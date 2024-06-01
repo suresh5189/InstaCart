@@ -1,0 +1,1117 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+/* Navbar */
+
+form {
+  color: #555;
+  display: flex;
+  padding: 2px;
+  border-radius: 5px;
+  width: 50%;
+  box-shadow: inset -1px -1px 7px 7px rgb(238, 238, 238);
+}
+
+.navbar {
+  /* position: fixed; */
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  /* align-items: center; */
+  justify-content: space-between;
+  padding: 15px 30px;
+  border-bottom: 1px solid rgb(201, 201, 201);
+  z-index: 1;
+  flex-direction: column;
+  background-color: #f7f5f0;
+}
+
+.HamburgerHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.HamburgerHead {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo {
+  margin-left: 20px;
+  cursor: pointer;
+}
+
+.HamBurgerIcon {
+  cursor: pointer;
+}
+
+.inputSearchBox {
+  padding: 10px;
+  margin-left: 30px;
+  border-radius: 5px;
+}
+
+input[type="search"] {
+  border: none;
+  background: transparent;
+  margin: 0;
+  padding: 7px 40px;
+  font-size: 18px;
+  color: inherit;
+  background-color: rgb(232, 232, 232);
+  border-radius: inherit;
+  width: 100%;
+  height: 50px;
+  border: 2px solid #d8d8d8;
+}
+
+input[type="search"]::placeholder {
+  color: #505050;
+  font-size: 18px;
+  font-weight: 500;
+  padding-left: 30px;
+}
+
+.loginButton {
+  margin-right: 20px;
+  padding: 10px;
+  font-size: 20px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  background-color: #f7f5f0;
+}
+
+.signupButton {
+  background-color: #108910;
+  color: white;
+  padding: 6px 25px;
+  font-size: 20px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.SearchContainer {
+  position: relative;
+  width: 50%;
+}
+
+.SearchIcon {
+  position: absolute;
+  top: 45%;
+  left: 10px;
+  transform: translateY(-50%);
+  color: #aaa;
+}
+
+.NavbarScrollBar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.HorizontalScrollBarWrapper {
+  display: flex;
+}
+
+.HorizontalScrollBarWrapper.Squares {
+  padding-top: 20px;
+}
+
+.NavbarScrollBarList {
+  padding: 0 10px;
+  margin: 0 10px;
+  display: flex;
+  align-items: center;
+  justify-self: center;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.NavbarScrollBarList.active:hover {
+  margin-top: 10px;
+  border-bottom: 2px solid black;
+}
+
+/* -------------------------------------------------------------- */
+/* -------------------------------------------------------------- */
+
+/* HomePageBar */
+
+.HomePageBar {
+  width: 100%;
+  min-height: 250px;
+  background-color: #deedd6;
+  position: relative;
+  margin: auto;
+}
+
+.HomePageBarDiv img {
+  width: 15%;
+  object-fit: cover;
+}
+
+.HomePageBarText {
+  font-family: "Roboto", sans-serif;
+  position: absolute;
+  top: 23%;
+  left: 15%;
+}
+
+.HomePageBarTextH1 {
+  font-size: 45px;
+  width: 508px;
+}
+
+.HomePageBarTextP {
+  font-size: 17px;
+  line-height: 20px;
+  font-weight: 400;
+  color: #003121;
+  margin: 16px 0 0 0;
+}
+
+.ImageBannerAndDrop {
+  display: flex;
+  justify-content: space-between;
+}
+
+.dropdown {
+  position: relative;
+  top: 60px;
+  left: 100px;
+}
+
+.dropDownButton {
+  background-color: white;
+  padding: 6px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.dropDownButtonList {
+  font-size: 18px;
+  font-family: "roboto";
+  background-color: white;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+}
+
+.dropDownButtonList span {
+  border: 1px solid black;
+  cursor: pointer;
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px 10px 0 0;
+}
+
+.dropDownButtonList span:hover {
+  background-color: lightgrey;
+}
+
+/* ------------------------------------------------------ */
+/* ------------------------------------------------------ */
+
+/* HomePage */
+
+.headerDiv {
+  font-size: 35px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px;
+  font-family: "roboto";
+}
+
+.headerTextColor {
+  color: green;
+  cursor: pointer;
+}
+
+.headerTextColor:hover {
+  text-decoration-line: underline;
+}
+
+.home {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.buttonHome {
+  border-radius: 10px;
+  box-shadow: 1px 1px 4px 4px rgb(241, 241, 241);
+  padding: 12px;
+  cursor: pointer;
+}
+
+.buttonHome:hover {
+  box-shadow: 1px 1px 7px 7px rgb(212, 212, 212);
+}
+
+.HomePageButtonDiv {
+  display: grid;
+  width: 100%;
+  max-width: 1280px;
+  grid-template-columns: repeat(auto-fill, minmax(344px, 1fr));
+  gap: 24px;
+  justify-content: center;
+  padding: 8px 0 0 0;
+}
+
+.buttonHomeLogo {
+  display: flex;
+  align-items: center;
+}
+
+.buttonHomeLogoImage img {
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  border-radius: 29px;
+  border: 1px solid #e8e9eb;
+  margin-right: 10px;
+}
+
+.LogoTextDiv {
+  font-family: "roboto";
+}
+
+.logoText {
+  display: flex;
+}
+
+.LogoTextTitle {
+  font-size: 20px;
+}
+
+.LogoTextSubTitle {
+  font-size: 15px;
+}
+
+.LogoTextSubTitleButton {
+  font-size: 12px;
+  background-color: rgb(242, 242, 242);
+  padding: 2px;
+  border-radius: 5px;
+}
+
+.showMoreLessButtons {
+  padding: 20px;
+  font-family: "Roboto";
+  color: rgb(16, 137, 16);
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.ShowMore {
+  cursor: pointer;
+}
+
+.ShowLess {
+  cursor: pointer;
+}
+
+.ShowMore:hover {
+  text-decoration: underline;
+}
+
+.ShowLess:hover {
+  text-decoration: underline;
+}
+
+.ShowMore {
+  padding: 20px;
+}
+
+/* ------------------------------------------------------------- */
+/* ------------------------------------------------------------- */
+
+/* Payment */
+
+.PhoneAndQrcode {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 100px;
+  max-width: 1152px;
+  background-color: #b1e5d5;
+  margin: auto;
+  border-radius: 8px;
+  box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.16);
+  margin-top: 30px;
+}
+
+.PhoneAndQrcodeText {
+  font-family: "roboto";
+  padding: 20px;
+}
+
+.PhoneAndQrcodeTextTitle {
+  margin: 0;
+}
+
+.PhoneAndQrcodeTextSub {
+  font-size: 15px;
+}
+
+.QrcodeImage {
+  border-radius: 8px;
+}
+
+/* ----------------------------------------------------------- */
+/* ----------------------------------------------------------- */
+
+/* Delivery Grocery */
+
+.DeliveryHead {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(auto-fill, minmax(344px, 1fr));
+  gap: 24px;
+  justify-content: center;
+  padding: 8px 0 0 0;
+}
+
+.Delivery {
+  display: flex;
+  max-width: 1152px;
+  padding: 0 16px;
+  margin: 100px auto;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  font-family: "roboto";
+}
+
+.DeliveryBox {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 10px;
+  background-color: #f6f7f8;
+  border-radius: 12px 12px 12px 12px;
+}
+
+.DeliveryBoxImage img {
+  width: 100%;
+  height: 100%;
+  border-radius: 12px 12px 0 0;
+}
+
+.DeliveryText {
+  padding: 32px 24px;
+}
+
+.DeliveryTextTitle {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.DeliveryTextSubTitle {
+  margin: 15px 0;
+  font-size: 14px;
+  color: #343538;
+}
+
+/* ---------------------------------------------------------- */
+/* ---------------------------------------------------------- */
+
+/* Grocery Market Place */
+
+.MarketPlace {
+  font-family: "Roboto";
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.MarketPlace h1 {
+  max-width: 500px;
+  text-align: center;
+}
+
+.MarketPlaceImage img {
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.MarketPlaceBox {
+  display: flex;
+  width: 90%;
+}
+
+.MarketPlaceSubBox {
+  background-color: #f6f7f8;
+  margin: 10px;
+  padding: 40px;
+  flex: 1;
+  border-radius: 10px;
+}
+
+.MarketPlaceBoxTitle {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.MarketPlaceBoxSubTitle {
+  font-size: 25px;
+}
+
+/* ----------------------------------------------------------------- */
+/* ----------------------------------------------------------------- */
+
+/* Common Questions FAQ */
+
+.CommonQuestion {
+  width: 100%;
+  font-size: 20px;
+  text-align:justify;
+  margin: 80px 0;
+}
+
+.CommonQuestionHeading {
+  font-size: 50px;
+  text-align: center;
+}
+
+.FAQ {
+  margin: 0 100px;
+}
+
+/* ------------------------------------------------------------------- */
+/* ------------------------------------------------------------------- */
+
+/* Footer */
+
+.Footer {
+  display: flex;
+  font-family: "Roboto";
+  flex-direction: column;
+  margin: 0 100px;
+}
+
+.FooterUlLI {
+  display: flex;
+  justify-content: space-between;
+}
+
+.FooterUl {
+  font-size: 17px;
+}
+
+.FooterLi {
+  list-style-type: none;
+  font-size: 16px;
+  padding: 0 10px;
+  line-height: 2;
+  font-weight: 300;
+}
+
+.StoreHead {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 25px;
+}
+
+.StoreIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  padding: 15px;
+  font-size: 14px;
+}
+
+.AppleIcon {
+  margin-right: 20px;
+}
+
+.HorizontalLine {
+  width: 90%;
+  height: 0;
+}
+
+.ToggleHead {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 2% 17%;
+}
+
+.Access {
+  margin-right: 50%;
+}
+
+.ToggleIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ToggleIcon span {
+  margin-right: 10px;
+}
+
+.LegalFooter {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 10px;
+}
+.LegalIcon span {
+  margin-right: 12px;
+}
+
+.CopyRight {
+  margin: 20px 95px;
+  font-size: 13px;
+  color: #72767e;
+}
+
+.CopyRight span {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+/* ---------------------------------------------------------------------------- */
+/* ---------------------------------------------------------------------------- */
+
+/* Login Page */
+
+.Login {
+  width: 416px;
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 0px 16px;
+  max-height: calc(-96px + 100vh);
+  min-height: 416px;
+  padding: 30px;
+  font-family: "Roboto";
+  box-sizing: border-box;
+  position: fixed;
+  z-index: 100;
+  background-color: white;
+  top: 50px;
+  left: 35%;
+}
+
+.CloseIcon {
+  display: flex;
+  cursor: pointer;
+}
+
+.IconButton {
+  font-family: "Roboto";
+  width: 100%;
+}
+
+.Google {
+  display: flex;
+  border: 1px solid black;
+  border-radius: 30px;
+  padding: 10px 50px;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.GoogleIcon {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.Google span {
+  margin-left: 20px;
+}
+
+.Facebook {
+  display: flex;
+  border: 1px solid black;
+  border-radius: 30px;
+  padding: 10px 50px;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.Facebook span {
+  margin-left: 10px;
+}
+
+.Phone {
+  display: flex;
+  border: 1px solid black;
+  border-radius: 30px;
+  padding: 10px 50px;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.Phone span {
+  margin-left: 10px;
+}
+
+Input {
+  padding: 22px 10px;
+  font-size: 17px;
+  line-height: 22px;
+  font-weight: 400;
+  width: 95%;
+  height: 100%;
+  border: 1px solid black;
+  border-radius: 12px;
+  background: transparent;
+}
+
+.Email {
+  margin-bottom: 10px;
+}
+
+.Horizontal {
+  display: flex;
+  padding: 10px;
+  align-items: center;
+}
+
+.Horizontal span {
+  padding: 0 10px;
+}
+
+.LoginButton {
+  width: 100%;
+  background-color: rgb(16, 137, 16);
+  color: white;
+  padding: 18px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.LoginButton:hover {
+  background-color: rgb(15, 125, 15);
+}
+
+.LoginButton span {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.Account {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+
+.SignUpButton {
+  margin-top: 10px;
+  color: rgb(16, 137, 16);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.Forgot {
+  padding: 10px;
+}
+
+.Forgot span {
+  color: rgb(16, 137, 16);
+  font-weight: 400;
+  cursor: pointer;
+}
+
+/* ------------------------------------------------------------ */
+/* ------------------------------------------------------------ */
+
+/* SignUp Page */
+
+.SignUp {
+  width: 416px;
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 0px 16px;
+  max-height: calc(-96px + 100vh);
+  min-height: 416px;
+  padding: 30px;
+  font-family: "Roboto";
+  box-sizing: border-box;
+  position: fixed;
+  z-index: 100;
+  background-color: white;
+  top: 50px;
+  left: 35%;
+}
+
+.InputText {
+  font-size: 17px;
+  margin-bottom: 12px;
+  font-family: "Roboto";
+}
+
+.SignUpButton {
+  width: 100%;
+  background-color: rgb(16, 137, 16);
+  color: white;
+  padding: 18px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.SignUpButton:hover {
+  background-color: rgb(15, 125, 15);
+}
+
+.SignUpButton span {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.SignButton {
+  margin-top: 8px;
+  color: rgb(16, 137, 16);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* --------------------------------------------------------- */
+/* --------------------------------------------------------- */
+
+/* Sidebar */
+
+.Sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: white;
+  width: 22%;
+  height: 100%;
+  z-index: 1;
+  box-sizing: border-box;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+.LogoAndImage {
+  display: flex;
+  margin: 20px;
+  align-items: center;
+}
+
+.CloseIconSidebar {
+  display: flex;
+  justify-content: center;
+}
+
+.SidebarHead {
+  font-size: 16px;
+  font-family: "Roboto";
+  line-height: 1;
+}
+
+.CloseIconSide {
+  cursor: pointer;
+}
+
+.SideBarHeading {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.SideBarHeading:hover {
+  background-color: rgb(245, 245, 245);
+}
+
+.Overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+  transition: opacity 0.3s ease-in-out;
+  opacity: 1;
+}
+
+.SideBarSignUpButton {
+  background-color: rgb(16, 137, 16);
+  padding: 15px 20px;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.SideBarSignUpButtonText {
+  color: white;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.SideBarLoginButton {
+  margin: 20px;
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+}
+
+.SideBarLoginButtonText {
+  font-size: 16px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.SideBarStoreButton .SideBarStoreButtonText {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: 8px;
+}
+
+.SideBarStoreButton .SideBarStoreButtonText.active {
+  color: white;
+  background-color: rgb(36, 37, 41);
+}
+
+.SideBarStoreButton .SideBarStoreButtonText:hover{
+  background-color: rgb(237, 237, 237);
+}
+
+.SideBarStoreButtonSpan {
+  padding-left: 8px;
+}
+
+.SideBarButtonAllList {
+  display: flex;
+}
+.SideBarButtonList {
+  margin-right: 8px;
+}
+
+/* ------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------ */
+
+/* Store Detail Screen */
+
+.StoreHeading {
+  font-size: 30px;
+  font-family: "Roboto";
+  margin: 20px;
+  font-weight: 500;
+}
+
+.SideBarDetailButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.DetailSideBarLogo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.DetailSideBarLogoText2 {
+  background-color: rgb(245, 222, 12);
+}
+
+.DetailSideBarLogoText3 {
+  color: rgb(43, 120, 198);
+  font-weight: bold;
+}
+
+.DetailSideBarLogoText4 {
+  color: rgb(190, 187, 187);
+  font-weight: 500;
+}
+
+.DetailSideBarLogo span img {
+  border: 1px solid lightgray;
+  border-radius: 100px;
+}
+
+.StoreDetail {
+  display: flex;
+  font-family: "Roboto";
+}
+
+.StoreDetailSideBar {
+  width: 18%;
+  border-right: 0.5px solid lightgray;
+  height: 100%;
+}
+
+.DetailScreenSidebar {
+  padding: 20px;
+  /* overflow-y: scroll; */
+  position: sticky;
+}
+
+.StoreDetailHead {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+}
+
+.StoreContainerHead {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.StoreContainer {
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.StoreContainerCartButton {
+  position: relative;
+  top: 15px;
+  right: -30%;
+  background-color: rgb(16, 137, 16);
+  border: none;
+  padding: 10px 15px;
+  color: white;
+  font-size: 17px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: ease-in;
+}
+
+.StoreContainerCartButton:hover {
+  background-color: rgb(11, 100, 11);
+}
+
+.StoreContainerCartButton div::before {
+  content: "Add";
+}
+
+.StoreContainerCartButton div:hover::before {
+  content: "Add to Cart";
+}
+
+.StoreImage img {
+  width: 180px;
+}
+
+.StoreContainerDetail {
+  padding: 10px;
+}
+
+.StoreContainerPrice {
+  border-radius: 4px;
+  padding: 8px 4px;
+  background-color: rgb(255, 220, 35);
+  color: rgb(36, 37, 41);
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  font-weight: bold;
+  width: 35%;
+}
+
+.StoreContainerPriceSup {
+  font-size: 14px;
+  position: relative;
+  top: -6px;
+}
+
+.StoreContainerProductDetail {
+  padding: 10px 0;
+  font-size: 15px;
+}
+
+.StoreContainerButton button {
+  border: none;
+  padding: 0px;
+  margin: 0px;
+  cursor: pointer;
+  user-select: none;
+  touch-action: manipulation;
+  position: relative;
+  background-color: rgb(255, 250, 204);
+  color: rgb(52, 53, 56);
+  height: 34px;
+  width: 100%;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.SideBarDetailButton {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 10px;
+  line-height: 2.5;
+}
+
+/* ------------------------------------------------------- */
+/* ------------------------------------------------------- */
+
+/* Bookmark */
+.Bookmark{
+  background-color: black;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 82%;
+  display: flex;
+  padding: 20px;
+  color: white;
+  justify-content: space-around;
+  align-items: center;
+  font-family: 'Roboto';
+}
+
+.BookmarkHead{
+  display: flex;
+  font-size: 20px;
+  align-items: center;
+  margin-left: 20%;
+}
+
+.BookmarkHeadingHead{
+  font-weight: 600;
+}
+
+.BookmarkHeadingSpan{
+  color:yellow;
+}
+
+.BookmarkButton button{
+  padding:10px 20px;
+  margin: 0 20px;
+  background-color: white;
+  border-radius:20px;
+  border: none;
+}
