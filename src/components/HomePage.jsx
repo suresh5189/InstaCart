@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Data from "../data/store_data";
+import Data from "../data/storeData";
 import { useNavigate } from "react-router-dom";
 
 function HomePage() {
@@ -34,7 +34,7 @@ function HomePage() {
               <div className="buttonHomeLogo">
                 <div className="buttonHomeLogoImage">
                   <a href="/">
-                    <img src={image} alt="image" />
+                    <img src={image} alt={title} />
                   </a>
                 </div>
                 <div className="LogoTextDiv">

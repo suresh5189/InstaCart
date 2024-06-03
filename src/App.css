@@ -587,6 +587,7 @@ input[type="search"]::placeholder {
   margin: 20px 95px;
   font-size: 13px;
   color: #72767e;
+  text-align: justify;
 }
 
 .CopyRight span {

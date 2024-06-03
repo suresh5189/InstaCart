@@ -1,16 +1,16 @@
 import React from "react";
-import DeliveryData from "../data/delivery_grocery";
+import DeliveryData from "../data/deliveryGrocery";
 
 const Delivery_Grocery = () => {
   return (
     <div className="Delivery">
       <h1>Grocery delivery you can count on</h1>
       <div className="DeliveryHead">
-        {DeliveryData.map(({ title, subTitle, img }) => {
+        {DeliveryData.map(({ title, subTitle, groceryImage }) => {
           return (
             <div className="DeliveryBox">
               <div className="DeliveryBoxImage">
-                <img src={img} alt="image" />
+                <img src={groceryImage} alt={title} />
               </div>
               <div className="DeliveryText">
                 <div className="DeliveryTextTitle">
