@@ -701,7 +701,7 @@ Input {
   padding: 0 10px;
 }
 
-.loginButton span:hover{
+.loginButton span:hover {
   text-decoration: underline;
 }
 
@@ -1003,6 +1003,7 @@ Input {
 .StoreContainerHead {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
+  cursor: pointer;
 }
 
 .StoreContainer {
@@ -1147,6 +1148,8 @@ Input {
 /* ------------------------------------------------ */
 /* ------------------------------------------------- */
 
+/* Cart Screen */
+
 .Cart {
   position: fixed;
   right: 0;
@@ -1157,10 +1160,10 @@ Input {
   box-sizing: border-box;
   padding: 10px;
   overflow-y: auto;
-  font-family: 'Roboto';
+  font-family: "Roboto";
 }
 
-.CartButton{
+.CartButton {
   background-color: rgb(16, 137, 16);
   border: none;
   padding: 5px 20px;
@@ -1168,11 +1171,11 @@ Input {
   cursor: pointer;
 }
 
-.CartButton:hover{
+.CartButton:hover {
   background-color: rgb(16, 103, 16);
 }
 
-.CartIcon{
+.CartIcon {
   color: white;
 }
 
@@ -1194,50 +1197,50 @@ Input {
   opacity: 1;
 }
 
-.CartHeader{
+.CartHeader {
   display: flex;
   align-items: center;
   padding: 10px;
 }
 
-.CartHeading{
+.CartHeading {
   display: flex;
   flex-direction: column;
   margin-left: 30%;
   font-size: 15px;
 }
 
-.CartHeadingText1{
+.CartHeadingText1 {
   font-weight: 500;
 }
 
-.CartHeadingText2{
+.CartHeadingText2 {
   color: rgb(172, 172, 172);
 }
 
-.CartItem{
+.CartItem {
   display: flex;
   justify-content: space-between;
   padding: 10px 0;
 }
 
-.CartItemImage{
+.CartItemImage {
   display: flex;
 }
 
-.CartItemImage img{
+.CartItemImage img {
   width: 50px;
   height: 50px;
 }
 
-.CartItemHeading{
+.CartItemHeading {
   display: flex;
   align-items: flex-start;
   flex-direction: column;
   margin-left: 25px;
 }
 
-.CartItemHeadingText{
+.CartItemHeadingText {
   width: 80%;
   display: flex;
   flex-direction: column;
@@ -1245,38 +1248,38 @@ Input {
   text-align: start;
 }
 
-.CartItemText2{
+.CartItemText2 {
   color: rgb(190, 187, 187);
 }
 
-.CartItemButtonDiv{
+.CartItemButtonDiv {
   display: flex;
 }
 
-.CartItemButtonIcon{
+.CartItemButtonIcon {
   font-size: 15px;
-  padding-right:6px;
+  padding-right: 6px;
   font-weight: 500;
   display: flex;
   align-items: center;
 }
 
-.CartItemPrice{
+.CartItemPrice {
   display: flex;
   align-items: center;
   font-size: 16px;
   font-weight: 600;
 }
 
-.CartInput{
+.CartInput {
   display: flex;
   position: absolute;
   bottom: 10px;
   left: 0;
-  width:100%;
+  width: 100%;
 }
 
-.CartInputButton{
+.CartInputButton {
   background-color: rgb(184, 184, 184);
   display: flex;
   align-items: center;
@@ -1284,4 +1287,136 @@ Input {
   border-radius: 10px;
   padding: 5px;
   color: white;
+}
+
+/* ---------------------------------------------------------- */
+/* ---------------------------------------------------------- */
+
+/* Store Item Detail */
+
+.StoreItemDetailHead{
+    width: 90%;
+    border-radius: 8px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 0px 16px;
+    max-height: calc(-96px + 100vh);
+    min-height: 650px;
+    padding: 30px;
+    font-family: "Roboto";
+    box-sizing: border-box;
+    position: fixed;
+    z-index: 100;
+    background-color: white;
+    top: 40px;
+    left: 5%;
+}
+
+.StoreItemDetailClose{
+  display: flex;  
+  align-items: center;
+  cursor: pointer;
+}
+
+.StoreItemDetailCloseBack{
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.StoreItemDetail{
+  display: flex;
+  justify-content: space-around;
+}
+
+.StoreItemDetailImage img{
+  margin-top: 60px;
+  transition: transform 1.5s;
+}
+
+.StoreItemDetailImage img:hover{
+  transform: scale(1.4);
+}
+
+.StoreItemDetailHeading{
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+}
+
+.StoreItemDetailDetail{
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.StoreItemDetailText1{
+  font-size: 26px;
+  font-weight: 600;
+}
+
+.StoreItemDetailText2{
+  padding: 15px 0;
+  font-size: 15px;
+}
+
+.StoreItemDetailButtonContainer{
+  width: 30%;
+  border: 1px solid rgb(208, 208, 208);
+  padding: 17px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.StoreItemDetailButtonContainerText{
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.StoreItemDetailButtonContainerCart{
+  background-color: rgb(16, 137, 16);
+  color: white;
+  border-radius: 30px;
+  font-size: 20px;
+  padding: 15px;
+  font-weight: 500;
+  text-align: center;
+  cursor: pointer;
+}
+
+.StoreItemDetailButtonContainerCart:hover{
+  background-color: rgb(15, 125, 15);
+}
+
+.StoreItemDetailIconItems{
+  display: flex;
+  padding: 10px;
+}
+
+.StoreItemDetailIcon{
+  display: flex;
+  margin-right: 20px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.StoreItemDetailIconSave{
+  margin-right: 10px;
+}
+
+.StoreItemDetailButtonContainerItemCount{
+  display: flex;
+  padding: 10px;
+}
+
+.InputIncreaseDecreaseButtonValue{
+  text-align: center;
+  background-color: rgb(233, 233, 233);
+  border: none;
+}
+
+.IncreaseDecreaseButton{
+  padding: 10px;
+  margin: 10px;
+  border: none;
+  font-size: 20px;
 }
