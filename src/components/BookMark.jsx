@@ -1,7 +1,7 @@
 import React from "react";
 import { IoClose } from "react-icons/io5";
 
-const BookMark = () => {
+const BookMark = ({ handleClose }) => {
   return (
     <div className="Bookmark">
       <div className="BookmarkHead">
@@ -17,8 +17,8 @@ const BookMark = () => {
         </div>
       </div>
       <div className="BookmarkIcon">
-        <span className="BookmarkIconClose">
-          <IoClose />
+        <span className="BookmarkIconClose" onClick={handleClose}>
+          <IoClose size={22} />
         </span>
       </div>
     </div>

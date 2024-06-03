@@ -53,9 +53,11 @@ const DetailScreenSidebar = () => {
         <div className="SideBarDetailButton">
           {DetailSideBarData.map(({ id, listItem }) => {
             return (
-              <span className="SideBarDetailButtonSpan" key={id}>
+              <div className="SideBarDetailButtonSpanHead">
+                <span className="SideBarDetailButtonSpan" key={id}>
                 {listItem}
               </span>
+              </div>
             );
           })}
         </div>

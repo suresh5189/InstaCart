@@ -16,9 +16,8 @@ function HomePage() {
   };
 
   const handleDetail = () => {
-    navigate('/storedetails')
+    navigate("/storedetails");
   };
-
 
   return (
     <div className="home">

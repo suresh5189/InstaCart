@@ -479,7 +479,7 @@ input[type="search"]::placeholder {
 .CommonQuestion {
   width: 100%;
   font-size: 20px;
-  text-align:justify;
+  text-align: justify;
   margin: 80px 0;
 }
 
@@ -519,6 +519,14 @@ input[type="search"]::placeholder {
   padding: 0 10px;
   line-height: 2;
   font-weight: 300;
+}
+
+.FooterLi li {
+  cursor: pointer;
+}
+
+.FooterLi li:hover {
+  text-decoration: underline;
 }
 
 .StoreHead {
@@ -894,12 +902,13 @@ Input {
   background-color: rgb(36, 37, 41);
 }
 
-.SideBarStoreButton .SideBarStoreButtonText:hover{
+.SideBarStoreButton .SideBarStoreButtonText:hover {
   background-color: rgb(237, 237, 237);
 }
 
 .SideBarStoreButtonSpan {
   padding-left: 8px;
+  cursor: pointer;
 }
 
 .SideBarButtonAllList {
@@ -907,6 +916,17 @@ Input {
 }
 .SideBarButtonList {
   margin-right: 8px;
+}
+
+.SideBarDetailButtonSpanHead {
+  cursor: pointer;
+  width: 100%;
+}
+
+.SideBarDetailButtonSpanHead:hover {
+  width: 100%;
+  background-color: rgb(237, 237, 237);
+  border-radius: 10px;
 }
 
 /* ------------------------------------------------------------------------ */
@@ -1079,7 +1099,7 @@ Input {
 /* ------------------------------------------------------- */
 
 /* Bookmark */
-.Bookmark{
+.Bookmark {
   background-color: black;
   position: fixed;
   bottom: 0;
@@ -1090,28 +1110,32 @@ Input {
   color: white;
   justify-content: space-around;
   align-items: center;
-  font-family: 'Roboto';
+  font-family: "Roboto";
 }
 
-.BookmarkHead{
+.BookmarkHead {
   display: flex;
   font-size: 20px;
   align-items: center;
   margin-left: 20%;
 }
 
-.BookmarkHeadingHead{
+.BookmarkHeadingHead {
   font-weight: 600;
 }
 
-.BookmarkHeadingSpan{
-  color:yellow;
+.BookmarkHeadingSpan {
+  color: yellow;
 }
 
-.BookmarkButton button{
-  padding:10px 20px;
+.BookmarkButton button {
+  padding: 10px 20px;
   margin: 0 20px;
   background-color: white;
-  border-radius:20px;
+  border-radius: 20px;
   border: none;
+}
+
+.BookmarkIconClose {
+  cursor: pointer;
 }

@@ -1,21 +1,36 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { ImFacebook2 } from "react-icons/im";
 import { FaPhoneVolume } from "react-icons/fa6";
 import { IoClose } from "react-icons/io5";
 
-const SignUp = ({ handleCloseSignUpModal }) => {
-
+const SignUp = ({ handleCloseSignUpModal, handleOpen }) => {
   const [next, setNext] = useState(true);
+
+  const refSignup = useRef(null);
 
   const handleContinue = () => {
     setNext(false);
   };
 
+  const handleClickOutsideSignUp = (event) => {
+    if (refSignup.current && !refSignup.current.contains(event.target)) {
+      handleCloseSignUpModal();
+    }
+  };
+
+  useEffect(() => {
+    if (handleOpen) {
+      document.addEventListener("mousedown", handleClickOutsideSignUp);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutsideSignUp);
+    }
+  }, [handleOpen]);
+
   return (
     <>
       <div className="Overlay"></div>
-      <div className="SignUp">
+      <div className="SignUp" ref={refSignup}>
         <div className="SignUpInside">
           <div className="CloseIcon" onClick={handleCloseSignUpModal}>
             <IoClose />

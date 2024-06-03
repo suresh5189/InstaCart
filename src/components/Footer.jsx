@@ -11,8 +11,8 @@ const Footer = () => {
   return (
     <div className="Footer">
       <div
-          style={{ borderBottom: "1px solid lightGrey", margin: "10px" }}
-        ></div>
+        style={{ borderBottom: "1px solid lightGrey", margin: "10px" }}
+      ></div>
       <div className="StoreHead">
         <div className="Store">
           <div>Get deliveries with Instacart</div>
@@ -98,8 +98,8 @@ const Footer = () => {
         </div>
       </div>
       <div
-          style={{ borderBottom: "1px solid lightGrey", margin: "10px" }}
-        ></div>
+        style={{ borderBottom: "1px solid lightGrey", margin: "10px" }}
+      ></div>
       <div className="StoreHead">
         <div className="Store">
           <div>Become a Shopper</div>
@@ -154,8 +154,8 @@ const Footer = () => {
         </div>
       </div>
       <div
-          style={{ borderBottom: "1px solid lightGrey", margin: "10px" }}
-        ></div>
+        style={{ borderBottom: "1px solid lightGrey", margin: "10px" }}
+      ></div>
       <div className="ToggleHead">
         <div className="Access">Accessibility</div>
         <div className="ToggleIcon">
@@ -163,17 +163,25 @@ const Footer = () => {
         </div>
       </div>
       <div
-          style={{ borderBottom: "1px solid lightGrey", margin: "10px" }}
-        ></div>
+        style={{ borderBottom: "1px solid lightGrey", margin: "10px" }}
+      ></div>
       <div className="LegalFooter">
         <div>Legal</div>
         <div>Term of Use</div>
         <div>Privacy Policy</div>
         <div className="LegalIcon">
-          <span><FaFacebookSquare /></span>
-          <span><FaTwitter /></span>
-          <span><FaInstagram /></span>
-          <span><FaPinterest /></span>
+          <span>
+            <FaFacebookSquare />
+          </span>
+          <span>
+            <FaTwitter />
+          </span>
+          <span>
+            <FaInstagram />
+          </span>
+          <span>
+            <FaPinterest />
+          </span>
         </div>
       </div>
       <div className="CopyRight">
@@ -183,8 +191,8 @@ const Footer = () => {
         LLC. Terms for Free Delivery (First Order): Offer valid on first order
         made through Instacart with a minimum basket size as set forth in the
         offer promotion. Offer expires on the date indicated in the user’s
-        account settings or displayed in the offer promotion. <span>View more details
-        here.</span>
+        account settings or displayed in the offer promotion.{" "}
+        <span>View more details here.</span>
       </div>
     </div>
   );
