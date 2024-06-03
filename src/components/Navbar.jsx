@@ -6,9 +6,11 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import { IoSearchOutline } from "react-icons/io5";
 import { FaShoppingCart } from "react-icons/fa";
 import NavbarList from "../data/navbarList";
+import Cart from "./CartScreen";
 
-function Navbar({ onLoginClick,onSignUpClick }) {
+function Navbar({ onLoginClick, onSignUpClick }) {
   const [hamburger, setHamburger] = useState(false);
+  const [cart, setCart] = useState(false);
 
   const navigate = useNavigate();
 
@@ -24,6 +26,14 @@ function Navbar({ onLoginClick,onSignUpClick }) {
     setHamburger(false);
   };
 
+  const handleCart = () => {
+    setCart(true);
+  };
+
+  const closeCart = () => {
+    setCart(false);
+  };
+
   return (
     <div className="navbar">
       <div className="HamburgerHeader">
@@ -31,7 +41,9 @@ function Navbar({ onLoginClick,onSignUpClick }) {
           <div className="Hamburger" onClick={handleHamburger}>
             <RxHamburgerMenu size={20} className="HamBurgerIcon" />
           </div>
-          {hamburger && <Sidebar closeSidebar={closeSidebar} isOpen={handleHamburger} />}
+          {hamburger && (
+            <Sidebar closeSidebar={closeSidebar} isOpen={handleHamburger} />
+          )}
           <div>
             <img
               src={InstaCartLogo}
@@ -56,8 +68,15 @@ function Navbar({ onLoginClick,onSignUpClick }) {
           <button className="loginButton" onClick={onSignUpClick}>
             <span>Sign up</span>
           </button>
-          <button className="signupButton">
-            <FaShoppingCart size={24} />
+          <button className="CartButton">
+            <div className="CartIconButtonHead">
+              <div className="CartIconButton" onClick={handleCart}>
+                <FaShoppingCart size={24} className="CartIcon" />
+              </div>
+              {cart && (
+                <Cart size={24} closeCart={closeCart} isOpenCart={handleCart} />
+              )}
+            </div>
           </button>
         </div>
       </div>

@@ -33,9 +33,14 @@ function App() {
           onLoginClick={handleLoginClick}
           onSignUpClick={handleSignUpClick}
         />
-        {showLoginModal && <Login handleClose={handleCloseModal} handleOpen={handleLoginClick}/>}
+        {showLoginModal && (
+          <Login handleClose={handleCloseModal} handleOpen={handleLoginClick} />
+        )}
         {showSignUpModal && (
-          <SignUp handleCloseSignUpModal={handleSignUpCloseModal} handleOpen={handleSignUpClick} />
+          <SignUp
+            handleCloseSignUpModal={handleSignUpCloseModal}
+            handleOpen={handleSignUpClick}
+          />
         )}
         <Routes>
           <Route path="/" element={<Home />}></Route>
