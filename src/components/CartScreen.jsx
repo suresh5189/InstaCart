@@ -57,19 +57,19 @@ const Cart = ({ closeCart, isOpenCart }) => {
                         <div className="CartItemButtonDiv">
                           <div className="CartItemButtonIcon">
                             <span className="CartItemButtonIcon">
-                              <TbReload size={20}/>
+                              <TbReload size={20} />
                             </span>
-                              <span className="CartItemButtonIconText">
-                                Choose Replacement
-                              </span>
+                            <span className="CartItemButtonIconText">
+                              Choose Replacement
+                            </span>
                           </div>
                           <div className="CartItemButtonIcon">
                             <span className="CartItemButtonIcon">
-                              <IoIosRemoveCircleOutline size={20}/>
+                              <IoIosRemoveCircleOutline size={20} />
                             </span>
-                              <span className="CartItemButtonIconText">
-                                Remove
-                              </span>
+                            <span className="CartItemButtonIconText">
+                              Remove
+                            </span>
                           </div>
                         </div>
                       </div>

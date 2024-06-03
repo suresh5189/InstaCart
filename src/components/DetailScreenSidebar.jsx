@@ -55,8 +55,8 @@ const DetailScreenSidebar = () => {
             return (
               <div className="SideBarDetailButtonSpanHead">
                 <span className="SideBarDetailButtonSpan" key={id}>
-                {listItem}
-              </span>
+                  {listItem}
+                </span>
               </div>
             );
           })}
