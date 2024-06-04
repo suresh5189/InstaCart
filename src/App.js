@@ -34,12 +34,17 @@ function App() {
           onSignUpClick={handleSignUpClick}
         />
         {showLoginModal && (
-          <Login handleClose={handleCloseModal} handleOpen={handleLoginClick} />
+          <Login
+            handleClose={handleCloseModal}
+            handleOpen={handleLoginClick}
+            handleSignUpClick={handleSignUpClick}
+          />
         )}
         {showSignUpModal && (
           <SignUp
             handleCloseSignUpModal={handleSignUpCloseModal}
             handleOpen={handleSignUpClick}
+            handleLoginClick={handleLoginClick}
           />
         )}
         <Routes>

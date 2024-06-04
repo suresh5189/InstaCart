@@ -81,7 +81,7 @@ function Navbar({ onLoginClick, onSignUpClick }) {
         </div>
       </div>
       <div className="NavbarScrollBar">
-        <div class="HorizontalScrollBarWrapper Squares">
+        <div className="HorizontalScrollBarWrapper Squares">
           {NavbarList.map(({ id, icon: Icon, text }) => {
             return (
               <div className="NavbarScrollBarList active" key={id}>

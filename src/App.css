@@ -610,7 +610,7 @@ input[type="search"]::placeholder {
   font-family: "Roboto";
   box-sizing: border-box;
   position: fixed;
-  z-index: 100;
+  z-index: 10;
   background-color: white;
   top: 50px;
   left: 35%;
@@ -765,7 +765,7 @@ Input {
   font-family: "Roboto";
   box-sizing: border-box;
   position: fixed;
-  z-index: 100;
+  z-index: 10;
   background-color: white;
   top: 50px;
   left: 35%;
@@ -780,7 +780,7 @@ Input {
 .SignUpButton {
   width: 100%;
   background-color: rgb(16, 137, 16);
-  color: white;
+  color: white !important;
   padding: 18px;
   border: none;
   border-radius: 10px;
@@ -1412,4 +1412,92 @@ Input {
   margin: 10px;
   border: none;
   font-size: 20px;
+}
+
+/* ---------------------------------------------------- */
+/* ---------------------------------------------------- */
+
+/* Reset Password */
+
+.Reset {
+  width: 416px;
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 0px 16px;
+  max-height: calc(-96px + 100vh);
+  padding: 30px;
+  font-family: "Roboto";
+  box-sizing: border-box;
+  position: fixed;
+  z-index: 100;
+  background-color: white;
+  top: 20%;
+  left: 35%;
+}
+
+.ResetInside {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.CloseIcon {
+  display: flex;
+  cursor: pointer;
+}
+
+.ResetInput {
+  font-size: 17px;
+  line-height: 22px;
+  font-weight: 400;
+  border-radius: 12px;
+  background: transparent;
+}
+
+.ResetButton {
+  width: 100%;
+  background-color: rgb(16, 137, 16);
+  color: white;
+  padding: 18px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.ResetButton:hover {
+  background-color: rgb(15, 125, 15);
+}
+
+.ResetButton span {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.Account {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+
+.SignUpButton {
+  margin-top: 10px;
+  color: rgb(16, 137, 16);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.Forgot {
+  padding: 10px;
+}
+
+.Forgot span {
+  color: rgb(16, 137, 16);
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.ResetHorizontalAbove {
+  margin-top: 10%;
 }

@@ -3,14 +3,22 @@ import { FcGoogle } from "react-icons/fc";
 import { ImFacebook2 } from "react-icons/im";
 import { FaPhoneVolume } from "react-icons/fa6";
 import { IoClose } from "react-icons/io5";
+import { sendOTPRegister } from "../apiServices";
 
-const SignUp = ({ handleCloseSignUpModal, handleOpen }) => {
-  const [next, setNext] = useState(true);
-
+const SignUp = ({ handleCloseSignUpModal, handleOpen, handleLoginClick }) => {
   const refSignup = useRef(null);
 
-  const handleContinue = () => {
-    setNext(false);
+  const [email, setEmail] = useState("");
+  const [responseMessage, setResponseMessage] = useState("");
+
+  const handleRegister = async () => {
+    try {
+      const response = await sendOTPRegister(email);
+      setResponseMessage(response.message || "Register Successfully");
+    } catch (error) {
+      console.error("Error Registering", error.message);
+      setResponseMessage(error.message);
+    }
   };
 
   const handleClickOutsideSignUp = (event) => {
@@ -25,7 +33,7 @@ const SignUp = ({ handleCloseSignUpModal, handleOpen }) => {
     } else {
       document.removeEventListener("mousedown", handleClickOutsideSignUp);
     }
-  }, [handleOpen]);
+  });
 
   return (
     <>
@@ -67,47 +75,40 @@ const SignUp = ({ handleCloseSignUpModal, handleOpen }) => {
                 Enter your email to get started.
               </span>
             </div>
-            {next ? (
-              <div className="Email">
-                <input
-                  type="email"
-                  name="email"
-                  id="email"
-                  placeholder="Email"
-                />
-              </div>
-            ) : (
-              <div className="Password">
-                <input
-                  type="password"
-                  name="password"
-                  id="password"
-                  placeholder="Password"
-                />
-              </div>
-            )}
+            <div className="Email">
+              <input
+                type="text"
+                name="email"
+                id="email"
+                placeholder="Enter Email"
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
           </div>
           <div className="Forgot">
             By continuing, you agree to our{" "}
             <span>Terms of Service, Privacy Policy & Health Data Notice.</span>
           </div>
-          <div className="LogButton" onClick={handleContinue}>
-            {next ? (
-              <button className="SignUpButton">
-                <span>Continue</span>
-              </button>
-            ) : (
-              <button className="SignUpButton">
+          <div className="LogButton">
+            <div>
+              <button className="SignUpButton" onClick={handleRegister}>
                 <span>Sign up</span>
               </button>
-            )}
+              {responseMessage && (
+                <p style={{ color: "red", textAlign: "center" }}>
+                  {responseMessage}
+                </p>
+              )}
+            </div>
           </div>
           <div
             style={{ borderBottom: "1px solid lightGrey", margin: "10px" }}
           ></div>
           <div className="Account">
             <span>Don’t have an account?</span>
-            <span className="SignButton">Log in</span>
+            <span className="SignButton" onClick={handleLoginClick}>
+              Log in
+            </span>
           </div>
         </div>
       </div>
