@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import StoreProductDetails from "../data/storeDetail";
 import { FaPlus } from "react-icons/fa6";
-import DetailScreenSidebar from "./DetailScreenSidebar";
+import DetailScreenSidebar from "./DetailScreenSideBar";
 import BookMark from "./BookMark";
 import StoreItemDetail from "./StoreItemDetail";
 import { useLocation } from "react-router-dom";
