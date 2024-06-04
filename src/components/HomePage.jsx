@@ -15,8 +15,8 @@ function HomePage() {
     setVisibleCount(9);
   };
 
-  const handleDetail = () => {
-    navigate("/storedetails");
+  const handleDetail = ( image,title) => {
+    navigate("/storedetails",{state:{image,title}});
   };
 
   return (
@@ -27,10 +27,10 @@ function HomePage() {
           <span className="headerTextColor"> San Francisco Bay Area</span>
         </header>
       </div>
-      <div className="HomePageButtonDiv" onClick={handleDetail}>
+      <div className="HomePageButtonDiv">
         {Data.slice(0, visibleCount).map(({ image, title, option }) => {
           return (
-            <div className="buttonHome">
+            <div className="buttonHome" onClick={()=> handleDetail(image,title)}>
               <div className="buttonHomeLogo">
                 <div className="buttonHomeLogoImage">
                   <a href="/">

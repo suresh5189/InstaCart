@@ -100,6 +100,61 @@ const storeDetail = [
     productDetail: "CLIF BAR Crunchy Peanut Butter Energy Bar",
     button: "See eligible items",
   },
+  {
+    id: 11,
+    productImage:
+      "https://www.instacart.com/image-server/296x296/filters:fill(FFF,true):format(jpg)/d2lnr5mha7bycj.cloudfront.net/product-image/file/large_6e4e94a0-a610-4503-8f6a-ffc26aa7c940.jpg",
+    price: "14",
+    supPrice: "99",
+    productDetail: "Firestone 805 Cerveza Lager, With Lime",
+    button: "See eligible items",
+  },
+  {
+    id: 12,
+    productImage:
+      "https://www.instacart.com/image-server/296x296/filters:fill(FFF,true):format(jpg)/d2lnr5mha7bycj.cloudfront.net/product-image/file/large_0e74d6a5-995d-43fa-a50a-f5b90c938108.jpg",
+    price: "2",
+    supPrice: "99",
+    productDetail: "SKIPPY Super Chunk Natural Peanut Butter Spread",
+    button: "See eligible items",
+  },
+  {
+    id: 13,
+    productImage:
+      "https://www.instacart.com/image-server/296x296/filters:fill(FFF,true):format(jpg)/d2lnr5mha7bycj.cloudfront.net/product-image/file/large_b9a394bd-4bbf-46de-a6cd-0d723034ac6c.jpg",
+    price: "4",
+    supPrice: "99",
+    productDetail:
+      "Freschetta Canadian Bacon and Pineapple Naturally Rising Crust Frozen Pizza",
+    button: "See eligible items",
+  },
+  {
+    id: 14,
+    productImage:
+      "https://www.instacart.com/image-server/296x296/filters:fill(FFF,true):format(jpg)/d2lnr5mha7bycj.cloudfront.net/product-image/file/large_4ea8e293-6c1f-472b-ac95-d48fa2f025d4.jpg",
+    price: "13",
+    supPrice: "99",
+    productDetail: "Peet's Coffee French Roast, Dark Roast Ground Coffee, Bag",
+    button: "See eligible items",
+  },
+  {
+    id: 15,
+    productImage:
+      "https://www.instacart.com/image-server/296x296/filters:fill(FFF,true):format(jpg)/d2lnr5mha7bycj.cloudfront.net/product-image/file/large_cece389f-32d5-46f7-965b-a527480279fa.jpg",
+    price: "9",
+    supPrice: "24",
+    productDetail: "Sprite Lemon Lime Soda Soft Drinks",
+    button: "See eligible items",
+  },
+  {
+    id: 16,
+    productImage:
+      "https://www.instacart.com/image-server/296x296/filters:fill(FFF,true):format(jpg)/d2lnr5mha7bycj.cloudfront.net/product-image/file/large_05989a4c-f15f-4970-8a6a-0ea15e43012f.png",
+    price: "4",
+    supPrice: "99",
+    productDetail: "Cheetos Cheese Flavored Snacks, Tangy Chili Fusion",
+    button: "See eligible items",
+  },
 ];
 
 export default storeDetail;

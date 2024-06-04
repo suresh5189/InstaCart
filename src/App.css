@@ -1037,14 +1037,6 @@ Input {
   background-color: rgb(11, 100, 11);
 }
 
-.StoreContainerCartButton div::before {
-  content: "Add";
-}
-
-.StoreContainerCartButton div:hover::before {
-  content: "Add to Cart";
-}
-
 .StoreImage img {
   width: 180px;
 }
@@ -1295,70 +1287,70 @@ Input {
 
 /* Store Item Detail */
 
-.StoreItemDetailHead{
-    width: 90%;
-    border-radius: 8px;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 0px 16px;
-    max-height: calc(-96px + 100vh);
-    min-height: 650px;
-    padding: 30px;
-    font-family: "Roboto";
-    box-sizing: border-box;
-    position: fixed;
-    z-index: 100;
-    background-color: white;
-    top: 40px;
-    left: 5%;
+.StoreItemDetailHead {
+  width: 90%;
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 0px 16px;
+  max-height: calc(-96px + 100vh);
+  min-height: 650px;
+  padding: 30px;
+  font-family: "Roboto";
+  box-sizing: border-box;
+  position: fixed;
+  z-index: 100;
+  background-color: white;
+  top: 40px;
+  left: 5%;
 }
 
-.StoreItemDetailClose{
-  display: flex;  
+.StoreItemDetailClose {
+  display: flex;
   align-items: center;
   cursor: pointer;
 }
 
-.StoreItemDetailCloseBack{
+.StoreItemDetailCloseBack {
   font-size: 15px;
   font-weight: 500;
 }
 
-.StoreItemDetail{
+.StoreItemDetail {
   display: flex;
   justify-content: space-around;
 }
 
-.StoreItemDetailImage img{
+.StoreItemDetailImage img {
   margin-top: 60px;
   transition: transform 1.5s;
 }
 
-.StoreItemDetailImage img:hover{
+.StoreItemDetailImage img:hover {
   transform: scale(1.4);
 }
 
-.StoreItemDetailHeading{
+.StoreItemDetailHeading {
   display: flex;
   flex-direction: column;
   width: 30%;
 }
 
-.StoreItemDetailDetail{
+.StoreItemDetailDetail {
   display: flex;
   justify-content: space-between;
   cursor: pointer;
 }
 
-.StoreItemDetailText1{
+.StoreItemDetailText1 {
   font-size: 26px;
   font-weight: 600;
 }
 
-.StoreItemDetailText2{
+.StoreItemDetailText2 {
   padding: 15px 0;
   font-size: 15px;
 }
 
-.StoreItemDetailButtonContainer{
+.StoreItemDetailButtonContainer {
   width: 30%;
   border: 1px solid rgb(208, 208, 208);
   padding: 17px;
@@ -1368,12 +1360,12 @@ Input {
   justify-content: space-evenly;
 }
 
-.StoreItemDetailButtonContainerText{
+.StoreItemDetailButtonContainerText {
   font-size: 30px;
   font-weight: bold;
 }
 
-.StoreItemDetailButtonContainerCart{
+.StoreItemDetailButtonContainerCart {
   background-color: rgb(16, 137, 16);
   color: white;
   border-radius: 30px;
@@ -1384,38 +1376,38 @@ Input {
   cursor: pointer;
 }
 
-.StoreItemDetailButtonContainerCart:hover{
+.StoreItemDetailButtonContainerCart:hover {
   background-color: rgb(15, 125, 15);
 }
 
-.StoreItemDetailIconItems{
+.StoreItemDetailIconItems {
   display: flex;
   padding: 10px;
 }
 
-.StoreItemDetailIcon{
+.StoreItemDetailIcon {
   display: flex;
   margin-right: 20px;
   padding: 10px;
   cursor: pointer;
 }
 
-.StoreItemDetailIconSave{
+.StoreItemDetailIconSave {
   margin-right: 10px;
 }
 
-.StoreItemDetailButtonContainerItemCount{
+.StoreItemDetailButtonContainerItemCount {
   display: flex;
   padding: 10px;
 }
 
-.InputIncreaseDecreaseButtonValue{
+.InputIncreaseDecreaseButtonValue {
   text-align: center;
   background-color: rgb(233, 233, 233);
   border: none;
 }
 
-.IncreaseDecreaseButton{
+.IncreaseDecreaseButton {
   padding: 10px;
   margin: 10px;
   border: none;
