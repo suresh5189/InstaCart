@@ -33,7 +33,7 @@ const StoreDetailScreen = () => {
     <>
       <div className="StoreDetail">
         <div className="StoreDetailSideBar">
-          <div classN     ame="DetailScreenSidebar">
+          <div className="DetailScreenSidebar">
             <DetailScreenSidebar image={image} title={title} />
           </div>
         </div>
