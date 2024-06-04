@@ -3,7 +3,6 @@ import { FcGoogle } from "react-icons/fc";
 import { ImFacebook2 } from "react-icons/im";
 import { FaPhoneVolume } from "react-icons/fa6";
 import { IoClose } from "react-icons/io5";
-import { sendOTPRegister } from "../apiServices";
 
 const SignUp = ({ handleCloseSignUpModal, handleOpen, handleLoginClick }) => {
   const refSignup = useRef(null);
@@ -11,15 +10,15 @@ const SignUp = ({ handleCloseSignUpModal, handleOpen, handleLoginClick }) => {
   const [email, setEmail] = useState("");
   const [responseMessage, setResponseMessage] = useState("");
 
-  const handleRegister = async () => {
-    try {
-      const response = await sendOTPRegister(email);
-      setResponseMessage(response.message || "Register Successfully");
-    } catch (error) {
-      console.error("Error Registering", error.message);
-      setResponseMessage(error.message);
-    }
-  };
+  // const handleRegister = async () => {
+  //   try {
+  //     const response = await sendOTPRegister(email);
+  //     setResponseMessage(response.message || "Register Successfully");
+  //   } catch (error) {
+  //     console.error("Error Registering", error.message);
+  //     setResponseMessage(error.message);
+  //   }
+  // };
 
   const handleClickOutsideSignUp = (event) => {
     if (refSignup.current && !refSignup.current.contains(event.target)) {
@@ -91,7 +90,7 @@ const SignUp = ({ handleCloseSignUpModal, handleOpen, handleLoginClick }) => {
           </div>
           <div className="LogButton">
             <div>
-              <button className="SignUpButton" onClick={handleRegister}>
+              <button className="SignUpButton">
                 <span>Sign up</span>
               </button>
               {responseMessage && (
