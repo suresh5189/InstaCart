@@ -2,7 +2,7 @@ import axios from "axios";
 
 const API_URL =
   "https://api.postman.com/collections/33977373-36e54ad1-9dfb-4bfc-b002-a3372663d430";
-const ACCESS_KEY = "PMAT-01HWSMNJGC4KE9W6GA642WCH2W";
+// const ACCESS_KEY = "";
 
 const apiServices = axios.create({
   baseURL: API_URL,
