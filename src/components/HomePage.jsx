@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Data from "../data/storeData";
 import { useNavigate } from "react-router-dom";
+import { storeData } from "../apiServices";
 
 function HomePage() {
   const [visibleCount, setVisibleCount] = useState(9);
+
+  const [store, setStore] = useState([]);
 
   const navigate = useNavigate();
 
@@ -15,9 +18,22 @@ function HomePage() {
     setVisibleCount(9);
   };
 
-  const handleDetail = ( image,title) => {
-    navigate("/storedetails",{state:{image,title}});
+  const handleDetail = (image, title) => {
+    navigate(`/storedetails/${title}/front`, { state: { image, title } });
   };
+
+  useEffect(() => {
+    const getStores = async () => {
+      try {
+        const data = await storeData();
+        setStore(data);
+      } catch (error) {
+        console.error("Error Fetching Store Data", error);
+      }
+    };
+
+    getStores();
+  }, []);
 
   return (
     <div className="home">
@@ -28,30 +44,66 @@ function HomePage() {
         </header>
       </div>
       <div className="HomePageButtonDiv">
-        {Data.slice(0, visibleCount).map(({ image, title, option }) => {
-          return (
-            <div className="buttonHome" onClick={()=> handleDetail(image,title)}>
-              <div className="buttonHomeLogo">
-                <div className="buttonHomeLogoImage">
-                  <a href="/">
-                    <img src={image} alt={title} />
-                  </a>
+        {store
+          .slice(0, visibleCount)
+          .map(
+            ({
+              store_id,
+              store_name,
+              image_url,
+              store_categories,
+              messages,
+            }) => {
+              return (
+                <div
+                  className="buttonHome"
+                  onClick={() => handleDetail(image_url, store_name)}
+                  key={store_id}
+                >
+                  <div className="buttonHomeLogo">
+                    <div className="buttonHomeLogoImage">
+                      <a href="/">
+                        <img src={image_url} alt={store_name} />
+                      </a>
+                    </div>
+                    <div className="LogoTextDiv">
+                      <div className="LogoText">
+                        <span className="LogoTextTitle">{store_name}</span>
+                      </div>
+                      <div>
+                        <span className="LogoTextSubTitle">
+                          {messages.map((message, index) => (
+                            <span
+                              key={index}
+                              className={`HomeMessage ${
+                                message.toLowerCase().includes("delivery")
+                                  ? "HomeMessageFirst"
+                                  : ""
+                              }
+                                    ${
+                                      message.toLowerCase().includes("in-store")
+                                        ? "HomeMessageStore"
+                                        : ""
+                                    }`}
+                            >
+                              {message}
+                            </span>
+                          ))}
+                        </span>
+                      </div>
+                      <div>
+                        {store_categories.map((category, index) => (
+                          <span key={index} className="LogoTextSubTitleButton">
+                            {category}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div className="LogoTextDiv">
-                  <div className="LogoText">
-                    <span className="LogoTextTitle">{title}</span>
-                  </div>
-                  <div>
-                    <span className="LogoTextSubTitle">{option}</span>
-                  </div>
-                  <div>
-                    <span className="LogoTextSubTitleButton">Accepts EBT</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          );
-        })}
+              );
+            }
+          )}
       </div>
       <div className="showMoreLessButtons">
         {visibleCount < Data.length ? (

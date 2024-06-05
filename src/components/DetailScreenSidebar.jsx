@@ -4,13 +4,13 @@ import { TbReload } from "react-icons/tb";
 import { FaListUl } from "react-icons/fa";
 import DetailSideBarData from "../data/detailSidebarData";
 
-const DetailScreenSidebar = ({ image, title }) => {
+const DetailScreenSidebar = ({ image, title, categories }) => {
   return (
     <div className="SidebarHead">
       <div className="SideBarDetailButton">
         <span className="DetailSideBarLogo">
-          <span>
-            <img src={image} alt="SafeWay" />
+          <span className="DetailSideBarImage">
+            <img src={image} alt={title} />
           </span>
           <span className="DetailSideBarLogoText1">{title}</span>
           <span className="DetailSideBarLogoText2">In store prices</span>

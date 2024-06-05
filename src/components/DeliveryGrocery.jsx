@@ -6,9 +6,9 @@ const Delivery_Grocery = () => {
     <div className="Delivery">
       <h1>Grocery delivery you can count on</h1>
       <div className="DeliveryHead">
-        {DeliveryData.map(({ title, subTitle, groceryImage }) => {
+        {DeliveryData.map(({id, title, subTitle, groceryImage }) => {
           return (
-            <div className="DeliveryBox">
+            <div className="DeliveryBox" key={id}>
               <div className="DeliveryBoxImage">
                 <img src={groceryImage} alt={title} />
               </div>

@@ -10,9 +10,9 @@ const Grocery_MarketPlace = () => {
         <img src={MarketPlace} alt="marketplace" />
       </div>
       <div className="MarketPlaceBox">
-        {MarketPlaceData.map(({ title, subtitle }) => {
+        {MarketPlaceData.map(({ id, title, subtitle }) => {
           return (
-            <div className="MarketPlaceSubBox">
+            <div className="MarketPlaceSubBox" key={id}>
               <div className="MarketPlaceBoxTitle">
                 <span>{title}</span>
               </div>

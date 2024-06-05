@@ -43,10 +43,11 @@ const StoreItemDetail = ({ item, handleClose, handleOpen }) => {
         </div>
         <div className="StoreItemDetail">
           <div className="StoreItemDetailImage">
-            <img src={item.productImage} alt={item.productDetail} />
+            <img src={item.image} alt={item.productDetail} />
           </div>
           <div className="StoreItemDetailHeading">
-            <div className="StoreItemDetailText1">{item.productDetail}</div>
+            <div className="StoreItemDetailText1">{item.title}</div>
+            <div className="StoreItemDetailText11">{item.label}</div>
             <div
               style={{ borderBottom: "1px solid lightGrey", marginTop: "20px" }}
             ></div>
@@ -60,7 +61,7 @@ const StoreItemDetail = ({ item, handleClose, handleOpen }) => {
           </div>
           <div className="StoreItemDetailButtonContainer">
             <div className="StoreItemDetailButtonContainerText">
-              $ {item.price}.{item.supPrice}
+              $ {item.actual_price}
             </div>
             <div className="StoreItemDetailButtonContainerItemCount">
               <button className="IncreaseDecreaseButton" onClick={decrement}>

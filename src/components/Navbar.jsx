@@ -1,16 +1,31 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Sidebar from "./Sidebar";
 import InstaCartLogo from "../images/instacart.svg";
 import { useNavigate } from "react-router-dom";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { IoSearchOutline } from "react-icons/io5";
 import { FaShoppingCart } from "react-icons/fa";
-import NavbarList from "../data/navbarList";
 import Cart from "./CartScreen";
+import { fetchCategoryList } from "../apiServices";
 
 function Navbar({ onLoginClick, onSignUpClick }) {
   const [hamburger, setHamburger] = useState(false);
   const [cart, setCart] = useState(false);
+
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    const getCategories = async () => {
+      try {
+        const data = await fetchCategoryList();
+        setCategories(data);
+      } catch (error) {
+        console.error("Error Fetching Categories", error);
+      }
+    };
+
+    getCategories();
+  }, []);
 
   const navigate = useNavigate();
 
@@ -82,13 +97,13 @@ function Navbar({ onLoginClick, onSignUpClick }) {
       </div>
       <div className="NavbarScrollBar">
         <div className="HorizontalScrollBarWrapper Squares">
-          {NavbarList.map(({ id, icon: Icon, text }) => {
+          {categories.map(({ id, name, imageUrl }) => {
             return (
               <div className="NavbarScrollBarList active" key={id}>
                 <div className="NavbarScrollBarIcon">
-                  <Icon size={28} />
+                  <img src={imageUrl} alt={name} />
                 </div>
-                <div className="NavbarScrollBarText">{text}</div>
+                <div className="NavbarScrollBarText">{name}</div>
               </div>
             );
           })}

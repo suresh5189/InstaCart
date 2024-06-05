@@ -6,6 +6,7 @@ import Home from "./components/Home";
 import StoreDetailScreen from "./components/StoreDetailScreen";
 import Navbar from "./components/Navbar";
 import { useState } from "react";
+import User from "./components/User";
 
 function App() {
   const [showLoginModal, setShowLoginModal] = useState(false);
@@ -49,7 +50,8 @@ function App() {
         )}
         <Routes>
           <Route path="/" element={<Home />}></Route>
-          <Route path="/storedetails" element={<StoreDetailScreen />}></Route>
+          <Route path="/storedetails/:storeId/front" element={<StoreDetailScreen />}></Route>
+          <Route path="/store/account" element={<User />}></Route>
         </Routes>
       </Router>
     </div>

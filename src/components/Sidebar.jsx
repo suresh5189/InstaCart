@@ -12,6 +12,7 @@ import { LuLightbulb } from "react-icons/lu";
 import { FaApple } from "react-icons/fa";
 import { FaGooglePlay } from "react-icons/fa";
 import { IoToggle } from "react-icons/io5";
+import { useNavigate } from "react-router-dom";
 
 const Sidebar = ({ closeSidebar, isOpen }) => {
   const useSidebarRef = useRef(null);
@@ -24,6 +25,12 @@ const Sidebar = ({ closeSidebar, isOpen }) => {
       closeSidebar();
     }
   };
+
+  const navigate = useNavigate();
+
+  const handleOpenAccount = () => {
+    navigate("/store/account");
+  }
 
   useEffect(() => {
     if (isOpen) {
@@ -66,7 +73,7 @@ const Sidebar = ({ closeSidebar, isOpen }) => {
             <div className="SideBarStoreButton">
               <span className="SideBarStoreButtonText">
                 <MdOutlineSettings size={20} />
-                <span className="SideBarStoreButtonSpan">
+                <span className="SideBarStoreButtonSpan" onClick={handleOpenAccount}>
                   Your account settings
                 </span>
               </span>

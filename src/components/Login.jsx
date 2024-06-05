@@ -4,11 +4,35 @@ import { ImFacebook2 } from "react-icons/im";
 import { FaPhoneVolume } from "react-icons/fa6";
 import { IoClose } from "react-icons/io5";
 import ResetPassword from "./ResetPassword";
+import { login } from "../apiServices";
 
 const Login = ({ handleClose, handleOpen, handleSignUpClick }) => {
   const refLogin = useRef(null);
 
   const [isResetOpen, setIsResetOpen] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [responseMessage, setResponseMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleLogin = async () => {
+    if (!email || !password) {
+      setResponseMessage("Please Enter Email And Password");
+      return;
+    }
+    setIsLoading(true);
+    try {
+      const response = await login(email, password);
+      setResponseMessage(response.message || "Logged In SuccessFully");
+    } catch (error) {
+      console.error("Error Logging In", error.message);
+      setResponseMessage(
+        error.message || "Error Logging In. Please try again."
+      );
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const handleClickOutSide = (event) => {
     if (refLogin.current && !refLogin.current.contains(event.target)) {
@@ -67,6 +91,8 @@ const Login = ({ handleClose, handleOpen, handleSignUpClick }) => {
                     name="email"
                     id="email"
                     placeholder="Email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
                 <div className="Password">
@@ -75,6 +101,8 @@ const Login = ({ handleClose, handleOpen, handleSignUpClick }) => {
                     name="password"
                     id="password"
                     placeholder="Password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                   />
                 </div>
               </div>
@@ -83,9 +111,18 @@ const Login = ({ handleClose, handleOpen, handleSignUpClick }) => {
                 <span onClick={() => setIsResetOpen(true)}>Reset it</span>
               </div>
               <div className="LogButton">
-                <button className="LoginButton">
-                  <span>Log in</span>
+                <button
+                  className="LoginButton"
+                  onClick={handleLogin}
+                  disabled={isLoading}
+                >
+                  <span>{isLoading ? "Loading..." : "Login"}</span>
                 </button>
+                {responseMessage && (
+                  <p style={{ color: "red", textAlign: "center" }}>
+                    {responseMessage}
+                  </p>
+                )}
               </div>
               <div
                 style={{ borderBottom: "1px solid lightGrey", margin: "10px" }}
