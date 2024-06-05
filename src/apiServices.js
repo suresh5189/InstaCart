@@ -1,9 +1,10 @@
 import axios from "axios";
 
-const baseURl = "https://instacart-xqwi.onrender.com";
+const baseURl = process.env.BASEURL;
+console.log(baseURl);
 
 const apiServices = axios.create({
-  baseURL: baseURl,
+  baseURl,
   headers: {
     "Content-Type": "application/json",
   },
@@ -47,7 +48,6 @@ export const verifyOTPRegister = async (email, password, enteredotp) => {
     }
   }
 };
-
 
 // --------------------------------------------------------------------------------
 
