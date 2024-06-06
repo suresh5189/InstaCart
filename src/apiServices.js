@@ -1,10 +1,9 @@
 import axios from "axios";
 
-const baseURl = process.env.BASEURL;
-console.log(baseURl);
+const baseURL = "https://instacart-xqwi.onrender.com";
 
 const apiServices = axios.create({
-  baseURl,
+  baseURL,
   headers: {
     "Content-Type": "application/json",
   },
