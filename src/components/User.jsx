@@ -1,14 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import InstacartBanner from "../images/instacartBanner.webp";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import ChangePassword from "./ChangePassword";
 
 const User = () => {
+  const navigate = useNavigate();
 
-    const navigate = useNavigate();
+  const handleBackToHome = () => {
+    navigate("/");
+  };
 
-    const handleBackToHome = () => {
-        navigate("/");
-    }
+  const [showPasswordModal, setShowPasswordModal] = useState(false);
+
+  const handleChangePassword = () => {
+    setShowPasswordModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowPasswordModal(false);
+  };
+
+  const Email = useSelector((state) => state.user.email);
+  const Password = useSelector((state) => state.user.password);
+  const Name = Email ? Email.split("@")[0] : "";
 
   return (
     <div className="User">
@@ -27,13 +42,20 @@ const User = () => {
                 <span className="UserEmail">Email Address</span>
               </div>
               <div className="UserIdAndChange">
-                <span className="UserEmailId">temp123@gmail.com</span>
+                <span className="UserEmailId">{Email}</span>
                 <span className="ChangeButton">Change</span>
               </div>
             </div>
-            <div className="UserEmailInformationDetailPassword">
-              <span className="UserEmail">Password</span>
-              <span className="ChangeButton">Change</span>
+            <div className="UserEmailInformationDetail">
+              <div>
+                <span className="UserEmail">Password</span>
+              </div>
+              <div className="UserIdAndChange">
+                <span className="UserEmailId">{Password}</span>
+                <span className="ChangeButton" onClick={handleChangePassword}>
+                  Change
+                </span>
+              </div>
             </div>
           </div>
         </div>
@@ -41,14 +63,14 @@ const User = () => {
           style={{ borderBottom: "1px solid lightGrey", margin: "10px" }}
         ></div>
         <div className="UserInformation">
-          <div className="UserInformationTitle">Peronsal Information</div>
+          <div className="UserInformationTitle">Personal Information</div>
           <div className="UserEmailInformation">
             <div className="UserEmailInformationDetail">
               <div>
                 <span className="UserEmail">Name</span>
               </div>
               <div className="UserIdAndChange">
-                <span className="UserEmailId">temp123</span>
+                <span className="UserEmailId">{Name}</span>
                 <span className="ChangeButton">Change</span>
               </div>
             </div>
@@ -65,6 +87,7 @@ const User = () => {
           <button>Back</button>
         </div>
       </div>
+      {showPasswordModal && <ChangePassword closeModal={handleCloseModal} />}
     </div>
   );
 };

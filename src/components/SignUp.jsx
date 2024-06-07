@@ -6,12 +6,14 @@ import { IoClose } from "react-icons/io5";
 import { sendOTPRegister } from "../apiServices";
 import VerifyOTP from "./VerifyOTP";
 
-const SignUp = ({ handleCloseSignUpModal, handleOpen, handleLoginClick }) => {
+const SignUp = ({ handleCloseSignUpModal, handleOpen, handleLoginClick,isLoggedIn }) => {
   const refSignup = useRef(null);
 
   const [email, setEmail] = useState("");
   const [responseMessage, setResponseMessage] = useState("");
+  const [otpid,setOtpid] = useState("");
   const [isOTPSent, setIsOTPSent] = useState(false);
+  const [isLogged,setIsLogged] = useState(false);
 
   const handleRegister = async () => {
     if (!email) {
@@ -21,14 +23,15 @@ const SignUp = ({ handleCloseSignUpModal, handleOpen, handleLoginClick }) => {
     try {
       setIsOTPSent(true);
       const response = await sendOTPRegister(email);
+      const {otpid} = response.data;
       setResponseMessage(response.message || "Register Successfully");
+      setOtpid(otpid);
     } catch (error) {
       console.error("Error Registering", error.message);
       setResponseMessage(error.message);
       setIsOTPSent(false);
     }
   };
-
 
   const handleClickOutsideSignUp = (event) => {
     if (refSignup.current && !refSignup.current.contains(event.target)) {
@@ -43,6 +46,11 @@ const SignUp = ({ handleCloseSignUpModal, handleOpen, handleLoginClick }) => {
       document.removeEventListener("mousedown", handleClickOutsideSignUp);
     }
   });
+
+  useEffect(() => {
+    // Update isLogged state based on isLoggedIn prop
+    setIsLogged(isLoggedIn);
+  }, [isLoggedIn]);
 
   return (
     <>
@@ -107,7 +115,7 @@ const SignUp = ({ handleCloseSignUpModal, handleOpen, handleLoginClick }) => {
                   <button
                     className="SignUpButton"
                     onClick={handleRegister}
-                    disabled={isOTPSent}
+                    disabled={isOTPSent || isLogged}
                   >
                     <span>{isOTPSent ? "Loading..." : "Sign up"}</span>
                   </button>
@@ -122,15 +130,20 @@ const SignUp = ({ handleCloseSignUpModal, handleOpen, handleLoginClick }) => {
                 style={{ borderBottom: "1px solid lightGrey", margin: "10px" }}
               ></div>
               <div className="Account">
-                <span>Don’t have an account?</span>
-                <span className="SignButton" onClick={handleLoginClick}>
-                  Log in
-                </span>
+              {!isLogged && ( // Only render if not logged in
+                  <>
+                    <span>Don’t have an account?</span>
+                    <span className="SignButton" onClick={handleLoginClick}>
+                      Log in
+                    </span>
+                  </>
+                )}
               </div>
             </>
           ) : (
             <VerifyOTP
               email={email}
+              otpid={otpid}
               onVerificationSuccess={handleCloseSignUpModal}
             />
           )}

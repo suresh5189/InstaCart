@@ -22,29 +22,26 @@ export const sendOTPRegister = async (email) => {
 
 // --------------------------------------------------------------------------
 
-export const verifyOTPRegister = async (email, password, enteredotp) => {
+export const verifyOTPRegister = async (email, password, enteredotp, otpid) => {
   try {
-    const response = await apiServices.post("/verify/register", {
+    const response = await apiServices.post("/register/verify", {
       email,
       password,
       enteredotp,
+      otpid,
     });
 
-    if (response && response.status === 200) {
-      const accessToken = response.data.JWTToken.accessToken;
+    if (response.status === 201) {
+      const accessToken = response.data.data.JWTToken.accessToken;
       localStorage.setItem("ACCESS_TOKEN", accessToken);
       return { status: "success", message: "OTP verified successfully" };
     } else {
       throw new Error("Invalid OTP");
     }
   } catch (error) {
-    if (error.response && error.response.data && error.response.data.message) {
-      throw new Error(error.response.data.message);
-    } else if (error.message) {
-      throw new Error(error.message);
-    } else {
-      throw new Error("Error verifying OTP. Please try again.");
-    }
+    throw new Error(
+      error.response.data.msg || "Error verifying OTP. Please try again."
+    );
   }
 };
 
@@ -53,17 +50,45 @@ export const verifyOTPRegister = async (email, password, enteredotp) => {
 export const login = async (email, password) => {
   try {
     const response = await apiServices.post("/login", { email, password });
-    if (response.data === 200) {
-      const accessToken = response.data.JWTToken.accessToken;
+    if (response.status === 200) {
+      const accessToken = response.data.data.JWTToken.accessToken;
       localStorage.setItem("AccessToken", accessToken);
     }
     return response;
   } catch (error) {
-    throw new Error(error.response.data.message || "Error Logging In");
+    throw new Error(
+      error.response.data.message || "Please Enter Correct Email And Password"
+    );
   }
 };
 
-// ------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------
+
+export const changePassword = async (
+  accessToken,
+  newPassword,
+  confirmPassword
+) => {
+  try {
+    const response = await apiServices.post(
+      "/userprofile/changepassword",
+      {
+        newPassword,
+        confirmNewPassword: confirmPassword,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
+    return response.data.message;
+  } catch (error) {
+    throw new Error(error.response.data.message || "Error Changing Password");
+  }
+};
+
+// --------------------------------------------------------------------------------
 
 export const fetchCategoryList = async () => {
   try {

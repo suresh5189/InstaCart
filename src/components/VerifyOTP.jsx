@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { verifyOTPRegister } from "../apiServices";
 
-const VerifyOTP = ({ email, onVerificationSuccess }) => {
+const VerifyOTP = ({ email, onVerificationSuccess, otpid }) => {
   const [password, setPassword] = useState("");
   const [enteredotp, setEnteredotp] = useState("");
   const [responseMessage, setResponseMessage] = useState("");
@@ -15,8 +15,13 @@ const VerifyOTP = ({ email, onVerificationSuccess }) => {
 
     setIsLoading(true);
     try {
-      const response = await verifyOTPRegister(email, password, enteredotp);
-      if (response.status === 201) {
+      const response = await verifyOTPRegister(
+        email,
+        password,
+        enteredotp,
+        otpid
+      );
+      if (response.status === "success") {
         setResponseMessage("OTP Verified Successfully");
         onVerificationSuccess();
       } else {

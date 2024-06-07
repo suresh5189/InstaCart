@@ -4,7 +4,7 @@ import DetailScreenSidebar from "./DetailScreenSideBar";
 import BookMark from "./BookMark";
 import StoreItemDetail from "./StoreItemDetail";
 import { useLocation, useParams } from "react-router-dom";
-import { storeData, storeDetailData } from "../apiServices";
+import { storeDetailData } from "../apiServices";
 
 const StoreDetailScreen = () => {
   const [bookmarkModalOpen, setBookmarkModalOpen] = useState(true);

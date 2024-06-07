@@ -8,10 +8,9 @@ import { FaShoppingCart } from "react-icons/fa";
 import Cart from "./CartScreen";
 import { fetchCategoryList } from "../apiServices";
 
-function Navbar({ onLoginClick, onSignUpClick }) {
+function Navbar({ onLoginClick, onSignUpClick, isLoggedIn, handleLogout }) {
   const [hamburger, setHamburger] = useState(false);
   const [cart, setCart] = useState(false);
-
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
@@ -57,7 +56,11 @@ function Navbar({ onLoginClick, onSignUpClick }) {
             <RxHamburgerMenu size={20} className="HamBurgerIcon" />
           </div>
           {hamburger && (
-            <Sidebar closeSidebar={closeSidebar} isOpen={handleHamburger} />
+            <Sidebar
+              closeSidebar={closeSidebar}
+              isOpen={handleHamburger}
+              isLoggedIn={isLoggedIn}
+            />
           )}
           <div>
             <img
@@ -77,36 +80,41 @@ function Navbar({ onLoginClick, onSignUpClick }) {
           />
         </div>
         <div>
-          <button className="loginButton" onClick={onLoginClick}>
-            <span>Log in</span>
-          </button>
-          <button className="loginButton" onClick={onSignUpClick}>
-            <span>Sign up</span>
-          </button>
+          {!isLoggedIn && (
+            <>
+              <button className="loginButton" onClick={onLoginClick}>
+                <span>Log in</span>
+              </button>
+              <button className="loginButton" onClick={onSignUpClick}>
+                <span>Sign up</span>
+              </button>
+            </>
+          )}
+          {isLoggedIn && (
+            <button className="loginButton" onClick={handleLogout}>
+              <span>Logout</span>
+            </button>
+          )}
           <button className="CartButton">
             <div className="CartIconButtonHead">
               <div className="CartIconButton" onClick={handleCart}>
                 <FaShoppingCart size={24} className="CartIcon" />
               </div>
-              {cart && (
-                <Cart size={24} closeCart={closeCart} isOpenCart={handleCart} />
-              )}
+              {cart && <Cart size={24} closeCart={closeCart} />}
             </div>
           </button>
         </div>
       </div>
       <div className="NavbarScrollBar">
         <div className="HorizontalScrollBarWrapper Squares">
-          {categories.map(({ id, name, imageUrl }) => {
-            return (
-              <div className="NavbarScrollBarList active" key={id}>
-                <div className="NavbarScrollBarIcon">
-                  <img src={imageUrl} alt={name} />
-                </div>
-                <div className="NavbarScrollBarText">{name}</div>
+          {categories.map(({ id, name, imageUrl }) => (
+            <div className="NavbarScrollBarList active" key={id}>
+              <div className="NavbarScrollBarIcon">
+                <img src={imageUrl} alt={name} />
               </div>
-            );
-          })}
+              <div className="NavbarScrollBarText">{name}</div>
+            </div>
+          ))}
         </div>
       </div>
     </div>

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { IoClose } from "react-icons/io5";
 import InstaCartLogo from "../images/instacart.svg";
 import { CiLogin } from "react-icons/ci";
@@ -13,9 +13,14 @@ import { FaApple } from "react-icons/fa";
 import { FaGooglePlay } from "react-icons/fa";
 import { IoToggle } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
+import UserImage from "../images/userImage.webp";
+import { useSelector } from "react-redux";
 
-const Sidebar = ({ closeSidebar, isOpen }) => {
+const Sidebar = ({ closeSidebar, isOpen, isLoggedIn }) => {
   const useSidebarRef = useRef(null);
+
+  const userEmail = useSelector((state) => state.user.email);
+  const userEmailName = userEmail ? userEmail.split("@")[0] : "";
 
   const handleClickOutside = (event) => {
     if (
@@ -29,8 +34,8 @@ const Sidebar = ({ closeSidebar, isOpen }) => {
   const navigate = useNavigate();
 
   const handleOpenAccount = () => {
-    navigate("/store/account");
-  }
+    navigate("/store/userinformation/account");
+  };
 
   useEffect(() => {
     if (isOpen) {
@@ -51,15 +56,26 @@ const Sidebar = ({ closeSidebar, isOpen }) => {
           <img src={InstaCartLogo} alt="instacartLogo" className="logo" />
         </div>
         <div className="SidebarHead">
-          <div className="SideBarSignUpButton">
-            <span className="SideBarSignUpButtonText">
-              <span>Sign up</span>
-            </span>
-          </div>
-          <div className="SideBarLoginButton">
-            <CiLogin size={20} />
-            <span className="SideBarLoginButtonText">Log in</span>
-          </div>
+          {!isLoggedIn ? (
+            <div>
+              <div className="SideBarSignUpButton">
+                <span className="SideBarSignUpButtonText">
+                  <span>Sign up</span>
+                </span>
+              </div>
+              <div className="SideBarLoginButton">
+                <CiLogin size={20} />
+                <span className="SideBarLoginButtonText">Log in</span>
+              </div>
+            </div>
+          ) : (
+            <div className="SideBarUserAndName">
+              <div className="SideBarUserName">{userEmailName}</div>
+              <div className="SideBarUserImage">
+                <img src={UserImage} alt="" />
+              </div>
+            </div>
+          )}
           <div
             style={{ borderBottom: "1px solid lightGrey", margin: "10px" }}
           ></div>
@@ -70,14 +86,19 @@ const Sidebar = ({ closeSidebar, isOpen }) => {
                 <span className="SideBarStoreButtonSpan">Stores</span>
               </span>
             </div>
-            <div className="SideBarStoreButton">
-              <span className="SideBarStoreButtonText">
-                <MdOutlineSettings size={20} />
-                <span className="SideBarStoreButtonSpan" onClick={handleOpenAccount}>
-                  Your account settings
+            {isLoggedIn && (
+              <div className="SideBarStoreButton">
+                <span className="SideBarStoreButtonText">
+                  <MdOutlineSettings size={20} />
+                  <span
+                    className="SideBarStoreButtonSpan"
+                    onClick={handleOpenAccount}
+                  >
+                    Your account settings
+                  </span>
                 </span>
-              </span>
-            </div>
+              </div>
+            )}
             <div className="SideBarStoreButton">
               <span className="SideBarStoreButtonText">
                 <TbSettingsPlus size={20} />

@@ -5,25 +5,39 @@ import { FaPhoneVolume } from "react-icons/fa6";
 import { IoClose } from "react-icons/io5";
 import ResetPassword from "./ResetPassword";
 import { login } from "../apiServices";
+import { useDispatch } from "react-redux";
+import { setEmail,setPassword } from "../store/action/userActions";
 
-const Login = ({ handleClose, handleOpen, handleSignUpClick }) => {
+const Login = ({
+  handleClose,
+  handleOpen,
+  handleSignUpClick,
+  handleLoginSuccess,
+}) => {
   const refLogin = useRef(null);
 
+  const dispatch = useDispatch();
+
   const [isResetOpen, setIsResetOpen] = useState(false);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [loginEmail, setLoginEmail] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
   const [responseMessage, setResponseMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // New state for tracking login status
 
   const handleLogin = async () => {
-    if (!email || !password) {
+    if (!loginEmail || !loginPassword) {
       setResponseMessage("Please Enter Email And Password");
       return;
     }
     setIsLoading(true);
     try {
-      const response = await login(email, password);
-      setResponseMessage(response.message || "Logged In SuccessFully");
+      const response = await login(loginEmail, loginPassword);
+      setResponseMessage(response.message || "Logged In Successfully");
+      setIsLoggedIn(true); // Update login status
+      handleLoginSuccess(); // Call the login success handler
+      dispatch(setEmail(loginEmail));
+      dispatch(setPassword(loginPassword));
     } catch (error) {
       console.error("Error Logging In", error.message);
       setResponseMessage(
@@ -50,93 +64,97 @@ const Login = ({ handleClose, handleOpen, handleSignUpClick }) => {
 
   return (
     <>
-      {!isResetOpen && (
-        <>
-          <div className="Overlay"></div>
-          <div className="Login" ref={refLogin}>
-            <div className="LoginInside">
-              <div className="CloseIcon">
-                <IoClose onClick={handleClose} />
-              </div>
-              <h1>Log in</h1>
-              <div className="IconButton">
-                <div className="Google">
-                  <div className="GoogleIcon">
-                    <FcGoogle size={24} />
+      {!isResetOpen &&
+        !isLoggedIn && ( // Only render if not resetting password and not logged in
+          <>
+            <div className="Overlay"></div>
+            <div className="Login" ref={refLogin}>
+              <div className="LoginInside">
+                <div className="CloseIcon">
+                  <IoClose onClick={handleClose} />
+                </div>
+                <h1>Log in</h1>
+                <div className="IconButton">
+                  <div className="Google">
+                    <div className="GoogleIcon">
+                      <FcGoogle size={24} />
+                    </div>
+                    <span className="GoogleText">Continue With Google</span>
                   </div>
-                  <span className="GoogleText">Continue With Google</span>
-                </div>
-                <div className="Facebook">
-                  <div className="FacebookIcon">
-                    <ImFacebook2 size={24} />
+                  <div className="Facebook">
+                    <div className="FacebookIcon">
+                      <ImFacebook2 size={24} />
+                    </div>
+                    <span className="FacebookText">Continue With Facebook</span>
                   </div>
-                  <span className="FacebookText">Continue With Facebook</span>
-                </div>
-                <div className="Phone">
-                  <div className="PhoneIcon">
-                    <FaPhoneVolume size={24} />
+                  <div className="Phone">
+                    <div className="PhoneIcon">
+                      <FaPhoneVolume size={24} />
+                    </div>
+                    <span className="PhoneText">Continue With Phone</span>
                   </div>
-                  <span className="PhoneText">Continue With Phone</span>
                 </div>
-              </div>
-              <div className="Horizontal">
-                <hr className="HorizontalLine" />
-                <span>or</span>
-                <hr className="HorizontalLine" />
-              </div>
-              <div className="Input">
-                <div className="Email">
-                  <input
-                    type="email"
-                    name="email"
-                    id="email"
-                    placeholder="Email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
+                <div className="Horizontal">
+                  <hr className="HorizontalLine" />
+                  <span>or</span>
+                  <hr className="HorizontalLine" />
                 </div>
-                <div className="Password">
-                  <input
-                    type="password"
-                    name="password"
-                    id="password"
-                    placeholder="Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                  />
+                <div className="Input">
+                  <div className="Email">
+                    <input
+                      type="email"
+                      name="email"
+                      id="email"
+                      placeholder="Email"
+                      value={loginEmail}
+                      onChange={(e) => setLoginEmail(e.target.value)}
+                    />
+                  </div>
+                  <div className="Password">
+                    <input
+                      type="password"
+                      name="password"
+                      id="password"
+                      placeholder="Password"
+                      value={loginPassword}
+                      onChange={(e) => setLoginPassword(e.target.value)}
+                    />
+                  </div>
                 </div>
-              </div>
-              <div className="Forgot" onClick={() => setIsResetOpen(true)}>
-                Forgot password?{" "}
-                <span onClick={() => setIsResetOpen(true)}>Reset it</span>
-              </div>
-              <div className="LogButton">
-                <button
-                  className="LoginButton"
-                  onClick={handleLogin}
-                  disabled={isLoading}
-                >
-                  <span>{isLoading ? "Loading..." : "Login"}</span>
-                </button>
-                {responseMessage && (
-                  <p style={{ color: "red", textAlign: "center" }}>
-                    {responseMessage}
-                  </p>
-                )}
-              </div>
-              <div
-                style={{ borderBottom: "1px solid lightGrey", margin: "10px" }}
-              ></div>
-              <div className="Account">
-                <span>Don’t have an account?</span>
-                <span className="SignButton" onClick={handleSignUpClick}>
-                  Sign up
-                </span>
+                <div className="Forgot" onClick={() => setIsResetOpen(true)}>
+                  Forgot password?{" "}
+                  <span onClick={() => setIsResetOpen(true)}>Reset it</span>
+                </div>
+                <div className="LogButton">
+                  <button
+                    className="LoginButton"
+                    onClick={handleLogin}
+                    disabled={isLoading}
+                  >
+                    <span>{isLoading ? "Loading..." : "Login"}</span>
+                  </button>
+                  {responseMessage && (
+                    <p style={{ color: "red", textAlign: "center" }}>
+                      {responseMessage}
+                    </p>
+                  )}
+                </div>
+                <div
+                  style={{
+                    borderBottom: "1px solid lightGrey",
+                    margin: "10px",
+                  }}
+                ></div>
+                <div className="Account">
+                  <span>Don’t have an account?</span>
+                  <span className="SignButton" onClick={handleSignUpClick}>
+                    Sign up
+                  </span>
+                </div>
               </div>
             </div>
-          </div>
-        </>
-      )}
+          </>
+        )}
       {isResetOpen && (
         <ResetPassword
           isOpenModal={isResetOpen}
