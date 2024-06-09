@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap");
 /* Navbar */
 
 form {
@@ -836,23 +836,23 @@ Input {
   overflow-y: auto;
 }
 
-.SideBarUserAndName{
+.SideBarUserAndName {
   display: flex;
   justify-content: space-around;
   align-items: center;
   font-size: 20px;
 }
 
-.SideBarUserName{
-  font-size:22px;
+.SideBarUserName {
+  font-size: 22px;
   font-weight: bold;
 }
 
-.SideBarUserImage{
+.SideBarUserImage {
   width: 50%;
 }
 
-.SideBarUserImage img{
+.SideBarUserImage img {
   width: 100px;
 }
 
@@ -1609,75 +1609,75 @@ Input {
 
 /* User */
 
-.User{
+.User {
   display: flex;
   position: fixed;
   width: 100%;
   height: 100%;
 }
 
-.UserBannerImage img{
+.UserBannerImage img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.UserHead{
-  font-family: 'Roboto';
+.UserHead {
+  font-family: "Roboto";
   margin: 20px;
   width: calc(100% - 40px);
 }
 
-.UserAccount{
+.UserAccount {
   font-size: 20px;
   margin-bottom: 30px;
 }
 
-.UserInformationTitle{
+.UserInformationTitle {
   font-size: 18px;
   font-weight: bold;
 }
 
-.UserPhone{
+.UserPhone {
   display: flex;
   flex-direction: column;
 }
 
-.UserEmailInformationDetail{
+.UserEmailInformationDetail {
   display: flex;
   flex-direction: column;
   font-weight: 300;
 }
 
-.UserIdAndChange{
+.UserIdAndChange {
   display: flex;
   justify-content: space-between;
 }
 
-.UserEmailInformationDetail{
-  margin:20px 0;
+.UserEmailInformationDetail {
+  margin: 20px 0;
 }
 
-.UserEmailInformationDetailPassword{
+.UserEmailInformationDetailPassword {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
   font-weight: 300;
 }
 
-.ChangeButton{
+.ChangeButton {
   color: green;
   font-weight: 500;
   cursor: pointer;
 }
 
-.UserBack{
+.UserBack {
   display: flex;
   justify-content: center;
   margin-top: 100px;
 }
 
-.UserBack button{
+.UserBack button {
   cursor: pointer;
   padding: 20px 50px;
   border-radius: 5px;
@@ -1727,7 +1727,7 @@ Input {
   cursor: pointer;
 }
 
-.ChangePasswordForm{
+.ChangePasswordForm {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -1735,7 +1735,331 @@ Input {
   box-shadow: none;
 }
 
-.ChangePasswordInputAndLabel{
+.ChangePasswordInputAndLabel {
   padding: 10px;
 }
 
+/* -------------------------------------------------------- */
+/* -------------------------------------------------------- */
+
+/* Change Email Page */
+
+.ChangeEmail {
+  width: 416px;
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 0px 16px;
+  max-height: calc(-96px + 100vh);
+  /* min-height: 416px; */
+  padding: 30px;
+  font-family: "Roboto";
+  box-sizing: border-box;
+  position: fixed;
+  z-index: 10;
+  background-color: white;
+  top: 50px;
+  left: 35%;
+}
+
+.ChangeEmailButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+}
+
+.ChangeEmailButton button {
+  width: 100%;
+  padding: 20px;
+  border-radius: 10px;
+  border: none;
+  background-color: rgb(16, 137, 16);
+  color: white;
+  font-size: 20px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.ChangeEmailInput {
+  margin: 10px 0;
+}
+
+/* ------------------------------------------- */
+
+/* Change Name Page */
+
+.ChangeName {
+  width: 416px;
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 0px 16px;
+  max-height: calc(-96px + 100vh);
+  /* min-height: 416px; */
+  padding: 30px;
+  font-family: "Roboto";
+  box-sizing: border-box;
+  position: fixed;
+  z-index: 10;
+  background-color: white;
+  top: 50px;
+  left: 35%;
+}
+
+.ChangeNameButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+}
+
+.ChangeNameButton button {
+  width: 100%;
+  padding: 20px;
+  border-radius: 10px;
+  border: none;
+  background-color: rgb(16, 137, 16);
+  color: white;
+  font-size: 20px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.ChangeNameInput {
+  margin: 10px 0;
+}
+
+/* ---------------------------------------------------------------- */
+
+/* Verify And Change Phone Number Page */
+
+.VerifyChangedPhoneNumber {
+  width: 416px;
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 0px 16px;
+  max-height: calc(-96px + 100vh);
+  /* min-height: 416px; */
+  padding: 30px;
+  font-family: "Roboto";
+  box-sizing: border-box;
+  position: fixed;
+  z-index: 10;
+  background-color: white;
+  top: 50px;
+  left: 35%;
+}
+
+.VerifyChangedPhoneNumberButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+}
+
+.VerifyChangedPhoneNumberButton button {
+  width: 100%;
+  padding: 20px;
+  border-radius: 10px;
+  border: none;
+  background-color: rgb(16, 137, 16);
+  color: white;
+  font-size: 20px;
+  font-weight: 500;
+  cursor: pointer;
+  margin: 0 10px;
+}
+
+.PhoneNumberInput {
+  margin: 10px 0;
+}
+
+/* ---------------------------------------------------- */
+/* ---------------------------------------------------- */
+
+/* Gift Card Page */
+
+.GiftCardMain {
+  margin: 0 140px;
+  font-family: "Playfair Display", serif;
+}
+
+.GiftNavbar {
+  display: flex;
+  padding: 25px;
+  align-items: center;
+  margin: 0 10px;
+  border-bottom: 1px solid rgb(230, 230, 230);
+}
+
+.GiftNavbarHamburger {
+  margin-right: 10px;
+}
+
+.GiftCard {
+  font-family: "Playfair Display", serif;
+}
+
+.GiftCardFirst {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.GiftCardHeadingText {
+  font-size: 65px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  line-height: 1.2;
+}
+
+.GiftCardSubHeadingText {
+  font-size: 18px;
+  margin: 20px 0;
+}
+
+.GiftCardButton {
+  margin: 10px 0;
+}
+
+.GiftCardButton button {
+  background-color: rgb(16, 137, 16);
+  padding: 15px 25px;
+  border: none;
+  border-radius: 30px;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.GiftCardButton button:hover {
+  background-color: rgb(16, 103, 16);
+}
+
+.GiftCardImage {
+  width: 80vh;
+}
+
+.GiftCardSubTextStyle {
+  cursor: pointer;
+  color: rgb(16, 137, 16);
+}
+
+/* ------------------------- */
+
+.Occasion {
+  margin: 100px auto;
+}
+
+.OccasionHeading {
+  font-size: 40px;
+  font-weight: bold;
+  margin-bottom: 25px;
+}
+
+.OccasionContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.OccasionImage {
+  width: 350px;
+}
+
+/* ------------------------- */
+
+.GiftConvenience {
+  margin: 100px auto;
+  padding-top: 100px;
+}
+
+.GiftConvenienceHeading {
+  font-size: 35px;
+  font-weight: bold;
+  margin-bottom: 45px;
+}
+
+.GiftConvenienceContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.GiftConvenienceImageContainer {
+  display: flex;
+  width: 90%;
+  justify-content: center;
+  align-items: center;
+}
+
+.GiftConvenienceImage {
+  width: 80px;
+  height: 80px;
+  margin-right: 15px;
+}
+
+.GiftConvenienceText {
+  font-size: 18px;
+}
+
+.GiftConvenienceSubText {
+  font-size: 15px;
+}
+
+/* ------------------------------ */
+
+.Purchase {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 35px 0;
+}
+
+.PurchaseImageContainer img {
+  width: 576px;
+  height: 576px;
+  object-fit: fill;
+  border-radius: 20px;
+}
+
+.PurchaseContainer {
+  padding: 0 80px;
+  width: 576px;
+  display: flex;
+  flex-direction: column;
+}
+
+.PurchaseContainerHeading {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.PurchaseContainerSubHeading {
+  font-size: 20px;
+  margin: 10px 0;
+  line-height: 1.2;
+}
+
+.PurchaseButton button {
+  background-color: rgb(16, 137, 16);
+  color: white;
+  padding: 15px 30px;
+  font-size: 20px;
+  font-weight: bold;
+  border: none;
+  border-radius: 30px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.PurchaseButton button:hover {
+  background-color: rgb(16, 103, 16);
+}
+
+/* ---------------------------------- */
+
+.FAQuestions {
+  margin-top: 100px;
+  margin-bottom: 150px;
+}
+
+.FAQuestionsHeading {
+  font-size: 30px;
+  font-weight: bold;
+}

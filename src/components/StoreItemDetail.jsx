@@ -29,7 +29,7 @@ const StoreItemDetail = ({ item, handleClose, handleOpen }) => {
     } else {
       document.removeEventListener("mousedown", handleClickOutside);
     }
-  }, [handleOpen]);
+  },);
 
   return (
     <>

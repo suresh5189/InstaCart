@@ -1,11 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
 import { changePassword } from "../apiServices";
+import { useDispatch } from "react-redux";
+import { setPassword as setPasswordAction } from "../store/action/userActions";
 
 function ChangePassword({ closeModal }) {
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [error, setError] = useState("");
+
+  const dispatch = useDispatch();
 
   const useChangeRef = useRef(null);
 
@@ -30,6 +34,7 @@ function ChangePassword({ closeModal }) {
         newPassword,
         confirmNewPassword
       );
+      dispatch(setPasswordAction(newPassword));
       setSuccessMessage(message);
       closeModal();
     } catch (error) {
@@ -70,8 +75,10 @@ function ChangePassword({ closeModal }) {
             />
           </div>
           <div>
-            {error && <div style={{color:'red'}}>{error}</div>}
-            {successMessage && <div style={{color:"green"}}>{successMessage}</div>}
+            {error && <div style={{ color: "red" }}>{error}</div>}
+            {successMessage && (
+              <div style={{ color: "green" }}>{successMessage}</div>
+            )}
           </div>
           <div className="ChangePasswordButton">
             <button type="submit">Change Password</button>

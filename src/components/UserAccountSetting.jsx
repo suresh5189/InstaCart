@@ -3,6 +3,9 @@ import InstacartBanner from "../images/instacartBanner.webp";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ChangePassword from "./ChangePassword";
+import ChangeEmail from "./ChangeEmail";
+import ChangeName from "./ChangeName";
+import VerifyChangedPhoneNumber from "./VerifyChangedPhoneNumber";
 
 const User = () => {
   const navigate = useNavigate();
@@ -12,18 +15,48 @@ const User = () => {
   };
 
   const [showPasswordModal, setShowPasswordModal] = useState(false);
+  const [showEmailModal, setShowEmailModal] = useState(false);
+  const [showNameModal, setShowNameModal] = useState(false);
+  const [showPhoneModal, setShowPhoneModal] = useState(false);
 
   const handleChangePassword = () => {
     setShowPasswordModal(true);
+  };
+
+  const handleChangeEmail = () => {
+    setShowEmailModal(true);
   };
 
   const handleCloseModal = () => {
     setShowPasswordModal(false);
   };
 
+  const handleCloseEmailModal = () => {
+    setShowEmailModal(false);
+  };
+
+  const handleChangeNameModal = () => {
+    setShowNameModal(true);
+  };
+
+  const handleCloseNameModal = () => {
+    setShowNameModal(false);
+  };
+  const handleChangePhoneModal = () => {
+    setShowPhoneModal(true);
+  };
+
+  const handleClosePhoneModal = () => {
+    setShowPhoneModal(false);
+  };
+
   const Email = useSelector((state) => state.user.email);
   const Password = useSelector((state) => state.user.password);
-  const Name = Email ? Email.split("@")[0] : "";
+  const FirstName = useSelector((state) => state.user.firstName);
+  const LastName = useSelector((state) => state.user.lastName);
+
+  const Name =
+    FirstName || LastName ? `${FirstName} ${LastName}` : Email.split("@")[0];
 
   return (
     <div className="User">
@@ -43,7 +76,9 @@ const User = () => {
               </div>
               <div className="UserIdAndChange">
                 <span className="UserEmailId">{Email}</span>
-                <span className="ChangeButton">Change</span>
+                <span className="ChangeButton" onClick={handleChangeEmail}>
+                  Change
+                </span>
               </div>
             </div>
             <div className="UserEmailInformationDetail">
@@ -71,7 +106,9 @@ const User = () => {
               </div>
               <div className="UserIdAndChange">
                 <span className="UserEmailId">{Name}</span>
-                <span className="ChangeButton">Change</span>
+                <span className="ChangeButton" onClick={handleChangeNameModal}>
+                  Change
+                </span>
               </div>
             </div>
             <div className="UserEmailInformationDetailPassword">
@@ -79,7 +116,9 @@ const User = () => {
                 <span className="UserEmailId">Phone Number</span>
                 <span className="UserEmailId">No Phone Number</span>
               </div>
-              <span className="ChangeButton">Change/Verify</span>
+              <span className="ChangeButton" onClick={handleChangePhoneModal}>
+                Change/Verify
+              </span>
             </div>
           </div>
         </div>
@@ -88,6 +127,13 @@ const User = () => {
         </div>
       </div>
       {showPasswordModal && <ChangePassword closeModal={handleCloseModal} />}
+      {showEmailModal && (
+        <ChangeEmail closeEmailModal={handleCloseEmailModal} />
+      )}
+      {showNameModal && <ChangeName closeNameModal={handleCloseNameModal} />}
+      {showPhoneModal && (
+        <VerifyChangedPhoneNumber closePhoneModal={handleClosePhoneModal} />
+      )}
     </div>
   );
 };

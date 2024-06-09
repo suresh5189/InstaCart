@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { IoClose } from "react-icons/io5";
 import InstaCartLogo from "../images/instacart.svg";
 import { CiLogin } from "react-icons/ci";
@@ -20,7 +20,11 @@ const Sidebar = ({ closeSidebar, isOpen, isLoggedIn }) => {
   const useSidebarRef = useRef(null);
 
   const userEmail = useSelector((state) => state.user.email);
-  const userEmailName = userEmail ? userEmail.split("@")[0] : "";
+  const FirstName = useSelector((state) => state.user.firstName);
+  const LastName = useSelector((state) => state.user.lastName);
+
+  const userEmailName =
+    FirstName || LastName ? `${FirstName} ${LastName}` : userEmail.split("@")[0];
 
   const handleClickOutside = (event) => {
     if (

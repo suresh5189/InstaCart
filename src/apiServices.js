@@ -11,6 +11,8 @@ const apiServices = axios.create({
 
 // ------------------------------------------------------------------------
 
+// Register
+
 export const sendOTPRegister = async (email) => {
   try {
     const response = await apiServices.post("/register", { email });
@@ -21,6 +23,8 @@ export const sendOTPRegister = async (email) => {
 };
 
 // --------------------------------------------------------------------------
+
+// Verifying the Register
 
 export const verifyOTPRegister = async (email, password, enteredotp, otpid) => {
   try {
@@ -47,6 +51,8 @@ export const verifyOTPRegister = async (email, password, enteredotp, otpid) => {
 
 // --------------------------------------------------------------------------------
 
+// Login
+
 export const login = async (email, password) => {
   try {
     const response = await apiServices.post("/login", { email, password });
@@ -63,6 +69,8 @@ export const login = async (email, password) => {
 };
 
 // -------------------------------------------------------------------------------
+
+// Change Password
 
 export const changePassword = async (
   accessToken,
@@ -89,6 +97,116 @@ export const changePassword = async (
 };
 
 // --------------------------------------------------------------------------------
+
+// Change Email
+export const changeEmail = async (
+  updatedEmail,
+  confirmEmail,
+  password,
+  accessToken
+) => {
+  try {
+    const response = await apiServices.post(
+      "/userprofile/changeemail",
+      {
+        updatedEmail,
+        confirmEmail,
+        password,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
+    return response;
+  } catch (error) {
+    throw new Error(error.response.data.message || "Error Changing Email");
+  }
+};
+
+// -------------------------------------------------------------------------------
+
+// Change Name
+
+export const changeName = async (firstName, lastName, accessToken) => {
+  try {
+    const response = await apiServices.post(
+      "/userprofile/changename",
+      {
+        firstName,
+        lastName,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    throw new Error(error.response.data.message || "Error Changing Name");
+  }
+};
+
+// --------------------------------------------------------------------------------
+
+// Change Phone Number
+export const changePhoneNumber = async (
+  countryCode,
+  phoneNumber,
+  accessToken
+) => {
+  try {
+    const response = await apiServices.post(
+      "/userprofile/changephonenumber",
+      {
+        country_code: countryCode,
+        phoneno: phoneNumber,
+        action: "verify",
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    throw new Error(
+      error.response.data.message || "Error Changing Phone Number"
+    );
+  }
+};
+
+// Verify Changed Phone Number
+export const verifyChangedPhoneNumber = async (
+  countryCode,
+  phoneNumber,
+  otpId,
+  enteredOtp
+) => {
+  try {
+    const response = await apiServices.post(
+      "/userprofile/verifychangedphonenumber",
+      {
+        country_code: countryCode,
+        phoneno: phoneNumber,
+        otpid: otpId,
+        enteredotp: enteredOtp,
+      }
+    );
+    return response.data;
+  } catch (error) {
+    throw new Error(
+      error.response.data.message || "Error Verifying Phone Number"
+    );
+  }
+};
+
+// --------------------------------------------------------------------------------
+
+// Category List
 
 export const fetchCategoryList = async () => {
   try {

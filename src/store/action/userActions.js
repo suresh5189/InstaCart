@@ -1,7 +1,13 @@
 // Import action types
-import { SET_EMAIL, SET_PASSWORD,LOGIN_USER,LOGOUT_USER } from "../ActionTypes";
+import {
+  SET_EMAIL,
+  SET_PASSWORD,
+  LOGIN_USER,
+  LOGOUT_USER,
+  FIRST_NAME,
+  LAST_NAME,
+} from "../ActionTypes";
 
-// Action creator for setting email
 export const setEmail = (email) => {
   return {
     type: SET_EMAIL,
@@ -16,6 +22,19 @@ export const setPassword = (password) => {
   };
 };
 
+export const setFirstName = (firstName) => {
+  return {
+    type: FIRST_NAME,
+    payload: firstName,
+  };
+};
+
+export const setLastName = (lastName) => {
+  return {
+    type: LAST_NAME,
+    payload: lastName,
+  };
+};
 
 export const loginUser = () => ({
   type: LOGIN_USER,

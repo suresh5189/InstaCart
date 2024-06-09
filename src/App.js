@@ -11,7 +11,8 @@ import {
 import Home from "./components/Home";
 import StoreDetailScreen from "./components/StoreDetailScreen";
 import Navbar from "./components/Navbar";
-import User from "./components/User";
+import User from "./components/UserAccountSetting";
+import GiftCard from "./components/GiftCard/GiftCard";
 
 function App() {
   const [showLoginModal, setShowLoginModal] = useState(false);
@@ -38,7 +39,7 @@ function App() {
 
   const handleLoginSuccess = () => {
     setIsLoggedIn(true);
-    localStorage.setItem("isLoggedIn", "true"); 
+    localStorage.setItem("isLoggedIn", "true");
   };
 
   const handleLogout = () => {
@@ -86,6 +87,7 @@ function App() {
             path="/store/userinformation/account"
             element={authGuard(<User />)}
           />
+          <Route path="/p/gift-cards" element={<GiftCard />} />
         </Routes>
       </Router>
     </div>
