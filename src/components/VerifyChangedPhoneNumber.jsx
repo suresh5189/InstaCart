@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import Select from "react-select";
 import { changePhoneNumber, verifyChangedPhoneNumber } from "../apiServices";
+import { useDispatch } from "react-redux";
+import { setPhoneNumber as setPhoneNumberAction } from "../store/action/userActions";
 
 const countryOptions = [
   { value: "+91", label: "+91 - India" },
@@ -22,6 +24,8 @@ const VerifyChangedPhoneNumber = ({ closePhoneModal }) => {
 
   const usePhoneRef = useRef(null);
 
+  const dispatch = useDispatch();
+
   const handleClickOutSide = (event) => {
     if (usePhoneRef.current && !usePhoneRef.current.contains(event.target)) {
       closePhoneModal();
@@ -36,20 +40,18 @@ const VerifyChangedPhoneNumber = ({ closePhoneModal }) => {
   }, []);
 
   const handleSendOTP = async () => {
-    console.log("First");
     try {
       const accessToken = localStorage.getItem("AccessToken");
       if (!accessToken) {
         console.log("Access Token Not Found!");
       }
-      console.log(accessToken);
       const response = await changePhoneNumber(
         selectedCountry.value,
         phoneNumber,
         accessToken
       );
-      console.log(response);
       setOtpSent(true);
+      dispatch(setPhoneNumberAction(phoneNumber));
       setMessage(response.message || "OTP Sent Successfully");
     } catch (error) {
       setMessage(error.message || "Error Sending OTP");
@@ -58,11 +60,16 @@ const VerifyChangedPhoneNumber = ({ closePhoneModal }) => {
 
   const handleVerifyPhoneNumber = async () => {
     try {
+      const accessToken = localStorage.getItem("AccessToken");
+      if (!accessToken) {
+        console.log("Access Token Not Found");
+      }
       const response = await verifyChangedPhoneNumber(
         selectedCountry.value,
         phoneNumber,
         otpId,
-        enteredOtp
+        enteredOtp,
+        accessToken
       );
       setMessage(response.message || "Phone Number Verified Successfully");
       closePhoneModal();

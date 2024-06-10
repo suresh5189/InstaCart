@@ -105,18 +105,20 @@ function Navbar({ onLoginClick, onSignUpClick, isLoggedIn, handleLogout }) {
           </button>
         </div>
       </div>
-      <div className="NavbarScrollBar">
-        <div className="HorizontalScrollBarWrapper Squares">
-          {categories.map(({ id, name, imageUrl }) => (
-            <div className="NavbarScrollBarList active" key={id}>
-              <div className="NavbarScrollBarIcon">
-                <img src={imageUrl} alt={name} />
+      {isLoggedIn && (
+        <div className="NavbarScrollBar">
+          <div className="HorizontalScrollBarWrapper Squares">
+            {categories.map(({ id, name, imageUrl }) => (
+              <div className="NavbarScrollBarList active" key={id}>
+                <div className="NavbarScrollBarIcon">
+                  <img src={imageUrl} alt={name} />
+                </div>
+                <div className="NavbarScrollBarText">{name}</div>
               </div>
-              <div className="NavbarScrollBarText">{name}</div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

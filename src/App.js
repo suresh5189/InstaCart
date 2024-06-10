@@ -13,6 +13,8 @@ import StoreDetailScreen from "./components/StoreDetailScreen";
 import Navbar from "./components/Navbar";
 import User from "./components/UserAccountSetting";
 import GiftCard from "./components/GiftCard/GiftCard";
+import InstacartPlus from "./components/InstacartPlus";
+import ManagePromo from "./components/ManagePromo";
 
 function App() {
   const [showLoginModal, setShowLoginModal] = useState(false);
@@ -78,16 +80,24 @@ function App() {
           />
         )}
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home isLoggedIn={isLoggedIn}/>} />
           <Route
             path="/storedetails/:storeId/front"
-            element={<StoreDetailScreen />}
+            element={authGuard(<StoreDetailScreen />)}
           />
           <Route
             path="/store/userinformation/account"
             element={authGuard(<User />)}
           />
           <Route path="/p/gift-cards" element={<GiftCard />} />
+          <Route
+            path="store/account/instacart-plus"
+            element={<InstacartPlus />}
+          />
+          <Route
+            path="/store/account/manage_promos"
+            element={<ManagePromo />}
+          />
         </Routes>
       </Router>
     </div>

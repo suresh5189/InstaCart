@@ -1,5 +1,6 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { IoIosArrowRoundBack } from "react-icons/io";
+import { resetPassword } from "../apiServices";
 
 const ResetPassword = ({ handleCloseModal, isOpenModal, handleClose }) => {
   const refReset = useRef(null);
@@ -8,6 +9,19 @@ const ResetPassword = ({ handleCloseModal, isOpenModal, handleClose }) => {
     if (refReset.current && !refReset.current.contains(event.target)) {
       handleCloseModal();
       handleClose();
+    }
+  };
+
+  const [emailValue, setEmailValue] = useState("");
+  const [message, setMessage] = useState("");
+
+  const handleResetPassword = async () => {
+    try {
+      const message = await resetPassword(emailValue);
+      console.log(message);
+      setMessage(message.data.data || "Linked Sent Successfully");
+    } catch (error) {
+      setMessage(error.message || "Error Sending Link.Try Again Later.");
     }
   };
 
@@ -37,14 +51,15 @@ const ResetPassword = ({ handleCloseModal, isOpenModal, handleClose }) => {
                   </span>
                   <input
                     type="email"
-                    name="email"
-                    id="email"
                     placeholder="Email"
+                    value={emailValue}
+                    onChange={(e) => setEmailValue(e.target.value)}
                   />
                 </div>
+              {message && <p style={{ color: "red" }}>{message}</p>}
               </div>
               <div className="LogButton">
-                <button className="ResetButton">
+                <button className="ResetButton" onClick={handleResetPassword}>
                   <span>Reset password</span>
                 </button>
               </div>

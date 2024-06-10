@@ -54,6 +54,7 @@ const User = () => {
   const Password = useSelector((state) => state.user.password);
   const FirstName = useSelector((state) => state.user.firstName);
   const LastName = useSelector((state) => state.user.lastName);
+  const PhoneNumber = useSelector((state) => state.user.phoneno);
 
   const Name =
     FirstName || LastName ? `${FirstName} ${LastName}` : Email.split("@")[0];
@@ -114,7 +115,7 @@ const User = () => {
             <div className="UserEmailInformationDetailPassword">
               <div className="UserPhone">
                 <span className="UserEmailId">Phone Number</span>
-                <span className="UserEmailId">No Phone Number</span>
+                <span className="UserEmailId">{PhoneNumber}</span>
               </div>
               <span className="ChangeButton" onClick={handleChangePhoneModal}>
                 Change/Verify

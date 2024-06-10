@@ -2,10 +2,9 @@
 import {
   SET_EMAIL,
   SET_PASSWORD,
-  LOGIN_USER,
-  LOGOUT_USER,
   FIRST_NAME,
   LAST_NAME,
+  PHONE_NUMBER,
 } from "../ActionTypes";
 
 // Initial state
@@ -14,7 +13,7 @@ const initialState = {
   password: "",
   firstName: "",
   lastName: "",
-  isLoggedIn: false,
+  phoneno: "",
 };
 
 // Reducer function
@@ -40,15 +39,10 @@ const userReducer = (state = initialState, action) => {
         ...state,
         lastName: action.payload,
       };
-    case LOGOUT_USER:
+    case PHONE_NUMBER:
       return {
         ...state,
-        isLoggedIn: true,
-      };
-    case LOGOUT_USER:
-      return {
-        ...state,
-        isLoggedIn: false,
+        phoneno: action.payload,
       };
     default:
       return state;

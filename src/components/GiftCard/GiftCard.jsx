@@ -10,7 +10,6 @@ import Footer from "../Footer";
 const GiftCard = () => {
   return (
     <>
-      <GiftCardNav />
       <div className="GiftCardMain">
         <GiftCardHome />
         <Ocassion />

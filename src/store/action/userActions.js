@@ -2,10 +2,9 @@
 import {
   SET_EMAIL,
   SET_PASSWORD,
-  LOGIN_USER,
-  LOGOUT_USER,
   FIRST_NAME,
   LAST_NAME,
+  PHONE_NUMBER,
 } from "../ActionTypes";
 
 export const setEmail = (email) => {
@@ -36,10 +35,11 @@ export const setLastName = (lastName) => {
   };
 };
 
-export const loginUser = () => ({
-  type: LOGIN_USER,
-});
+export const setPhoneNumber = (phoneno) => {
+  return {
+    type: PHONE_NUMBER,
+    payload: phoneno,
+  };
+};
 
-export const logoutUser = () => ({
-  type: LOGOUT_USER,
-});
+

@@ -916,16 +916,35 @@ Input {
 }
 
 .SideBarLoginButton {
-  margin: 20px;
+  background-color: rgb(16, 137, 16);
+  padding: 15px 20px;
+  border-radius: 30px;
   display: flex;
   align-items: center;
-  font-weight: 500;
+  justify-content: center;
 }
 
 .SideBarLoginButtonText {
-  font-size: 16px;
-  margin-left: 10px;
-  cursor: pointer;
+  color: white;
+  font-size: 20px;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.SideBarLoginIcon{
+  margin-right: 20px;
+}
+
+.SideBarNew{
+  margin: 20px;
+}
+
+.SideBarNewSpan{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
 }
 
 .SideBarStoreButton .SideBarStoreButtonText {
@@ -1890,6 +1909,7 @@ Input {
 
 .GiftNavbarHamburger {
   margin-right: 10px;
+  cursor: pointer;
 }
 
 .GiftCard {
@@ -2062,4 +2082,234 @@ Input {
 .FAQuestionsHeading {
   font-size: 30px;
   font-weight: bold;
+}
+
+/* -------------------------------------------------------------------- */
+/* -------------------------------------------------------------------- */
+
+/* InstaCart Plus Page*/
+
+.InstaCartPlusContainer {
+  font-family: "Roboto";
+}
+
+.InstaCartBanner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(117, 0, 70);
+}
+
+.InstacartImageLogo {
+  width: 269px;
+}
+
+.InstacartImage {
+  width: 550px;
+}
+
+.InstaCartPlusCHeadContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.InstaCartPlusCHead {
+  margin: 40px 270px;
+}
+
+.InstaCartPlusHeading {
+  font-size: 30px;
+}
+
+.InstaCartPlusCHeadList {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  margin: 20px 0;
+}
+
+.InstaCartPlusCHeadListFirst {
+  display: flex;
+  padding: 20px 0;
+}
+
+.InstaCartPlusCHeadListFirstImage {
+  width: 80px;
+}
+
+.InstaCartPlusCHeadListSpan {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  margin-left: 20px;
+}
+
+.InstaCartPlusCHeadText1 {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.InstaCartPlusButton button {
+  padding: 15px 35px;
+  border-radius: 30px;
+  border: none;
+  color: white;
+  background-color: rgb(136, 0, 82);
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.InstaCartPlusButton button:hover {
+  background-color: rgb(117, 0, 70);
+}
+
+.InstaCartPlusButtonBelowText {
+  margin-top: 20px;
+  text-align: justify;
+}
+
+.InstaCartPromoCodeButton {
+  margin: 20px 0;
+  color: rgb(16, 137, 16);
+}
+
+.InstaCardPlusDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 40px;
+}
+
+.InstaCardPlusHeading {
+  font-size: 25px;
+  margin-top: 50px;
+}
+
+.InstaCardPlusInsideDiv {
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 2px 8px;
+  display: flex;
+  border-radius: 20px;
+  margin: 30px 0;
+}
+
+.InstaCardPlusImage img {
+  min-height: 170px;
+  width: 150px;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+
+.InstaCardPlusText {
+  width: 200px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.InstaCardPlusText2 {
+  margin: 15px 0;
+  color: rgb(16, 137, 16);
+  font-weight: 500;
+}
+
+/* --------------------------------------------------------- */
+/* --------------------------------------------------------- */
+
+/* Manage Promo Page */
+
+.Promo {
+  margin: 35px 100px;
+  font-family: "Roboto";
+}
+
+.PromoDivHeading {
+  font-size: 27px;
+  font-weight: 600;
+}
+
+.PromoDivSubHeading {
+  margin: 15px 0;
+}
+
+.PromoDivSubHeadingText {
+  text-decoration: underline;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.PromoInputAndButton {
+  display: flex;
+  margin: 40px 0;
+}
+
+.PromoInput {
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgb(189, 189, 189);
+  border-radius: 12px;
+  box-sizing: border-box;
+  color: rgb(66, 66, 66);
+  font-size: 16px;
+  height: 56px;
+  margin-right: 20px;
+  max-width: 343px;
+  opacity: 1;
+}
+
+.PromoAddButton {
+  padding: 20px 20px;
+  border-radius: 15px;
+  border: none;
+  font-size: 15px;
+  color: white;
+  font-weight: bold;
+  background-color: rgb(172, 172, 172);
+}
+
+.PromoTermButton {
+  color: rgb(16, 137, 16);
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+.CreditHead {
+  margin-top: 100px;
+}
+
+.Credit {
+  display: flex;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 2px 8px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 12px;
+  display: flex;
+  margin-bottom: 24px;
+  padding: 16px;
+  width: 300px;
+  justify-content: space-between;
+}
+
+.CreditCard {
+  display: flex;
+  flex-direction: column;
+}
+
+.CreditCardPrice {
+  color: rgb(172, 172, 172);
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.CreditCardText {
+  font-weight: 300;
+}
+
+.CreditExclaimIcon {
+  color: rgb(172, 172, 172);
+}
+
+.CreditViewText {
+  text-decoration: underline;
 }

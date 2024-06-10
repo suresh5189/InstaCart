@@ -37,7 +37,7 @@ export const verifyOTPRegister = async (email, password, enteredotp, otpid) => {
 
     if (response.status === 201) {
       const accessToken = response.data.data.JWTToken.accessToken;
-      localStorage.setItem("ACCESS_TOKEN", accessToken);
+      localStorage.setItem("AccessToken", accessToken);
       return { status: "success", message: "OTP verified successfully" };
     } else {
       throw new Error("Invalid OTP");
@@ -184,7 +184,8 @@ export const verifyChangedPhoneNumber = async (
   countryCode,
   phoneNumber,
   otpId,
-  enteredOtp
+  enteredOtp,
+  accessToken
 ) => {
   try {
     const response = await apiServices.post(
@@ -194,6 +195,11 @@ export const verifyChangedPhoneNumber = async (
         phoneno: phoneNumber,
         otpid: otpId,
         enteredotp: enteredOtp,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
       }
     );
     return response.data;
@@ -201,6 +207,21 @@ export const verifyChangedPhoneNumber = async (
     throw new Error(
       error.response.data.message || "Error Verifying Phone Number"
     );
+  }
+};
+
+// --------------------------------------------------------------------------------
+
+// Reset Password
+
+export const resetPassword = async (email) => {
+  try {
+    const response = await apiServices.post("/resetpassword", {
+      email,
+    });
+    return response;
+  } catch (error) {
+    throw new Error(error.response.data.message || "Error Resetting Password");
   }
 };
 
