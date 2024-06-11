@@ -5,8 +5,6 @@ import BookMark from "./BookMark";
 import StoreItemDetail from "./StoreItemDetail";
 import { useLocation, useParams } from "react-router-dom";
 import { storeDetailData } from "../apiServices";
-import Navbar from "./Navbar";
-import Login from "../components/Login";
 
 const StoreDetailScreen = () => {
   const [bookmarkModalOpen, setBookmarkModalOpen] = useState(true);

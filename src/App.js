@@ -15,6 +15,10 @@ import User from "./components/UserAccountSetting";
 import GiftCard from "./components/GiftCard/GiftCard";
 import InstacartPlus from "./components/InstacartPlus";
 import ManagePromo from "./components/ManagePromo";
+import CategoryListPage from "./components/CategoryListPage";
+import PopularGift from "./components/PopularGift";
+import PopularGiftSecondPage from "./components/PopularGiftSecondPage";
+import StoreDetails from "./components/StoreDetails";
 
 function App() {
   const [showLoginModal, setShowLoginModal] = useState(false);
@@ -58,6 +62,7 @@ function App() {
   return (
     <div className="App">
       <Router>
+      <StoreDetails />
         <Navbar
           onLoginClick={handleLoginClick}
           onSignUpClick={handleSignUpClick}
@@ -97,6 +102,18 @@ function App() {
           <Route
             path="/store/account/manage_promos"
             element={<ManagePromo />}
+          />
+            <Route
+              path="/store/category"
+              element={authGuard(<CategoryListPage />)}
+            />
+          <Route
+            path="/store/category/populargifts"
+            element={authGuard(<PopularGift />)}
+          />
+          <Route
+            path="/popular-gifts/category/:index"
+            element={authGuard(<PopularGiftSecondPage />)}
           />
         </Routes>
       </Router>

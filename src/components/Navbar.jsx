@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Sidebar from "./Sidebar";
 import InstaCartLogo from "../images/instacart.svg";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { IoSearchOutline } from "react-icons/io5";
 import { FaShoppingCart } from "react-icons/fa";
@@ -109,12 +109,20 @@ function Navbar({ onLoginClick, onSignUpClick, isLoggedIn, handleLogout }) {
         <div className="NavbarScrollBar">
           <div className="HorizontalScrollBarWrapper Squares">
             {categories.map(({ id, name, imageUrl }) => (
-              <div className="NavbarScrollBarList active" key={id}>
+              <Link
+                className="NavbarScrollBarList active"
+                key={id}
+                to={
+                  id !== 8
+                    ? `/store/category?main_category_id=${id}`
+                    : `/store/category/populargifts`
+                }
+              >
                 <div className="NavbarScrollBarIcon">
                   <img src={imageUrl} alt={name} />
                 </div>
                 <div className="NavbarScrollBarText">{name}</div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>

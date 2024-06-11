@@ -6,14 +6,19 @@ import { IoClose } from "react-icons/io5";
 import { sendOTPRegister } from "../apiServices";
 import VerifyOTP from "./VerifyOTP";
 
-const SignUp = ({ handleCloseSignUpModal, handleOpen, handleLoginClick,isLoggedIn }) => {
+const SignUp = ({
+  handleCloseSignUpModal,
+  handleOpen,
+  handleLoginClick,
+  isLoggedIn,
+}) => {
   const refSignup = useRef(null);
 
   const [email, setEmail] = useState("");
   const [responseMessage, setResponseMessage] = useState("");
-  const [otpid,setOtpid] = useState("");
+  const [otpid, setOtpid] = useState("");
   const [isOTPSent, setIsOTPSent] = useState(false);
-  const [isLogged,setIsLogged] = useState(false);
+  const [isLogged, setIsLogged] = useState(false);
 
   const handleRegister = async () => {
     if (!email) {
@@ -23,7 +28,7 @@ const SignUp = ({ handleCloseSignUpModal, handleOpen, handleLoginClick,isLoggedI
     try {
       setIsOTPSent(true);
       const response = await sendOTPRegister(email);
-      const {otpid} = response.data;
+      const { otpid } = response.data;
       setResponseMessage(response.message || "Register Successfully");
       setOtpid(otpid);
     } catch (error) {
@@ -130,7 +135,7 @@ const SignUp = ({ handleCloseSignUpModal, handleOpen, handleLoginClick,isLoggedI
                 style={{ borderBottom: "1px solid lightGrey", margin: "10px" }}
               ></div>
               <div className="Account">
-              {!isLogged && ( // Only render if not logged in
+                {!isLogged && ( // Only render if not logged in
                   <>
                     <span>Don’t have an account?</span>
                     <span className="SignButton" onClick={handleLoginClick}>

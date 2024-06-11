@@ -24,6 +24,7 @@ const VerifyOTP = ({ email, onVerificationSuccess, otpid }) => {
       if (response.status === "success") {
         setResponseMessage("OTP Verified Successfully");
         onVerificationSuccess();
+        alert("Sign Up Successfully. Log in Now");
       } else {
         setResponseMessage("Error verifying OTP. Please try again.");
       }

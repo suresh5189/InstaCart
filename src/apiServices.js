@@ -241,12 +241,19 @@ export const fetchCategoryList = async () => {
 
 // -----------------------------------------------------------------------------
 
-export const storeData = async () => {
+export const storeData = async (id) => {
   try {
-    const response = await apiServices.get(
-      "/store/category?main_category_id=1"
-    );
-    return response.data.data.storeData;
+    if (id == 8) {
+      const response = await apiServices.get(
+        `/store/category?main_category_id=${id}`
+      );
+      return response.data.data;
+    } else {
+      const response = await apiServices.get(
+        `/store/category?main_category_id=${id}`
+      );
+      return response.data.data.storeData;
+    }
   } catch (error) {
     console.error("Error Fetching Store Data.", error);
     throw new Error("Error Fetching Store Data");
@@ -255,7 +262,7 @@ export const storeData = async () => {
 
 // -----------------------------------------------------------------------------
 
-export const storeDetailData = async (storeId) => {
+export const storeDetailData = async () => {
   try {
     const response = await apiServices.get(
       `/store/category/populargifts?storeId=7`

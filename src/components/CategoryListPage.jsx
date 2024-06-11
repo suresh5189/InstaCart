@@ -1,56 +1,39 @@
 import React, { useEffect, useState } from "react";
-import Data from "../data/storeData";
-import { useNavigate } from "react-router-dom";
 import { storeData } from "../apiServices";
+import { useSearchParams } from "react-router-dom";
+import Store from "../images/Store.png";
 
-function HomePage({ isLoggedIn }) {
-  const [visibleCount, setVisibleCount] = useState(9);
-
-  const [store, setStore] = useState([]);
-
-  const navigate = useNavigate();
-
-  const showMore = () => {
-    setVisibleCount(visibleCount + 6);
-  };
-
-  const showLess = () => {
-    setVisibleCount(9);
-  };
-
-  const handleDetail = (image, title) => {
-    if (!isLoggedIn) {
-      alert("Login First");
-    } else {
-      navigate(`/storedetails/${title}/front`, { state: { image, title } });
-    }
-  };
+const CategoryListPage = () => {
+  const [storeCategory, setStoreCategory] = useState([]);
+  const [searchParams] = useSearchParams();
+  const categoryId = searchParams.get("main_category_id");
+  console.log(storeCategory);
 
   useEffect(() => {
-    const getStores = async () => {
+    const getStoresdata = async () => {
       try {
-        const data = await storeData(1);
-        setStore(data);
+        const data = await storeData(categoryId);
+        setStoreCategory(data);
+        // console.log(data);
       } catch (error) {
         console.error("Error Fetching Store Data", error);
       }
     };
-
-    getStores();
-  }, []);
+    getStoresdata();
+  }, [categoryId]);
 
   return (
-    <div className="home">
-      <div className="headerDiv">
-        <header className="header">
-          Choose your store in
-          <span className="headerTextColor"> San Francisco Bay Area</span>
-        </header>
-      </div>
+    <div className="CategoryList">
       <div className="HomePageButtonDiv">
-        {store
-          .slice(0, visibleCount)
-          .map(
+        {storeCategory.length == 0 ? (
+          <div className="CategoryListImageDiv">
+            <div className="CategoryListImageDivText">Store Not Found!</div>
+            <div>
+              <img src={Store} alt="" className="CategoryListImage" />
+            </div>
+          </div>
+        ) : (
+          storeCategory.map(
             ({
               store_id,
               store_name,
@@ -61,7 +44,7 @@ function HomePage({ isLoggedIn }) {
               return (
                 <div
                   className="buttonHome"
-                  onClick={() => handleDetail(image_url, store_name)}
+                  //   onClick={() => handleDetail(image_url, store_name)}
                   key={store_id}
                 >
                   <div className="buttonHomeLogo">
@@ -84,11 +67,13 @@ function HomePage({ isLoggedIn }) {
                                   ? "HomeMessageFirst"
                                   : ""
                               }
-                                    ${
-                                      message.toLowerCase().includes("in-store")
-                                        ? "HomeMessageStore"
-                                        : ""
-                                    }`}
+                                      ${
+                                        message
+                                          .toLowerCase()
+                                          .includes("in-store")
+                                          ? "HomeMessageStore"
+                                          : ""
+                                      }`}
                             >
                               {message}
                             </span>
@@ -107,21 +92,11 @@ function HomePage({ isLoggedIn }) {
                 </div>
               );
             }
-          )}
-      </div>
-      <div className="showMoreLessButtons">
-        {visibleCount < Data.length ? (
-          <span onClick={showMore} className="ShowMore">
-            Show All
-          </span>
-        ) : (
-          <span onClick={showLess} className="ShowLess">
-            Show Less
-          </span>
+          )
         )}
       </div>
     </div>
   );
-}
+};
 
-export default HomePage;
+export default CategoryListPage;
