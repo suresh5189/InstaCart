@@ -18,7 +18,7 @@ import ManagePromo from "./components/ManagePromo";
 import CategoryListPage from "./components/CategoryListPage";
 import PopularGift from "./components/PopularGift";
 import PopularGiftSecondPage from "./components/PopularGiftSecondPage";
-import StoreDetails from "./components/StoreDetails";
+import StoreDetailsInfoPage from "./components/StoreDetailsInfoPage";
 
 function App() {
   const [showLoginModal, setShowLoginModal] = useState(false);
@@ -62,7 +62,6 @@ function App() {
   return (
     <div className="App">
       <Router>
-        {/* <StoreDetails /> */}
         <Navbar
           onLoginClick={handleLoginClick}
           onSignUpClick={handleSignUpClick}
@@ -115,6 +114,7 @@ function App() {
             path="/popular-gifts/category/:index"
             element={authGuard(<PopularGiftSecondPage />)}
           />
+          <Route path="/store:id/info" element={<StoreDetailsInfoPage />} />
         </Routes>
       </Router>
     </div>

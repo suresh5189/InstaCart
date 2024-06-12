@@ -5,20 +5,27 @@ import BookMark from "./BookMark";
 import StoreItemDetail from "./StoreItemDetail";
 import { useLocation, useParams } from "react-router-dom";
 import { storeDetailData } from "../apiServices";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../store/action/userActions";
 
 const StoreDetailScreen = () => {
   const [bookmarkModalOpen, setBookmarkModalOpen] = useState(true);
   const [itemModalOpen, setItemModalOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const [hoveredId, setHoveredId] = useState(null);
+  const [productByCategory, setProductByCategory] = useState({});
+  const [cart, setCart] = useState([]);
 
   const { storeId } = useParams();
 
-  const [productByCategory, setProductByCategory] = useState({});
-  // console.log(productByCategory);
+  const dispatch = useDispatch();
+
+  const handleAddToCart = (item) => {
+    dispatch(addToCart(item));
+  };
 
   const location = useLocation();
-  const { image, title } = location.state;
+  const { store_id, image, title } = location.state;
 
   const handleCloseBookmarkModal = () => {
     setBookmarkModalOpen(false);
@@ -51,7 +58,11 @@ const StoreDetailScreen = () => {
       <div className="StoreDetail">
         <div className="StoreDetailSideBar">
           <div className="DetailScreenSidebar">
-            <DetailScreenSidebar image={image} title={title} />
+            <DetailScreenSidebar
+              storeId={store_id}
+              image={image}
+              title={title}
+            />
           </div>
         </div>
         <div>
@@ -76,6 +87,16 @@ const StoreDetailScreen = () => {
                               className="StoreContainerCartButton"
                               onMouseEnter={() => setHoveredId(id)}
                               onMouseLeave={() => setHoveredId(null)}
+                              onClick={() =>
+                                handleAddToCart({
+                                  id,
+                                  title,
+                                  image,
+                                  label,
+                                  actual_price,
+                                  selling_price,
+                                })
+                              }
                             >
                               <FaPlus size={16} />
                               <div>

@@ -18,11 +18,13 @@ function HomePage({ isLoggedIn }) {
     setVisibleCount(9);
   };
 
-  const handleDetail = (image, title) => {
+  const handleDetail = (store_id, image, title) => {
     if (!isLoggedIn) {
       alert("Login First");
     } else {
-      navigate(`/storedetails/${title}/front`, { state: { image, title } });
+      navigate(`/storedetails/${store_id}/front`, {
+        state: { store_id, image, title },
+      });
     }
   };
 
@@ -61,7 +63,7 @@ function HomePage({ isLoggedIn }) {
               return (
                 <div
                   className="buttonHome"
-                  onClick={() => handleDetail(image_url, store_name)}
+                  onClick={() => handleDetail(store_id, image_url, store_name)}
                   key={store_id}
                 >
                   <div className="buttonHomeLogo">

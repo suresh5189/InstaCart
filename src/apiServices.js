@@ -276,4 +276,16 @@ export const storeDetailData = async () => {
 
 // -------------------------------------------------------------------------------
 
+// Get Store Inside Detail
+
+export const getStoreInsideDetails = async (id) => {
+  try {
+    const response = await apiServices.get(`/store/${id}/info`);
+    return response.data;
+  } catch (error) {
+    console.error("Error Fetching Store Inside Details", error.message);
+    throw new Error("Error Fetching Store Inside Details");
+  }
+};
+
 export default apiServices;

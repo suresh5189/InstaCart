@@ -100,7 +100,7 @@ function Navbar({ onLoginClick, onSignUpClick, isLoggedIn, handleLogout }) {
               <div className="CartIconButton" onClick={handleCart}>
                 <FaShoppingCart size={24} className="CartIcon" />
               </div>
-              {cart && <Cart size={24} closeCart={closeCart} />}
+              {cart && <Cart size={24} closeCart={closeCart} isOpenCart={handleCart}/>}
             </div>
           </button>
         </div>

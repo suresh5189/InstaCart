@@ -4,9 +4,11 @@ import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage"; // defaults to localStorage for web
 
 import userReducer from "./reducers/userReducer";
+import cartReducer from "./reducers/cartReducer";
 
 const rootReducer = combineReducers({
   user: userReducer,
+  cart:cartReducer,
   // Add other reducers here if needed
 });
 
