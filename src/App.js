@@ -62,7 +62,7 @@ function App() {
   return (
     <div className="App">
       <Router>
-      <StoreDetails />
+        {/* <StoreDetails /> */}
         <Navbar
           onLoginClick={handleLoginClick}
           onSignUpClick={handleSignUpClick}
@@ -85,7 +85,7 @@ function App() {
           />
         )}
         <Routes>
-          <Route path="/" element={<Home isLoggedIn={isLoggedIn}/>} />
+          <Route path="/" element={<Home isLoggedIn={isLoggedIn} />} />
           <Route
             path="/storedetails/:storeId/front"
             element={authGuard(<StoreDetailScreen />)}
@@ -103,10 +103,10 @@ function App() {
             path="/store/account/manage_promos"
             element={<ManagePromo />}
           />
-            <Route
-              path="/store/category"
-              element={authGuard(<CategoryListPage />)}
-            />
+          <Route
+            path="/store/category"
+            element={authGuard(<CategoryListPage />)}
+          />
           <Route
             path="/store/category/populargifts"
             element={authGuard(<PopularGift />)}
