@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { MdOutlineClose } from "react-icons/md";
 import { RiDeleteBinLine } from "react-icons/ri";
 import {
@@ -10,10 +10,17 @@ import {
   removeFromCart,
   updateCartItemQuantity,
 } from "../store/action/userActions";
+import { useNavigate } from "react-router-dom";
 
 const Cart = ({ closeCart, isOpenCart }) => {
   const useCartRef = useRef(null);
   const dispatch = useDispatch();
+  const [totalPrice, setTotalPrice] = useState(0);
+  const navigate = useNavigate();
+
+  const navigateToCheckoutPage = () => {
+    navigate("/store/checkout");
+  };
 
   const handleClickOutside = (event) => {
     if (useCartRef.current && !useCartRef.current.contains(event.target)) {
@@ -22,7 +29,7 @@ const Cart = ({ closeCart, isOpenCart }) => {
   };
 
   const cartItems = useSelector((state) => state.cart.items);
-  console.log("Cart Items:", cartItems);
+  // console.log("Cart Items:", cartItems);
 
   const handleRemoveItemFromCart = (itemId) => {
     dispatch(removeFromCart(itemId));
@@ -33,11 +40,13 @@ const Cart = ({ closeCart, isOpenCart }) => {
   };
 
   const handleDecreaseQuantity = (itemId) => {
-    const item = cartItems.find((item) => item.id === item.id);
+    const item = cartItems.find((item) => item.id === itemId);
     if (item && item.quantity > 1) {
       dispatch(updateCartItemQuantity(itemId, -1));
     }
   };
+
+  const isDisabled = cartItems.length === 0;
 
   useEffect(() => {
     if (isOpenCart) {
@@ -46,6 +55,14 @@ const Cart = ({ closeCart, isOpenCart }) => {
       document.removeEventListener("mousedown", handleClickOutside);
     }
   }, [isOpenCart]);
+
+  useEffect(() => {
+    const newTotalPrice = cartItems.reduce(
+      (total, item) => total + item.actual_price * item.quantity,
+      0
+    );
+    setTotalPrice(newTotalPrice);
+  }, [cartItems]);
 
   return (
     <>
@@ -69,7 +86,7 @@ const Cart = ({ closeCart, isOpenCart }) => {
         ></div>
         {cartItems.map(
           ({ id, image, title, label, actual_price, quantity }) => {
-            const displayQuantity = quantity ?? 1;
+            const displayQuantity = quantity !== undefined ? quantity : 1;
             return (
               <div className="CartItem" key={id}>
                 <div className="CartItemImage">
@@ -112,15 +129,28 @@ const Cart = ({ closeCart, isOpenCart }) => {
                   </div>
                 </div>
                 <div className="CartItemPrice">
-                  <span className="CartItemPriceText">$ {displayQuantity*actual_price}</span>
+                  <span className="CartItemPriceText">
+                    $ {(displayQuantity * actual_price).toFixed(2)}
+                  </span>
                 </div>
               </div>
             );
           }
         )}
         <div className="CartCheckOutButton">
-          <button>$10 Min. to checkout</button>
-          <span className="CartInputButton">$0.00</span>
+          <button
+            onClick={navigateToCheckoutPage}
+            style={{
+              cursor: "pointer",
+              backgroundColor: isDisabled ? "rgb(172, 172, 172)" : "rgb(27, 152, 27)",
+            }}
+            disabled={isDisabled}
+          >
+            {totalPrice < 10 ? "$10 Min. to checkout" : "Checkout"}
+          </button>
+          <span className="CartInputButton">
+            ${totalPrice <= 0 ? "0.00" : totalPrice.toFixed(2)}
+          </span>
         </div>
       </div>
     </>

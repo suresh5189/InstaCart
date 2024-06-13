@@ -241,9 +241,11 @@ export const fetchCategoryList = async () => {
 
 // -----------------------------------------------------------------------------
 
+// Navbar Main Category API
+
 export const storeData = async (id) => {
   try {
-    if (id == 8) {
+    if (id === 8) {
       const response = await apiServices.get(
         `/store/category?main_category_id=${id}`
       );
@@ -262,6 +264,7 @@ export const storeData = async (id) => {
 
 // -----------------------------------------------------------------------------
 
+// Popular Gift Detail
 export const storeDetailData = async () => {
   try {
     const response = await apiServices.get(
@@ -285,6 +288,20 @@ export const getStoreInsideDetails = async (id) => {
   } catch (error) {
     console.error("Error Fetching Store Inside Details", error.message);
     throw new Error("Error Fetching Store Inside Details");
+  }
+};
+
+// --------------------------------------------------------------------------------
+
+// Get Store Item Details
+
+export const getStoreIemDetails = async (id) => {
+  try {
+    const response = await apiServices.get(`/store/collection/store/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error Fetching Store Item Data", error.message);
+    throw new Error("Error Fetching Store Item Data");
   }
 };
 

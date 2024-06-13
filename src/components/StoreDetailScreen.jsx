@@ -14,7 +14,6 @@ const StoreDetailScreen = () => {
   const [selectedItem, setSelectedItem] = useState(null);
   const [hoveredId, setHoveredId] = useState(null);
   const [productByCategory, setProductByCategory] = useState({});
-  const [cart, setCart] = useState([]);
 
   const { storeId } = useParams();
 

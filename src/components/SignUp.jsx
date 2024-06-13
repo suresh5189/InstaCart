@@ -5,6 +5,7 @@ import { FaPhoneVolume } from "react-icons/fa6";
 import { IoClose } from "react-icons/io5";
 import { sendOTPRegister } from "../apiServices";
 import VerifyOTP from "./VerifyOTP";
+import { ErrorMessage, Field, Form, Formik } from "formik";
 
 const SignUp = ({
   handleCloseSignUpModal,
@@ -20,7 +21,8 @@ const SignUp = ({
   const [isOTPSent, setIsOTPSent] = useState(false);
   const [isLogged, setIsLogged] = useState(false);
 
-  const handleRegister = async () => {
+  const handleRegister = async (values) => {
+    const { email } = values;
     if (!email) {
       setResponseMessage("Please Enter Your Email.");
       return;
@@ -93,44 +95,74 @@ const SignUp = ({
                 <span>or</span>
                 <hr className="HorizontalLine" />
               </div>
-              <div className="Input">
-                <div className="InputText">
-                  <span className="InputTextTitle">
-                    Enter your email to get started.
-                  </span>
-                </div>
-                <div className="Email">
-                  <input
-                    type="text"
-                    name="email"
-                    id="email"
-                    placeholder="Enter Email"
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
-                </div>
-              </div>
-              <div className="Forgot">
-                By continuing, you agree to our{" "}
-                <span>
-                  Terms of Service, Privacy Policy & Health Data Notice.
-                </span>
-              </div>
-              <div className="LogButton">
-                <div>
-                  <button
-                    className="SignUpButton"
-                    onClick={handleRegister}
-                    disabled={isOTPSent || isLogged}
-                  >
-                    <span>{isOTPSent ? "Loading..." : "Sign up"}</span>
-                  </button>
-                  {responseMessage && (
-                    <p style={{ color: "red", textAlign: "center" }}>
-                      {responseMessage}
-                    </p>
-                  )}
-                </div>
-              </div>
+              <Formik
+                initialValues={{ email: "", password: "" }}
+                validate={(values) => {
+                  const errors = {};
+                  if (!values.email) {
+                    errors.email = "Required Email";
+                  } else if (
+                    !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(
+                      values.email
+                    )
+                  ) {
+                    errors.email = "Invalid Email Address";
+                  }
+                  return errors;
+                }}
+                onSubmit={(values, { setSubmitting }) => {
+                  handleRegister(values);
+                  setSubmitting(false);
+                }}
+              >
+                {({ isSubmitting }) => (
+                  <Form className="Form">
+                    <div className="Input">
+                      <div className="InputText">
+                        <span className="InputTextTitle">
+                          Enter your email to get started.
+                        </span>
+                      </div>
+                      <div className="Email">
+                        <Field
+                          type="text"
+                          name="email"
+                          id="email"
+                          placeholder="Enter Email"
+                        />
+                        <ErrorMessage
+                          name="email"
+                          component="div"
+                          style={{ color: "red" }}
+                        />
+                      </div>
+                    </div>
+                    <div className="Forgot">
+                      By continuing, you agree to our{" "}
+                      <span>
+                        Terms of Service, Privacy Policy & Health Data Notice.
+                      </span>
+                    </div>
+                    <div className="LogButton">
+                      <div>
+                        <button
+                          className="SignUpButton"
+                          onClick={handleRegister}
+                          disabled={isOTPSent || isLogged || isSubmitting}
+                          type="submit"
+                        >
+                          <span>{isOTPSent ? "Loading..." : "Sign up"}</span>
+                        </button>
+                        {responseMessage && (
+                          <p style={{ color: "red", textAlign: "center" }}>
+                            {responseMessage}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                  </Form>
+                )}
+              </Formik>
               <div
                 style={{ borderBottom: "1px solid lightGrey", margin: "10px" }}
               ></div>

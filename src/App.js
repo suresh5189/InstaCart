@@ -19,6 +19,8 @@ import CategoryListPage from "./components/CategoryListPage";
 import PopularGift from "./components/PopularGift";
 import PopularGiftSecondPage from "./components/PopularGiftSecondPage";
 import StoreDetailsInfoPage from "./components/StoreDetailsInfoPage";
+import Checkout from "./components/Checkout/Checkout";
+import StoreItemInfo from "./components/StoreItemInfo";
 
 function App() {
   const [showLoginModal, setShowLoginModal] = useState(false);
@@ -85,9 +87,13 @@ function App() {
         )}
         <Routes>
           <Route path="/" element={<Home isLoggedIn={isLoggedIn} />} />
-          <Route
+          {/* <Route
             path="/storedetails/:storeId/front"
             element={authGuard(<StoreDetailScreen />)}
+          /> */}
+          <Route
+            path="/storedetails/:storeId/front"
+            element={authGuard(<StoreItemInfo />)}
           />
           <Route
             path="/store/userinformation/account"
@@ -115,6 +121,7 @@ function App() {
             element={authGuard(<PopularGiftSecondPage />)}
           />
           <Route path="/store:id/info" element={<StoreDetailsInfoPage />} />
+          <Route path="/store/checkout" element={<Checkout />} />
         </Routes>
       </Router>
     </div>

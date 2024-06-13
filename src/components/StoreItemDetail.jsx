@@ -29,8 +29,7 @@ const StoreItemDetail = ({ item, handleClose, handleOpen }) => {
     } else {
       document.removeEventListener("mousedown", handleClickOutside);
     }
-  },);
-
+  });
   return (
     <>
       <div className="Overlay"></div>

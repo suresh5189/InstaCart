@@ -7,11 +7,15 @@ import { IoSearchOutline } from "react-icons/io5";
 import { FaShoppingCart } from "react-icons/fa";
 import Cart from "./CartScreen";
 import { fetchCategoryList } from "../apiServices";
+import { useSelector } from "react-redux";
 
 function Navbar({ onLoginClick, onSignUpClick, isLoggedIn, handleLogout }) {
   const [hamburger, setHamburger] = useState(false);
   const [cart, setCart] = useState(false);
   const [categories, setCategories] = useState([]);
+
+  const totalItems = useSelector((state) => state.cart.totalItems);
+  // console.log(totalItems);
 
   useEffect(() => {
     const getCategories = async () => {
@@ -79,7 +83,7 @@ function Navbar({ onLoginClick, onSignUpClick, isLoggedIn, handleLogout }) {
             placeholder="Search products, stores and recipes"
           />
         </div>
-        <div>
+        <div style={{ display: "flex" }}>
           {!isLoggedIn && (
             <>
               <button className="loginButton" onClick={onLoginClick}>
@@ -95,14 +99,24 @@ function Navbar({ onLoginClick, onSignUpClick, isLoggedIn, handleLogout }) {
               <span>Logout</span>
             </button>
           )}
-          <button className="CartButton">
-            <div className="CartIconButtonHead">
-              <div className="CartIconButton" onClick={handleCart}>
-                <FaShoppingCart size={24} className="CartIcon" />
+          {isLoggedIn && (
+            <button className="CartButton">
+              <div className="CartIconButtonHead">
+                <div className="CartIconButton" onClick={handleCart}>
+                  <span>
+                    <FaShoppingCart size={22} className="CartIcon" />
+                  </span>
+                  <span className="CartIconCount">{totalItems}</span>
+                </div>
+                {cart && (
+                  <Cart
+                    closeCart={closeCart}
+                    isOpenCart={handleCart}
+                  />
+                )}
               </div>
-              {cart && <Cart size={24} closeCart={closeCart} isOpenCart={handleCart}/>}
-            </div>
-          </button>
+            </button>
+          )}
         </div>
       </div>
       {isLoggedIn && (
