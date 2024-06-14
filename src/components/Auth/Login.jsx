@@ -4,9 +4,9 @@ import { ImFacebook2 } from "react-icons/im";
 import { FaPhoneVolume } from "react-icons/fa6";
 import { IoClose } from "react-icons/io5";
 import ResetPassword from "./ResetPassword";
-import { login } from "../apiServices";
+import { login } from "../../apiServices";
 import { useDispatch } from "react-redux";
-import { setEmail, setPassword } from "../store/action/userActions";
+import { setEmail, setPassword } from "../../store/action/userActions";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 
 const Login = ({
@@ -34,6 +34,7 @@ const Login = ({
     try {
       const response = await login(email, password);
       setResponseMessage(response.message || "Logged In Successfully");
+      // console.log(response.data);
       setIsLoggedIn(true);
       handleLoginSuccess();
       dispatch(setEmail(email));

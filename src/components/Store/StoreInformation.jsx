@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { AiOutlineDollar } from "react-icons/ai";
 import { HiArrowUturnRight } from "react-icons/hi2";
 import { BsExclamationCircle } from "react-icons/bs";
-import { getStoreInsideDetails } from "../apiServices";
+import { getStoreInsideDetails } from "../../apiServices";
 
 function StoreDetailsInfoPage({ isOpen, isClose, storeId }) {
   const [activeTab, setActiveTab] = useState("info");

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { verifyOTPRegister } from "../apiServices";
+import { verifyOTPRegister } from "../../apiServices";
 
 const VerifyOTP = ({ email, onVerificationSuccess, otpid }) => {
   const [password, setPassword] = useState("");

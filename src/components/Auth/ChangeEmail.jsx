@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-import { changeEmail } from "../apiServices";
-import { setEmail as setEmailAction } from "../store/action/userActions";
+import { changeEmail } from "../../apiServices";
+import { setEmail as setEmailAction } from "../../store/action/userActions";
 import { useDispatch } from "react-redux";
 
 function ChangeEmail({ closeEmailModal }) {

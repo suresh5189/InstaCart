@@ -1,6 +1,6 @@
 import React from "react";
 import Faq from "react-faq-component";
-import data from "../data/faqData";
+import data from "../../data/faqData";
 
 const styles = {
   bgColor: "white",

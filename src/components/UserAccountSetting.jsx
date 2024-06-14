@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import InstacartBanner from "../images/instacartBanner.webp";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import ChangePassword from "./ChangePassword";
-import ChangeEmail from "./ChangeEmail";
-import ChangeName from "./ChangeName";
-import VerifyChangedPhoneNumber from "./VerifyChangedPhoneNumber";
+import ChangePassword from "../components/Auth/ChangePassword";
+import ChangeEmail from "../components/Auth/ChangeEmail";
+import ChangeName from "../components/Auth/ChangeName";
+import VerifyChangedPhoneNumber from "../components/Auth/VerifyChangedPhoneNumber";
 
 const User = () => {
   const navigate = useNavigate();

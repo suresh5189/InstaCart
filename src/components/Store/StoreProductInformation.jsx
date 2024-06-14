@@ -3,18 +3,34 @@ import { IoMdHeartEmpty } from "react-icons/io";
 import { FaList } from "react-icons/fa6";
 import { GoArrowLeft } from "react-icons/go";
 import { MdKeyboardArrowDown } from "react-icons/md";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../store/action/userActions";
+import { toast } from "react-toastify";
 
-const StoreItemDetail = ({ item, handleClose, handleOpen }) => {
-  const [count, setCount] = useState(1);
+const StoreProductInformation = ({ item, handleClose, handleOpen }) => {
+  const [quantity, setQuantity] = useState(1);
   const useItemRef = useRef(null);
 
+  const dispatch = useDispatch();
+
+  const handleAddToCart = (item) => {
+    dispatch(addToCart(item));
+    toast.success("Item Added To Cart", {
+      position: "bottom-center",
+      autoClose: 2000,
+      hideProgressBar: true,
+    });
+  };
+
+  console.log(item, quantity);
+
   const increment = () => {
-    setCount(count + 1);
+    setQuantity(quantity + 1);
   };
 
   const decrement = () => {
-    if (count > 1) {
-      setCount(count - 1);
+    if (quantity > 1) {
+      setQuantity(quantity - 1);
     }
   };
   const handleClickOutside = (event) => {
@@ -69,14 +85,17 @@ const StoreItemDetail = ({ item, handleClose, handleOpen }) => {
               <input
                 className="InputIncreaseDecreaseButtonValue"
                 type="text"
-                value={count}
+                value={quantity}
                 disabled
               />
               <button className="IncreaseDecreaseButton" onClick={increment}>
                 +
               </button>
             </div>
-            <div className="StoreItemDetailButtonContainerCart">
+            <div
+              className="StoreItemDetailButtonContainerCart"
+              onClick={() => handleAddToCart(item)}
+            >
               Add To Cart
             </div>
             <div className="StoreItemDetailIconItems">
@@ -100,4 +119,4 @@ const StoreItemDetail = ({ item, handleClose, handleOpen }) => {
   );
 };
 
-export default StoreItemDetail;
+export default StoreProductInformation;

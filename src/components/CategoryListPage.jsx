@@ -25,14 +25,7 @@ const CategoryListPage = () => {
   return (
     <div className="CategoryList">
       <div className="HomePageButtonDiv">
-        {storeCategory.length == 0 ? (
-          <div className="CategoryListImageDiv">
-            <div className="CategoryListImageDivText">Store Not Found!</div>
-            <div>
-              <img src={Store} alt="" className="CategoryListImage" />
-            </div>
-          </div>
-        ) : (
+        {storeCategory.length !== 0 ? (
           storeCategory.map(
             ({
               store_id,
@@ -93,6 +86,13 @@ const CategoryListPage = () => {
               );
             }
           )
+        ) : (
+          <div className="CategoryListImageDiv">
+            <div className="CategoryListImageDivText">Store Not Found!</div>
+            <div>
+              <img src={Store} alt="" className="CategoryListImage" />
+            </div>
+          </div>
         )}
       </div>
     </div>

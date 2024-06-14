@@ -8,8 +8,7 @@ import cartReducer from "./reducers/cartReducer";
 
 const rootReducer = combineReducers({
   user: userReducer,
-  cart:cartReducer,
-  // Add other reducers here if needed
+  cart: cartReducer,
 });
 
 const persistConfig = {

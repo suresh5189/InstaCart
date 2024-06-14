@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { IoIosArrowRoundBack } from "react-icons/io";
-import { resetPassword } from "../apiServices";
+import { resetPassword } from "../../apiServices";
 
 const ResetPassword = ({ handleCloseModal, isOpenModal, handleClose }) => {
   const refReset = useRef(null);

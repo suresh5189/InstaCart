@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
-import { changeName } from "../apiServices";
+import { changeName } from "../../apiServices";
 import { useDispatch } from "react-redux";
 import {
   setFirstName as setFirstNameChange,
   setLastName as setLastNameChange,
-} from "../store/action/userActions"; // Import action creators
+} from "../../store/action/userActions"; // Import action creators
 
 function ChangeName({ closeNameModal }) {
   const [firstName, setFirstName] = useState("");

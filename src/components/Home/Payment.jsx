@@ -1,6 +1,6 @@
 import React from "react";
-import Phone from "../images/phone.webp";
-import Qrcode from "../images/qrcode.webp";
+import Phone from "../../images/phone.webp";
+import Qrcode from "../../images/qrcode.webp";
 
 function Payment() {
   return (

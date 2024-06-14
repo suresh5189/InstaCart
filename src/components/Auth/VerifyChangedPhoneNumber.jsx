@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import Select from "react-select";
-import { changePhoneNumber, verifyChangedPhoneNumber } from "../apiServices";
+import { changePhoneNumber, verifyChangedPhoneNumber } from "../../apiServices";
 import { useDispatch } from "react-redux";
-import { setPhoneNumber as setPhoneNumberAction } from "../store/action/userActions";
+import { setPhoneNumber as setPhoneNumberAction } from "../../store/action/userActions";
 
 const countryOptions = [
   { value: "+91", label: "+91 - India" },
@@ -51,7 +51,6 @@ const VerifyChangedPhoneNumber = ({ closePhoneModal }) => {
         accessToken
       );
       setOtpSent(true);
-      dispatch(setPhoneNumberAction(phoneNumber));
       setMessage(response.message || "OTP Sent Successfully");
     } catch (error) {
       setMessage(error.message || "Error Sending OTP");
@@ -72,6 +71,7 @@ const VerifyChangedPhoneNumber = ({ closePhoneModal }) => {
         accessToken
       );
       setMessage(response.message || "Phone Number Verified Successfully");
+      dispatch(setPhoneNumberAction(phoneNumber));
       closePhoneModal();
     } catch (error) {
       setMessage(error.message || "Error Verifying Phone Number");

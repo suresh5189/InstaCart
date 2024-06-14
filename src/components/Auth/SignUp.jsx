@@ -3,7 +3,7 @@ import { FcGoogle } from "react-icons/fc";
 import { ImFacebook2 } from "react-icons/im";
 import { FaPhoneVolume } from "react-icons/fa6";
 import { IoClose } from "react-icons/io5";
-import { sendOTPRegister } from "../apiServices";
+import { sendOTPRegister } from "../../apiServices";
 import VerifyOTP from "./VerifyOTP";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 

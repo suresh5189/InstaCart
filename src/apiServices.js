@@ -305,4 +305,33 @@ export const getStoreIemDetails = async (id) => {
   }
 };
 
+// --------------------------------------------------------------------------------
+
+// Search Store
+
+export const searchStore = async (
+  query,
+  storePage = 1,
+  storeLimit = 2,
+  productsStorePage = 1,
+  productsStoreLimit = 2
+) => {
+  try {
+    const response = await apiServices.get("/store/search", {
+      params: {
+        query,
+        storePage,
+        storeLimit,
+        productsStorePage,
+        productsStoreLimit,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw new Error(error.response.data.message || "Error Searching Store");
+  }
+};
+
+// -----------------------------------------------------------------------------------
+
 export default apiServices;

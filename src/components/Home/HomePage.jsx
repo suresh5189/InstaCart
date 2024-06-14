@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import Data from "../data/storeData";
+import Data from "../../data/storeData";
 import { useNavigate } from "react-router-dom";
-import { storeData } from "../apiServices";
+import { storeData } from "../../apiServices";
 
 function HomePage({ isLoggedIn }) {
   const [visibleCount, setVisibleCount] = useState(9);

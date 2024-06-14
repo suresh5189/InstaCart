@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { FaPlus } from "react-icons/fa6";
 import DetailScreenSidebar from "./DetailScreenSideBar";
-import BookMark from "./BookMark";
-import StoreItemDetail from "./StoreItemDetail";
+import BookMark from "../BookMark";
+import StoreItemDetail from "./StoreProductInformation";
 import { useLocation, useParams } from "react-router-dom";
-import { storeDetailData } from "../apiServices";
+import { storeDetailData } from "../../apiServices";
 import { useDispatch } from "react-redux";
-import { addToCart } from "../store/action/userActions";
+import { addToCart } from "../../store/action/userActions";
 
 const StoreDetailScreen = () => {
   const [bookmarkModalOpen, setBookmarkModalOpen] = useState(true);

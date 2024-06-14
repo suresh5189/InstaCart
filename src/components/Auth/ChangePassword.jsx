@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
-import { changePassword } from "../apiServices";
+import { changePassword } from "../../apiServices";
 import { useDispatch } from "react-redux";
-import { setPassword as setPasswordAction } from "../store/action/userActions";
+import { setPassword as setPasswordAction } from "../../store/action/userActions";
 
 function ChangePassword({ closeModal }) {
   const [newPassword, setNewPassword] = useState("");
@@ -34,8 +34,8 @@ function ChangePassword({ closeModal }) {
         newPassword,
         confirmNewPassword
       );
-      dispatch(setPasswordAction(newPassword));
       setSuccessMessage(message);
+      dispatch(setPasswordAction(newPassword));
       closeModal();
     } catch (error) {
       setError(error.message);

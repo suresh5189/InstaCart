@@ -1,5 +1,5 @@
 import React from "react";
-import DeliveryData from "../data/deliveryGrocery";
+import DeliveryData from "../../data/deliveryGrocery";
 
 const Delivery_Grocery = () => {
   return (

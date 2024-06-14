@@ -1,21 +1,22 @@
 import React, { useEffect, useState } from "react";
-import { getStoreIemDetails } from "../apiServices";
-import StoreItemDetail from "./StoreItemDetail";
-import BookMark from "./BookMark";
+import { getStoreIemDetails } from "../../apiServices";
 import { FaPlus } from "react-icons/fa6";
 import { useDispatch } from "react-redux";
-import { addToCart } from "../store/action/userActions";
-import DetailScreenSidebar from "./DetailScreenSideBar";
-import Loader from "./Loader";
 import { useLocation } from "react-router-dom";
+import { addToCart } from "../../store/action/userActions";
+import Loader from "../Loader";
+import BookMark from "../BookMark";
+import StoreProductInformation from "./StoreProductInformation";
+import DetailScreenSidebar from "./DetailScreenSideBar";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-const StoreItemInfo = () => {
+const StoreProducts = () => {
   const [bookmarkModalOpen, setBookmarkModalOpen] = useState(true);
   const [itemModalOpen, setItemModalOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const [hoveredId, setHoveredId] = useState(null);
   const [productByCategory, setProductByCategory] = useState({});
-  const [itemData, setItemData] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const dispatch = useDispatch();
@@ -28,6 +29,11 @@ const StoreItemInfo = () => {
 
   const handleAddToCart = (item) => {
     dispatch(addToCart(item));
+    toast.success("Item Added To Cart", {
+      position: "bottom-center",
+      autoClose: 2000,
+      hideProgressBar: true,
+    });
   };
 
   const handleCloseBookmarkModal = () => {
@@ -57,7 +63,9 @@ const StoreItemInfo = () => {
             if (!categorizedProducts[category_name][subcategory_name]) {
               categorizedProducts[category_name][subcategory_name] = [];
             }
-            categorizedProducts[category_name][subcategory_name].push(...products);
+            categorizedProducts[category_name][subcategory_name].push(
+              ...products
+            );
           });
         });
         setProductByCategory(categorizedProducts);
@@ -73,6 +81,7 @@ const StoreItemInfo = () => {
   return (
     <>
       <div className="StoreDetail">
+        <ToastContainer />
         <div className="StoreDetailSideBar">
           <div className="DetailScreenSidebar">
             <DetailScreenSidebar
@@ -189,7 +198,7 @@ const StoreItemInfo = () => {
         />
       )}
       {selectedItem && (
-        <StoreItemDetail
+        <StoreProductInformation
           item={selectedItem}
           handleClose={handleCloseDetailModal}
           handleOpen={itemModalOpen}
@@ -199,4 +208,4 @@ const StoreItemInfo = () => {
   );
 };
 
-export default StoreItemInfo;
+export default StoreProducts;

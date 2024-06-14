@@ -5,7 +5,7 @@ import GiftCardNav from "./GiftCardNav";
 import GiftConvenience from "./GiftConvenience";
 import Purchase from "./Purchase";
 import FAQuestions from "./FAQuestions";
-import Footer from "../Footer";
+import Footer from "../Home/Footer";
 
 const GiftCard = () => {
   return (

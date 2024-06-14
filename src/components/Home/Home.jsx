@@ -7,11 +7,11 @@ import GroceryMarketPlace from "./GroceryMarketPlace";
 import CommonQuestion from "./CommonQuestion";
 import Footer from "./Footer";
 
-const Home = ({isLoggedIn}) => {
+const Home = ({ isLoggedIn }) => {
   return (
     <div>
       <HomePageBar />
-      <HomePage isLoggedIn={isLoggedIn}/>
+      <HomePage isLoggedIn={isLoggedIn} />
       <Payment />
       <DeliveryGrocery />
       <GroceryMarketPlace />

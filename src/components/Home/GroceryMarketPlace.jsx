@@ -1,6 +1,6 @@
 import React from "react";
-import MarketPlace from "../images/marketplace.png";
-import MarketPlaceData from "../data/marketPlace";
+import MarketPlace from "../../images/marketplace.png";
+import MarketPlaceData from "../../data/marketPlace";
 
 const Grocery_MarketPlace = () => {
   return (

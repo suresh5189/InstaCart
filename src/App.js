@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import "./App.css";
-import Login from "./components/Login";
-import SignUp from "./components/SignUp";
+import Login from "./components/Auth/Login";
+import SignUp from "./components/Auth/SignUp";
 import {
   BrowserRouter as Router,
   Route,
   Routes,
   Navigate,
 } from "react-router-dom";
-import Home from "./components/Home";
-import StoreDetailScreen from "./components/StoreDetailScreen";
+import Home from "./components/Home/Home";
+// import StoreDetailScreen from "./components/Store/StoreDetailScreen";
 import Navbar from "./components/Navbar";
 import User from "./components/UserAccountSetting";
 import GiftCard from "./components/GiftCard/GiftCard";
@@ -18,9 +18,9 @@ import ManagePromo from "./components/ManagePromo";
 import CategoryListPage from "./components/CategoryListPage";
 import PopularGift from "./components/PopularGift";
 import PopularGiftSecondPage from "./components/PopularGiftSecondPage";
-import StoreDetailsInfoPage from "./components/StoreDetailsInfoPage";
+import StoreDetailsInfoPage from "./components/Store/StoreInformation";
 import Checkout from "./components/Checkout/Checkout";
-import StoreItemInfo from "./components/StoreItemInfo";
+import StoreItemInfo from "./components/Store/StoreProducts";
 
 function App() {
   const [showLoginModal, setShowLoginModal] = useState(false);

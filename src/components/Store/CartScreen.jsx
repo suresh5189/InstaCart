@@ -9,8 +9,9 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   removeFromCart,
   updateCartItemQuantity,
-} from "../store/action/userActions";
+} from "../../store/action/userActions";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Cart = ({ closeCart, isOpenCart }) => {
   const useCartRef = useRef(null);
@@ -20,6 +21,7 @@ const Cart = ({ closeCart, isOpenCart }) => {
 
   const navigateToCheckoutPage = () => {
     navigate("/store/checkout");
+    closeCart();
   };
 
   const handleClickOutside = (event) => {
@@ -33,6 +35,11 @@ const Cart = ({ closeCart, isOpenCart }) => {
 
   const handleRemoveItemFromCart = (itemId) => {
     dispatch(removeFromCart(itemId));
+    toast.success("Item Remove From Cart", {
+      position: "bottom-center",
+      autoClose: 2000,
+      hideProgressBar: true,
+    });
   };
 
   const handleIncreaseQuantity = (itemId) => {
@@ -142,7 +149,9 @@ const Cart = ({ closeCart, isOpenCart }) => {
             onClick={navigateToCheckoutPage}
             style={{
               cursor: "pointer",
-              backgroundColor: isDisabled ? "rgb(172, 172, 172)" : "rgb(27, 152, 27)",
+              backgroundColor: isDisabled
+                ? "rgb(172, 172, 172)"
+                : "rgb(27, 152, 27)",
             }}
             disabled={isDisabled}
           >
