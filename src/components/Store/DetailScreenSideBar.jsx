@@ -23,17 +23,17 @@ const DetailScreenSidebar = ({ storeId, image, title }) => {
     const fetchStoreFrontDetails = async () => {
       try {
         const response = await getStoreFrontDetails(storeId);
-        setStoreFrontItems(response.data[0].categories || []); 
+        setStoreFrontItems(response.data[0].categories || []);
         // setLoading(false);
       } catch (error) {
         console.error("Error fetching store front details:", error);
         setStoreFrontItems([]);
       }
     };
-    
+
     fetchStoreFrontDetails();
   }, [storeId]);
-  
+
   // console.log(storeFrontItems)
 
   return (

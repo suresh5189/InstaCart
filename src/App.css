@@ -1371,6 +1371,7 @@ Input {
   font-weight: 500;
   display: flex;
   align-items: center;
+  color: rgb(128, 126, 126);
 }
 
 .CartItemButtonIconAndRemove {
@@ -1384,7 +1385,7 @@ Input {
 .CartItemPrice {
   display: flex;
   align-items: center;
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 600;
 }
 

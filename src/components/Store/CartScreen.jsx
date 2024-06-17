@@ -1,10 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { MdOutlineClose } from "react-icons/md";
+import { CiSquarePlus } from "react-icons/ci";
+import { CiSquareMinus } from "react-icons/ci";
 import { RiDeleteBinLine } from "react-icons/ri";
-import {
-  IoIosRemoveCircleOutline,
-  IoIosAddCircleOutline,
-} from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import {
   removeFromCart,
@@ -110,7 +108,7 @@ const Cart = ({ closeCart, isOpenCart }) => {
                             className="CartItemButtonIcon"
                             onClick={() => handleDecreaseQuantity(id)}
                           >
-                            <IoIosRemoveCircleOutline size={20} />
+                            <CiSquareMinus size={20} />
                           </div>
                           <span className="CartItemQuantity">
                             {displayQuantity}
@@ -119,7 +117,7 @@ const Cart = ({ closeCart, isOpenCart }) => {
                             className="CartItemButtonIcon"
                             onClick={() => handleIncreaseQuantity(id)}
                           >
-                            <IoIosAddCircleOutline size={20} />
+                            <CiSquarePlus size={20} />
                           </div>
                         </div>
                         <div
