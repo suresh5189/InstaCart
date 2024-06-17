@@ -22,7 +22,7 @@ function HomePage({ isLoggedIn }) {
     if (!isLoggedIn) {
       alert("Login First");
     } else {
-      navigate(`/storedetails/${store_id}/front`, {
+      navigate(`/store/${store_id}/storefront`, {
         state: { store_id, image, title },
       });
     }

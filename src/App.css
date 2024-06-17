@@ -1761,6 +1761,19 @@ Input {
   background-color: rgb(16, 137, 16);
 }
 
+.LoadingUserAccount {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50vh;
+}
+
+.LoadingUserAccount p {
+  font-size: 25px;
+  font-family: "Playfair Display";
+  color: #3e3e3e;
+}
+
 /* ------------------------------------------------------------ */
 /* ------------------------------------------------------------ */
 
@@ -3044,4 +3057,44 @@ Input {
 
 .SearchHorizontalLine {
   border: 1px solid #f0f0f0;
+}
+
+/* ------------------------------------------------------------------ */
+/* ------------------------------------------------------------------ */
+
+/* Pagination  */
+
+.PaginationDiv {
+  display: flex;
+  flex-direction: column;
+}
+
+.Pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+  font-family: "Playfair Display";
+}
+
+.PaginationBack {
+  margin: 0 15px;
+  padding: 10px 15px;
+  background-color: rgb(18, 19, 20);
+  border: none;
+  color: white;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.PaginationNext {
+  margin: 0 15px;
+  padding: 10px 15px;
+  background-color: rgb(18, 19, 20);
+  border: none;
+  color: white;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
 }

@@ -1,6 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import Select from "react-select";
-import { changePhoneNumber, verifyChangedPhoneNumber } from "../../apiServices";
+import {
+  changePhoneNumber,
+  verifyChangedPhoneNumber,
+} from "../../apiServices";
 import { useDispatch } from "react-redux";
 import { setPhoneNumber as setPhoneNumberAction } from "../../store/action/userActions";
 
@@ -43,15 +46,18 @@ const VerifyChangedPhoneNumber = ({ closePhoneModal }) => {
     try {
       const accessToken = localStorage.getItem("AccessToken");
       if (!accessToken) {
-        console.log("Access Token Not Found!");
+        throw new Error("Access Token Not Found!");
       }
       const response = await changePhoneNumber(
         selectedCountry.value,
         phoneNumber,
         accessToken
       );
+      const otpid = response.data.otpid;
+      console.log(otpid);
       setOtpSent(true);
       setMessage(response.message || "OTP Sent Successfully");
+      setOtpId(otpid); // Set OTP ID obtained from the API response
     } catch (error) {
       setMessage(error.message || "Error Sending OTP");
     }
@@ -61,7 +67,7 @@ const VerifyChangedPhoneNumber = ({ closePhoneModal }) => {
     try {
       const accessToken = localStorage.getItem("AccessToken");
       if (!accessToken) {
-        console.log("Access Token Not Found");
+        throw new Error("Access Token Not Found");
       }
       const response = await verifyChangedPhoneNumber(
         selectedCountry.value,
@@ -78,33 +84,43 @@ const VerifyChangedPhoneNumber = ({ closePhoneModal }) => {
     }
   };
 
+  const maskOtpId = (otpId) => {
+    if (!otpId) return "";
+    const visiblePart = otpId.substring(otpId.length - 3);
+    const hiddenPart = "*".repeat(otpId.length - 3);
+    return hiddenPart + visiblePart;
+  };
+
   return (
     <>
       <div className="Overlay"></div>
       <div className="VerifyChangedPhoneNumber" ref={usePhoneRef}>
-        <h1>{otpSent ? "Verify Phone Number" : "Change Phone Number"}</h1>
-        <Select
-          value={selectedCountry}
-          onChange={setSelectedCountry}
-          options={countryOptions}
-          placeholder="Select Country Code"
-          className="CountryCodeField"
-        />
-        <input
-          type="text"
-          value={phoneNumber}
-          onChange={(e) => setPhoneNumber(e.target.value)}
-          placeholder="Phone Number"
-          className="PhoneNumberInput"
-        />
-        {otpSent ? (
+        {!otpSent ? (
+          <>
+            <h1>{otpSent ? "Verify Phone Number" : "Change Phone Number"}</h1>
+            <Select
+              value={selectedCountry}
+              onChange={setSelectedCountry}
+              options={countryOptions}
+              placeholder="Select Country Code"
+              className="CountryCodeField"
+            />
+            <input
+              type="text"
+              value={phoneNumber}
+              onChange={(e) => setPhoneNumber(e.target.value)}
+              placeholder="Phone Number"
+              className="PhoneNumberInput"
+            />
+          </>
+        ) : (
           <>
             <input
               type="text"
-              value={otpId}
-              onChange={(e) => setOtpId(e.target.value)}
+              value={maskOtpId(otpId)}
               placeholder="OTP ID"
               className="PhoneNumberInput"
+              readOnly 
             />
             <input
               type="text"
@@ -114,7 +130,7 @@ const VerifyChangedPhoneNumber = ({ closePhoneModal }) => {
               className="PhoneNumberInput"
             />
           </>
-        ) : null}
+        )}
         {message && <p style={{ color: "red" }}>{message}</p>}
         <div className="VerifyChangedPhoneNumberButton">
           {otpSent ? (

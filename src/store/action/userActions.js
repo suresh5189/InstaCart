@@ -8,7 +8,13 @@ import {
   ADD_TO_CART,
   REMOVE_FROM_CART,
   UPDATE_CART_ITEM_QUANTITY,
+  UPDATE_USER_PROFILE,
 } from "../ActionTypes";
+
+export const updateProfile = (userData) => ({
+  type: UPDATE_USER_PROFILE,
+  payload: userData,
+});
 
 export const setEmail = (email) => {
   return {

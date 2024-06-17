@@ -205,7 +205,7 @@ export const verifyChangedPhoneNumber = async (
     return response.data;
   } catch (error) {
     throw new Error(
-      error.response.data.message || "Error Verifying Phone Number"
+      error.response.data.message || "Error Verifying Phone number"
     );
   }
 };
@@ -227,6 +227,23 @@ export const resetPassword = async (email) => {
 
 // --------------------------------------------------------------------------------
 
+export const getUserDetails = async (accessToken) => {
+  try {
+    const response = await apiServices.get("/userprofile/information", {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    // console.log(response.data);
+    return response;
+  } catch (error) {
+    throw new Error(
+      error.response.data.message || "Failed To Fetch User Information"
+    );
+  }
+};
+
+// --------------------------------------------------------------------------------
 // Category List
 
 export const fetchCategoryList = async () => {
@@ -279,6 +296,19 @@ export const storeDetailData = async () => {
 
 // -------------------------------------------------------------------------------
 
+// Get Store Front Detail
+
+export const getStoreFrontDetails = async (storeId) => {
+  try {
+    const response = await apiServices.get(`/store/${storeId}/front`);
+    return response.data;
+  } catch (error) {
+    throw new Error("Error Fetching Store Front Details");
+  }
+};
+
+// -------------------------------------------------------------------------------
+
 // Get Store Inside Detail
 
 export const getStoreInsideDetails = async (id) => {
@@ -312,9 +342,9 @@ export const getStoreIemDetails = async (id) => {
 export const searchStore = async (
   query,
   storePage = 1,
-  storeLimit = 2,
-  productsStorePage = 1,
-  productsStoreLimit = 2
+  storeLimit = 1,
+  productsStorePage = 1
+  // productsStoreLimit = 2
 ) => {
   try {
     const response = await apiServices.get("/store/search", {
@@ -323,7 +353,7 @@ export const searchStore = async (
         storePage,
         storeLimit,
         productsStorePage,
-        productsStoreLimit,
+        // productsStoreLimit,
       },
     });
     return response.data;
@@ -333,5 +363,26 @@ export const searchStore = async (
 };
 
 // -----------------------------------------------------------------------------------
+
+// Search Inside Store
+
+export const searchInsideStore = async (query, storeId, page = 1) => {
+  try {
+    const response = await apiServices.get("/store/inside/search", {
+      params: {
+        query,
+        storeId,
+        page,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw new Error(
+      error.response.data.message || "Error Searching Inside Store"
+    );
+  }
+};
+
+// ------------------------------------------------------------------------------------
 
 export default apiServices;

@@ -92,7 +92,7 @@ function App() {
             element={authGuard(<StoreDetailScreen />)}
           /> */}
           <Route
-            path="/storedetails/:storeId/front"
+            path="/store/:storeId/storefront"
             element={authGuard(<StoreItemInfo />)}
           />
           <Route

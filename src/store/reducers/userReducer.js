@@ -5,6 +5,7 @@ import {
   FIRST_NAME,
   LAST_NAME,
   PHONE_NUMBER,
+  UPDATE_USER_PROFILE,
 } from "../ActionTypes";
 
 // Initial state
@@ -14,6 +15,7 @@ const initialState = {
   firstName: "",
   lastName: "",
   phoneno: "",
+  userDetails: null,
 };
 
 // Reducer function
@@ -43,6 +45,11 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         phoneno: action.payload,
+      };
+    case UPDATE_USER_PROFILE:
+      return {
+        ...state,
+        userDetails: action.payload,
       };
     default:
       return state;

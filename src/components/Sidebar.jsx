@@ -20,14 +20,8 @@ import { IoIosArrowForward } from "react-icons/io";
 const Sidebar = ({ closeSidebar, isOpen, isLoggedIn }) => {
   const useSidebarRef = useRef(null);
 
-  const userEmail = useSelector((state) => state.user.email);
-  const FirstName = useSelector((state) => state.user.firstName);
-  const LastName = useSelector((state) => state.user.lastName);
-
-  const userEmailName =
-    FirstName || LastName
-      ? `${FirstName} ${LastName}`
-      : userEmail.split("@")[0];
+  const userDetails = useSelector((state) => state.user.userDetails);
+  // console.log(userDetails);
 
   const handleClickOutside = (event) => {
     if (
@@ -122,7 +116,9 @@ const Sidebar = ({ closeSidebar, isOpen, isLoggedIn }) => {
           ) : (
             <>
               <div className="SideBarUserAndName">
-                <div className="SideBarUserName">{userEmailName}</div>
+                <div className="SideBarUserName">
+                  {userDetails.firstName} {userDetails.lastName}
+                </div>
                 <div className="SideBarUserImage">
                   <img src={UserImage} alt="" />
                 </div>

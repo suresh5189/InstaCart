@@ -1,22 +1,40 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaShop } from "react-icons/fa6";
 import { TbReload } from "react-icons/tb";
 import { FaListUl } from "react-icons/fa";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import DetailSideBarData from "../../data/detailSidebarData";
 import StoreDetailsInfoPage from "./StoreInformation";
+import { getStoreFrontDetails } from "../../apiServices";
 
 const DetailScreenSidebar = ({ storeId, image, title }) => {
   const [openDetailInfoModal, setOpenDetailInfoModal] = useState(false);
+  const [storeFrontItems, setStoreFrontItems] = useState([]);
 
   const handleOpenDetailInfoModal = () => {
     setOpenDetailInfoModal(true);
-    // history.push(`/store/${storeId}/info`);
   };
 
   const handleCloseDetailInfoModal = () => {
     setOpenDetailInfoModal(false);
   };
+
+  useEffect(() => {
+    const fetchStoreFrontDetails = async () => {
+      try {
+        const response = await getStoreFrontDetails(storeId);
+        setStoreFrontItems(response.data[0].categories || []); 
+        // setLoading(false);
+      } catch (error) {
+        console.error("Error fetching store front details:", error);
+        setStoreFrontItems([]);
+      }
+    };
+    
+    fetchStoreFrontDetails();
+  }, [storeId]);
+  
+  // console.log(storeFrontItems)
 
   return (
     <>
@@ -69,13 +87,20 @@ const DetailScreenSidebar = ({ storeId, image, title }) => {
         ></div>
         <div className="SideBarStore">
           <div className="SideBarDetailButton">
-            {DetailSideBarData.map(({ id, listItem }) => {
-              return (
-                <div className="SideBarDetailButtonSpanHead" key={id}>
-                  <span className="SideBarDetailButtonSpan">{listItem}</span>
+            {storeFrontItems.length === 0 ? (
+              <div className="NoCategoriesMessage">No categories available</div>
+            ) : (
+              storeFrontItems.map((category) => (
+                <div
+                  className="SideBarDetailButtonSpanHead"
+                  key={category.category_id}
+                >
+                  <span className="SideBarDetailButtonSpan">
+                    {category.category_name}
+                  </span>
                 </div>
-              );
-            })}
+              ))
+            )}
           </div>
         </div>
       </div>

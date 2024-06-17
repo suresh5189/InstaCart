@@ -18,14 +18,14 @@ const StoreProducts = () => {
   const [hoveredId, setHoveredId] = useState(null);
   const [productByCategory, setProductByCategory] = useState({});
   const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const dispatch = useDispatch();
-
   const location = useLocation();
-
   const { state } = location;
-
   const { store_id, title, image } = state || {};
+
+  const itemsPerPage = 8;
 
   const handleAddToCart = (item) => {
     dispatch(addToCart(item));
@@ -78,6 +78,18 @@ const StoreProducts = () => {
     fetchStoreItemDetails();
   }, [store_id]);
 
+  const handleNextPage = () => {
+    setCurrentPage((prevPage) => prevPage + 1);
+  };
+
+  const handlePrevPage = () => {
+    setCurrentPage((prevPage) => prevPage - 1);
+  };
+
+  // Calculate start and end indices for pagination
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+
   return (
     <>
       <div className="StoreDetail">
@@ -91,104 +103,125 @@ const StoreProducts = () => {
             />
           </div>
         </div>
-        <div>
-          {loading ? (
-            <Loader />
-          ) : (
-            Object.entries(productByCategory).map(
-              ([category, subcategories]) => (
-                <div key={category}>
-                  {Object.entries(subcategories).some(
-                    ([subcategory, products]) => products.length > 0
-                  ) && (
-                    <div className="StoreDetailHead">
-                      <div className="StoreHeading">{category}</div>
-                      {Object.entries(subcategories).map(
-                        ([subcategory, products]) =>
-                          products.length > 0 && (
-                            <div key={subcategory}>
-                              <div className="StoreSubHeading">
-                                {subcategory}
-                              </div>
-                              <div className="StoreContainerHead">
-                                {products.map(
-                                  ({
-                                    id,
-                                    title,
-                                    image,
-                                    label,
-                                    actual_price,
-                                    selling_price,
-                                  }) => (
-                                    <div className="StoreContainer" key={id}>
-                                      <button
-                                        className="StoreContainerCartButton"
-                                        onMouseEnter={() => setHoveredId(id)}
-                                        onMouseLeave={() => setHoveredId(null)}
-                                        onClick={() =>
-                                          handleAddToCart({
-                                            id,
-                                            title,
-                                            image,
-                                            label,
-                                            actual_price,
-                                            selling_price,
-                                          })
-                                        }
-                                      >
-                                        <FaPlus size={16} />
-                                        <div>
-                                          {hoveredId === id
-                                            ? "Add To Cart"
-                                            : "Add"}
-                                        </div>
-                                      </button>
-                                      <div
-                                        className="StoreImageAndDetailContainer"
-                                        onClick={() =>
-                                          handleOpenDetailModal({
-                                            id,
-                                            title,
-                                            image,
-                                            label,
-                                            actual_price,
-                                            selling_price,
-                                          })
-                                        }
-                                      >
-                                        <div className="StoreImage">
-                                          <img src={image} alt={title} />
-                                        </div>
-                                        <div className="StoreContainerDetail">
-                                          <div className="StoreContainerPrice">
-                                            <span className="StoreContainerPriceSup">
-                                              ${actual_price}
-                                            </span>
-                                            <span className="StoreContainerPriceSub">
-                                              ${selling_price}
-                                            </span>
+        <div className="PaginationDiv">
+          <div>
+            {loading ? (
+              <Loader />
+            ) : (
+              Object.entries(productByCategory).map(
+                ([category, subcategories]) => (
+                  <div key={category}>
+                    {Object.entries(subcategories).some(
+                      ([subcategory, products]) => products.length > 0
+                    ) && (
+                      <div className="StoreDetailHead">
+                        <div className="StoreHeading">{category}</div>
+                        {Object.entries(subcategories).map(
+                          ([subcategory, products]) =>
+                            products.length > 0 && (
+                              <div key={subcategory}>
+                                <div className="StoreSubHeading">
+                                  {subcategory}
+                                </div>
+                                <div className="StoreContainerHead">
+                                  {products.map(
+                                    ({
+                                      id,
+                                      title,
+                                      image,
+                                      label,
+                                      actual_price,
+                                      selling_price,
+                                    }) => (
+                                      <div className="StoreContainer" key={id}>
+                                        <button
+                                          className="StoreContainerCartButton"
+                                          onMouseEnter={() => setHoveredId(id)}
+                                          onMouseLeave={() =>
+                                            setHoveredId(null)
+                                          }
+                                          onClick={() =>
+                                            handleAddToCart({
+                                              id,
+                                              title,
+                                              image,
+                                              label,
+                                              actual_price,
+                                              selling_price,
+                                            })
+                                          }
+                                        >
+                                          <FaPlus size={16} />
+                                          <div>
+                                            {hoveredId === id
+                                              ? "Add To Cart"
+                                              : "Add"}
                                           </div>
-                                          <div className="StoreContainerTitle">
-                                            {title}
+                                        </button>
+                                        <div
+                                          className="StoreImageAndDetailContainer"
+                                          onClick={() =>
+                                            handleOpenDetailModal({
+                                              id,
+                                              title,
+                                              image,
+                                              label,
+                                              actual_price,
+                                              selling_price,
+                                            })
+                                          }
+                                        >
+                                          <div className="StoreImage">
+                                            <img src={image} alt={title} />
                                           </div>
-                                          <div className="StoreContainerProductDetail">
-                                            {label}
+                                          <div className="StoreContainerDetail">
+                                            <div className="StoreContainerPrice">
+                                              <span className="StoreContainerPriceSup">
+                                                ${actual_price}
+                                              </span>
+                                              <span className="StoreContainerPriceSub">
+                                                ${selling_price}
+                                              </span>
+                                            </div>
+                                            <div className="StoreContainerTitle">
+                                              {title}
+                                            </div>
+                                            <div className="StoreContainerProductDetail">
+                                              {label}
+                                            </div>
                                           </div>
                                         </div>
                                       </div>
-                                    </div>
-                                  )
-                                )}
+                                    )
+                                  )}
+                                </div>
                               </div>
-                            </div>
-                          )
-                      )}
-                    </div>
-                  )}
-                </div>
+                            )
+                        )}
+                      </div>
+                    )}
+                  </div>
+                )
               )
-            )
-          )}
+            )}
+          </div>
+          <div className="Pagination">
+            <button
+              onClick={handlePrevPage}
+              disabled={currentPage <= 1}
+              className="PaginationBack"
+            >
+              Previous
+            </button>
+            <span>{`Page ${currentPage}`}</span>
+            <button
+              onClick={handleNextPage}
+              disabled={currentPage >= Math.ceil(10 / itemsPerPage)}
+              className="PaginationNext"
+            >
+              Next
+            </button>
+          </div>
         </div>
       </div>
       {bookmarkModalOpen && (

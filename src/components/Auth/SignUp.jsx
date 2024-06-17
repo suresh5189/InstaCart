@@ -23,6 +23,7 @@ const SignUp = ({
 
   const handleRegister = async (values) => {
     const { email } = values;
+    setEmail(email);
     if (!email) {
       setResponseMessage("Please Enter Your Email.");
       return;
@@ -45,6 +46,8 @@ const SignUp = ({
       handleCloseSignUpModal();
     }
   };
+
+  console.log(email);
 
   useEffect(() => {
     if (handleOpen) {
@@ -96,7 +99,7 @@ const SignUp = ({
                 <hr className="HorizontalLine" />
               </div>
               <Formik
-                initialValues={{ email: "", password: "" }}
+                initialValues={{ email: "" }}
                 validate={(values) => {
                   const errors = {};
                   if (!values.email) {
@@ -125,7 +128,7 @@ const SignUp = ({
                       </div>
                       <div className="Email">
                         <Field
-                          type="text"
+                          type="email"
                           name="email"
                           id="email"
                           placeholder="Enter Email"
