@@ -3,11 +3,25 @@ import PopularGiftImage from "../images/PopularGift.png";
 import { useParams } from "react-router-dom";
 import { storeDetailData } from "../apiServices";
 import { FaPlus } from "react-icons/fa6";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../store/action/userActions";
+import { ToastContainer, toast } from "react-toastify";
 
 const PopularGiftSecondPage = () => {
   const [hoveredId, setHoveredId] = useState(null);
   const [productByCategory, setProductByCategory] = useState({});
   const { PopularGiftSecondId } = useParams();
+
+  const dispatch = useDispatch();
+
+  const handleAddToCart = (item) => {
+    dispatch(addToCart(item));
+    toast.success("Item Added To Cart", {
+      position: "bottom-center",
+      autoClose: 2000,
+      hideProgressBar: true,
+    });
+  };
 
   useEffect(() => {
     const fetchPopularGiftSecondData = async () => {
@@ -24,6 +38,7 @@ const PopularGiftSecondPage = () => {
   return (
     <>
       <div className="PopularGiftSecondContainer">
+        <ToastContainer />
         <div className="PopularGiftSecondImageDiv">
           <img
             src={PopularGiftImage}
@@ -65,6 +80,16 @@ const PopularGiftSecondPage = () => {
                                 className="PopularGiftSecondContainerCartButton"
                                 onMouseEnter={() => setHoveredId(id)}
                                 onMouseLeave={() => setHoveredId(null)}
+                                onClick={() =>
+                                  handleAddToCart({
+                                    id,
+                                    title,
+                                    image,
+                                    label,
+                                    actual_price,
+                                    selling_price,
+                                  })
+                                }
                               >
                                 <FaPlus size={16} />
                                 <div>

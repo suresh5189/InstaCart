@@ -9,7 +9,6 @@ import {
   Navigate,
 } from "react-router-dom";
 import Home from "./components/Home/Home";
-// import StoreDetailScreen from "./components/Store/StoreDetailScreen";
 import Navbar from "./components/Navbar";
 import User from "./components/UserAccountSetting";
 import GiftCard from "./components/GiftCard/GiftCard";
@@ -21,29 +20,21 @@ import PopularGiftSecondPage from "./components/PopularGiftSecondPage";
 import StoreDetailsInfoPage from "./components/Store/StoreInformation";
 import Checkout from "./components/Checkout/Checkout";
 import StoreItemInfo from "./components/Store/StoreProducts";
+import GiftCardNav from "./components/GiftCard/GiftCardNav";
 
 function App() {
+  // const navigate = useNavigate();
+
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showSignUpModal, setShowSignUpModal] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(
     localStorage.getItem("isLoggedIn") === "true"
   );
 
-  const handleLoginClick = () => {
-    setShowLoginModal(true);
-  };
-
-  const handleCloseModal = () => {
-    setShowLoginModal(false);
-  };
-
-  const handleSignUpClick = () => {
-    setShowSignUpModal(true);
-  };
-
-  const handleSignUpCloseModal = () => {
-    setShowSignUpModal(false);
-  };
+  const handleLoginClick = () => setShowLoginModal(true);
+  const handleCloseModal = () => setShowLoginModal(false);
+  const handleSignUpClick = () => setShowSignUpModal(true);
+  const handleSignUpCloseModal = () => setShowSignUpModal(false);
 
   const handleLoginSuccess = () => {
     setIsLoggedIn(true);
@@ -54,22 +45,46 @@ function App() {
     setIsLoggedIn(false);
     localStorage.removeItem("isLoggedIn");
     localStorage.removeItem("AccessToken");
-    window.location.reload();
+    window.location.href = "/";
   };
 
   const authGuard = (Component) => {
     return isLoggedIn ? Component : <Navigate to="/" />;
   };
 
-  return (
-    <div className="App">
-      <Router>
+  const renderHeader = () => {
+    const currentPath = window.location.pathname; // Get current path
+
+    // List of paths where Navbar should be displayed
+    const navbarPaths = [
+      "/",
+      "/store/:storeId/storefront",
+      "/store/userinformation/account",
+      // "/store/account/manage_promos",
+      "/store/category",
+      "/store/category/populargifts",
+      "/popular-gifts/category/:index",
+      "/store:id/info",
+    ];
+
+    if (navbarPaths.includes(currentPath)) {
+      return (
         <Navbar
           onLoginClick={handleLoginClick}
           onSignUpClick={handleSignUpClick}
           isLoggedIn={isLoggedIn}
           handleLogout={handleLogout}
         />
+      );
+    } else {
+      return <GiftCardNav />;
+    }
+  };
+
+  return (
+    <div className="App">
+      <Router>
+        {renderHeader()}
         {showLoginModal && (
           <Login
             handleClose={handleCloseModal}
@@ -87,10 +102,6 @@ function App() {
         )}
         <Routes>
           <Route path="/" element={<Home isLoggedIn={isLoggedIn} />} />
-          {/* <Route
-            path="/storedetails/:storeId/front"
-            element={authGuard(<StoreDetailScreen />)}
-          /> */}
           <Route
             path="/store/:storeId/storefront"
             element={authGuard(<StoreItemInfo />)}

@@ -21,6 +21,11 @@ const StoreDetailScreen = () => {
 
   const handleAddToCart = (item) => {
     dispatch(addToCart(item));
+    toast.success("Item Added To Cart", {
+      position: "bottom-center",
+      autoClose: 2000,
+      hideProgressBar: true,
+    });
   };
 
   const location = useLocation();

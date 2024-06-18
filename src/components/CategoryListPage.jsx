@@ -1,13 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { storeData } from "../apiServices";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import Store from "../images/Store.png";
 
 const CategoryListPage = () => {
   const [storeCategory, setStoreCategory] = useState([]);
   const [searchParams] = useSearchParams();
   const categoryId = searchParams.get("main_category_id");
-  console.log(storeCategory);
+  // console.log(storeCategory);
+
+  const navigate = useNavigate();
+
+  const handleDetail = (store_id, image, title) => {
+    navigate(`/store/${store_id}/storefront`, {
+      state: { store_id, image, title },
+    });
+  };
 
   useEffect(() => {
     const getStoresdata = async () => {
@@ -37,7 +45,7 @@ const CategoryListPage = () => {
               return (
                 <div
                   className="buttonHome"
-                  //   onClick={() => handleDetail(image_url, store_name)}
+                  onClick={() => handleDetail(store_id, image_url, store_name)}
                   key={store_id}
                 >
                   <div className="buttonHomeLogo">
