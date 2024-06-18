@@ -1,4 +1,5 @@
 import axios from "axios";
+import { jwtDecode } from "jwt-decode";
 
 const baseURL = "https://instacart-xqwi.onrender.com";
 
@@ -56,11 +57,17 @@ export const verifyOTPRegister = async (email, password, enteredotp, otpid) => {
 export const login = async (email, password) => {
   try {
     const response = await apiServices.post("/login", { email, password });
+    // console.log(response);
     if (response.status === 200) {
-      const accessToken = response.data.data.JWTToken.accessToken;
+      const { accessToken, refreshToken } = response.data.data.JWTToken;
       localStorage.setItem("AccessToken", accessToken);
+      localStorage.setItem("RefreshToken", refreshToken);
+      const decodeRefreshToken = jwtDecode(accessToken);
+      const userId = decodeRefreshToken.userId;
+      return { ...response.data, userId };
+    } else {
+      throw new Error("Login Failed");
     }
-    return response;
   } catch (error) {
     throw new Error(
       error.response.data.message || "Please Enter Correct Email And Password"

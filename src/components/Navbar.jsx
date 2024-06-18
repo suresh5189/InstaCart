@@ -47,26 +47,11 @@ function Navbar({ onLoginClick, onSignUpClick, isLoggedIn, handleLogout }) {
   }, []);
 
   const navigate = useNavigate();
-
-  const handleHome = () => {
-    navigate("/");
-  };
-
-  const handleHamburger = () => {
-    setHamburger(true);
-  };
-
-  const closeSidebar = () => {
-    setHamburger(false);
-  };
-
-  const handleCart = () => {
-    setCart(true);
-  };
-
-  const closeCart = () => {
-    setCart(false);
-  };
+  const handleHome = () => navigate("/");
+  const handleHamburger = () => setHamburger(true);
+  const closeSidebar = () => setHamburger(false);
+  const handleCart = () => setCart(true);
+  const closeCart = () => setCart(false);
 
   const handleSearchInputChange = async (event) => {
     const query = event.target.value;
@@ -75,6 +60,7 @@ function Navbar({ onLoginClick, onSignUpClick, isLoggedIn, handleLogout }) {
       try {
         const suggestions = await searchStore(query);
         const { matchingStores, matchingProducts } = suggestions.data;
+        // console.log(suggestions);
         setSearchSuggestions({ matchingStores, matchingProducts });
         console.log(suggestions.data);
       } catch (error) {
@@ -83,6 +69,13 @@ function Navbar({ onLoginClick, onSignUpClick, isLoggedIn, handleLogout }) {
     } else {
       setSearchSuggestions({ matchingStores: [], matchingProducts: [] });
     }
+  };
+
+  const handleDetail = (store_id, image, title) => {
+    navigate(`/store/${store_id}/storefront`, {
+      state: { store_id, image, title },
+    });
+    setSearchQuery("");
   };
 
   return (
@@ -130,7 +123,17 @@ function Navbar({ onLoginClick, onSignUpClick, isLoggedIn, handleLogout }) {
                       <div className="searchSuggestions">
                         {searchSuggestions.matchingStores.map(
                           (store, index) => (
-                            <div key={index} className="searchSuggestionItem">
+                            <div
+                              key={index}
+                              className="searchSuggestionItem"
+                              onClick={() =>
+                                handleDetail(
+                                  store.store_id,
+                                  store.store_logo,
+                                  store.store_name
+                                )
+                              }
+                            >
                               <img
                                 src={store.store_logo}
                                 alt={store.store_name}

@@ -21,15 +21,17 @@ import StoreDetailsInfoPage from "./components/Store/StoreInformation";
 import Checkout from "./components/Checkout/Checkout";
 import StoreItemInfo from "./components/Store/StoreProducts";
 import GiftCardNav from "./components/GiftCard/GiftCardNav";
+import { useDispatch } from "react-redux";
+import { logoutSuccess } from "./store/action/authActions";
 
 function App() {
-  // const navigate = useNavigate();
-
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showSignUpModal, setShowSignUpModal] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(
     localStorage.getItem("isLoggedIn") === "true"
   );
+
+  const dispatch = useDispatch();
 
   const handleLoginClick = () => setShowLoginModal(true);
   const handleCloseModal = () => setShowLoginModal(false);
@@ -45,7 +47,7 @@ function App() {
     setIsLoggedIn(false);
     localStorage.removeItem("isLoggedIn");
     localStorage.removeItem("AccessToken");
-    window.location.href = "/";
+    dispatch(logoutSuccess());
   };
 
   const authGuard = (Component) => {
@@ -131,7 +133,7 @@ function App() {
             path="/popular-gifts/category/:index"
             element={authGuard(<PopularGiftSecondPage />)}
           />
-          <Route path="/store:id/info" element={<StoreDetailsInfoPage />} />
+          <Route path="/store/:id/info" element={<StoreDetailsInfoPage />} />
           <Route path="/store/checkout" element={<Checkout />} />
         </Routes>
       </Router>

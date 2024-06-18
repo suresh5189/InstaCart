@@ -5,8 +5,10 @@ import {thunk} from "redux-thunk"; // Import redux-thunk
 
 import userReducer from "./reducers/userReducer";
 import cartReducer from "./reducers/cartReducer";
+import authReducer from "./reducers/authReducer";
 
 const rootReducer = combineReducers({
+  auth:authReducer,
   user: userReducer,
   cart: cartReducer,
 });

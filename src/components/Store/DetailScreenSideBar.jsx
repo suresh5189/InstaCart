@@ -3,7 +3,7 @@ import { FaShop } from "react-icons/fa6";
 import { TbReload } from "react-icons/tb";
 import { FaListUl } from "react-icons/fa";
 import { MdKeyboardArrowRight } from "react-icons/md";
-import DetailSideBarData from "../../data/detailSidebarData";
+// import DetailSideBarData from "../../data/detailSidebarData";
 import StoreDetailsInfoPage from "./StoreInformation";
 import { getStoreFrontDetails } from "../../apiServices";
 

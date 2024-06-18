@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Data from "../../data/storeData";
 import { useNavigate } from "react-router-dom";
 import { storeData } from "../../apiServices";
 
@@ -32,6 +31,7 @@ function HomePage({ isLoggedIn }) {
     const getStores = async () => {
       try {
         const data = await storeData(1);
+        // console.log(data);
         setStore(data);
       } catch (error) {
         console.error("Error Fetching Store Data", error);
@@ -112,7 +112,7 @@ function HomePage({ isLoggedIn }) {
           )}
       </div>
       <div className="showMoreLessButtons">
-        {visibleCount < Data.length ? (
+        {visibleCount < store.length ? (
           <span onClick={showMore} className="ShowMore">
             Show All
           </span>
