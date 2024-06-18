@@ -48,7 +48,7 @@ const Login = ({
       dispatch(setEmail(email));
       dispatch(setPassword(password));
       dispatch(loginSuccess(userId));
-      dispatch(updateProfile(getUserData.data.data));
+      dispatch(updateProfile(getUserData.data.data.userData));
     } catch (error) {
       console.error("Error Logging In", error.message);
       setResponseMessage(
