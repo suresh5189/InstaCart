@@ -23,6 +23,8 @@ import StoreItemInfo from "./components/Store/StoreProducts";
 import GiftCardNav from "./components/GiftCard/GiftCardNav";
 import { useDispatch } from "react-redux";
 import { logoutSuccess } from "./store/action/authActions";
+import AddressModal from "./components/Checkout/AddressModal";
+import PaymentMethod from "./components/Checkout/PaymentMethod";
 
 function App() {
   const [showLoginModal, setShowLoginModal] = useState(false);
@@ -135,6 +137,7 @@ function App() {
           />
           <Route path="/store/:id/info" element={<StoreDetailsInfoPage />} />
           <Route path="/store/checkout" element={<Checkout />} />
+          <Route path="/store/checkout/payment" element={<PaymentMethod />} />
         </Routes>
       </Router>
     </div>

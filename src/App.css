@@ -2897,7 +2897,7 @@ Input {
   background-color: white;
   padding: 24px;
   border-bottom: 1px solid rgb(232, 233, 235);
-  cursor: default;
+  cursor: pointer;
 }
 
 .CheckoutAddressFieldSet {
@@ -2949,6 +2949,24 @@ Input {
   margin-right: 12px;
 }
 
+.CheckoutDeliveryAddress {
+  margin: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.CheckoutDeliveryAddressText {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.CheckoutDeliveryAddressEditButton {
+  color: rgb(35, 155, 35);
+  font-weight: bold;
+  cursor: pointer;
+}
+
 .CheckoutContinueButtonDiv {
   display: flex;
   align-items: center;
@@ -2975,6 +2993,107 @@ Input {
   background-color: white;
   padding: 24px;
   height: 110px;
+}
+
+.DeliveryInstructionsOpen {
+  display: flex;
+  font-weight: 600;
+  margin: 10px 0;
+  font-size: 18px;
+}
+
+.DeliveryCheckBox {
+  width: 19px;
+  color: red;
+  margin-right: 12px;
+}
+
+.SaveAndContinueButton {
+  background-color: rgb(16, 137, 16);
+  width: 100%;
+  border: none;
+  padding: 14px 0;
+  color: white;
+  font-size: 18px;
+  border-radius: 30px;
+  font-weight: 500;
+  font-family: "Roboto";
+  margin: 20px 0;
+  cursor: pointer;
+}
+
+.DeliveryTextArea {
+  appearance: none;
+  background-color: rgb(255, 255, 255);
+  border-radius: 12px;
+  box-shadow: rgb(199, 200, 205) 0px 0px 0px 1px;
+  border: none;
+  color: rgb(52, 53, 56);
+  margin: 12px 0;
+  padding: 30px 12px;
+  position: relative;
+  touch-action: manipulation;
+  transition: box-shadow 200ms ease-in-out 0s;
+  width: 100%;
+  resize: none;
+  font-size: 16px;
+  font-family: "Roboto";
+}
+
+.DeliveryTextInstruction {
+  background-color: rgb(244, 244, 244);
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  padding: 12px 10px;
+  font-family: "Roboto";
+  border-radius: 10px;
+}
+
+.DeliveryInstructionsClosed {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0;
+}
+
+.DeliveryInstructionsButton {
+  padding: 12px 15px;
+  border: none;
+  font-size: 15px;
+}
+
+.CheckoutAddressLegendDebit{
+  display: flex;
+  align-items: center;
+  font-family: 'Roboto';
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.CheckoutAddressLegendDebitCardImage{
+  width: 35px;
+  height: auto;
+  margin-right: 8px;
+}
+
+.PhoneNumberContainer{
+  display: flex;
+  align-items: center;
+}
+
+.CountryCodeField{
+  padding: 10px;
+}
+
+.css-1fdsijx-ValueContainer{
+  padding: 17px !important;
+}
+
+.PhoneNumberInput{
+  width: 50%;
+}
+
+.SavedPhoneNumber{
+  font-size: 18px;
 }
 
 /* ---------------------------------------------------- */
@@ -3098,4 +3217,167 @@ Input {
   border-radius: 20px;
   font-weight: bold;
   cursor: pointer;
+}
+
+/* ------------------------------------------------------ */
+/* ------------------------------------------------------ */
+
+/* Address Modal */
+
+.AddressDiv {
+  width: 416px;
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 0px 16px;
+  max-height: calc(96px + 100vh);
+  min-height: 510px;
+  padding: 30px;
+  font-family: "Roboto";
+  box-sizing: border-box;
+  position: fixed;
+  z-index: 10;
+  background-color: white;
+  top: 40px;
+  left: 35%;
+}
+
+.AddressHeader {
+  display: flex;
+}
+
+.AddressHeaderIcon {
+  cursor: pointer;
+}
+
+.AddressHeaderTitle {
+  margin-left: 25%;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+.AddressInputAndButtonDiv {
+  margin: 15px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.AddressInput {
+  margin-bottom: 15px;
+  border: 2px solid rgb(199, 199, 199);
+}
+
+.AddressButtonDiv {
+  width: 100%;
+}
+
+.AddressButton {
+  width: 100%;
+  border: none;
+  padding: 17px 0;
+  color: white;
+  font-size: 18px;
+  font-weight: 500;
+  font-family: "Roboto";
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+.SaveButton {
+  background-color: rgb(16, 137, 16);
+}
+
+.disabledSaveButton {
+  background-color: rgb(172, 172, 172);
+}
+
+/* --------------------------------------------------------------------- */
+/* --------------------------------------------------------------------- */
+
+/* Payment Method */
+
+.PaymentMethod {
+  width: 516px;
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 0px 16px;
+  max-height: calc(96px + 100vh);
+  min-height: 610px;
+  padding: 30px;
+  font-family: "Roboto";
+  box-sizing: border-box;
+  position: fixed;
+  z-index: 10;
+  background-color: rgb(255, 255, 255);
+  top: 40px;
+  left: 32%;
+}
+
+.PaymentMethodHeader {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.PaymentMethodHeaderIcon{
+  cursor: pointer;
+}
+
+.PaymentMethodHeaderTitle{
+  margin-left: 27%;
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+.PaymentMethodSavedDiv{
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  margin: 12px 0;
+}
+
+.PaymentMethodGoogle {
+  display: flex;
+  align-items: center;
+  font-family: "Roboto";
+  font-size: 16px;
+  cursor: pointer;
+  padding: 12px 12px;
+}
+
+.PaymentMethodGoogle:hover{
+  background-color: rgb(247, 247, 247);
+  border-radius: 15px;
+}
+
+.PaymentMethodGoogleImage {
+  width: 40px;
+  height: auto;
+  margin-right: 8px;
+}
+
+.PaymentMethodButtonDiv{
+  width: calc(30px + 100% + 30px);
+  padding: 12px 16px;
+  position: relative;
+  bottom: -30px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 0px 16px;
+  right: 30px;
+}
+
+.PaymentMethodButton{
+  background-color: rgb(16, 137, 16);
+  width: 100%;
+  border: none;
+  padding: 14px 0;
+  color: white;
+  font-family: 'Roboto';
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+.PaymentMethodButton:hover{
+  background-color: rgb(16, 103, 16);
 }
