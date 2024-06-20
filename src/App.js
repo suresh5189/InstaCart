@@ -23,8 +23,7 @@ import StoreItemInfo from "./components/Store/StoreProducts";
 import GiftCardNav from "./components/GiftCard/GiftCardNav";
 import { useDispatch } from "react-redux";
 import { logoutSuccess } from "./store/action/authActions";
-import AddressModal from "./components/Checkout/AddressModal";
-import PaymentMethod from "./components/Checkout/PaymentMethod";
+import { toast } from "react-toastify";
 
 function App() {
   const [showLoginModal, setShowLoginModal] = useState(false);
@@ -49,7 +48,13 @@ function App() {
     setIsLoggedIn(false);
     localStorage.removeItem("isLoggedIn");
     localStorage.removeItem("AccessToken");
+    toast.success("Logout Successfully", {
+      position: "bottom-center",
+      autoClose: 2000,
+      hideProgressBar: true,
+    });
     dispatch(logoutSuccess());
+    window.location.reload();
   };
 
   const authGuard = (Component) => {
@@ -137,7 +142,6 @@ function App() {
           />
           <Route path="/store/:id/info" element={<StoreDetailsInfoPage />} />
           <Route path="/store/checkout" element={<Checkout />} />
-          <Route path="/store/checkout/payment" element={<PaymentMethod />} />
         </Routes>
       </Router>
     </div>

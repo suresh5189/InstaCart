@@ -1,31 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import map from "../../images/InstacartPlus.webp";
+import { addAddress } from "../../apiServices";
 
 const AddressModal = ({ onClose, onAddressSave, initialAddress }) => {
   const [streetAddress, setStreetAddress] = useState("");
+  const [floorAddress, setFloorAddress] = useState("");
   const [zipCode, setZipCode] = useState("");
   const [isSaveDisabled, setIsSaveDisabled] = useState(true);
 
   useEffect(() => {
     if (initialAddress) {
       setStreetAddress(initialAddress.streetAddress);
+      setFloorAddress(initialAddress.floorAddress);
       setZipCode(initialAddress.zipCode);
     }
   }, [initialAddress]);
 
   useEffect(() => {
-    setIsSaveDisabled(!streetAddress || !zipCode);
-  }, [streetAddress, zipCode]);
-
-  const handleSaveAddress = () => {
-    if (onAddressSave) {
-      onAddressSave({
-        streetAddress,
-        zipCode,
-      });
-    }
-  };
+    setIsSaveDisabled(!streetAddress || !floorAddress || !zipCode);
+  }, [streetAddress, floorAddress, zipCode]);
 
   const handleOverlayClick = (e) => {
     if (e.target.classList.contains("Overlay")) {
@@ -36,6 +30,28 @@ const AddressModal = ({ onClose, onAddressSave, initialAddress }) => {
   const handleZipCodeChange = (e) => {
     const formattedZipCode = e.target.value.replace(/\D/g, "");
     setZipCode(formattedZipCode);
+  };
+
+  const addNewAddress = async () => {
+    try {
+      const refreshToken = localStorage.getItem("RefreshToken");
+      const result = await addAddress(refreshToken, {
+        street: streetAddress,
+        floor: floorAddress,
+        business_name: null,
+        zip_code: zipCode,
+        latitude: null,
+        longitude: null,
+      });
+      console.log("Address added successfully:", result);
+      onAddressSave({
+        street: streetAddress,
+        floor: floorAddress,
+        zip_code: zipCode,
+      });
+    } catch (error) {
+      console.error("Error adding address:", error);
+    }
   };
 
   return (
@@ -60,6 +76,13 @@ const AddressModal = ({ onClose, onAddressSave, initialAddress }) => {
             onChange={(e) => setStreetAddress(e.target.value)}
           />
           <input
+            type="text"
+            className="AddressInput"
+            placeholder="Floor Address"
+            value={floorAddress}
+            onChange={(e) => setFloorAddress(e.target.value)}
+          />
+          <input
             type="tel"
             className="AddressInput"
             placeholder="Zip Code"
@@ -71,12 +94,15 @@ const AddressModal = ({ onClose, onAddressSave, initialAddress }) => {
               className={`AddressButton ${
                 isSaveDisabled ? "disabledSaveButton" : "SaveButton"
               }`}
-              onClick={handleSaveAddress}
+              onClick={addNewAddress}
               disabled={isSaveDisabled}
             >
               Save Address
             </button>
           </div>
+        </div>
+        <div>
+          <span style={{ color: "red" }}>Delete Address</span>
         </div>
       </div>
     </>

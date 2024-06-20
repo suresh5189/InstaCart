@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   removeFromCart,
   updateCartItemQuantity,
+  updateTotalPrice,
 } from "../../store/action/userActions";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -67,6 +68,7 @@ const Cart = ({ closeCart, isOpenCart }) => {
       0
     );
     setTotalPrice(newTotalPrice);
+    dispatch(updateTotalPrice(newTotalPrice));
   }, [cartItems]);
 
   return (

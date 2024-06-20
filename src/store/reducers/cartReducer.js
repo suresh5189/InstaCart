@@ -4,11 +4,13 @@ import {
   ADD_TO_CART,
   REMOVE_FROM_CART,
   UPDATE_CART_ITEM_QUANTITY,
+  UPDATE_TOTAL_PRICE,
 } from "../ActionTypes";
 
 const initialState = {
   items: [],
   totalItems: 0,
+  totalPrice:0,
 };
 
 const cartReducer = (state = initialState, action) => {
@@ -62,6 +64,11 @@ const cartReducer = (state = initialState, action) => {
             : item
         ),
       };
+      case UPDATE_TOTAL_PRICE:
+        return {
+          ...state,
+          totalPrice:action.payload
+        }
     default:
       return state;
   }

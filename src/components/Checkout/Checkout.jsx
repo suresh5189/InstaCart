@@ -7,10 +7,14 @@ import { BsFillTelephoneOutboundFill } from "react-icons/bs";
 import { FaCreditCard } from "react-icons/fa";
 import { IoGiftSharp } from "react-icons/io5";
 import { SiInstacart } from "react-icons/si";
+import { BsExclamationCircleFill } from "react-icons/bs";
 import AddressModal from "./AddressModal";
 import PaymentMethod from "./PaymentMethod";
 import DebitCard from "../../images/Payment/DebitCard.webp";
 import Select from "react-select";
+import GiftCardImage from "../../data/giftCardImage";
+import { useSelector } from "react-redux";
+import { addAddress } from "../../apiServices";
 
 const Checkout = () => {
   const [isAddressModalOpen, setIsAddressModalOpen] = useState(false);
@@ -23,6 +27,7 @@ const Checkout = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [isSaveDisabled, setIsSaveDisabled] = useState(true);
   const [isPhoneNumberVisible, setIsPhoneNumberVisible] = useState(false);
+  const [makeAGift, setMakeAGift] = useState(false);
 
   const handleSaveAddress = (address) => {
     setDeliveryAddress(address);
@@ -35,6 +40,11 @@ const Checkout = () => {
   const handleAddressCloseModal = () => setIsAddressModalOpen(false);
   const tooglePaymentModal = () => setIsPaymentModalOpen(!isPaymentModalOpen);
   const handlePaymentCloseModal = () => setIsPaymentModalOpen(false);
+
+  const price = useSelector((state) => state.cart.totalPrice);
+
+  const totalPrice = price + 1.99 + 3.0 + 0.24;
+  // console.log(totalPrice.toFixed(2));
 
   const handleDeliveryInstructionsClick = (deliveryAddress) => {
     if (deliveryAddress) {
@@ -68,6 +78,10 @@ const Checkout = () => {
     setIsPhoneNumberVisible(!isPhoneNumberVisible);
 
   const handleSaveAndContinuePhone = () => setIsPhoneNumberVisible(false);
+
+  const toggleMakeAGift = () => setMakeAGift(!makeAGift);
+
+  const handleSaveMakeAGift = () => setMakeAGift(false);
 
   return (
     <>
@@ -111,6 +125,9 @@ const Checkout = () => {
                         <span>
                           Street Address: {deliveryAddress.streetAddress}
                         </span>
+                        <span>
+                          Floor Address: {deliveryAddress.floorAddress}
+                        </span>
                         <span>ZipCode: {deliveryAddress.zipCode}</span>
                       </div>
                       <div
@@ -124,6 +141,11 @@ const Checkout = () => {
                     </div>
                   )}
                 </>
+                <div>
+                  <span style={{ color: "green", fontWeight: "bold" }}>
+                    Add Address
+                  </span>
+                </div>
               </fieldset>
             </div>
             <div className="CheckoutAddressDiv">
@@ -248,7 +270,6 @@ const Checkout = () => {
                         className="PhoneNumberInput"
                         placeholder="Enter phone number"
                         value={phoneNumber}
-                        maxLength={10}
                         onChange={handlePhoneNumberChange}
                       />
                     </div>
@@ -309,7 +330,10 @@ const Checkout = () => {
             </div>
             <div className="CheckoutAddressDiv">
               <fieldset className="CheckoutAddressFieldSet">
-                <legend className="CheckoutAddressLegend">
+                <legend
+                  className="CheckoutAddressLegend"
+                  onClick={toggleMakeAGift}
+                >
                   <div className="CheckoutAddressLegendDiv">
                     <div className="CheckoutAddressLegendIconDiv">
                       <span className="CheckoutAddressLegendIcon">
@@ -323,6 +347,116 @@ const Checkout = () => {
                     </div>
                   </div>
                 </legend>
+                {makeAGift && (
+                  <>
+                    <div className="MakeAGiftDivHead">
+                      <div className="MakeAGiftToHeading">
+                        <span className="MakeAGiftToText">To</span>
+                      </div>
+                      <div className="MakeAGiftInputHead">
+                        <input
+                          type="text"
+                          className="MakeAGiftInputRecipient"
+                          placeholder="Recipient Name"
+                          value={phoneNumber}
+                        />
+                      </div>
+                      <div className="MakeAGiftContainer">
+                        <Select
+                          value={selectedCountry}
+                          onChange={setSelectedCountry}
+                          options={countryOptions}
+                          placeholder="Select Country Code"
+                          className="CountryCodeField"
+                        />
+                        <input
+                          type="tel"
+                          className="MakeAGiftInput"
+                          placeholder="Recipient Phone Number"
+                          value={phoneNumber}
+                          maxLength={10}
+                          onChange={handlePhoneNumberChange}
+                        />
+                      </div>
+                    </div>
+                    <div className="MakeAGiftRecipientSpanDiv">
+                      <span className="MakeAGiftRecipientSpanText1">
+                        Your recipient can schedule delivery
+                      </span>
+                      <span className="MakeAGiftRecipientSpanText2">
+                        We'll send your recipient a message with delivery
+                        details. They can schedule their delivery for a
+                        convenient time.
+                      </span>
+                    </div>
+                    <div className="MakeAGiftInputHead">
+                      <div className="MakeAGiftFromDiv">
+                        <span className="MakeAGiftFromText">From</span>
+                      </div>
+                      <input
+                        type="text"
+                        className="MakeAGiftInputFrom"
+                        placeholder="Your Name"
+                        value={phoneNumber}
+                      />
+                    </div>
+                    <div className="">
+                      <div className="MakeAGiftCardImageDivHeadingOuter">
+                        <div className="MakeAGiftCardImageDivHeadingInner">
+                          <span className="MakeAGiftCardImageDivText1">
+                            Choose a digital card
+                          </span>
+                          <span className="MakeAGiftCardImageDivText2">
+                            Optional
+                          </span>
+                        </div>
+                        <div className="MakeAGiftCardImageOuterDiv">
+                          <ul className="MakeAGiftCardImageInnerDiv">
+                            {GiftCardImage.map(({ id, image }) => (
+                              <li className="MakeAGiftCardImageLi" key={id}>
+                                <img
+                                  src={image}
+                                  alt=""
+                                  className="MakeAGiftCardImage"
+                                />
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+                      <div className="MakeAGiftTextAreaDiv">
+                        <div className="MakeAGiftTextAreaHeadingDiv">
+                          <span className="MakeAGiftTextAreaHeadingText1">
+                            Personal Message
+                          </span>
+                          <span className="MakeAGiftTextAreaHeadingText2">
+                            Optional
+                          </span>
+                        </div>
+                        <textarea
+                          name="deliveryInstruction"
+                          id="deliveryInstruction"
+                          placeholder="Add a personal message"
+                          className="DeliveryTextArea"
+                        ></textarea>
+                      </div>
+                    </div>
+                    <div className="CheckoutContinueButtonDiv">
+                      <button
+                        className="AddressButton SaveButton"
+                        onClick={handleSaveMakeAGift}
+                      >
+                        Continue
+                      </button>
+                      <span
+                        className="MakeAGfitButtonClose"
+                        onClick={toggleMakeAGift}
+                      >
+                        Close
+                      </span>
+                    </div>
+                  </>
+                )}
               </fieldset>
             </div>
             <div className="CheckoutAddressDiv">
@@ -347,10 +481,57 @@ const Checkout = () => {
               </button>
             </div>
           </div>
-          <div className="CheckoutContinueButtonOutsideDiv">
-            <button className="CheckoutContinueButton" disabled>
-              Continue
-            </button>
+          <div>
+            <div className="CheckoutContinueButtonOutsideDiv">
+              <button className="CheckoutContinueButton" disabled>
+                Continue
+              </button>
+            </div>
+            {deliveryAddress && (
+              <div className="TotalCartPriceOuterDiv">
+                <div className="TotalCartPriceInnerDiv">
+                  <div className="TotalCartPriceSubTotal">
+                    <span className="TotalCartPriceSubTotalText1">
+                      Item subtotal
+                    </span>
+                    <span className="TotalCartPriceSubTotalText2">
+                      ${price.toFixed(2)}
+                    </span>
+                  </div>
+                  <div className="TotalCartPriceDeliveryFee">
+                    <span className="TotalCartPriceDeliveryFeeText1">
+                      Delivery fee
+                    </span>
+                    <span className="TotalCartPriceDeliveryFeeText2">
+                      $1.99
+                    </span>
+                  </div>
+                  <div className="TotalCartPriceServiceFee">
+                    <span className="TotalCartPriceServiceFeeText1">
+                      Service fee
+                      <BsExclamationCircleFill size={14} color="grey" />
+                    </span>
+                    <span className="TotalCartPriceServiceFeeText2">$3.00</span>
+                  </div>
+                  <div className="TotalCartPriceEstimatefFee">
+                    <span className="TotalCartPriceEstimatefFeeText1">
+                      Estimated taxes and fees
+                      <BsExclamationCircleFill size={14} color="grey" />
+                    </span>
+                    <span className="TotalCartPriceEstimatefFeeText2">
+                      $0.24
+                    </span>
+                  </div>
+                </div>
+                <hr style={{ margin: "10px", color: "lightgrey" }} />
+                <div className="TotalCartPriceTotal">
+                  <span className="TotalCartPriceTotalText1">Subtotal</span>
+                  <span className="TotalCartPriceTotalText2">
+                    ${totalPrice.toFixed(2)}
+                  </span>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>

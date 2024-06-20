@@ -9,6 +9,7 @@ import {
   REMOVE_FROM_CART,
   UPDATE_CART_ITEM_QUANTITY,
   UPDATE_USER_PROFILE,
+  UPDATE_TOTAL_PRICE,
 } from "../ActionTypes";
 
 export const updateProfile = (userData) => ({
@@ -65,3 +66,8 @@ export const updateCartItemQuantity = (itemId, quantity) => ({
   type: UPDATE_CART_ITEM_QUANTITY,
   payload: { itemId, quantity },
 });
+
+export const updateTotalPrice = (totalPrice) => ({
+  type:UPDATE_TOTAL_PRICE,
+  payload:totalPrice,
+})

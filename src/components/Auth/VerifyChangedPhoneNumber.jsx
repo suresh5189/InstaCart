@@ -1,10 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import Select from "react-select";
-import {
-  changePhoneNumber,
-  verifyChangedPhoneNumber,
-} from "../../apiServices";
 import { useDispatch } from "react-redux";
+import { changePhoneNumber, verifyChangedPhoneNumber } from "../../apiServices";
 import { setPhoneNumber as setPhoneNumberAction } from "../../store/action/userActions";
 
 const countryOptions = [
@@ -120,7 +117,7 @@ const VerifyChangedPhoneNumber = ({ closePhoneModal }) => {
               value={maskOtpId(otpId)}
               placeholder="OTP ID"
               className="PhoneNumberInput"
-              readOnly 
+              readOnly
             />
             <input
               type="text"

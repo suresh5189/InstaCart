@@ -62,7 +62,7 @@ export const login = async (email, password) => {
       const { accessToken, refreshToken } = response.data.data.JWTToken;
       localStorage.setItem("AccessToken", accessToken);
       localStorage.setItem("RefreshToken", refreshToken);
-      const decodeRefreshToken = jwtDecode(accessToken);
+      const decodeRefreshToken = jwtDecode(refreshToken);
       const userId = decodeRefreshToken.userId;
       return { ...response.data, userId };
     } else {
@@ -391,5 +391,84 @@ export const searchInsideStore = async (query, storeId, page = 1) => {
 };
 
 // ------------------------------------------------------------------------------------
+
+// Checkout
+
+export const checkoutAPI = async (orderData, accessToken) => {
+  try {
+    const response = await apiServices.post("/orders/checkout", orderData, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw new Error(error.response.data.message || "Error Adding Order");
+  }
+};
+
+// ------------------------------------------------------------------------------------
+
+// Add Address
+
+export const addAddress = async (refreshToken, addressData) => {
+  try {
+    const response = await apiServices.post("/add-address", addressData, {
+      headers: {
+        Authorization: `Bearer ${refreshToken}`,
+      },
+    });
+    return response;
+  } catch (error) {
+    throw new Error(error.response.data.message || "Error Adding Address");
+  }
+};
+
+// --------------------------------------------------------------------------------------
+
+// Edit Address
+
+export const editAddress = async (
+  accessToken,
+  addressId,
+  updatedAddressData
+) => {
+  try {
+    const response = await apiServices.post(
+      `/addresses/${addressId}/edit-address`,
+      updatedAddressData,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    throw new Error(error.response.data.message || "Error Editing Address");
+  }
+};
+
+// ----------------------------------------------------------------------------------------
+
+// Delete Address
+
+export const deleteAddress = async (accessToken, addressId) => {
+  try {
+    const response = await apiServices.delete(
+      `/addresses/${addressId}/delete-address`,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    throw new Error(error.response.data.message || "Error Deleting Address");
+  }
+};
+
+// ---------------------------------------------------------------------------------------
 
 export default apiServices;

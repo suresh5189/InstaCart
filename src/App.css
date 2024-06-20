@@ -3061,39 +3061,175 @@ Input {
   font-size: 15px;
 }
 
-.CheckoutAddressLegendDebit{
+.CheckoutAddressLegendDebit {
   display: flex;
   align-items: center;
-  font-family: 'Roboto';
+  font-family: "Roboto";
   font-size: 15px;
   font-weight: 500;
 }
 
-.CheckoutAddressLegendDebitCardImage{
+.CheckoutAddressLegendDebitCardImage {
   width: 35px;
   height: auto;
   margin-right: 8px;
 }
 
-.PhoneNumberContainer{
+.PhoneNumberContainer {
   display: flex;
   align-items: center;
 }
 
-.CountryCodeField{
+.CountryCodeField {
   padding: 10px;
 }
 
-.css-1fdsijx-ValueContainer{
-  padding: 17px !important;
+.css-1fdsijx-ValueContainer {
+  padding: 10px !important;
 }
 
-.PhoneNumberInput{
-  width: 50%;
+.PhoneNumberInput,
+.MakeAGiftInput {
+  width: 65%;
 }
 
-.SavedPhoneNumber{
+.SavedPhoneNumber {
   font-size: 18px;
+}
+
+/* ------------------------------------- */
+
+.MakeAGiftToHeading {
+  margin: 10px 0;
+}
+
+.MakeAGiftToText,
+.MakeAGiftFromText {
+  font-size: 20px;
+  font-family: "Roboto";
+  font-weight: bold;
+}
+
+.MakeAGiftDivHead {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* width: 100%; */
+}
+
+.MakeAGiftInputRecipient {
+  width: 100% !important;
+}
+
+.MakeAGiftContainer {
+  display: flex;
+  align-items: center;
+}
+
+.MakeAGiftCardImageOuterDiv {
+  display: inline-grid;
+  margin: 12px 0px;
+  padding: 0px;
+}
+
+.MakeAGiftCardImageInnerDiv {
+  list-style: none;
+  display: inline-block;
+  overflow-x: auto;
+  white-space: nowrap;
+  padding-top: 8px;
+  padding-bottom: 16px;
+}
+
+.MakeAGiftCardImageLi {
+  display: inline-block;
+}
+
+.MakeAGiftCardImage {
+  height: 100px;
+  width: 140px;
+  padding: 0px;
+  margin: 0px 8px;
+  border-radius: 4px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 2px 8px;
+}
+
+.MakeAGiftCardImage:hover {
+  /* width: 100%; */
+  outline: rgb(52, 53, 56) solid 2px;
+  border-radius: 4px;
+}
+
+.MakeAGiftRecipientSpanDiv {
+  display: flex;
+  flex-direction: column;
+  font-family: "Roboto";
+  gap: 7px;
+  margin: 12px 0;
+}
+
+.MakeAGiftRecipientSpanText1 {
+  font-weight: 500;
+}
+
+.MakeAGiftRecipientSpanText2 {
+  font-weight: 300;
+}
+
+.MakeAGiftInputFrom {
+  width: 100%;
+}
+
+.MakeAGiftFromDiv {
+  margin: 8px 0;
+}
+
+.MakeAGiftCardImageDivHeadingInner,
+.MakeAGiftTextAreaHeadingDiv {
+  display: flex;
+  justify-content: space-between;
+  padding: 30px 10px 0px 10px;
+}
+
+.MakeAGiftCardImageDivText1,
+.MakeAGiftTextAreaHeadingText1 {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.CheckoutContinueButtonDiv {
+  display: flex;
+  flex-direction: column;
+}
+
+.MakeAGfitButtonClose {
+  margin: 10px 0;
+  color: rgb(15, 125, 15);
+  font-weight: bold;
+}
+
+/* ----------------------------------------- */
+
+.TotalCartPriceOuterDiv {
+  margin: 20px 0;
+  padding: 25px 0;
+  background-color: #ffffff;
+}
+
+/* .TotalCartPriceInnerDiv{
+  padding-top: 20px;
+} */
+
+.TotalCartPriceSubTotal,
+.TotalCartPriceDeliveryFee,
+.TotalCartPriceServiceFee,
+.TotalCartPriceEstimatefFee,
+.TotalCartPriceTotal {
+  padding: 2px 15px;
+  display: flex;
+  justify-content: space-between;
+  font-family: "Roboto";
+  font-weight: 300;
 }
 
 /* ---------------------------------------------------- */
@@ -3318,18 +3454,18 @@ Input {
   margin-bottom: 20px;
 }
 
-.PaymentMethodHeaderIcon{
+.PaymentMethodHeaderIcon {
   cursor: pointer;
 }
 
-.PaymentMethodHeaderTitle{
+.PaymentMethodHeaderTitle {
   margin-left: 27%;
   font-size: 20px;
   font-weight: 500;
   letter-spacing: 1px;
 }
 
-.PaymentMethodSavedDiv{
+.PaymentMethodSavedDiv {
   font-size: 20px;
   font-weight: 500;
   letter-spacing: 1px;
@@ -3345,7 +3481,7 @@ Input {
   padding: 12px 12px;
 }
 
-.PaymentMethodGoogle:hover{
+.PaymentMethodGoogle:hover {
   background-color: rgb(247, 247, 247);
   border-radius: 15px;
 }
@@ -3356,7 +3492,7 @@ Input {
   margin-right: 8px;
 }
 
-.PaymentMethodButtonDiv{
+.PaymentMethodButtonDiv {
   width: calc(30px + 100% + 30px);
   padding: 12px 16px;
   position: relative;
@@ -3365,19 +3501,29 @@ Input {
   right: 30px;
 }
 
-.PaymentMethodButton{
+.PaymentMethodButton {
   background-color: rgb(16, 137, 16);
   width: 100%;
   border: none;
   padding: 14px 0;
   color: white;
-  font-family: 'Roboto';
+  font-family: "Roboto";
   font-size: 15px;
   font-weight: 500;
   border-radius: 30px;
   cursor: pointer;
 }
 
-.PaymentMethodButton:hover{
+.PaymentMethodButton:hover {
   background-color: rgb(16, 103, 16);
+}
+
+/* ----------------------------------------------------------------------- */
+/* ----------------------------------------------------------------------- */
+
+/* Register With Phone Number */
+
+.PhoneNumberInputLogin{
+  margin: 10px 0;
+  width: 100%;
 }

@@ -6,6 +6,8 @@ import { IoClose } from "react-icons/io5";
 import { sendOTPRegister } from "../../apiServices";
 import VerifyOTP from "./VerifyOTP";
 import { ErrorMessage, Field, Form, Formik } from "formik";
+import Select from "react-select";
+import { MdEmail } from "react-icons/md";
 
 const SignUp = ({
   handleCloseSignUpModal,
@@ -20,6 +22,19 @@ const SignUp = ({
   const [otpid, setOtpid] = useState("");
   const [isOTPSent, setIsOTPSent] = useState(false);
   const [isLogged, setIsLogged] = useState(false);
+  const [selectedCountry, setSelectedCountry] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [signWithPhone, setSignWithPhone] = useState(false);
+
+  const countryOptions = [
+    { value: "+91", label: "+91 - India" },
+    { value: "+1", label: "+1 - United States" },
+    { value: "+44", label: "+44 - United Kingdom" },
+    { value: "+86", label: "+86 - China" },
+    { value: "+81", label: "+81 - Japan" },
+    { value: "+49", label: "+49 - Germany" },
+    { value: "+7", label: "+7 - Russia" },
+  ];
 
   const handleRegister = async (values) => {
     const { email } = values;
@@ -28,9 +43,15 @@ const SignUp = ({
       setResponseMessage("Please Enter Your Email.");
       return;
     }
+    
     try {
       setIsOTPSent(true);
-      const response = await sendOTPRegister(email);
+      let response;
+      if(email){
+        response = await sendOTPRegister(email);
+      }else{
+        response = await sendOTPRegister({selectedCountry,phoneNumber});
+      }
       const { otpid } = response.data;
       setResponseMessage(response.message || "Register Successfully");
       setOtpid(otpid);
@@ -47,7 +68,7 @@ const SignUp = ({
     }
   };
 
-  console.log(email);
+  // console.log(email);
 
   useEffect(() => {
     if (handleOpen) {
@@ -61,6 +82,8 @@ const SignUp = ({
     // Update isLogged state based on isLoggedIn prop
     setIsLogged(isLoggedIn);
   }, [isLoggedIn]);
+
+  const handleLoginWithPhone = () => setSignWithPhone(!signWithPhone);
 
   return (
     <>
@@ -86,86 +109,135 @@ const SignUp = ({
                   </div>
                   <span className="FacebookText">Continue With Facebook</span>
                 </div>
-                <div className="Phone">
-                  <div className="PhoneIcon">
-                    <FaPhoneVolume size={24} />
+                {signWithPhone ? (
+                  <div className="Phone" onClick={handleLoginWithPhone}>
+                    <div className="PhoneIcon">
+                      <FaPhoneVolume size={24} />
+                    </div>
+                    <span className="PhoneText">
+                      Continue With Phone
+                    </span>
                   </div>
-                  <span className="PhoneText">Continue With Phone</span>
-                </div>
+                ) : (
+                  <div className="Phone" onClick={handleLoginWithPhone}>
+                    <div className="PhoneIcon">
+                      <MdEmail size={24} />
+                    </div>
+                    <span className="PhoneText">
+                      Continue With Email
+                    </span>
+                  </div>
+                )}
               </div>
               <div className="Horizontal">
                 <hr className="HorizontalLine" />
                 <span>or</span>
                 <hr className="HorizontalLine" />
               </div>
-              <Formik
-                initialValues={{ email: "" }}
-                validate={(values) => {
-                  const errors = {};
-                  if (!values.email) {
-                    errors.email = "Required Email";
-                  } else if (
-                    !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(
-                      values.email
-                    )
-                  ) {
-                    errors.email = "Invalid Email Address";
-                  }
-                  return errors;
-                }}
-                onSubmit={(values, { setSubmitting }) => {
-                  handleRegister(values);
-                  setSubmitting(false);
-                }}
-              >
-                {({ isSubmitting }) => (
-                  <Form className="Form">
-                    <div className="Input">
-                      <div className="InputText">
-                        <span className="InputTextTitle">
-                          Enter your email to get started.
+              {signWithPhone ? (
+                <Formik
+                  initialValues={{ email: "" }}
+                  validate={(values) => {
+                    const errors = {};
+                    if (!values.email) {
+                      errors.email = "Required Email";
+                    } else if (
+                      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(
+                        values.email
+                      )
+                    ) {
+                      errors.email = "Invalid Email Address";
+                    }
+                    return errors;
+                  }}
+                  onSubmit={(values, { setSubmitting }) => {
+                    handleRegister(values);
+                    setSubmitting(false);
+                  }}
+                >
+                  {({ isSubmitting }) => (
+                    <Form className="Form">
+                      <div className="Input">
+                        <div className="InputText">
+                          <span className="InputTextTitle">
+                            Enter your email to get started.
+                          </span>
+                        </div>
+                        <div className="Email">
+                          <Field
+                            type="email"
+                            name="email"
+                            id="email"
+                            placeholder="Enter Email"
+                          />
+                          <ErrorMessage
+                            name="email"
+                            component="div"
+                            style={{ color: "red" }}
+                          />
+                        </div>
+                      </div>
+                      <div className="Forgot">
+                        By continuing, you agree to our{" "}
+                        <span>
+                          Terms of Service, Privacy Policy & Health Data Notice.
                         </span>
                       </div>
-                      <div className="Email">
-                        <Field
-                          type="email"
-                          name="email"
-                          id="email"
-                          placeholder="Enter Email"
-                        />
-                        <ErrorMessage
-                          name="email"
-                          component="div"
-                          style={{ color: "red" }}
-                        />
+                      <div className="LogButton">
+                        <div>
+                          <button
+                            className="SignUpButton"
+                            onClick={handleRegister}
+                            disabled={isOTPSent || isLogged || isSubmitting}
+                            type="submit"
+                          >
+                            <span>{isOTPSent ? "Loading..." : "Sign up"}</span>
+                          </button>
+                          {responseMessage && (
+                            <p style={{ color: "red", textAlign: "center" }}>
+                              {responseMessage}
+                            </p>
+                          )}
+                        </div>
                       </div>
-                    </div>
-                    <div className="Forgot">
-                      By continuing, you agree to our{" "}
-                      <span>
-                        Terms of Service, Privacy Policy & Health Data Notice.
-                      </span>
-                    </div>
-                    <div className="LogButton">
-                      <div>
-                        <button
-                          className="SignUpButton"
-                          onClick={handleRegister}
-                          disabled={isOTPSent || isLogged || isSubmitting}
-                          type="submit"
-                        >
-                          <span>{isOTPSent ? "Loading..." : "Sign up"}</span>
-                        </button>
-                        {responseMessage && (
-                          <p style={{ color: "red", textAlign: "center" }}>
-                            {responseMessage}
-                          </p>
-                        )}
-                      </div>
-                    </div>
-                  </Form>
-                )}
-              </Formik>
+                    </Form>
+                  )}
+                </Formik>
+              ) : (
+                <div className="RegisterWithPhone">
+                  <div className="RegisterWithPhoneContainer">
+                    <Select
+                      value={selectedCountry}
+                      onChange={setSelectedCountry}
+                      options={countryOptions}
+                      placeholder="Select Country Code"
+                      className="CountryCodeFieldLogin"
+                    />
+                    <input
+                      type="tel"
+                      className="PhoneNumberInputLogin"
+                      placeholder="Enter phone number"
+                      value={phoneNumber}
+                      onChange={(e) => setPhoneNumber(e.target.value)}
+                    />
+                    <div>
+                          <button
+                            className="SignUpButton"
+                            onClick={handleRegister}
+                            disabled={isOTPSent || isLogged}
+                            type="submit"
+                          >
+                            <span>{isOTPSent ? "Loading..." : "Sign up"}</span>
+                          </button>
+                          {responseMessage && (
+                            <p style={{ color: "red", textAlign: "center" }}>
+                              {responseMessage}
+                            </p>
+                          )}
+                        </div>
+                  </div>
+                </div>
+              )}
               <div
                 style={{ borderBottom: "1px solid lightGrey", margin: "10px" }}
               ></div>

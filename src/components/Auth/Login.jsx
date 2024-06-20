@@ -3,6 +3,7 @@ import { FcGoogle } from "react-icons/fc";
 import { ImFacebook2 } from "react-icons/im";
 import { FaPhoneVolume } from "react-icons/fa6";
 import { IoClose } from "react-icons/io5";
+import { MdEmail } from "react-icons/md";
 import ResetPassword from "./ResetPassword";
 import { getUserDetails, login } from "../../apiServices";
 import { useDispatch } from "react-redux";
@@ -13,6 +14,8 @@ import {
 } from "../../store/action/userActions";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { loginSuccess } from "../../store/action/authActions";
+import { toast } from "react-toastify";
+import Select from "react-select";
 
 const Login = ({
   handleClose,
@@ -28,6 +31,19 @@ const Login = ({
   const [responseMessage, setResponseMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [selectedCountry, setSelectedCountry] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [signWithPhone, setSignWithPhone] = useState(false);
+
+  const countryOptions = [
+    { value: "+91", label: "+91 - India" },
+    { value: "+1", label: "+1 - United States" },
+    { value: "+44", label: "+44 - United Kingdom" },
+    { value: "+86", label: "+86 - China" },
+    { value: "+81", label: "+81 - Japan" },
+    { value: "+49", label: "+49 - Germany" },
+    { value: "+7", label: "+7 - Russia" },
+  ];
 
   const handleLogin = async (values) => {
     const { email, password } = values;
@@ -38,17 +54,20 @@ const Login = ({
     setIsLoading(true);
     try {
       const response = await login(email, password);
-      setResponseMessage(response.message || "Logged In Successfully");
       const refreshToken = localStorage.getItem("RefreshToken");
-      const userId = response.userId;
       const getUserData = await getUserDetails(refreshToken);
       // console.log(getUserData.data.data);
       setIsLoggedIn(true);
       handleLoginSuccess();
       dispatch(setEmail(email));
       dispatch(setPassword(password));
-      dispatch(loginSuccess(userId));
+      dispatch(loginSuccess(response.userId));
       dispatch(updateProfile(getUserData.data.data.userData));
+      toast.success("Logged In Successfully", {
+        position: "bottom-center",
+        autoClose: 2000,
+        hideProgressBar: true,
+      });
     } catch (error) {
       console.error("Error Logging In", error.message);
       setResponseMessage(
@@ -72,6 +91,8 @@ const Login = ({
       document.removeEventListener("mousedown", handleClickOutSide);
     }
   });
+
+  const handleLoginWithPhone = () => setSignWithPhone(!signWithPhone);
 
   return (
     <>
@@ -97,82 +118,133 @@ const Login = ({
                   </div>
                   <span className="FacebookText">Continue With Facebook</span>
                 </div>
-                <div className="Phone">
-                  <div className="PhoneIcon">
-                    <FaPhoneVolume size={24} />
+
+                {signWithPhone ? (
+                  <div className="Phone" onClick={handleLoginWithPhone}>
+                    <div className="PhoneIcon">
+                      <FaPhoneVolume size={24} />
+                    </div>
+                    <span className="PhoneText">
+                      Continue With Phone
+                    </span>
                   </div>
-                  <span className="PhoneText">Continue With Phone</span>
-                </div>
+                ) : (
+                  <div className="Phone" onClick={handleLoginWithPhone}>
+                    <div className="PhoneIcon">
+                      <MdEmail size={24} />
+                    </div>
+                    <span className="PhoneText">
+                      Continue With Email
+                    </span>
+                  </div>
+                )}
               </div>
               <div className="Horizontal">
                 <hr className="HorizontalLine" />
                 <span>or</span>
                 <hr className="HorizontalLine" />
               </div>
-              <Formik
-                initialValues={{ email: "", password: "" }}
-                validate={(values) => {
-                  const errors = {};
-                  if (!values.email) {
-                    errors.email = "Required Email";
-                  } else if (
-                    !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(
-                      values.email
-                    )
-                  ) {
-                    errors.email = "Invalid Email Address";
-                  }
-                  if (!values.password) {
-                    errors.password = "Required Password";
-                  }
-                  return errors;
-                }}
-                onSubmit={(values, { setSubmitting }) => {
-                  handleLogin(values);
-                  setSubmitting(false);
-                }}
-              >
-                {({ isSubmitting }) => (
-                  <Form className="Form">
-                    <div className="Input">
-                      <div className="Email">
-                        <Field
-                          type="email"
-                          name="email"
-                          id="email"
-                          placeholder="Email"
-                        />
-                        <ErrorMessage
-                          name="email"
-                          component="div"
-                          style={{ color: "red" }}
-                        />
+              {signWithPhone ? (
+                <Formik
+                  initialValues={{ email: "", password: "" }}
+                  validate={(values) => {
+                    const errors = {};
+                    if (!values.email) {
+                      errors.email = "Required Email";
+                    } else if (
+                      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(
+                        values.email
+                      )
+                    ) {
+                      errors.email = "Invalid Email Address";
+                    }
+                    if (!values.password) {
+                      errors.password = "Required Password";
+                    }
+                    return errors;
+                  }}
+                  onSubmit={(values, { setSubmitting }) => {
+                    handleLogin(values);
+                    setSubmitting(false);
+                  }}
+                >
+                  {({ isSubmitting }) => (
+                    <Form className="Form">
+                      <div className="Input">
+                        <div className="Email">
+                          <Field
+                            type="email"
+                            name="email"
+                            id="email"
+                            placeholder="Email"
+                          />
+                          <ErrorMessage
+                            name="email"
+                            component="div"
+                            style={{ color: "red" }}
+                          />
+                        </div>
+                        <div className="Password">
+                          <Field
+                            type="password"
+                            name="password"
+                            id="password"
+                            placeholder="Password"
+                          />
+                          <ErrorMessage
+                            name="password"
+                            component="div"
+                            style={{ color: "red" }}
+                          />
+                        </div>
                       </div>
-                      <div className="Password">
-                        <Field
-                          type="password"
-                          name="password"
-                          id="password"
-                          placeholder="Password"
-                        />
-                        <ErrorMessage
-                          name="password"
-                          component="div"
-                          style={{ color: "red" }}
-                        />
+                      <div
+                        className="Forgot"
+                        onClick={() => setIsResetOpen(true)}
+                      >
+                        Forgot password?{" "}
+                        <span onClick={() => setIsResetOpen(true)}>
+                          Reset it
+                        </span>
                       </div>
-                    </div>
-                    <div
-                      className="Forgot"
-                      onClick={() => setIsResetOpen(true)}
-                    >
-                      Forgot password?{" "}
-                      <span onClick={() => setIsResetOpen(true)}>Reset it</span>
-                    </div>
+                      <div className="LogButton">
+                        <button
+                          className="LoginButton"
+                          disabled={isLoading || isSubmitting}
+                          type="submit"
+                        >
+                          <span>{isLoading ? "Loading..." : "Login"}</span>
+                        </button>
+                        {responseMessage && (
+                          <p style={{ color: "red", textAlign: "center" }}>
+                            {responseMessage}
+                          </p>
+                        )}
+                      </div>
+                    </Form>
+                  )}
+                </Formik>
+              ) : (
+                <div className="RegisterWithPhone">
+                  <div className="RegisterWithPhoneContainer">
+                    <Select
+                      value={selectedCountry}
+                      onChange={setSelectedCountry}
+                      options={countryOptions}
+                      placeholder="Select Country Code"
+                      className="CountryCodeFieldLogin"
+                    />
+                    <input
+                      type="tel"
+                      className="PhoneNumberInputLogin"
+                      placeholder="Enter phone number"
+                      value={phoneNumber}
+                      onChange={(e) => setPhoneNumber(e.target.value)}
+                    />
                     <div className="LogButton">
                       <button
                         className="LoginButton"
-                        disabled={isLoading || isSubmitting}
+                        disabled={isLoading}
                         type="submit"
                       >
                         <span>{isLoading ? "Loading..." : "Login"}</span>
@@ -183,9 +255,10 @@ const Login = ({
                         </p>
                       )}
                     </div>
-                  </Form>
-                )}
-              </Formik>
+                  </div>
+                </div>
+              )}
+
               <div
                 style={{
                   borderBottom: "1px solid lightGrey",
