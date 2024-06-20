@@ -31,7 +31,7 @@ function HomePage({ isLoggedIn }) {
     const getStores = async () => {
       try {
         const data = await storeData(1);
-        // console.log(data);
+        console.log(data);
         setStore(data);
       } catch (error) {
         console.error("Error Fetching Store Data", error);

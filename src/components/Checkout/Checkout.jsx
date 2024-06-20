@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { FaLocationDot } from "react-icons/fa6";
 import { FiSearch } from "react-icons/fi";
-import { FaAddressCard } from "react-icons/fa";
 import { FaCar } from "react-icons/fa6";
 import { BsFillClockFill } from "react-icons/bs";
 import { BsFillTelephoneOutboundFill } from "react-icons/bs";
@@ -28,7 +27,7 @@ const Checkout = () => {
   const handleSaveAddress = (address) => {
     setDeliveryAddress(address);
     setIsAddressModalOpen(false);
-    setShowDeliveryInstructions(true);
+    // setShowDeliveryInstructions(true);
   };
 
   const toggleAddressModal = () => setIsAddressModalOpen(!isAddressModalOpen);
@@ -37,7 +36,7 @@ const Checkout = () => {
   const tooglePaymentModal = () => setIsPaymentModalOpen(!isPaymentModalOpen);
   const handlePaymentCloseModal = () => setIsPaymentModalOpen(false);
 
-  const handleDeliveryInstructionsClick = () => {
+  const handleDeliveryInstructionsClick = (deliveryAddress) => {
     if (deliveryAddress) {
       setShowDeliveryInstructions(true);
     }
@@ -53,10 +52,7 @@ const Checkout = () => {
     { value: "+7", label: "+7 - Russia" },
   ];
 
-  const handleSaveAndContinue = () => {
-    console.log("Save and Continue", leaveAtDoor);
-    setShowDeliveryInstructions(false);
-  };
+  const handleSaveAndContinue = () => setShowDeliveryInstructions(false);
 
   const handlePhoneNumberChange = (e) => {
     const formattedPhoneNumber = e.target.value.replace(/\D/g, "");
@@ -68,13 +64,10 @@ const Checkout = () => {
     }
   };
 
-  const togglePhoneNumberInput = () => {
+  const togglePhoneNumberInput = () =>
     setIsPhoneNumberVisible(!isPhoneNumberVisible);
-  };
 
-  const handleSaveAndContinuePhone = () => {
-    setIsPhoneNumberVisible(false);
-  };
+  const handleSaveAndContinuePhone = () => setIsPhoneNumberVisible(false);
 
   return (
     <>
@@ -192,7 +185,7 @@ const Checkout = () => {
                         <div className="SaveAndContinueButtonDiv">
                           <button
                             className="SaveAndContinueButton"
-                            onChange={handleSaveAndContinue}
+                            onClick={handleSaveAndContinue}
                           >
                             Save & Continue
                           </button>
