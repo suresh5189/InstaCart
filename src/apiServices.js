@@ -14,9 +14,23 @@ const apiServices = axios.create({
 
 // Register
 
-export const sendOTPRegister = async (email) => {
+export const sendOTPRegister = async ({ email, country_code, phoneNumber }) => {
+  let requestBody = {};
+  // console.log(email,country_code,phoneNumber);
   try {
-    const response = await apiServices.post("/register", { email });
+    if (email) {
+      requestBody = { email };
+    } else if (country_code && phoneNumber) {
+      requestBody = {
+        country_code,
+        phoneno: phoneNumber,
+      };
+    } else {
+      throw new Error("Invalid Parameters For Registration");
+    }
+    // console.log(requestBody);
+    const response = await apiServices.post("/register", requestBody);
+    // console.log(response.data);
     return response.data;
   } catch (error) {
     throw new Error(error.response.data.message || "Error Registering");
@@ -27,14 +41,52 @@ export const sendOTPRegister = async (email) => {
 
 // Verifying the Register
 
-export const verifyOTPRegister = async (email, password, enteredotp, otpid) => {
+// export const verifyOTPRegister = async (email,country_code,phoneno, password, enteredotp, otpid) => {
+//   try {
+//     const response = await apiServices.post("/register/verify", {
+//       email,
+//       country_code,
+//       phoneno,
+//       password,
+//       enteredotp,
+//       otpid,
+//     });
+
+//     if (response.status === 201) {
+//       const accessToken = response.data.data.JWTToken.accessToken;
+//       localStorage.setItem("AccessToken", accessToken);
+//       return { status: "success", message: "OTP verified successfully" };
+//     } else {
+//       throw new Error("Invalid OTP");
+//     }
+//   } catch (error) {
+//     throw new Error(
+//       error.response.data.msg || "Error verifying OTP. Please try again."
+//     );
+//   }
+// };
+
+export const verifyOTPRegister = async (
+  email,
+  country_code,
+  phoneno,
+  password,
+  enteredotp,
+  otpid
+) => {
   try {
-    const response = await apiServices.post("/register/verify", {
-      email,
-      password,
-      enteredotp,
-      otpid,
-    });
+    let requestBody = {};
+    if (email) {
+      // Sign up with email
+      requestBody = { email, password, enteredotp, otpid };
+    } else if (country_code && phoneno) {
+      // Sign up with phone number
+      requestBody = { country_code, phoneno, enteredotp, otpid };
+    } else {
+      throw new Error("Invalid parameters for OTP verification");
+    }
+
+    const response = await apiServices.post("/register/verify", requestBody);
 
     if (response.status === 201) {
       const accessToken = response.data.data.JWTToken.accessToken;
@@ -71,6 +123,39 @@ export const login = async (email, password) => {
   } catch (error) {
     throw new Error(
       error.response.data.message || "Please Enter Correct Email And Password"
+    );
+  }
+};
+
+// ------------------------------------------------------------------------------
+
+// Verify Login
+export const verifyOTPLogin = async (
+  country_code,
+  phoneno,
+  enteredotp,
+  otpid
+) => {
+  try {
+    let requestBody = {
+      phoneno,
+      country_code,
+      enteredotp,
+      otpid,
+    };
+
+    const response = await apiServices.post("/login/verify", requestBody);
+
+    if (response.status === 200) {
+      const accessToken = response.data.data.JWTToken.accessToken;
+      localStorage.setItem("AccessToken", accessToken);
+      return { status: "success", message: "OTP verified successfully" };
+    } else {
+      throw new Error("Invalid OTP");
+    }
+  } catch (error) {
+    throw new Error(
+      error.response?.data?.msg || "Error verifying OTP. Please try again."
     );
   }
 };

@@ -1,7 +1,14 @@
 import React, { useState } from "react";
 import { verifyOTPRegister } from "../../apiServices";
 
-const VerifyOTP = ({ email, onVerificationSuccess, otpid }) => {
+const VerifyOTP = ({
+  email,
+  phoneno,
+  country_code,
+  onVerificationSuccess,
+  otpid,
+  isPhoneSignUp, // New prop to determine if sign-up was with phone
+}) => {
   const [password, setPassword] = useState("");
   const [enteredotp, setEnteredotp] = useState("");
   const [responseMessage, setResponseMessage] = useState("");
@@ -15,12 +22,29 @@ const VerifyOTP = ({ email, onVerificationSuccess, otpid }) => {
 
     setIsLoading(true);
     try {
-      const response = await verifyOTPRegister(
-        email,
-        password,
-        enteredotp,
-        otpid
-      );
+      let response;
+      if (isPhoneSignUp) {
+        // Sign up was with phone number
+        response = await verifyOTPRegister(
+          null, // No email needed for phone sign-up
+          country_code,
+          phoneno,
+          null,
+          enteredotp,
+          otpid
+        );
+      } else {
+        // Sign up was with email
+        response = await verifyOTPRegister(
+          email,
+          null, // No country_code or phoneno needed for email sign-up
+          null,
+          password,
+          enteredotp,
+          otpid
+        );
+      }
+
       if (response.status === "success") {
         setResponseMessage("OTP Verified Successfully");
         onVerificationSuccess();

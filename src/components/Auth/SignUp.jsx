@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { ImFacebook2 } from "react-icons/im";
-import { FaPhoneVolume } from "react-icons/fa6";
+import { FaPhoneVolume } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
 import { sendOTPRegister } from "../../apiServices";
 import VerifyOTP from "./VerifyOTP";
@@ -21,8 +21,7 @@ const SignUp = ({
   const [responseMessage, setResponseMessage] = useState("");
   const [otpid, setOtpid] = useState("");
   const [isOTPSent, setIsOTPSent] = useState(false);
-  const [isLogged, setIsLogged] = useState(false);
-  const [selectedCountry, setSelectedCountry] = useState("");
+  const [selectedCountry, setSelectedCountry] = useState(null);
   const [phoneNumber, setPhoneNumber] = useState("");
   const [signWithPhone, setSignWithPhone] = useState(false);
 
@@ -37,24 +36,32 @@ const SignUp = ({
   ];
 
   const handleRegister = async (values) => {
-    const { email } = values;
-    setEmail(email);
-    if (!email) {
-      setResponseMessage("Please Enter Your Email.");
-      return;
-    }
-    
     try {
       setIsOTPSent(true);
       let response;
-      if(email){
-        response = await sendOTPRegister(email);
-      }else{
-        response = await sendOTPRegister({selectedCountry,phoneNumber});
+      if (!signWithPhone) {
+        if (!selectedCountry) {
+          throw new Error("Please select a country code.");
+        }
+        response = await sendOTPRegister({
+          country_code: selectedCountry.value,
+          phoneNumber,
+        });
+      } else {
+        const { email } = values;
+        setEmail(email);
+        if (!email) {
+          throw new Error("Please Enter Your Email.");
+        }
+        response = await sendOTPRegister({ email });
       }
-      const { otpid } = response.data;
-      setResponseMessage(response.message || "Register Successfully");
-      setOtpid(otpid);
+      if (response && response.data) {
+        const { otpid } = response.data;
+        setResponseMessage(response.message || "Register Successfully");
+        setOtpid(otpid);
+      } else {
+        throw new Error("Empty response received from server.");
+      }
     } catch (error) {
       console.error("Error Registering", error.message);
       setResponseMessage(error.message);
@@ -68,22 +75,24 @@ const SignUp = ({
     }
   };
 
-  // console.log(email);
-
   useEffect(() => {
     if (handleOpen) {
       document.addEventListener("mousedown", handleClickOutsideSignUp);
     } else {
       document.removeEventListener("mousedown", handleClickOutsideSignUp);
     }
-  });
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutsideSignUp);
+    };
+  }, [handleOpen]);
 
   useEffect(() => {
     // Update isLogged state based on isLoggedIn prop
-    setIsLogged(isLoggedIn);
+    setIsOTPSent(false); // Reset isOTPSent when isLoggedIn changes
   }, [isLoggedIn]);
 
-  const handleLoginWithPhone = () => setSignWithPhone(!signWithPhone);
+  const handleLoginWithPhone = () => setSignWithPhone(true);
+  const handleLoginWithEmail = () => setSignWithPhone(false);
 
   return (
     <>
@@ -110,22 +119,18 @@ const SignUp = ({
                   <span className="FacebookText">Continue With Facebook</span>
                 </div>
                 {signWithPhone ? (
-                  <div className="Phone" onClick={handleLoginWithPhone}>
+                  <div className="Phone" onClick={handleLoginWithEmail}>
                     <div className="PhoneIcon">
-                      <FaPhoneVolume size={24} />
+                      <MdEmail size={24} />
                     </div>
-                    <span className="PhoneText">
-                      Continue With Phone
-                    </span>
+                    <span className="PhoneText">Continue With Email</span>
                   </div>
                 ) : (
                   <div className="Phone" onClick={handleLoginWithPhone}>
                     <div className="PhoneIcon">
-                      <MdEmail size={24} />
+                      <FaPhoneVolume size={24} />
                     </div>
-                    <span className="PhoneText">
-                      Continue With Email
-                    </span>
+                    <span className="PhoneText">Continue With Phone</span>
                   </div>
                 )}
               </div>
@@ -167,7 +172,6 @@ const SignUp = ({
                           <Field
                             type="email"
                             name="email"
-                            id="email"
                             placeholder="Enter Email"
                           />
                           <ErrorMessage
@@ -187,8 +191,7 @@ const SignUp = ({
                         <div>
                           <button
                             className="SignUpButton"
-                            onClick={handleRegister}
-                            disabled={isOTPSent || isLogged || isSubmitting}
+                            disabled={isOTPSent || isLoggedIn || isSubmitting}
                             type="submit"
                           >
                             <span>{isOTPSent ? "Loading..." : "Sign up"}</span>
@@ -221,20 +224,20 @@ const SignUp = ({
                       onChange={(e) => setPhoneNumber(e.target.value)}
                     />
                     <div>
-                          <button
-                            className="SignUpButton"
-                            onClick={handleRegister}
-                            disabled={isOTPSent || isLogged}
-                            type="submit"
-                          >
-                            <span>{isOTPSent ? "Loading..." : "Sign up"}</span>
-                          </button>
-                          {responseMessage && (
-                            <p style={{ color: "red", textAlign: "center" }}>
-                              {responseMessage}
-                            </p>
-                          )}
-                        </div>
+                      <button
+                        className="SignUpButton"
+                        onClick={handleRegister}
+                        disabled={isOTPSent || isLoggedIn}
+                        type="submit"
+                      >
+                        <span>{isOTPSent ? "Loading..." : "Sign up"}</span>
+                      </button>
+                      {responseMessage && (
+                        <p style={{ color: "red", textAlign: "center" }}>
+                          {responseMessage}
+                        </p>
+                      )}
+                    </div>
                   </div>
                 </div>
               )}
@@ -242,7 +245,7 @@ const SignUp = ({
                 style={{ borderBottom: "1px solid lightGrey", margin: "10px" }}
               ></div>
               <div className="Account">
-                {!isLogged && ( // Only render if not logged in
+                {!isLoggedIn && ( // Only render if not logged in
                   <>
                     <span>Don’t have an account?</span>
                     <span className="SignButton" onClick={handleLoginClick}>
@@ -255,6 +258,8 @@ const SignUp = ({
           ) : (
             <VerifyOTP
               email={email}
+              phoneno={phoneNumber}
+              country_code={selectedCountry?.value}
               otpid={otpid}
               onVerificationSuccess={handleCloseSignUpModal}
             />
