@@ -134,6 +134,13 @@ const Login = ({
     };
   }, [handleOpen]);
 
+  // const maskOtpId = (otpId) => {
+  //   if (!otpId) return "";
+  //   const visiblePart = otpId.substring(otpId.length - 3);
+  //   const hiddenPart = "*".repeat(otpId.length - 3);
+  //   return hiddenPart + visiblePart;
+  // };
+
   return (
     <>
       {!isResetOpen && !isLoggedIn && (
@@ -225,6 +232,13 @@ const Login = ({
                           name="phoneNumber"
                           component="div"
                           style={{ color: "red", marginBottom: "5px" }}
+                        />
+                        <input
+                          type="text"
+                          // value={maskOtpId(otpId)}
+                          placeholder="OTP ID"
+                          className="PhoneNumberInput"
+                          readOnly
                         />
                       </div>
                       <div className="LogButton">
