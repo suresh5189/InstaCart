@@ -1,14 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import GooglePay from "../../images/Payment/GooglePay.webp";
 import PaymentMethodData from "../../data/paymentMethod";
 
 const PaymentMethod = ({ onClose }) => {
+
+  const [selectedMethod,setSelectedMethod] = useState(null)
+
   const handleOverlayClick = (e) => {
     if (e.target.classList.contains("Overlay")) {
       onClose();
     }
   };
+
+  const handlePaymentMethodClick = (index) =>{
+    setSelectedMethod(index);
+  }
 
   return (
     <>
@@ -43,7 +50,11 @@ const PaymentMethod = ({ onClose }) => {
           </div>
           <div>
             {PaymentMethodData.map((data, index) => (
-              <div className="PaymentMethodGoogle">
+              <div className={`PaymentMethodGoogle ${
+                selectedMethod === index ? "Selected" : ""
+              }`}
+              onClick={()=>handlePaymentMethodClick(index)}
+              >
                 <span className="PaymentMethodGoogleImageDiv">
                   <img
                     src={data.image}
