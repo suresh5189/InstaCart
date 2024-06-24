@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaLocationDot } from "react-icons/fa6";
 import { FiSearch } from "react-icons/fi";
 import { FaCar } from "react-icons/fa6";
@@ -14,11 +14,17 @@ import DebitCard from "../../images/Payment/DebitCard.webp";
 import Select from "react-select";
 import GiftCardImage from "../../data/giftCardImage";
 import { useSelector } from "react-redux";
-import { addAddress } from "../../apiServices";
+import {
+  addAddress,
+  deleteAddress,
+  editAddress,
+  getAllAddress,
+} from "../../apiServices";
 
 const Checkout = () => {
   const [isAddressModalOpen, setIsAddressModalOpen] = useState(false);
   const [deliveryAddress, setDeliveryAddress] = useState(null);
+  const [isEditAddress, setIsEditAddress] = useState(null);
   const [showDeliveryInstructions, setShowDeliveryInstructions] =
     useState(false);
   const [leaveAtDoor, setLeaveAtDoor] = useState(false);
@@ -28,15 +34,32 @@ const Checkout = () => {
   const [isSaveDisabled, setIsSaveDisabled] = useState(true);
   const [isPhoneNumberVisible, setIsPhoneNumberVisible] = useState(false);
   const [makeAGift, setMakeAGift] = useState(false);
+  const [allAddress, setAllAddress] = useState([]);
+  const [selectedAddressId, setSelectedAddressId] = useState(null);
 
-  const handleSaveAddress = (address) => {
-    setDeliveryAddress(address);
-    setIsAddressModalOpen(false);
-    // setShowDeliveryInstructions(true);
+  useEffect(() => {
+    // Fetch initial address from local storage or API if needed
+    const storedAddress = JSON.parse(localStorage.getItem("DeliveryAddress"));
+    if (storedAddress) {
+      setDeliveryAddress(storedAddress);
+    }
+    allAddressesGet();
+  }, []);
+
+  const allAddressesGet = async () => {
+    try {
+      const refreshToken = localStorage.getItem("RefreshToken");
+      const addresses = await getAllAddress(refreshToken);
+      const address = addresses.data.data.addressDetails;
+      // console.log("Addresses", address.length);
+      setAllAddress(address);
+    } catch (error) {
+      console.log("Error Fetching Addresses", error.message);
+    }
   };
 
   const toggleAddressModal = () => setIsAddressModalOpen(!isAddressModalOpen);
-  const handleEditAddress = () => setIsAddressModalOpen(true);
+  // const handleEditAddress = () => setIsAddressModalOpen(true);
   const handleAddressCloseModal = () => setIsAddressModalOpen(false);
   const tooglePaymentModal = () => setIsPaymentModalOpen(!isPaymentModalOpen);
   const handlePaymentCloseModal = () => setIsPaymentModalOpen(false);
@@ -46,10 +69,8 @@ const Checkout = () => {
   const totalPrice = price + 1.99 + 3.0 + 0.24;
   // console.log(totalPrice.toFixed(2));
 
-  const handleDeliveryInstructionsClick = (deliveryAddress) => {
-    if (deliveryAddress) {
-      setShowDeliveryInstructions(true);
-    }
+  const handleDeliveryInstructionsClick = () => {
+    setShowDeliveryInstructions(true);
   };
 
   const countryOptions = [
@@ -76,12 +97,83 @@ const Checkout = () => {
 
   const togglePhoneNumberInput = () =>
     setIsPhoneNumberVisible(!isPhoneNumberVisible);
-
   const handleSaveAndContinuePhone = () => setIsPhoneNumberVisible(false);
-
   const toggleMakeAGift = () => setMakeAGift(!makeAGift);
-
   const handleSaveMakeAGift = () => setMakeAGift(false);
+
+  const handleUpdateAddress = async (address) => {
+    try {
+      const refreshToken = localStorage.getItem("RefreshToken");
+      const updatedAddressWithCoords = {
+        ...address,
+        latitude: null || 0,
+        longitude: null || 0,
+      };
+      const updatedAddress = await editAddress(
+        refreshToken,
+        selectedAddressId,
+        updatedAddressWithCoords
+      );
+      if (updatedAddress) {
+        const updatedAddresses = allAddress.map((addr) =>
+          addr.address_id === updatedAddress.address_id ? updatedAddress : addr
+        );
+        setAllAddress(updatedAddresses);
+        setDeliveryAddress(updatedAddress); // Update the deliveryAddress if needed
+        localStorage.setItem("DeliveryAddress", JSON.stringify(updatedAddress));
+        setIsAddressModalOpen(false);
+      } else {
+        console.log("Updated address is null");
+      }
+    } catch (error) {
+      console.log("Error Updating Address", error.message);
+    }
+  };
+
+  const handleAddAddress = async (newAddress) => {
+    try {
+      const refreshToken = localStorage.getItem("RefreshToken");
+      const addedAddress = await addAddress(refreshToken, newAddress);
+      if (addedAddress) {
+        setAllAddress([...allAddress, addedAddress.data]); // Add new address to state
+        setIsAddressModalOpen(false);
+      } else {
+        console.log("Failed to add new address");
+      }
+    } catch (error) {
+      console.log("Error Adding Address", error.message);
+    }
+  };
+
+  const handleEditAddress = (addressId) => {
+    if (selectedAddressId) {
+      const addressToEdit = allAddress.find(
+        (address) => address.address_id === addressId
+      );
+      setIsEditAddress(addressToEdit);
+      setIsAddressModalOpen(true);
+    }
+  };
+
+  const handleDeleteAddress = async () => {
+    try {
+      const refreshToken = localStorage.getItem("RefreshToken");
+      const deletedAddress = await deleteAddress(
+        refreshToken,
+        selectedAddressId
+      );
+      if (deletedAddress) {
+        setDeliveryAddress(null);
+        localStorage.removeItem("DeliveryAddress");
+        setSelectedAddressId(null);
+        allAddressesGet(); // Refresh addresses after deletion
+      } else {
+        console.log("Failed to delete address");
+      }
+    } catch (error) {
+      console.log("Error deleting address", error.message);
+    }
+  };
 
   return (
     <>
@@ -105,7 +197,7 @@ const Checkout = () => {
                   </div>
                 </legend>
                 <>
-                  {deliveryAddress === null ? (
+                  {allAddress.length === 0 ? (
                     <div className="CheckoutAddressButtonDiv">
                       <button
                         className="CheckoutAddressButton"
@@ -121,28 +213,69 @@ const Checkout = () => {
                     </div>
                   ) : (
                     <div className="CheckoutDeliveryAddress">
-                      <div className="CheckoutDeliveryAddressText">
-                        <span>
-                          Street Address: {deliveryAddress.streetAddress}
-                        </span>
-                        <span>
-                          Floor Address: {deliveryAddress.floorAddress}
-                        </span>
-                        <span>ZipCode: {deliveryAddress.zipCode}</span>
-                      </div>
-                      <div
-                        className="CheckoutDeliveryAddressEditButtonDiv"
-                        onClick={handleEditAddress}
-                      >
-                        <span className="CheckoutDeliveryAddressEditButton">
-                          Edit
-                        </span>
-                      </div>
+                      {allAddress &&
+                        allAddress.map(
+                          ({ address_id, street, floor, zip_code }) => (
+                            <div key={address_id}>
+                              <div className="CheckoutDeliveryAddressInside">
+                                <div className="CheckoutDeliveryAddressTextDiv">
+                                  <input
+                                    type="radio"
+                                    name="selectedAddress"
+                                    value={address_id}
+                                    onChange={() =>
+                                      setSelectedAddressId(address_id)
+                                    }
+                                    checked={selectedAddressId === address_id}
+                                    className="RadioInputCheck"
+                                  />
+                                  <div className="CheckoutDeliveryAddressText">
+                                    <span>Street Address: {street}</span>
+                                    <span>Floor Address: {floor}</span>
+                                    <span>ZipCode: {zip_code}</span>
+                                  </div>
+                                </div>
+                                <div>
+                                  <div
+                                    className="CheckoutDeliveryAddressEditButtonDiv"
+                                    // onClick={handleEditAddress}
+                                  >
+                                    <span
+                                      className="CheckoutDeliveryAddressEditButton"
+                                      onClick={() =>
+                                        handleEditAddress(address_id)
+                                      }
+                                    >
+                                      Edit
+                                    </span>
+                                  </div>
+                                  <div
+                                    className="CheckoutDeliveryAddressEditButtonDiv"
+                                    onClick={handleDeleteAddress}
+                                    style={{ marginTop: "15px" }}
+                                  >
+                                    <span
+                                      style={{
+                                        color: "red",
+                                        fontWeight: "700",
+                                      }}
+                                    >
+                                      Delete
+                                    </span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          )
+                        )}
                     </div>
                   )}
                 </>
                 <div>
-                  <span style={{ color: "green", fontWeight: "bold" }}>
+                  <span
+                    style={{ color: "green", fontWeight: "bold" }}
+                    onClick={toggleAddressModal}
+                  >
                     Add Address
                   </span>
                 </div>
@@ -164,7 +297,7 @@ const Checkout = () => {
                     </div>
                   </div>
                 </legend>
-                {deliveryAddress && (
+                {selectedAddressId && (
                   <div className="DeliveryInstructionsArea">
                     {!showDeliveryInstructions ? (
                       <div className="DeliveryInstructionsClosed">
@@ -487,7 +620,7 @@ const Checkout = () => {
                 Continue
               </button>
             </div>
-            {deliveryAddress && (
+            {allAddress && (
               <div className="TotalCartPriceOuterDiv">
                 <div className="TotalCartPriceInnerDiv">
                   <div className="TotalCartPriceSubTotal">
@@ -537,9 +670,11 @@ const Checkout = () => {
       </div>
       {isAddressModalOpen && (
         <AddressModal
+          isOpen={isAddressModalOpen}
           onClose={handleAddressCloseModal}
-          onAddressSave={handleSaveAddress}
-          initialAddress={deliveryAddress}
+          onAddAddress={handleAddAddress}
+          onUpdateAddress={handleUpdateAddress}
+          isEdit={isEditAddress}
         />
       )}
       {isPaymentModalOpen && (

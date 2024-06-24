@@ -138,8 +138,8 @@ export const verifyOTPLogin = async (
 ) => {
   try {
     let requestBody = {
-      phoneno,
       country_code,
+      phoneno,
       enteredotp,
       otpid,
     };
@@ -555,5 +555,23 @@ export const deleteAddress = async (accessToken, addressId) => {
 };
 
 // ---------------------------------------------------------------------------------------
+
+// Get All Address
+
+export const getAllAddress = async (accessToken) => {
+  try {
+    const response = await apiServices.get("/addresses", {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+
+    return response;
+  } catch (error) {
+    throw new Error(error.response.data.message || "Error Fetching Addresses");
+  }
+};
+
+// ----------------------------------------------------------------------------------------
 
 export default apiServices;

@@ -58,7 +58,7 @@ const PaymentMethod = ({ onClose }) => {
         </div>
         <div className="PaymentMethodButtonDiv">
           <button className="PaymentMethodButton">
-            Confirm payment method
+            Confirm Payment Method
           </button>
         </div>
       </div>

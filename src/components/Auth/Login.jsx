@@ -208,8 +208,8 @@ const Login = ({
                     <Form className="Form">
                       <div className="Input">
                         <Select
-                          value={selectedCountry}
-                          onChange={setSelectedCountry}
+                          // value={selectedCountry}
+                          // onChange={setSelectedCountry}
                           options={countryOptions}
                           placeholder="Select Country Code"
                           className="CountryCodeFieldLogin"
@@ -225,8 +225,8 @@ const Login = ({
                           name="phoneNumber"
                           id="phoneNumber"
                           placeholder="Phone Number"
-                          value={phoneNumber}
-                          onChange={(e) => setPhoneNumber(e.target.value)}
+                          // value={phoneNumber}
+                          // onChange={(e) => setPhoneNumber(e.target.value)}
                         />
                         <ErrorMessage
                           name="phoneNumber"

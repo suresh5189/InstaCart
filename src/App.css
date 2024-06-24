@@ -2953,6 +2953,22 @@ Input {
   margin: 20px;
   display: flex;
   justify-content: space-between;
+  flex-direction: column;
+}
+
+.CheckoutDeliveryAddressInside{
+  display: flex;
+  justify-content: space-between;
+  margin: 14px 0;
+}
+
+.CheckoutDeliveryAddressTextDiv{
+  display: flex;
+}
+
+.RadioInputCheck{
+  width: 20px;
+  margin-right: 20px;
 }
 
 .CheckoutDeliveryAddressText {
