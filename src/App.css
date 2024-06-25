@@ -2956,17 +2956,17 @@ Input {
   flex-direction: column;
 }
 
-.CheckoutDeliveryAddressInside{
+.CheckoutDeliveryAddressInside {
   display: flex;
   justify-content: space-between;
   margin: 14px 0;
 }
 
-.CheckoutDeliveryAddressTextDiv{
+.CheckoutDeliveryAddressTextDiv {
   display: flex;
 }
 
-.RadioInputCheck{
+.RadioInputCheck {
   width: 20px;
   margin-right: 20px;
 }
@@ -3534,7 +3534,7 @@ Input {
   background-color: rgb(16, 103, 16);
 }
 
-.Selected{
+.Selected {
   background-color: rgb(240, 240, 240);
   border-radius: 15px;
 }
@@ -3544,7 +3544,7 @@ Input {
 
 /* Register With Phone Number */
 
-.PhoneNumberInputLogin{
+.PhoneNumberInputLogin {
   margin: 10px 0;
   width: 100%;
 }
