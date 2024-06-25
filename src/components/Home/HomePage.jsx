@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { storeData } from "../../apiServices";
 
-function HomePage({ isLoggedIn }) {
+function HomePage({ isLoggedIn, handleLogin }) {
   const [visibleCount, setVisibleCount] = useState(9);
 
   const [store, setStore] = useState([]);
@@ -19,7 +19,7 @@ function HomePage({ isLoggedIn }) {
 
   const handleDetail = (store_id, image, title) => {
     if (!isLoggedIn) {
-      alert("Login First");
+      return handleLogin(true);
     } else {
       navigate(`/store/${store_id}/storefront`, {
         state: { store_id, image, title },

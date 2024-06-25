@@ -20,6 +20,8 @@ import {
   editAddress,
   getAllAddress,
 } from "../../apiServices";
+import { ToastContainer, toast } from "react-toastify";
+import OrderPlaceAnimation from "./OrderPlaceAnimation";
 
 const Checkout = () => {
   const [isAddressModalOpen, setIsAddressModalOpen] = useState(false);
@@ -33,9 +35,16 @@ const Checkout = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [isSaveDisabled, setIsSaveDisabled] = useState(true);
   const [isPhoneNumberVisible, setIsPhoneNumberVisible] = useState(false);
-  const [makeAGift, setMakeAGift] = useState(false);
+  // const [makeAGift, setMakeAGift] = useState(false);
   const [allAddress, setAllAddress] = useState([]);
   const [selectedAddressId, setSelectedAddressId] = useState(null);
+  const [selectedImageId, setSelectedImageId] = useState(null);
+  const [recipientName, setRecipientName] = useState("");
+  const [recipientNumber, setRecipientNumber] = useState("");
+  const [senderName, setSenderName] = useState("");
+  const [makeAGiftVisible, setMakeAGiftVisible] = useState(false);
+  const [onSelectedPaymentMethod, setOnSelectedPaymentMethod] = useState(null);
+  const [showAnimation, setShowAnimation] = useState(false);
 
   useEffect(() => {
     // Fetch initial address from local storage or API if needed
@@ -58,10 +67,25 @@ const Checkout = () => {
     }
   };
 
+  const handleOrderPlacedContinue = () => {
+    setShowAnimation(true);
+    setTimeout(() => {
+      window.location.href = "/";
+    }, 2000);
+  };
+
+  const handleSelectedPaymentMethod = (method) => {
+    setOnSelectedPaymentMethod(method);
+  };
+
   const toggleAddressModal = () => setIsAddressModalOpen(!isAddressModalOpen);
   // const handleEditAddress = () => setIsAddressModalOpen(true);
   const handleAddressCloseModal = () => setIsAddressModalOpen(false);
-  const tooglePaymentModal = () => setIsPaymentModalOpen(!isPaymentModalOpen);
+  const tooglePaymentModal = () => {
+    if (selectedAddressId) {
+      setIsPaymentModalOpen(!isPaymentModalOpen);
+    }
+  };
   const handlePaymentCloseModal = () => setIsPaymentModalOpen(false);
 
   const price = useSelector((state) => state.cart.totalPrice);
@@ -95,11 +119,19 @@ const Checkout = () => {
     }
   };
 
-  const togglePhoneNumberInput = () =>
-    setIsPhoneNumberVisible(!isPhoneNumberVisible);
+  const togglePhoneNumberInput = () => {
+    if (selectedAddressId) {
+      setIsPhoneNumberVisible(!isPhoneNumberVisible);
+    }
+  };
   const handleSaveAndContinuePhone = () => setIsPhoneNumberVisible(false);
-  const toggleMakeAGift = () => setMakeAGift(!makeAGift);
-  const handleSaveMakeAGift = () => setMakeAGift(false);
+  const handleSaveMakeAItGift = () => setMakeAGiftVisible(false);
+  const toggleMakeAGift = () => {
+    if (selectedAddressId) {
+      setMakeAGiftVisible(!makeAGiftVisible);
+    }
+  };
+  // const handleSaveMakeAGift = () => setMakeAGift(false);
 
   const handleUpdateAddress = async (address) => {
     try {
@@ -122,6 +154,11 @@ const Checkout = () => {
         setDeliveryAddress(updatedAddress); // Update the deliveryAddress if needed
         localStorage.setItem("DeliveryAddress", JSON.stringify(updatedAddress));
         setIsAddressModalOpen(false);
+        toast.success("Address Updated Successfully", {
+          position: "bottom-center",
+          autoClose: 2000,
+          hideProgressBar: true,
+        });
       } else {
         console.log("Updated address is null");
       }
@@ -136,6 +173,11 @@ const Checkout = () => {
       const addedAddress = await addAddress(refreshToken, newAddress);
       if (addedAddress) {
         setAllAddress([...allAddress, addedAddress.data]); // Add new address to state
+        toast.success("Address Added Successfully", {
+          position: "bottom-center",
+          autoClose: 2000,
+          hideProgressBar: true,
+        });
         setIsAddressModalOpen(false);
       } else {
         console.log("Failed to add new address");
@@ -167,6 +209,11 @@ const Checkout = () => {
         localStorage.removeItem("DeliveryAddress");
         setSelectedAddressId(null);
         allAddressesGet(); // Refresh addresses after deletion
+        toast.success("Address Deleted Successfully", {
+          position: "bottom-center",
+          autoClose: 2000,
+          hideProgressBar: true,
+        });
       } else {
         console.log("Failed to delete address");
       }
@@ -175,8 +222,13 @@ const Checkout = () => {
     }
   };
 
+  const handleMakeAGiftImageClick = (index) => {
+    setSelectedImageId(index);
+  };
+
   return (
     <>
+      <ToastContainer />
       <div className="CheckOutside">
         <div className="Checkout">
           <div className="CheckoutDiv">
@@ -439,25 +491,43 @@ const Checkout = () => {
                         <FaCreditCard size={26} />
                       </span>
                     </div>
-                    <div className="CheckoutAddressLegendTextDiv">
+                    <div
+                      className="CheckoutAddressLegendTextDiv"
+                      onClick={tooglePaymentModal}
+                    >
                       <h2 className="CheckoutAddressLegendText">Pay with</h2>
                     </div>
                   </div>
-                  <div
-                    className="CheckoutAddressLegendDebit"
-                    onClick={tooglePaymentModal}
-                  >
-                    <span className="CheckoutAddressLegendDebitCardImageDiv">
-                      <img
-                        src={DebitCard}
-                        alt="Debit Card"
-                        className="CheckoutAddressLegendDebitCardImage"
-                      />
-                    </span>
-                    <span className="CheckoutAddressLegendDebitCardText">
-                      Choose a payment method
-                    </span>
-                  </div>
+                  {onSelectedPaymentMethod ? (
+                    <div className="PaymentMethodPayWithDiv">
+                      <span className="CheckoutAddressLegendDebitCardImageDiv">
+                        <img
+                          src={onSelectedPaymentMethod.image}
+                          alt={onSelectedPaymentMethod.title}
+                          className="CheckoutAddressLegnedPayWithImage"
+                        />
+                      </span>
+                      <span className="PaymentMethodGoogleTitle">
+                        {onSelectedPaymentMethod.title}
+                      </span>
+                    </div>
+                  ) : (
+                    <div
+                      className="CheckoutAddressLegendDebit"
+                      onClick={tooglePaymentModal}
+                    >
+                      <span className="CheckoutAddressLegendDebitCardImageDiv">
+                        <img
+                          src={DebitCard}
+                          alt="Debit Card"
+                          className="CheckoutAddressLegendDebitCardImage"
+                        />
+                      </span>
+                      <span className="CheckoutAddressLegendDebitCardText">
+                        Choose a payment method
+                      </span>
+                    </div>
+                  )}
                 </legend>
               </fieldset>
             </div>
@@ -480,7 +550,7 @@ const Checkout = () => {
                     </div>
                   </div>
                 </legend>
-                {makeAGift && (
+                {makeAGiftVisible && (
                   <>
                     <div className="MakeAGiftDivHead">
                       <div className="MakeAGiftToHeading">
@@ -491,7 +561,8 @@ const Checkout = () => {
                           type="text"
                           className="MakeAGiftInputRecipient"
                           placeholder="Recipient Name"
-                          value={phoneNumber}
+                          value={recipientName}
+                          onChange={(e) => setRecipientName(e.target.value)}
                         />
                       </div>
                       <div className="MakeAGiftContainer">
@@ -506,9 +577,9 @@ const Checkout = () => {
                           type="tel"
                           className="MakeAGiftInput"
                           placeholder="Recipient Phone Number"
-                          value={phoneNumber}
+                          value={recipientNumber}
                           maxLength={10}
-                          onChange={handlePhoneNumberChange}
+                          onChange={(e) => setRecipientNumber(e.target.value)}
                         />
                       </div>
                     </div>
@@ -530,7 +601,8 @@ const Checkout = () => {
                         type="text"
                         className="MakeAGiftInputFrom"
                         placeholder="Your Name"
-                        value={phoneNumber}
+                        value={senderName}
+                        onChange={(e) => setSenderName(e.target.value)}
                       />
                     </div>
                     <div className="">
@@ -550,7 +622,12 @@ const Checkout = () => {
                                 <img
                                   src={image}
                                   alt=""
-                                  className="MakeAGiftCardImage"
+                                  className={`MakeAGiftCardImage ${
+                                    selectedImageId === id
+                                      ? "SelectedImage"
+                                      : ""
+                                  }`}
+                                  onClick={() => handleMakeAGiftImageClick(id)}
                                 />
                               </li>
                             ))}
@@ -577,7 +654,7 @@ const Checkout = () => {
                     <div className="CheckoutContinueButtonDiv">
                       <button
                         className="AddressButton SaveButton"
-                        onClick={handleSaveMakeAGift}
+                        onClick={handleSaveMakeAItGift}
                       >
                         Continue
                       </button>
@@ -590,6 +667,33 @@ const Checkout = () => {
                     </div>
                   </>
                 )}
+                {senderName &&
+                  recipientName &&
+                  recipientNumber &&
+                  !makeAGiftVisible && (
+                    <div className="RecipientDetailAndImage">
+                      <div className="RecipientDetails">
+                        <span>Recipient Name: {recipientName}</span>
+                        <span>
+                          Recipient Phone Number:{" "}
+                          {selectedCountry && `${selectedCountry.value} `}{" "}
+                          {recipientNumber}
+                        </span>
+                        <span>Sender Name: {senderName}</span>
+                      </div>
+                      <div>
+                        <img
+                          src={
+                            GiftCardImage.find(
+                              (card) => card.id === selectedImageId
+                            )?.image
+                          }
+                          alt=""
+                          className="MakeAGiftCardImage"
+                        />
+                      </div>
+                    </div>
+                  )}
               </fieldset>
             </div>
             <div className="CheckoutAddressDiv">
@@ -609,14 +713,28 @@ const Checkout = () => {
               </fieldset>
             </div>
             <div className="CheckoutContinueButtonDiv">
-              <button className="CheckoutContinueButton" disabled>
+              <button
+                className={`CheckoutContinueButton ${
+                  onSelectedPaymentMethod === null
+                    ? "disabledSaveButton"
+                    : "SaveButton"
+                }`}
+                onClick={handleOrderPlacedContinue}
+              >
                 Continue
               </button>
             </div>
           </div>
           <div>
             <div className="CheckoutContinueButtonOutsideDiv">
-              <button className="CheckoutContinueButton" disabled>
+              <button
+                className={`CheckoutContinueButton ${
+                  onSelectedPaymentMethod === null
+                    ? "disabledSaveButton"
+                    : "SaveButton"
+                }`}
+                onClick={handleOrderPlacedContinue}
+              >
                 Continue
               </button>
             </div>
@@ -678,8 +796,12 @@ const Checkout = () => {
         />
       )}
       {isPaymentModalOpen && (
-        <PaymentMethod onClose={handlePaymentCloseModal} />
+        <PaymentMethod
+          onClose={handlePaymentCloseModal}
+          onSelectedPaymentMethod={handleSelectedPaymentMethod}
+        />
       )}
+      <OrderPlaceAnimation width={400} height={400} isVisible={showAnimation} />
     </>
   );
 };

@@ -7,7 +7,7 @@ import { MdKeyboardArrowRight } from "react-icons/md";
 import StoreDetailsInfoPage from "./StoreInformation";
 import { getStoreFrontDetails } from "../../apiServices";
 
-const DetailScreenSidebar = ({ storeId, image, title }) => {
+const DetailScreenSidebar = ({ storeId, image, title,handleCategoryClick }) => {
   const [openDetailInfoModal, setOpenDetailInfoModal] = useState(false);
   const [storeFrontItems, setStoreFrontItems] = useState([]);
 
@@ -24,6 +24,7 @@ const DetailScreenSidebar = ({ storeId, image, title }) => {
       try {
         const response = await getStoreFrontDetails(storeId);
         setStoreFrontItems(response.data[0].categories || []);
+        // console.log(response);
         // setLoading(false);
       } catch (error) {
         console.error("Error fetching store front details:", error);
@@ -94,6 +95,7 @@ const DetailScreenSidebar = ({ storeId, image, title }) => {
                 <div
                   className="SideBarDetailButtonSpanHead"
                   key={category.category_id}
+                  onClick={()=>handleCategoryClick(category.category_name)}
                 >
                   <span className="SideBarDetailButtonSpan">
                     {category.category_name}

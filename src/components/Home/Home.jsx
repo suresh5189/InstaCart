@@ -8,19 +8,19 @@ import CommonQuestion from "./CommonQuestion";
 import Footer from "./Footer";
 import { ToastContainer } from "react-toastify";
 
-const Home = ({ isLoggedIn }) => {
+const Home = ({ isLoggedIn, handleLogin }) => {
   return (
     <>
-    <ToastContainer />
-    <div>
-      <HomePageBar />
-      <HomePage isLoggedIn={isLoggedIn} />
-      <Payment />
-      <DeliveryGrocery />
-      <GroceryMarketPlace />
-      <CommonQuestion />
-      <Footer />
-    </div>
+      <ToastContainer />
+      <div>
+        <HomePageBar />
+        <HomePage isLoggedIn={isLoggedIn} handleLogin={handleLogin} />
+        <Payment />
+        <DeliveryGrocery />
+        <GroceryMarketPlace />
+        <CommonQuestion />
+        <Footer />
+      </div>
     </>
   );
 };

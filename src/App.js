@@ -110,7 +110,12 @@ function App() {
           />
         )}
         <Routes>
-          <Route path="/" element={<Home isLoggedIn={isLoggedIn} />} />
+          <Route
+            path="/"
+            element={
+              <Home isLoggedIn={isLoggedIn} handleLogin={handleLoginClick} />
+            }
+          />
           <Route
             path="/store/:storeId/storefront"
             element={authGuard(<StoreItemInfo />)}

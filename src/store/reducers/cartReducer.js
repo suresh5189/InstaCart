@@ -10,7 +10,7 @@ import {
 const initialState = {
   items: [],
   totalItems: 0,
-  totalPrice:0,
+  totalPrice: 0,
 };
 
 const cartReducer = (state = initialState, action) => {
@@ -64,11 +64,11 @@ const cartReducer = (state = initialState, action) => {
             : item
         ),
       };
-      case UPDATE_TOTAL_PRICE:
-        return {
-          ...state,
-          totalPrice:action.payload
-        }
+    case UPDATE_TOTAL_PRICE:
+      return {
+        ...state,
+        totalPrice: action.payload,
+      };
     default:
       return state;
   }

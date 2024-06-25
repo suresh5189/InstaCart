@@ -101,8 +101,8 @@ input[type="search"]::placeholder {
 
 .SearchIcon {
   position: absolute;
-  top: 45%;
-  left: 10px;
+  top: 50%;
+  left: 15px;
   transform: translateY(-50%);
   color: #aaa;
 }
@@ -1071,18 +1071,23 @@ Input {
   width: 25%;
   border-right: 0.5px solid lightgray;
   height: 100%;
+  position: fixed;
+  background-color: white;
+  overflow-y: scroll;
 }
 
 .DetailScreenSidebar {
   padding: 20px;
   /* overflow-y: scroll; */
   position: sticky;
+  /* top: 0;
+  left: 0; */
 }
 
 .StoreDetailHead {
   display: flex;
   flex-direction: column;
-  width: 75%;
+  /* width: 75%; */
 }
 
 .StoreContainerHead {
@@ -1161,6 +1166,15 @@ Input {
   text-align: center;
 }
 
+.StoreContainerProductQuantitySpan {
+  background-color: #108910;
+  color: white;
+  margin-left: 10px;
+  padding: 5px 10px;
+  border-radius: 50%;
+  font-size: 19px;
+}
+
 .StoreContainerButton button {
   border: none;
   padding: 0px;
@@ -1194,8 +1208,8 @@ Input {
   background-color: black;
   position: fixed;
   bottom: 0;
-  right: 0;
-  width: 82%;
+  left: 0;
+  width: 100%;
   display: flex;
   padding: 20px;
   color: white;
@@ -2998,10 +3012,8 @@ Input {
   border-radius: 40px;
   border: none;
   font-size: 20px;
-  cursor: default;
-  pointer-events: none;
   background-color: rgb(246, 247, 248);
-  color: rgb(199, 200, 205);
+  color: rgb(255, 255, 255);
   font-weight: 500;
 }
 
@@ -3091,6 +3103,20 @@ Input {
   margin-right: 8px;
 }
 
+.PaymentMethodPayWithDiv {
+  display: flex;
+  align-items: center;
+  font-family: "Roboto";
+  font-size: 16px;
+  cursor: pointer;
+  justify-content: center;
+}
+
+.CheckoutAddressLegnedPayWithImage {
+  width: 55px;
+  margin-right: 8px;
+}
+
 .PhoneNumberContainer {
   display: flex;
   align-items: center;
@@ -3170,6 +3196,11 @@ Input {
   box-shadow: rgba(0, 0, 0, 0.16) 0px 2px 8px;
 }
 
+.SelectedImage {
+  outline: rgb(52, 53, 56) solid 2px;
+  border-radius: 4px;
+}
+
 .MakeAGiftCardImage:hover {
   /* width: 100%; */
   outline: rgb(52, 53, 56) solid 2px;
@@ -3222,6 +3253,18 @@ Input {
   margin: 10px 0;
   color: rgb(15, 125, 15);
   font-weight: bold;
+}
+
+.RecipientDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.RecipientDetailAndImage {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 /* ----------------------------------------- */
@@ -3341,6 +3384,17 @@ Input {
   flex-direction: column;
 }
 
+.ProductDivMain {
+  position: fixed;
+  right: 0;
+  /* top: 0; */
+  width: 75%;
+  height: 100vh;
+  overflow-y: scroll;
+  margin-bottom: 30%;
+  z-index: -1;
+}
+
 .Pagination {
   display: flex;
   justify-content: center;
@@ -3438,10 +3492,12 @@ Input {
 
 .SaveButton {
   background-color: rgb(16, 137, 16);
+  cursor: pointer;
 }
 
 .disabledSaveButton {
-  background-color: rgb(172, 172, 172);
+  background-color: rgb(246, 247, 248);
+  color: rgb(199, 200, 205);
 }
 
 /* --------------------------------------------------------------------- */
@@ -3547,4 +3603,29 @@ Input {
 .PhoneNumberInputLogin {
   margin: 10px 0;
   width: 100%;
+}
+
+/* ------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------ */
+
+/* Lottie Animation */
+
+.LottieAnimation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
+  /* backdrop-filter: blur(1px); */
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.LottieAnimationText {
+  color: white;
+  font-size: 40px;
+  font-family: "Playfair Display";
 }

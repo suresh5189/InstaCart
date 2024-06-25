@@ -19,8 +19,10 @@ const Cart = ({ closeCart, isOpenCart }) => {
   const navigate = useNavigate();
 
   const navigateToCheckoutPage = () => {
-    navigate("/store/checkout");
-    closeCart();
+    if (totalPrice > 10) {
+      navigate("/store/checkout");
+      closeCart();
+    }
   };
 
   const handleClickOutside = (event) => {

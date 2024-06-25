@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { getStoreIemDetails } from "../../apiServices";
 import { FaPlus } from "react-icons/fa6";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { addToCart } from "../../store/action/userActions";
 import Loader from "../Loader";
@@ -26,6 +26,9 @@ const StoreProducts = () => {
   const { store_id, title, image } = state || {};
 
   const itemsPerPage = 8;
+  const productRef = useRef({});
+
+  const { items: cartItems } = useSelector((state) => state.cart);
 
   const handleAddToCart = (item) => {
     dispatch(addToCart(item));
@@ -34,6 +37,14 @@ const StoreProducts = () => {
       autoClose: 2000,
       hideProgressBar: true,
     });
+  };
+
+  const handleCategoryClick = (categoryId) => {
+    const categoryElement = productRef.current[categoryId];
+    console.log(categoryElement);
+    if (categoryElement) {
+      categoryElement.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
   };
 
   const handleCloseBookmarkModal = () => {
@@ -100,17 +111,21 @@ const StoreProducts = () => {
               storeId={store_id}
               image={image}
               title={title}
+              handleCategoryClick={handleCategoryClick}
             />
           </div>
         </div>
         <div className="PaginationDiv">
-          <div>
+          <div className="ProductDivMain">
             {loading ? (
               <Loader />
             ) : (
               Object.entries(productByCategory).map(
                 ([category, subcategories]) => (
-                  <div key={category}>
+                  <div
+                    key={category}
+                    ref={(el) => (productRef.current[category] = el)}
+                  >
                     {Object.entries(subcategories).some(
                       ([subcategory, products]) => products.length > 0
                     ) && (
@@ -132,67 +147,86 @@ const StoreProducts = () => {
                                       label,
                                       actual_price,
                                       selling_price,
-                                    }) => (
-                                      <div className="StoreContainer" key={id}>
-                                        <button
-                                          className="StoreContainerCartButton"
-                                          onMouseEnter={() => setHoveredId(id)}
-                                          onMouseLeave={() =>
-                                            setHoveredId(null)
-                                          }
-                                          onClick={() =>
-                                            handleAddToCart({
-                                              id,
-                                              title,
-                                              image,
-                                              label,
-                                              actual_price,
-                                              selling_price,
-                                            })
-                                          }
-                                        >
-                                          <FaPlus size={16} />
-                                          <div>
-                                            {hoveredId === id
-                                              ? "Add To Cart"
-                                              : "Add"}
-                                          </div>
-                                        </button>
+                                    }) => {
+                                      const cartItem = cartItems.find(
+                                        (item) => item.id === id
+                                      );
+                                      const quantityInCart = cartItem
+                                        ? cartItem.quantity
+                                        : 0;
+
+                                      return (
                                         <div
-                                          className="StoreImageAndDetailContainer"
-                                          onClick={() =>
-                                            handleOpenDetailModal({
-                                              id,
-                                              title,
-                                              image,
-                                              label,
-                                              actual_price,
-                                              selling_price,
-                                            })
-                                          }
+                                          className="StoreContainer"
+                                          key={id}
                                         >
-                                          <div className="StoreImage">
-                                            <img src={image} alt={title} />
-                                          </div>
-                                          <div className="StoreContainerDetail">
-                                            <div className="StoreContainerPrice">
-                                              <span className="StoreContainerPriceSup">
-                                                ${actual_price}
-                                              </span>
-                                              <span className="StoreContainerPriceSub">
-                                                ${selling_price}
+                                          <button
+                                            className="StoreContainerCartButton"
+                                            onMouseEnter={() =>
+                                              setHoveredId(id)
+                                            }
+                                            onMouseLeave={() =>
+                                              setHoveredId(null)
+                                            }
+                                            onClick={() =>
+                                              handleAddToCart({
+                                                id,
+                                                title,
+                                                image,
+                                                label,
+                                                actual_price,
+                                                selling_price,
+                                              })
+                                            }
+                                          >
+                                            <FaPlus size={16} />
+                                            <div>
+                                              {hoveredId === id
+                                                ? "Add To Cart"
+                                                : "Add"}
+                                            </div>
+                                            <div className="StoreContainerProductQuantity">
+                                              <span className="StoreContainerProductQuantitySpan">
+                                                {quantityInCart}
                                               </span>
                                             </div>
-                                            <div className="StoreContainerTitle">
-                                              {title}
+                                          </button>
+                                          <div
+                                            className="StoreImageAndDetailContainer"
+                                            onClick={() =>
+                                              handleOpenDetailModal({
+                                                id,
+                                                title,
+                                                image,
+                                                label,
+                                                actual_price,
+                                                selling_price,
+                                              })
+                                            }
+                                          >
+                                            <div className="StoreImage">
+                                              <img src={image} alt={title} />
                                             </div>
-                                            <div className="StoreContainerProductDetail">
-                                              {label}
+                                            <div className="StoreContainerDetail">
+                                              <div className="StoreContainerPrice">
+                                                <span className="StoreContainerPriceSup">
+                                                  ${actual_price}
+                                                </span>
+                                                <span className="StoreContainerPriceSub">
+                                                  ${selling_price}
+                                                </span>
+                                              </div>
+                                              <div className="StoreContainerTitle">
+                                                {title}
+                                              </div>
+                                              <div className="StoreContainerProductDetail">
+                                                {label}
+                                              </div>
                                             </div>
                                           </div>
                                         </div>
-                                      </div>
-                                    )
+                                      );
+                                    }
                                   )}
                                 </div>
                               </div>
@@ -204,23 +238,23 @@ const StoreProducts = () => {
                 )
               )
             )}
-          </div>
-          <div className="Pagination">
-            <button
-              onClick={handlePrevPage}
-              disabled={currentPage <= 1}
-              className="PaginationBack"
-            >
-              Previous
-            </button>
-            <span>{`Page ${currentPage}`}</span>
-            <button
-              onClick={handleNextPage}
-              disabled={currentPage >= Math.ceil(10 / itemsPerPage)}
-              className="PaginationNext"
-            >
-              Next
-            </button>
+            <div className="Pagination">
+              <button
+                onClick={handlePrevPage}
+                disabled={currentPage <= 1}
+                className="PaginationBack"
+              >
+                Previous
+              </button>
+              <span>{`Page ${currentPage}`}</span>
+              <button
+                onClick={handleNextPage}
+                disabled={currentPage >= Math.ceil(10 / itemsPerPage)}
+                className="PaginationNext"
+              >
+                Next
+              </button>
+            </div>
           </div>
         </div>
       </div>

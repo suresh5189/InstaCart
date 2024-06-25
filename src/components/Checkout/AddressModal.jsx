@@ -53,14 +53,14 @@ const AddressModal = ({
           street: streetAddress,
           floor: floorAddress,
           zip_code: zipCode,
-          business_name: null, // Assuming this is optional and not required for new addresses
-          latitude: null || 0, // Replace with actual latitude if available
-          longitude: null || 0, // Replace with actual longitude if available
+          business_name: null,
+          latitude: null || 0,
+          longitude: null || 0,
         };
         const refreshToken = localStorage.getItem("RefreshToken");
         const result = await addAddress(refreshToken, newAddress);
         if (result) {
-          onAddAddress(result.data); // Pass the newly added address to the parent component
+          onAddAddress(result.data);
           const addressObject = {
             street: result.data.street,
             floor: result.data.floor,

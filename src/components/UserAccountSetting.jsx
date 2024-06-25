@@ -7,7 +7,6 @@ import ChangeEmail from "../components/Auth/ChangeEmail";
 import ChangeName from "../components/Auth/ChangeName";
 import VerifyChangedPhoneNumber from "../components/Auth/VerifyChangedPhoneNumber";
 import { getUserDetails } from "../apiServices";
-import { updateProfile } from "../store/action/userActions";
 
 const User = () => {
   const navigate = useNavigate();
@@ -68,12 +67,12 @@ const User = () => {
 
   const [userDetails, setUserDetails] = useState(null);
 
-  const accessToken = localStorage.getItem("AccessToken");
+  const refreshToken = localStorage.getItem("RefreshToken");
   useEffect(() => {
     const fetchUserDetails = async () => {
       setIsLoading(true);
       try {
-        const getuserData = await getUserDetails(accessToken);
+        const getuserData = await getUserDetails(refreshToken);
         const userData = getuserData.data.data.userData;
         setUserDetails(userData);
         // console.log(userData);
@@ -85,10 +84,10 @@ const User = () => {
       }
     };
 
-    if (accessToken) {
+    if (refreshToken) {
       fetchUserDetails();
     }
-  }, [accessToken, dispatch]);
+  }, [refreshToken, dispatch]);
 
   if (isLoading) {
     return (

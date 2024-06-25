@@ -3,9 +3,8 @@ import { IoMdClose } from "react-icons/io";
 import GooglePay from "../../images/Payment/GooglePay.webp";
 import PaymentMethodData from "../../data/paymentMethod";
 
-const PaymentMethod = ({ onClose }) => {
-
-  const [selectedMethod,setSelectedMethod] = useState(null)
+const PaymentMethod = ({ onClose, onSelectedPaymentMethod }) => {
+  const [selectedMethod, setSelectedMethod] = useState(null);
 
   const handleOverlayClick = (e) => {
     if (e.target.classList.contains("Overlay")) {
@@ -13,9 +12,19 @@ const PaymentMethod = ({ onClose }) => {
     }
   };
 
-  const handlePaymentMethodClick = (index) =>{
+  const handlePaymentMethodClick = (index) => {
     setSelectedMethod(index);
-  }
+  };
+
+  const handleConfirmPaymentMethod = () => {
+    if (selectedMethod !== null) {
+      onSelectedPaymentMethod({
+        image: PaymentMethodData[selectedMethod].image,
+        title: PaymentMethodData[selectedMethod].title,
+      });
+    }
+    onClose();
+  };
 
   return (
     <>
@@ -50,10 +59,12 @@ const PaymentMethod = ({ onClose }) => {
           </div>
           <div>
             {PaymentMethodData.map((data, index) => (
-              <div className={`PaymentMethodGoogle ${
-                selectedMethod === index ? "Selected" : ""
-              }`}
-              onClick={()=>handlePaymentMethodClick(index)}
+              <div
+                key={index}
+                className={`PaymentMethodGoogle ${
+                  selectedMethod === index ? "Selected" : ""
+                }`}
+                onClick={() => handlePaymentMethodClick(index)}
               >
                 <span className="PaymentMethodGoogleImageDiv">
                   <img
@@ -68,7 +79,10 @@ const PaymentMethod = ({ onClose }) => {
           </div>
         </div>
         <div className="PaymentMethodButtonDiv">
-          <button className="PaymentMethodButton">
+          <button
+            className="PaymentMethodButton"
+            onClick={handleConfirmPaymentMethod}
+          >
             Confirm Payment Method
           </button>
         </div>
