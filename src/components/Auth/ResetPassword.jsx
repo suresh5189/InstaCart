@@ -56,7 +56,7 @@ const ResetPassword = ({ handleCloseModal, isOpenModal, handleClose }) => {
                     onChange={(e) => setEmailValue(e.target.value)}
                   />
                 </div>
-              {message && <p style={{ color: "red" }}>{message}</p>}
+                {message && <p style={{ color: "red" }}>{message}</p>}
               </div>
               <div className="LogButton">
                 <button className="ResetButton" onClick={handleResetPassword}>

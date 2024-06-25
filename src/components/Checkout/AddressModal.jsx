@@ -118,9 +118,8 @@ const AddressModal = ({
           />
           <div className="AddressButtonDiv">
             <button
-              className={`AddressButton ${
-                isSaveDisabled ? "disabledSaveButton" : "SaveButton"
-              }`}
+              className={`AddressButton ${isSaveDisabled ? "disabledSaveButton" : "SaveButton"
+                }`}
               onClick={handleSaveAddress}
               disabled={isSaveDisabled}
             >

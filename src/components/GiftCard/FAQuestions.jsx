@@ -3,21 +3,21 @@ import Faq from "react-faq-component";
 import data from '../../data/giftCardFaq';
 
 const styles = {
-    bgColor: "white",
-    titleTextColor: "black",
-    rowTitleColor: "black",
-    rowTitleTextSize: "20px",
-    rowContentColor: "grey",
-    rowContentTextSize: "17px",
-  };
-  
-  const config = {
-    animate: true,
-    arrowIcon: "V",
-    tabFocus: true,
-    expandIcon: "+",
-    collapseIcon: "-",
-  };
+  bgColor: "white",
+  titleTextColor: "black",
+  rowTitleColor: "black",
+  rowTitleTextSize: "20px",
+  rowContentColor: "grey",
+  rowContentTextSize: "17px",
+};
+
+const config = {
+  animate: true,
+  arrowIcon: "V",
+  tabFocus: true,
+  expandIcon: "+",
+  collapseIcon: "-",
+};
 
 const FAQuestions = () => {
   return (

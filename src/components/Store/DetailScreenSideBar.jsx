@@ -7,7 +7,7 @@ import { MdKeyboardArrowRight } from "react-icons/md";
 import StoreDetailsInfoPage from "./StoreInformation";
 import { getStoreFrontDetails } from "../../apiServices";
 
-const DetailScreenSidebar = ({ storeId, image, title,handleCategoryClick }) => {
+const DetailScreenSidebar = ({ storeId, image, title, handleCategoryClick }) => {
   const [openDetailInfoModal, setOpenDetailInfoModal] = useState(false);
   const [storeFrontItems, setStoreFrontItems] = useState([]);
 
@@ -95,7 +95,7 @@ const DetailScreenSidebar = ({ storeId, image, title,handleCategoryClick }) => {
                 <div
                   className="SideBarDetailButtonSpanHead"
                   key={category.category_id}
-                  onClick={()=>handleCategoryClick(category.category_name)}
+                  onClick={() => handleCategoryClick(category.category_name)}
                 >
                   <span className="SideBarDetailButtonSpan">
                     {category.category_name}

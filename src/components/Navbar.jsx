@@ -209,7 +209,7 @@ function Navbar({ onLoginClick, onSignUpClick, isLoggedIn, handleLogout }) {
                   <span>
                     <FaShoppingCart size={22} className="CartIcon" />
                   </span>
-                  <span className="CartIconCount">{totalItems-1}</span>
+                  <span className="CartIconCount">{totalItems - 1}</span>
                 </div>
                 {cart && <Cart closeCart={closeCart} isOpenCart={handleCart} />}
               </div>

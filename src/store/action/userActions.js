@@ -68,6 +68,6 @@ export const updateCartItemQuantity = (itemId, quantity) => ({
 });
 
 export const updateTotalPrice = (totalPrice) => ({
-  type:UPDATE_TOTAL_PRICE,
-  payload:totalPrice,
+  type: UPDATE_TOTAL_PRICE,
+  payload: totalPrice,
 })

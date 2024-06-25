@@ -61,9 +61,8 @@ const PaymentMethod = ({ onClose, onSelectedPaymentMethod }) => {
             {PaymentMethodData.map((data, index) => (
               <div
                 key={index}
-                className={`PaymentMethodGoogle ${
-                  selectedMethod === index ? "Selected" : ""
-                }`}
+                className={`PaymentMethodGoogle ${selectedMethod === index ? "Selected" : ""
+                  }`}
                 onClick={() => handlePaymentMethodClick(index)}
               >
                 <span className="PaymentMethodGoogleImageDiv">

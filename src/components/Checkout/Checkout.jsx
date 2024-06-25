@@ -290,7 +290,7 @@ const Checkout = () => {
                                 <div>
                                   <div
                                     className="CheckoutDeliveryAddressEditButtonDiv"
-                                    // onClick={handleEditAddress}
+                                  // onClick={handleEditAddress}
                                   >
                                     <span
                                       className="CheckoutDeliveryAddressEditButton"
@@ -463,9 +463,8 @@ const Checkout = () => {
                       onClick={handleSaveAndContinuePhone}
                     >
                       <button
-                        className={`AddressButton ${
-                          isSaveDisabled ? "disabledSaveButton" : "SaveButton"
-                        }`}
+                        className={`AddressButton ${isSaveDisabled ? "disabledSaveButton" : "SaveButton"
+                          }`}
                         disabled={isSaveDisabled}
                       >
                         Save & Continue
@@ -622,11 +621,10 @@ const Checkout = () => {
                                 <img
                                   src={image}
                                   alt=""
-                                  className={`MakeAGiftCardImage ${
-                                    selectedImageId === id
+                                  className={`MakeAGiftCardImage ${selectedImageId === id
                                       ? "SelectedImage"
                                       : ""
-                                  }`}
+                                    }`}
                                   onClick={() => handleMakeAGiftImageClick(id)}
                                 />
                               </li>
@@ -714,11 +712,10 @@ const Checkout = () => {
             </div>
             <div className="CheckoutContinueButtonDiv">
               <button
-                className={`CheckoutContinueButton ${
-                  onSelectedPaymentMethod === null
+                className={`CheckoutContinueButton ${onSelectedPaymentMethod === null
                     ? "disabledSaveButton"
                     : "SaveButton"
-                }`}
+                  }`}
                 onClick={handleOrderPlacedContinue}
               >
                 Continue
@@ -728,11 +725,10 @@ const Checkout = () => {
           <div>
             <div className="CheckoutContinueButtonOutsideDiv">
               <button
-                className={`CheckoutContinueButton ${
-                  onSelectedPaymentMethod === null
+                className={`CheckoutContinueButton ${onSelectedPaymentMethod === null
                     ? "disabledSaveButton"
                     : "SaveButton"
-                }`}
+                  }`}
                 onClick={handleOrderPlacedContinue}
               >
                 Continue

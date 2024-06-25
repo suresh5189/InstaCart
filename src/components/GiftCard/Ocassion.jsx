@@ -9,15 +9,15 @@ const Ocassion = () => {
       <div className="OccasionHeading">Perfect for any occasion</div>
       <div className="OccasionContainer">
         <div className="OccasionImageContainer">
-          <img src={Support} alt="" className="OccasionImage"/>
+          <img src={Support} alt="" className="OccasionImage" />
           <h2 className="OccasionText">Support loved ones</h2>
         </div>
         <div className="OccasionImageContainer">
-          <img src={Virtual} alt="" className="OccasionImage"/>
+          <img src={Virtual} alt="" className="OccasionImage" />
           <h2 className="OccasionText">Support loved ones</h2>
         </div>
         <div className="OccasionImageContainer">
-          <img src={Congrats} alt="" className="OccasionImage"/>
+          <img src={Congrats} alt="" className="OccasionImage" />
           <h2 className="OccasionText">Support loved ones</h2>
         </div>
       </div>

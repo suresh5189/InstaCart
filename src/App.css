@@ -596,6 +596,7 @@ input[type="search"]::placeholder {
   justify-content: space-evenly;
   margin-top: 10px;
 }
+
 .LegalIcon span {
   margin-right: 12px;
 }
@@ -986,6 +987,7 @@ Input {
 .SideBarButtonAllList {
   display: flex;
 }
+
 .SideBarButtonList {
   margin-right: 8px;
 }
@@ -2406,9 +2408,11 @@ Input {
   0% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(-25px);
   }
+
   100% {
     transform: translateY(0);
   }
@@ -2418,9 +2422,11 @@ Input {
   0% {
     transform: translateX(0);
   }
+
   50% {
     transform: translateX(-25px);
   }
+
   100% {
     transform: translateX(0);
   }
@@ -3321,6 +3327,7 @@ Input {
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }

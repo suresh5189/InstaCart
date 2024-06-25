@@ -225,8 +225,8 @@ const Login = ({
                           name="phoneNumber"
                           id="phoneNumber"
                           placeholder="Phone Number"
-                          // value={phoneNumber}
-                          // onChange={(e) => setPhoneNumber(e.target.value)}
+                        // value={phoneNumber}
+                        // onChange={(e) => setPhoneNumber(e.target.value)}
                         />
                         <ErrorMessage
                           name="phoneNumber"

@@ -129,111 +129,111 @@ const StoreProducts = () => {
                     {Object.entries(subcategories).some(
                       ([subcategory, products]) => products.length > 0
                     ) && (
-                      <div className="StoreDetailHead">
-                        <div className="StoreHeading">{category}</div>
-                        {Object.entries(subcategories).map(
-                          ([subcategory, products]) =>
-                            products.length > 0 && (
-                              <div key={subcategory}>
-                                <div className="StoreSubHeading">
-                                  {subcategory}
-                                </div>
-                                <div className="StoreContainerHead">
-                                  {products.map(
-                                    ({
-                                      id,
-                                      title,
-                                      image,
-                                      label,
-                                      actual_price,
-                                      selling_price,
-                                    }) => {
-                                      const cartItem = cartItems.find(
-                                        (item) => item.id === id
-                                      );
-                                      const quantityInCart = cartItem
-                                        ? cartItem.quantity
-                                        : 0;
+                        <div className="StoreDetailHead">
+                          <div className="StoreHeading">{category}</div>
+                          {Object.entries(subcategories).map(
+                            ([subcategory, products]) =>
+                              products.length > 0 && (
+                                <div key={subcategory}>
+                                  <div className="StoreSubHeading">
+                                    {subcategory}
+                                  </div>
+                                  <div className="StoreContainerHead">
+                                    {products.map(
+                                      ({
+                                        id,
+                                        title,
+                                        image,
+                                        label,
+                                        actual_price,
+                                        selling_price,
+                                      }) => {
+                                        const cartItem = cartItems.find(
+                                          (item) => item.id === id
+                                        );
+                                        const quantityInCart = cartItem
+                                          ? cartItem.quantity
+                                          : 0;
 
-                                      return (
-                                        <div
-                                          className="StoreContainer"
-                                          key={id}
-                                        >
-                                          <button
-                                            className="StoreContainerCartButton"
-                                            onMouseEnter={() =>
-                                              setHoveredId(id)
-                                            }
-                                            onMouseLeave={() =>
-                                              setHoveredId(null)
-                                            }
-                                            onClick={() =>
-                                              handleAddToCart({
-                                                id,
-                                                title,
-                                                image,
-                                                label,
-                                                actual_price,
-                                                selling_price,
-                                              })
-                                            }
-                                          >
-                                            <FaPlus size={16} />
-                                            <div>
-                                              {hoveredId === id
-                                                ? "Add To Cart"
-                                                : "Add"}
-                                            </div>
-                                            <div className="StoreContainerProductQuantity">
-                                              <span className="StoreContainerProductQuantitySpan">
-                                                {quantityInCart}
-                                              </span>
-                                            </div>
-                                          </button>
+                                        return (
                                           <div
-                                            className="StoreImageAndDetailContainer"
-                                            onClick={() =>
-                                              handleOpenDetailModal({
-                                                id,
-                                                title,
-                                                image,
-                                                label,
-                                                actual_price,
-                                                selling_price,
-                                              })
-                                            }
+                                            className="StoreContainer"
+                                            key={id}
                                           >
-                                            <div className="StoreImage">
-                                              <img src={image} alt={title} />
-                                            </div>
-                                            <div className="StoreContainerDetail">
-                                              <div className="StoreContainerPrice">
-                                                <span className="StoreContainerPriceSup">
-                                                  ${actual_price}
-                                                </span>
-                                                <span className="StoreContainerPriceSub">
-                                                  ${selling_price}
+                                            <button
+                                              className="StoreContainerCartButton"
+                                              onMouseEnter={() =>
+                                                setHoveredId(id)
+                                              }
+                                              onMouseLeave={() =>
+                                                setHoveredId(null)
+                                              }
+                                              onClick={() =>
+                                                handleAddToCart({
+                                                  id,
+                                                  title,
+                                                  image,
+                                                  label,
+                                                  actual_price,
+                                                  selling_price,
+                                                })
+                                              }
+                                            >
+                                              <FaPlus size={16} />
+                                              <div>
+                                                {hoveredId === id
+                                                  ? "Add To Cart"
+                                                  : "Add"}
+                                              </div>
+                                              <div className="StoreContainerProductQuantity">
+                                                <span className="StoreContainerProductQuantitySpan">
+                                                  {quantityInCart}
                                                 </span>
                                               </div>
-                                              <div className="StoreContainerTitle">
-                                                {title}
+                                            </button>
+                                            <div
+                                              className="StoreImageAndDetailContainer"
+                                              onClick={() =>
+                                                handleOpenDetailModal({
+                                                  id,
+                                                  title,
+                                                  image,
+                                                  label,
+                                                  actual_price,
+                                                  selling_price,
+                                                })
+                                              }
+                                            >
+                                              <div className="StoreImage">
+                                                <img src={image} alt={title} />
                                               </div>
-                                              <div className="StoreContainerProductDetail">
-                                                {label}
+                                              <div className="StoreContainerDetail">
+                                                <div className="StoreContainerPrice">
+                                                  <span className="StoreContainerPriceSup">
+                                                    ${actual_price}
+                                                  </span>
+                                                  <span className="StoreContainerPriceSub">
+                                                    ${selling_price}
+                                                  </span>
+                                                </div>
+                                                <div className="StoreContainerTitle">
+                                                  {title}
+                                                </div>
+                                                <div className="StoreContainerProductDetail">
+                                                  {label}
+                                                </div>
                                               </div>
                                             </div>
                                           </div>
-                                        </div>
-                                      );
-                                    }
-                                  )}
+                                        );
+                                      }
+                                    )}
+                                  </div>
                                 </div>
-                              </div>
-                            )
-                        )}
-                      </div>
-                    )}
+                              )
+                          )}
+                        </div>
+                      )}
                   </div>
                 )
               )
