@@ -10,6 +10,8 @@ import {
   UPDATE_CART_ITEM_QUANTITY,
   UPDATE_USER_PROFILE,
   UPDATE_TOTAL_PRICE,
+  ADD_TO_FAVORITE,
+  REMOVE_FROM_FAVORITE,
 } from "../ActionTypes";
 
 export const updateProfile = (userData) => ({
@@ -71,3 +73,17 @@ export const updateTotalPrice = (totalPrice) => ({
   type: UPDATE_TOTAL_PRICE,
   payload: totalPrice,
 })
+
+export const addToFavorite =(item) => {
+  return {
+    type:ADD_TO_FAVORITE,
+    payload:item
+  }
+}
+
+export const removeFromFavorite = (item) => {
+  return {
+    type:REMOVE_FROM_FAVORITE,
+    payload:item.id
+  }
+}

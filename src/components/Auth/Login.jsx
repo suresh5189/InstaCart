@@ -5,7 +5,12 @@ import { FaPhoneVolume } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
 import { MdEmail } from "react-icons/md";
 import ResetPassword from "./ResetPassword";
-import { getUserDetails, login, verifyOTPLogin } from "../../apiServices";
+import {
+  getUserDetails,
+  login,
+  refreshAccessToken,
+  verifyOTPLogin,
+} from "../../apiServices";
 import { useDispatch } from "react-redux";
 import { setEmail, updateProfile } from "../../store/action/userActions";
 import { loginSuccess } from "../../store/action/authActions";
@@ -42,21 +47,22 @@ const Login = ({
 
   const handleLogin = async (values) => {
     const { email, password } = values;
-
     if (signWithPhone) {
       // If signing in with phone number
-      if (!selectedCountry) {
-        setResponseMessage("Please select a country code.");
-        return;
-      }
-      if (!phoneNumber) {
-        setResponseMessage("Please enter your phone number.");
+      if (!selectedCountry && !phoneNumber) {
+        console.log(selectedCountry);
+        setResponseMessage(
+          "Please select a Country Code and Enter Correct Number"
+        );
         return;
       }
 
       setIsLoading(true);
       try {
         // Use your verifyLogin API for phone number
+        const responseData = await login(selectedCountry.value,phoneNumber);
+        // console.log(responseData);
+
         const response = await verifyOTPLogin(
           selectedCountry.value,
           phoneNumber
@@ -141,6 +147,22 @@ const Login = ({
   //   return hiddenPart + visiblePart;
   // };
 
+  const handleRefreshToken = async () => {
+    try {
+      const refreshToken = localStorage.getItem("RefreshToken");
+      const { accessToken } = await refreshAccessToken(refreshToken);
+      localStorage.setItem("AccessToken", accessToken);
+    } catch (error) {
+      console.log("Error Refreshing Token", error.message);
+    }
+  };
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      handleRefreshToken();
+    }
+  }, [isLoggedIn]);
+
   return (
     <>
       {!isResetOpen && !isLoggedIn && (
@@ -187,78 +209,79 @@ const Login = ({
                 <hr className="HorizontalLine" />
               </div>
               {signWithPhone ? (
-                <Formik
-                  initialValues={{ phoneNumber: "" }}
-                  validate={(values) => {
-                    const errors = {};
-                    if (!selectedCountry) {
-                      errors.selectedCountry = "Please select a country code.";
-                    }
-                    if (!values.phoneNumber) {
-                      errors.phoneNumber = "Please enter your phone number.";
-                    }
-                    return errors;
-                  }}
-                  onSubmit={(values, { setSubmitting }) => {
-                    handleLogin(values);
-                    setSubmitting(false);
-                  }}
-                >
-                  {({ isSubmitting }) => (
-                    <Form className="Form">
-                      <div className="Input">
-                        <Select
-                          // value={selectedCountry}
-                          // onChange={setSelectedCountry}
-                          options={countryOptions}
-                          placeholder="Select Country Code"
-                          className="CountryCodeFieldLogin"
-                          name="selectedCountry"
-                        />
-                        <ErrorMessage
+                // <Formik
+                //   initialValues={{ selectedCountry: null, phoneNumber: "" }}
+                //   validate={(values) => {
+                //     const errors = {};
+                //     if (!values.selectedCountry) {
+                //       errors.selectedCountry = "Please select a country code.";
+                //     }
+                //     if (!values.phoneNumber) {
+                //       errors.phoneNumber = "Please enter your phone number.";
+                //     }
+                //     return errors;
+                //   }}
+                //   onSubmit={(values, { setSubmitting }) => {
+                //     handleLogin(values);
+                //     setSubmitting(false);
+                //   }}
+                // >
+                //   {({ isSubmitting }) => (
+                <form className="Form">
+                  <div className="Input">
+                    <Select
+                      value={selectedCountry}
+                      onChange={setSelectedCountry}
+                      options={countryOptions}
+                      placeholder="Select Country Code"
+                      className="CountryCodeFieldLogin"
+                      name="selectedCountry"
+                    />
+                    {/* <ErrorMessage
                           name="selectedCountry"
                           component="div"
                           style={{ color: "red", marginBottom: "5px" }}
-                        />
-                        <Field
-                          type="tel"
-                          name="phoneNumber"
-                          id="phoneNumber"
-                          placeholder="Phone Number"
-                        // value={phoneNumber}
-                        // onChange={(e) => setPhoneNumber(e.target.value)}
-                        />
-                        <ErrorMessage
+                        /> */}
+                    <input
+                      type="tel"
+                      name="phoneNumber"
+                      id="phoneNumber"
+                      placeholder="Phone Number"
+                      value={phoneNumber}
+                      onChange={(e) => setPhoneNumber(e.target.value)}
+                    />
+                    {/* <ErrorMessage
                           name="phoneNumber"
                           component="div"
                           style={{ color: "red", marginBottom: "5px" }}
-                        />
-                        <input
-                          type="text"
-                          // value={maskOtpId(otpId)}
-                          placeholder="OTP ID"
-                          className="PhoneNumberInput"
-                          readOnly
-                        />
-                      </div>
-                      <div className="LogButton">
-                        <button
-                          className="LoginButton"
-                          disabled={isLoading || isSubmitting}
-                          type="submit"
-                        >
-                          <span>{isLoading ? "Loading..." : "Login"}</span>
-                        </button>
-                        {responseMessage && (
-                          <p style={{ color: "red", textAlign: "center" }}>
-                            {responseMessage}
-                          </p>
-                        )}
-                      </div>
-                    </Form>
-                  )}
-                </Formik>
+                        /> */}
+                    <input
+                      type="text"
+                      // value={maskOtpId(otpId)}
+                      placeholder="OTP ID"
+                      className="PhoneNumberInput"
+                      readOnly
+                    />
+                  </div>
+                  <div className="LogButton">
+                    <button
+                      type="submit"
+                      className="LoginButton"
+                      disabled={isLoading}
+                      onClick={handleLogin}
+                    >
+                      <span>{isLoading ? "Loading..." : "Login"}</span>
+                    </button>
+                    {responseMessage && (
+                      <p style={{ color: "red", textAlign: "center" }}>
+                        {responseMessage}
+                      </p>
+                    )}
+                  </div>
+                </form>
               ) : (
+                // )}
+                // </Formik>
                 <Formik
                   initialValues={{ email: "", password: "" }}
                   validate={(values) => {

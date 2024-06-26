@@ -1549,6 +1549,12 @@ Input {
   margin-right: 10px;
 }
 
+.HeartButton {
+  padding: 0 !important;
+  width: 20px !important;
+  height: 20px !important;
+}
+
 .StoreItemDetailButtonContainerItemCount {
   display: flex;
   padding: 10px;
@@ -3623,7 +3629,6 @@ Input {
   left: 0;
   width: 100% !important;
   height: 100% !important;
-  /* backdrop-filter: blur(1px); */
   background-color: rgba(0, 0, 0, 0.4);
   display: flex;
   justify-content: center;
@@ -3635,4 +3640,125 @@ Input {
   color: white;
   font-size: 40px;
   font-family: "Playfair Display";
+}
+
+.LottieFavoriteAnimation {
+  font-size: 17px;
+  width: 100% !important;
+  height: 100% !important;
+  text-align: center;
+  font-family: "Playfair Display";
+  color: rgb(66, 66, 66);
+}
+
+.NotFoundFavoriteAnimationDiv {
+  margin-left: 150%;
+  width: 100%;
+}
+
+/* ----------------------------------------------------------------------- */
+/* ----------------------------------------------------------------------- */
+
+/* Favorite Page */
+
+.FavoriteHeading {
+  text-align: center;
+  margin: 20px 0;
+  font-family: "Playfair Display";
+  font-size: 22px;
+  color: rgb(97, 96, 96);
+}
+
+.Favorite {
+  margin: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 360px);
+  align-items: center;
+}
+
+.FavoriteDiv {
+  width: 300px;
+  height: 404px;
+  /* background: #07182e; */
+  position: relative;
+  display: flex;
+  place-content: center;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 20px;
+  flex-direction: column;
+  font-family: "Playfair Display";
+  margin: 20px;
+}
+
+.FavoriteDiv::before {
+  content: "";
+  position: absolute;
+  width: 100px;
+  background-image: linear-gradient(
+    180deg,
+    rgb(0, 183, 255),
+    rgb(255, 48, 255)
+  );
+  height: 130%;
+  animation: rotBGimg 3s linear infinite;
+  transition: all 0.2s linear;
+}
+
+@keyframes rotBGimg {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.FavoriteDiv::after {
+  content: "";
+  position: absolute;
+  background: #f8f8f8;
+  inset: 5px;
+  border-radius: 15px;
+}
+
+.FavoriteImageDiv,
+.FavoriteTitleDiv,
+.FavoritePriceDiv,
+.FavoriteLabelDiv {
+  z-index: 1;
+  /* color: white; */
+}
+
+.FavoriteImage {
+  height: 200px;
+  width: 200px;
+  display: flex;
+  align-items: center;
+  border-radius: 15px;
+}
+
+.FavoriteTitleDiv {
+  width: 200px;
+  text-align: center;
+  font-size: 17px;
+  font-family: "Playfair Display";
+  margin: 5px 0;
+}
+
+.FavoritePriceDiv {
+  margin: 5px 0;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: rgb(190, 187, 187);
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.FavoriteLabelDiv {
+  background-color: rgb(255, 250, 204);
+  padding: 4px 15px;
+  border-radius: 5px;
+  margin: 5px 0;
 }

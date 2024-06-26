@@ -24,6 +24,7 @@ import GiftCardNav from "./components/GiftCard/GiftCardNav";
 import { useDispatch } from "react-redux";
 import { logoutSuccess } from "./store/action/authActions";
 import { toast } from "react-toastify";
+import Favorite from "./components/Store/Favorite";
 
 function App() {
   const [showLoginModal, setShowLoginModal] = useState(false);
@@ -69,11 +70,11 @@ function App() {
       "/",
       "/store/:storeId/storefront",
       "/store/userinformation/account",
-      // "/store/account/manage_promos",
       "/store/category",
       "/store/category/populargifts",
       "/popular-gifts/category/:index",
       "/store:id/info",
+      "/favorites"
     ];
 
     if (navbarPaths.includes(currentPath)) {
@@ -147,6 +148,7 @@ function App() {
           />
           <Route path="/store/:id/info" element={<StoreDetailsInfoPage />} />
           <Route path="/store/checkout" element={<Checkout />} />
+          <Route path="favorites" element={<Favorite />} />
         </Routes>
       </Router>
     </div>

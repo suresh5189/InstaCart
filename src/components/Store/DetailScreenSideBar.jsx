@@ -2,14 +2,27 @@ import React, { useEffect, useState } from "react";
 import { FaShop } from "react-icons/fa6";
 import { TbReload } from "react-icons/tb";
 import { FaListUl } from "react-icons/fa";
+import { MdFavorite } from "react-icons/md";
 import { MdKeyboardArrowRight } from "react-icons/md";
 // import DetailSideBarData from "../../data/detailSidebarData";
 import StoreDetailsInfoPage from "./StoreInformation";
 import { getStoreFrontDetails } from "../../apiServices";
+import { useNavigate } from "react-router-dom";
 
-const DetailScreenSidebar = ({ storeId, image, title, handleCategoryClick }) => {
+const DetailScreenSidebar = ({
+  storeId,
+  image,
+  title,
+  handleCategoryClick,
+}) => {
   const [openDetailInfoModal, setOpenDetailInfoModal] = useState(false);
   const [storeFrontItems, setStoreFrontItems] = useState([]);
+
+  const navigate = useNavigate();
+
+  const handleNavigatefavorite = () => {
+    navigate("/favorites");
+  };
 
   const handleOpenDetailInfoModal = () => {
     setOpenDetailInfoModal(true);
@@ -80,6 +93,12 @@ const DetailScreenSidebar = ({ storeId, image, title, handleCategoryClick }) => 
             <span className="SideBarStoreButtonText">
               <FaListUl size={20} />
               <span className="SideBarStoreButtonSpan">Lists</span>
+            </span>
+          </div>
+          <div className="SideBarStoreButton" onClick={handleNavigatefavorite}>
+            <span className="SideBarStoreButtonText">
+              <MdFavorite size={20} />
+              <span className="SideBarStoreButtonSpan">Favorite</span>
             </span>
           </div>
         </div>

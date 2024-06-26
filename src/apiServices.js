@@ -12,6 +12,24 @@ const apiServices = axios.create({
 
 // ------------------------------------------------------------------------
 
+// Refresh Token
+
+export const refreshAccessToken = async (refreshToken) => {
+  try {
+    const response = await apiServices.post("/refreshAccessToken", {
+      refreshToken,
+    });
+    // console.log(response.data);
+    return response.data;
+  } catch (error) {
+    throw new Error(
+      error.response.data.message || "Failed To Refresh Access Token"
+    );
+  }
+};
+
+// ----------------------------------------------------------------------------
+
 // Register
 
 export const sendOTPRegister = async ({ email, country_code, phoneNumber }) => {
@@ -106,9 +124,15 @@ export const verifyOTPRegister = async (
 
 // Login
 
-export const login = async (email, password) => {
+export const login = async (country_code, phoneno,email, password) => {
   try {
-    const response = await apiServices.post("/login", { email, password });
+    let response;
+    if (phoneno) {
+      response = await apiServices.post("/login", {country_code, phoneno });
+    } 
+    else {
+      response = await apiServices.post("/login", {email, password });
+    }
     // console.log(response);
     if (response.status === 200) {
       const { accessToken, refreshToken } = response.data.data.JWTToken;
@@ -144,8 +168,8 @@ export const verifyOTPLogin = async (
       otpid,
     };
 
+    console.log(requestBody);
     const response = await apiServices.post("/login/verify", requestBody);
-
     if (response.status === 200) {
       const accessToken = response.data.data.JWTToken.accessToken;
       localStorage.setItem("AccessToken", accessToken);
