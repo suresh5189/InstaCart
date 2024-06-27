@@ -124,30 +124,45 @@ export const verifyOTPRegister = async (
 
 // Login
 
-export const login = async (country_code, phoneno,email, password) => {
+export const login = async (identifier, credential) => {
   try {
     let response;
-    if (phoneno) {
-      response = await apiServices.post("/login", {country_code, phoneno });
-    } 
-    else {
-      response = await apiServices.post("/login", {email, password });
+    if (identifier.includes("@")) {
+      // Email login
+      response = await apiServices.post("/login", {
+        email: identifier,
+        password: credential,
+      });
+    } else {
+      // Phone number login
+      response = await apiServices.post("/login", {
+        phoneno: credential,
+        country_code: identifier,
+      });
     }
-    // console.log(response);
+
     if (response.status === 200) {
-      const { accessToken, refreshToken } = response.data.data.JWTToken;
-      localStorage.setItem("AccessToken", accessToken);
-      localStorage.setItem("RefreshToken", refreshToken);
-      const decodeRefreshToken = jwtDecode(refreshToken);
-      const userId = decodeRefreshToken.userId;
-      return { ...response.data, userId };
+      if (identifier.includes("@")) {
+        // Handle email login response
+        const { accessToken, refreshToken } = response.data.data.JWTToken;
+        localStorage.setItem("AccessToken", accessToken);
+        localStorage.setItem("RefreshToken", refreshToken);
+        const decodeRefreshToken = jwtDecode(refreshToken);
+        const userId = decodeRefreshToken.userId;
+        return { ...response.data, userId };
+      } else {
+        // Handle phone number login response
+        return { data: response.data, userId: null }; // Adjust as per your backend response
+      }
     } else {
       throw new Error("Login Failed");
     }
   } catch (error) {
-    throw new Error(
-      error.response.data.message || "Please Enter Correct Email And Password"
-    );
+    if (error.response && error.response.data && error.response.data.message) {
+      throw new Error(error.response.data.message);
+    } else {
+      throw new Error("Login Failed");
+    }
   }
 };
 
@@ -157,8 +172,8 @@ export const login = async (country_code, phoneno,email, password) => {
 export const verifyOTPLogin = async (
   country_code,
   phoneno,
-  enteredotp,
-  otpid
+  otpid,
+  enteredotp
 ) => {
   try {
     let requestBody = {
@@ -168,11 +183,12 @@ export const verifyOTPLogin = async (
       otpid,
     };
 
-    console.log(requestBody);
+    // console.log(requestBody);
     const response = await apiServices.post("/login/verify", requestBody);
-    if (response.status === 200) {
-      const accessToken = response.data.data.JWTToken.accessToken;
+    if (response.status === 201) {
+      const { accessToken, refreshToken } = response.data.data.JWTToken;
       localStorage.setItem("AccessToken", accessToken);
+      localStorage.setItem("RefreshToken", refreshToken);
       return { status: "success", message: "OTP verified successfully" };
     } else {
       throw new Error("Invalid OTP");
@@ -181,6 +197,20 @@ export const verifyOTPLogin = async (
     throw new Error(
       error.response?.data?.msg || "Error verifying OTP. Please try again."
     );
+  }
+};
+
+// -------------------------------------------------------------------------------
+
+// Resend OTP
+
+export const resendOTP = async (otpid) => {
+  try {
+    const response = await apiServices.post("/resendOtp", { otpid });
+    // console.log(response);
+    return response;
+  } catch (error) {
+    throw new Error(error.response.data.message || "Error Resending OTP");
   }
 };
 
@@ -597,5 +627,51 @@ export const getAllAddress = async (accessToken) => {
 };
 
 // ----------------------------------------------------------------------------------------
+
+// Add To Save Product
+
+export const addToSavedProduct = async (productId, accessToken) => {
+  try {
+    const response = await apiServices.post(
+      "/products/addtosaved",
+      { productId },
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    throw new Error(
+      error.response.data.message || "Errror Adding To Save Product"
+    );
+  }
+};
+
+// ----------------------------------------------------------------------------------------
+
+// Remove From Saved Product
+
+export const removeFromSavedProduct = async (productId, accessToken) => {
+  try {
+    const response = await apiServices.delete(
+      `/products/saved/remove/${productId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    throw new Error(
+      error.response.data.message || "Error Reomving From Saved Product"
+    );
+  }
+};
+
+// ------------------------------------------------------------------------------------------
 
 export default apiServices;

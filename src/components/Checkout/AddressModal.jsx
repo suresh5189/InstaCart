@@ -70,7 +70,7 @@ const AddressModal = ({
             "DeliveryAddress",
             JSON.stringify(addressObject)
           );
-          console.log("Address added successfully:", result);
+          // console.log("Address added successfully:", result);
         }
         onClose();
       } catch (error) {

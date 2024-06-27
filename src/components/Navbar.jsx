@@ -56,7 +56,7 @@ function Navbar({ onLoginClick, onSignUpClick, isLoggedIn, handleLogout }) {
   const handleSearchInputChange = async (event) => {
     const query = event.target.value;
     setSearchQuery(query);
-    if (query.trim() != "") {
+    if (query.trim() !== "") {
       try {
         const suggestions = await searchStore(query);
         const { matchingStores, matchingProducts } = suggestions.data;
@@ -209,7 +209,7 @@ function Navbar({ onLoginClick, onSignUpClick, isLoggedIn, handleLogout }) {
                   <span>
                     <FaShoppingCart size={22} className="CartIcon" />
                   </span>
-                  <span className="CartIconCount">{totalItems - 1}</span>
+                  <span className="CartIconCount">{totalItems}</span>
                 </div>
                 {cart && <Cart closeCart={closeCart} isOpenCart={handleCart} />}
               </div>

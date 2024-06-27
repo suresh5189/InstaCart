@@ -1,30 +1,20 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { ImFacebook2 } from "react-icons/im";
 import { FaPhoneVolume } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
 import { MdEmail } from "react-icons/md";
 import ResetPassword from "./ResetPassword";
-import {
-  getUserDetails,
-  login,
-  refreshAccessToken,
-  verifyOTPLogin,
-} from "../../apiServices";
+import { getUserDetails, login, refreshAccessToken } from "../../apiServices";
 import { useDispatch } from "react-redux";
 import { setEmail, updateProfile } from "../../store/action/userActions";
 import { loginSuccess } from "../../store/action/authActions";
 import { toast } from "react-toastify";
 import Select from "react-select";
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import VerifyLoginOTP from "../Auth/VerifyLoginOTP";
 
-const Login = ({
-  handleClose,
-  handleOpen,
-  handleSignUpClick,
-  handleLoginSuccess,
-}) => {
-  const refLogin = useRef(null);
+const Login = ({ handleClose, handleSignUpClick, handleLoginSuccess }) => {
   const dispatch = useDispatch();
 
   const [isResetOpen, setIsResetOpen] = useState(false);
@@ -34,6 +24,8 @@ const Login = ({
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [phoneNumber, setPhoneNumber] = useState("");
   const [signWithPhone, setSignWithPhone] = useState(false);
+  const [showOTPModal, setShowOTPModal] = useState(false);
+  const [isOtpid, setIsOtpid] = useState(null);
 
   const countryOptions = [
     { value: "+91", label: "+91 - India" },
@@ -46,7 +38,6 @@ const Login = ({
   ];
 
   const handleLogin = async (values) => {
-    const { email, password } = values;
     if (signWithPhone) {
       // If signing in with phone number
       if (!selectedCountry && !phoneNumber) {
@@ -60,33 +51,22 @@ const Login = ({
       setIsLoading(true);
       try {
         // Use your verifyLogin API for phone number
-        const responseData = await login(selectedCountry.value,phoneNumber);
-        // console.log(responseData);
+        const responseData = await login(selectedCountry.value, phoneNumber);
+        const otpid = responseData.data.data.otpid;
+        setIsOtpid(otpid);
 
-        const response = await verifyOTPLogin(
-          selectedCountry.value,
-          phoneNumber
-        );
-        console.log(response);
-        const refreshToken = localStorage.getItem("RefreshToken");
-        const getUserData = await getUserDetails(refreshToken);
-        setIsLoggedIn(true);
-        handleLoginSuccess();
-        dispatch(updateProfile(getUserData.data.data.userData));
-        toast.success("Logged In Successfully", {
-          position: "bottom-center",
-          autoClose: 2000,
-          hideProgressBar: true,
-        });
+        setShowOTPModal(true);
       } catch (error) {
-        console.error("Error Logging In", error.message);
+        console.error("Error Logging In From Phone Number", error.message);
         setResponseMessage(
-          error.message || "Error Logging In. Please try again."
+          error.message ||
+            "Error Logging In From Phone Number. Please try again."
         );
       } finally {
         setIsLoading(false);
       }
     } else {
+      const { email, password } = values;
       // If signing in with email
       if (!email || !password) {
         setResponseMessage("Please enter email and password.");
@@ -110,9 +90,9 @@ const Login = ({
           hideProgressBar: true,
         });
       } catch (error) {
-        console.error("Error Logging In", error.message);
+        console.error("Error Logging In From Email", error.message);
         setResponseMessage(
-          error.message || "Error Logging In. Please try again."
+          error.message || "Error Logging In From Email. Please try again."
         );
       } finally {
         setIsLoading(false);
@@ -121,31 +101,13 @@ const Login = ({
   };
 
   const handleClickOutside = (event) => {
-    if (refLogin.current && !refLogin.current.contains(event.target)) {
+    if (event.target.classList.contains("Overlay") || !showOTPModal) {
       handleClose();
     }
   };
 
   const handleLoginWithPhone = () => setSignWithPhone(true);
   const handleLoginWithEmail = () => setSignWithPhone(false);
-
-  useEffect(() => {
-    if (handleOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
-    } else {
-      document.removeEventListener("mousedown", handleClickOutside);
-    }
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [handleOpen]);
-
-  // const maskOtpId = (otpId) => {
-  //   if (!otpId) return "";
-  //   const visiblePart = otpId.substring(otpId.length - 3);
-  //   const hiddenPart = "*".repeat(otpId.length - 3);
-  //   return hiddenPart + visiblePart;
-  // };
 
   const handleRefreshToken = async () => {
     try {
@@ -167,8 +129,8 @@ const Login = ({
     <>
       {!isResetOpen && !isLoggedIn && (
         <>
-          <div className="Overlay"></div>
-          <div className="Login" ref={refLogin}>
+          <div className="Overlay" onClick={handleClickOutside}></div>
+          <div className="Login">
             <div className="LoginInside">
               <div className="CloseIcon">
                 <IoClose onClick={handleClose} />
@@ -209,24 +171,6 @@ const Login = ({
                 <hr className="HorizontalLine" />
               </div>
               {signWithPhone ? (
-                // <Formik
-                //   initialValues={{ selectedCountry: null, phoneNumber: "" }}
-                //   validate={(values) => {
-                //     const errors = {};
-                //     if (!values.selectedCountry) {
-                //       errors.selectedCountry = "Please select a country code.";
-                //     }
-                //     if (!values.phoneNumber) {
-                //       errors.phoneNumber = "Please enter your phone number.";
-                //     }
-                //     return errors;
-                //   }}
-                //   onSubmit={(values, { setSubmitting }) => {
-                //     handleLogin(values);
-                //     setSubmitting(false);
-                //   }}
-                // >
-                //   {({ isSubmitting }) => (
                 <form className="Form">
                   <div className="Input">
                     <Select
@@ -237,11 +181,6 @@ const Login = ({
                       className="CountryCodeFieldLogin"
                       name="selectedCountry"
                     />
-                    {/* <ErrorMessage
-                          name="selectedCountry"
-                          component="div"
-                          style={{ color: "red", marginBottom: "5px" }}
-                        /> */}
                     <input
                       type="tel"
                       name="phoneNumber"
@@ -249,18 +188,7 @@ const Login = ({
                       placeholder="Phone Number"
                       value={phoneNumber}
                       onChange={(e) => setPhoneNumber(e.target.value)}
-                    />
-                    {/* <ErrorMessage
-                          name="phoneNumber"
-                          component="div"
-                          style={{ color: "red", marginBottom: "5px" }}
-                        /> */}
-                    <input
-                      type="text"
-                      // value={maskOtpId(otpId)}
-                      placeholder="OTP ID"
-                      className="PhoneNumberInput"
-                      readOnly
+                      style={{ margin: "10px 0", width: "100%" }}
                     />
                   </div>
                   <div className="LogButton">
@@ -280,8 +208,6 @@ const Login = ({
                   </div>
                 </form>
               ) : (
-                // )}
-                // </Formik>
                 <Formik
                   initialValues={{ email: "", password: "" }}
                   validate={(values) => {
@@ -307,6 +233,7 @@ const Login = ({
                           name="email"
                           id="email"
                           placeholder="Email"
+                          style={{ marginBottom: "10px", width: "100%" }}
                         />
                         <ErrorMessage
                           name="email"
@@ -318,6 +245,7 @@ const Login = ({
                           name="password"
                           id="password"
                           placeholder="Password"
+                          style={{ marginBottom: "10px", width: "100%" }}
                         />
                         <ErrorMessage
                           name="password"
@@ -361,6 +289,15 @@ const Login = ({
             </div>
           </div>
         </>
+      )}
+      {showOTPModal && (
+        <VerifyLoginOTP
+          phoneno={phoneNumber}
+          country_code={selectedCountry.value}
+          otpid={isOtpid}
+          handleLoginSuccess={handleLoginSuccess}
+          onVerificationSuccess={handleClose}
+        />
       )}
       {isResetOpen && (
         <ResetPassword

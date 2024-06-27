@@ -22,6 +22,7 @@ import {
 } from "../../apiServices";
 import { ToastContainer, toast } from "react-toastify";
 import OrderPlaceAnimation from "./OrderPlaceAnimation";
+import Klarna from "../../images/Klarna.webp";
 
 const Checkout = () => {
   const [isAddressModalOpen, setIsAddressModalOpen] = useState(false);
@@ -290,7 +291,7 @@ const Checkout = () => {
                                 <div>
                                   <div
                                     className="CheckoutDeliveryAddressEditButtonDiv"
-                                  // onClick={handleEditAddress}
+                                    // onClick={handleEditAddress}
                                   >
                                     <span
                                       className="CheckoutDeliveryAddressEditButton"
@@ -463,8 +464,9 @@ const Checkout = () => {
                       onClick={handleSaveAndContinuePhone}
                     >
                       <button
-                        className={`AddressButton ${isSaveDisabled ? "disabledSaveButton" : "SaveButton"
-                          }`}
+                        className={`AddressButton ${
+                          isSaveDisabled ? "disabledSaveButton" : "SaveButton"
+                        }`}
                         disabled={isSaveDisabled}
                       >
                         Save & Continue
@@ -527,6 +529,36 @@ const Checkout = () => {
                       </span>
                     </div>
                   )}
+                  <div>
+                    <button className="PayWithKlarna">
+                      <div className="PayWithKlarnaDiv">
+                        <div>
+                          <span className="PayWithKlarnaText1">
+                            $15 off your first 2 orders when you pay with Klarna
+                          </span>
+                        </div>
+                        <div className="PayWithKlarnaTexts">
+                          <div>
+                            <span className="PayWithKlarnaText2">
+                              Apply code
+                            </span>
+                          </div>
+                          <div>
+                            <span className="PayWithKlarnaText3">
+                              Terms Apply
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="PayWithKlarnaImageDiv">
+                        <img
+                          src={Klarna}
+                          alt=""
+                          className="PayWithKlarnaImage"
+                        />
+                      </div>
+                    </button>
+                  </div>
                 </legend>
               </fieldset>
             </div>
@@ -621,10 +653,11 @@ const Checkout = () => {
                                 <img
                                   src={image}
                                   alt=""
-                                  className={`MakeAGiftCardImage ${selectedImageId === id
+                                  className={`MakeAGiftCardImage ${
+                                    selectedImageId === id
                                       ? "SelectedImage"
                                       : ""
-                                    }`}
+                                  }`}
                                   onClick={() => handleMakeAGiftImageClick(id)}
                                 />
                               </li>
@@ -704,7 +737,9 @@ const Checkout = () => {
                       </span>
                     </div>
                     <div className="CheckoutAddressLegendTextDiv">
-                      <h2 className="CheckoutAddressLegendText">Instacart+</h2>
+                      <h2 className="CheckoutAddressLegendText">
+                        Save $7 per order on average with Instacart+
+                      </h2>
                     </div>
                   </div>
                 </legend>
@@ -712,10 +747,11 @@ const Checkout = () => {
             </div>
             <div className="CheckoutContinueButtonDiv">
               <button
-                className={`CheckoutContinueButton ${onSelectedPaymentMethod === null
+                className={`CheckoutContinueButton ${
+                  onSelectedPaymentMethod === null
                     ? "disabledSaveButton"
                     : "SaveButton"
-                  }`}
+                }`}
                 onClick={handleOrderPlacedContinue}
               >
                 Continue
@@ -725,10 +761,11 @@ const Checkout = () => {
           <div>
             <div className="CheckoutContinueButtonOutsideDiv">
               <button
-                className={`CheckoutContinueButton ${onSelectedPaymentMethod === null
+                className={`CheckoutContinueButton ${
+                  onSelectedPaymentMethod === null
                     ? "disabledSaveButton"
                     : "SaveButton"
-                  }`}
+                }`}
                 onClick={handleOrderPlacedContinue}
               >
                 Continue

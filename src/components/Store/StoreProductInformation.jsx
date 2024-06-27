@@ -11,6 +11,7 @@ import {
 import { toast } from "react-toastify";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import { addToSavedProduct, removeFromSavedProduct } from "../../apiServices";
 
 const StoreProductInformation = ({ item, handleClose, handleOpen }) => {
   // const [isFavorite, setIsFavorite] = useState(false);
@@ -30,29 +31,14 @@ const StoreProductInformation = ({ item, handleClose, handleOpen }) => {
     localStorage.setItem("favorites", JSON.stringify(favoriteItems));
   }, [favoriteItems]);
 
-  const handleChangeFavoriteButtonColor = () => {
+  const handleChangeFavoriteButtonColor = async () => {
     const isCurrentlyFavorite = favoriteItems[item.id];
 
-    // setIsFavorite(!isFavorite);
     if (!isCurrentlyFavorite) {
-      dispatch(addToFavorite(item));
-      toast.success("Item Added To Favorites", {
-        position: "bottom-center",
-        autoClose: 2000,
-        hideProgressBar: true,
-      });
+      await addToProduct();
     } else {
-      dispatch(removeFromFavorite(item));
-      toast.success("Item Removed From Favorites", {
-        position: "bottom-center",
-        autoClose: 2000,
-        hideProgressBar: true,
-      });
+      await removeProduct();
     }
-    setFavoritesItems({
-      ...favoriteItems,
-      [item.id]: !isCurrentlyFavorite,
-    });
   };
 
   const handleAddToCart = (item) => {
@@ -88,6 +74,57 @@ const StoreProductInformation = ({ item, handleClose, handleOpen }) => {
       document.removeEventListener("mousedown", handleClickOutside);
     }
   });
+
+  const addToProduct = async () => {
+    try {
+      const accessToken = localStorage.getItem("AccessToken");
+      await addToSavedProduct(item.id, accessToken);
+      // Update local state to reflect the change
+      setFavoritesItems({
+        ...favoriteItems,
+        [item.id]: true, // Assuming successful addition
+      });
+      dispatch(addToFavorite(item));
+      toast.success("Item Added To Favorites", {
+        position: "bottom-center",
+        autoClose: 2000,
+        hideProgressBar: true,
+      });
+    } catch (error) {
+      console.log(error.message);
+      toast.error("Failed to add item to favorites", {
+        position: "bottom-center",
+        autoClose: 2000,
+        hideProgressBar: true,
+      });
+    }
+  };
+
+  const removeProduct = async () => {
+    try {
+      const accessToken = localStorage.getItem("AccessToken");
+      await removeFromSavedProduct(item.id, accessToken);
+      // Update local state to reflect the change
+      setFavoritesItems({
+        ...favoriteItems,
+        [item.id]: false, // Assuming successful removal
+      });
+      dispatch(removeFromFavorite(item));
+      toast.success("Item Removed From Favorites", {
+        position: "bottom-center",
+        autoClose: 2000,
+        hideProgressBar: true,
+      });
+    } catch (error) {
+      console.log(error.message);
+      toast.error("Failed to remove item from favorites", {
+        position: "bottom-center",
+        autoClose: 2000,
+        hideProgressBar: true,
+      });
+    }
+  };
+
   return (
     <>
       <div className="Overlay"></div>
