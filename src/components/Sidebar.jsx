@@ -16,6 +16,7 @@ import { useNavigate } from "react-router-dom";
 import UserImage from "../images/userImage.webp";
 import { useSelector } from "react-redux";
 import { IoIosArrowForward } from "react-icons/io";
+import { FaFirstOrderAlt } from "react-icons/fa";
 
 const Sidebar = ({ closeSidebar, isOpen, isLoggedIn }) => {
   const useSidebarRef = useRef(null);
@@ -36,6 +37,10 @@ const Sidebar = ({ closeSidebar, isOpen, isLoggedIn }) => {
 
   const handleOpenAccount = () => {
     navigate("/store/userinformation/account");
+    closeSidebar();
+  };
+  const handleOpenOrder = () => {
+    navigate("/store/orders");
     closeSidebar();
   };
 
@@ -131,6 +136,17 @@ const Sidebar = ({ closeSidebar, isOpen, isLoggedIn }) => {
                   <span className="SideBarStoreButtonText active">
                     <GoHomeFill size={24} />
                     <span className="SideBarStoreButtonSpan">Stores</span>
+                  </span>
+                </div>
+                <div className="SideBarStoreButton">
+                  <span className="SideBarStoreButtonText">
+                    <FaFirstOrderAlt size={20} />
+                    <span
+                      className="SideBarStoreButtonSpan"
+                      onClick={handleOpenOrder}
+                    >
+                      Your Orders
+                    </span>
                   </span>
                 </div>
                 <div className="SideBarStoreButton">

@@ -16,6 +16,7 @@ import GiftCardImage from "../../data/giftCardImage";
 import { useSelector } from "react-redux";
 import {
   addAddress,
+  addOrder,
   deleteAddress,
   editAddress,
   getAllAddress,
@@ -68,6 +69,9 @@ const Checkout = () => {
     }
   };
 
+  const cartItems = useSelector((state) => state.cart.items);
+  console.log(cartItems);
+
   const handleOrderPlacedContinue = () => {
     setShowAnimation(true);
     setTimeout(() => {
@@ -91,7 +95,11 @@ const Checkout = () => {
 
   const price = useSelector((state) => state.cart.totalPrice);
 
-  const totalPrice = price + 1.99 + 3.0 + 0.24;
+  const deliveryFee = 1.99;
+  const serviceFee = 3.0;
+  const estimateTaxes = 0.24;
+
+  const totalPrice = price + deliveryFee + serviceFee + estimateTaxes;
   // console.log(totalPrice.toFixed(2));
 
   const handleDeliveryInstructionsClick = () => {
@@ -226,6 +234,42 @@ const Checkout = () => {
   const handleMakeAGiftImageClick = (index) => {
     setSelectedImageId(index);
   };
+
+  const handleAddOrder = async () => {
+    try {
+      const orderData = {
+        store_id: 1,
+        cart_items: cartItems.map((item) => ({
+          product_id: item.id,
+          quantity: 1,
+        })),
+        country_code: selectedCountry.value,
+        mobile_number: phoneNumber,
+        payment_mode: onSelectedPaymentMethod.title,
+        actual_subtotal: price,
+        final_subtotal: totalPrice,
+        service_fee: serviceFee,
+        bag_fee: deliveryFee,
+        subtotal: price,
+        discount_applied: 0,
+        use_referral_bonus: true,
+        pickup_address_id: selectedAddressId,
+        pickup_day: "11 may",
+        pickup_slot: "11:35-11:45pm",
+        pickup_fee: 2.99,
+      };
+
+      const refreshToken = localStorage.getItem("RefreshToken");
+
+      const response = await addOrder(refreshToken, orderData);
+      console.log("Order Placed Successfully", response);
+      handleOrderPlacedContinue();
+    } catch (error) {
+      console.log("Error Placing Order", error.message);
+    }
+  };
+
+  // console.log(onSelectedPaymentMethod.title);
 
   return (
     <>
@@ -752,7 +796,7 @@ const Checkout = () => {
                     ? "disabledSaveButton"
                     : "SaveButton"
                 }`}
-                onClick={handleOrderPlacedContinue}
+                onClick={handleAddOrder}
               >
                 Continue
               </button>
@@ -766,7 +810,7 @@ const Checkout = () => {
                     ? "disabledSaveButton"
                     : "SaveButton"
                 }`}
-                onClick={handleOrderPlacedContinue}
+                onClick={handleAddOrder}
               >
                 Continue
               </button>

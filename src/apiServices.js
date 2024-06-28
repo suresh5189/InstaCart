@@ -674,4 +674,58 @@ export const removeFromSavedProduct = async (productId, accessToken) => {
 
 // ------------------------------------------------------------------------------------------
 
+// Add Order
+
+export const addOrder = async (accessToken, orderData) => {
+  try {
+    const response = await apiServices.post("/orders/checkout", orderData, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw new Error(error.response.data.message || "Error Adding Order");
+  }
+};
+
+// -------------------------------------------------------------------------------------------
+
+// Get Orders
+
+export const getOrders = async (accessToken) => {
+  try {
+    const response = await apiServices.get("/orders/my-orders", {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw new Error(error.response.data.message || "Error Fetching Orders");
+  }
+};
+
+// -------------------------------------------------------------------------------------------
+
+// Get Order Details
+
+export const getOrdersDetails = async (accessToken, orderId) => {
+  try {
+    const response = await apiServices.get("/orders/my-orders/orderdetail", {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+      params: {
+        orderId: orderId,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw new Error(
+      error.response.data.message || "Error Fetching Order Details"
+    );
+  }
+};
+
 export default apiServices;

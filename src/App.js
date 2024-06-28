@@ -25,6 +25,8 @@ import { useDispatch } from "react-redux";
 import { logoutSuccess } from "./store/action/authActions";
 import { toast } from "react-toastify";
 import Favorite from "./components/Store/Favorite";
+import AllOrders from "./components/Store/AllOrders";
+import OrderDetails from "./components/Store/OrderDetails";
 
 function App() {
   const [showLoginModal, setShowLoginModal] = useState(false);
@@ -124,6 +126,14 @@ function App() {
           <Route
             path="/store/userinformation/account"
             element={authGuard(<User />)}
+          />
+          <Route
+            path="/store/orders"
+            element={authGuard(<AllOrders />)}
+          />
+          <Route
+            path="/store/orders/orderDetails/:order_id"
+            element={authGuard(<OrderDetails />)}
           />
           <Route path="/p/gift-cards" element={<GiftCard />} />
           <Route
