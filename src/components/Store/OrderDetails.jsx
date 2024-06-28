@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 const OrderDetails = () => {
   const [orderDetails, setOrderDetails] = useState([]);
 
-  const {order_id} = useParams();
+  const { order_id } = useParams();
 
   useEffect(() => {
     const getProductOrderDetails = async () => {
@@ -23,9 +23,9 @@ const OrderDetails = () => {
 
   return (
     <div>
-      {orderDetails.length>0 ? (
-        orderDetails.map((detail)=> (
-            <div>
+      {orderDetails.length > 0 ? (
+        orderDetails.map((detail) => (
+          <div>
             <h1>Your Order Details</h1>
             <div>
               <div>
@@ -38,8 +38,8 @@ const OrderDetails = () => {
               <span>Order Status</span>
             </div>
           </div>
-          ))
-      ):(
+        ))
+      ) : (
         <div>Loading...</div>
       )}
     </div>
