@@ -103,7 +103,7 @@ const OrderDetails = () => {
                 ZipCode: {orderDetails.address.zip_code}
               </span>
               <span className="OrderDetailAddressMobileNumber">
-                Phone No: {orderDetails.mobile_number}
+                Phone No: {orderDetails.country_code}{orderDetails.mobile_number}
               </span>
             </div>
             <div className="OrderDetailPaymentDiv">

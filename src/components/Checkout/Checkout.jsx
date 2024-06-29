@@ -70,7 +70,7 @@ const Checkout = () => {
   };
 
   const cartItems = useSelector((state) => state.cart.items);
-  console.log(cartItems);
+  // console.log(cartItems);
 
   const handleOrderPlacedContinue = () => {
     setShowAnimation(true);
@@ -243,6 +243,7 @@ const Checkout = () => {
           product_id: item.id,
           quantity: 1,
         })),
+        // address_id,
         country_code: selectedCountry.value,
         mobile_number: phoneNumber,
         payment_mode: onSelectedPaymentMethod.title,
