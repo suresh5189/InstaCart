@@ -4055,7 +4055,7 @@ Input {
   width: 800px;
   border-radius: 8px;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 0px 16px;
-  max-height: calc(96px + 100vh);
+  max-height: calc(100vh - 96px);
   min-height: 510px;
   padding: 30px;
   font-family: "Roboto";
@@ -4065,6 +4065,7 @@ Input {
   background-color: white;
   top: 40px;
   left: 25%;
+  overflow-y: scroll;
 }
 
 h1 {
@@ -4115,7 +4116,7 @@ textarea:focus {
   margin: 10px 0;
 }
 
-.ListButton{
+.ListButton {
   cursor: pointer;
 }
 
@@ -4266,7 +4267,7 @@ button[type="submit"]:hover {
 
 .ListContainerButtonDiv span {
   border: none;
-  padding:18px;
+  padding: 18px;
   margin: 0px 0px 0px 8px;
   cursor: pointer;
   user-select: none;
@@ -4278,27 +4279,84 @@ button[type="submit"]:hover {
   border-radius: 36px;
 }
 
-.ListContainerTitle{
+.ListContainerTitle {
   font-size: 30px;
   font-weight: 500;
-  font-family: 'Roboto';
+  font-family: "Roboto";
 }
 
-.ListContainerEditButtonDiv{
+.ListContainerEditButtonDiv {
   display: flex;
   justify-content: center;
 }
 
-.ListContainerEditButton{
+.ListContainerEditButton {
   width: 100%;
   padding: 20px 0;
-  border-radius:35px;
+  border-radius: 35px;
   font-size: 20px;
   font-weight: 500;
-  font-family: 'Roboto';
+  font-family: "Roboto";
   border: none;
   background-color: rgb(232, 233, 235);
   cursor: pointer;
+}
+
+/* -------------------------------------------------------------------- */
+/* -------------------------------------------------------------------- */
+
+/* // Options */
+
+.Options {
+  width: 600px;
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 0px 16px;
+  max-height: calc(100vh - 96px);
+  min-height: 210px;
+  padding: 30px;
+  font-family: "Roboto";
+  font-weight: 500;
+  box-sizing: border-box;
+  position: fixed;
+  z-index: 1100;
+  background-color: white;
+  top: 30%;
+  left: 30%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.OptionsCloseDiv {
+  display: flex;
+}
+
+.OptionsCloseIcon,
+.OptionsDeleteDiv,
+.OptionsEditDiv,
+.OptionsCancelButton {
+  cursor: pointer;
+}
+
+.OptionsCloseText {
+  margin-left: 200px;
+  font-size: 23px;
+}
+
+.OptionsEditDiv {
+  margin-bottom: 20px;
+}
+
+.OptionsDeleteDiv {
+  color: red;
+}
+
+.OptionsHorizontalLine {
+  border-top: 1px solid rgb(221, 221, 221);
+}
+
+.OptionsCancelButtonDiv {
+  text-align: center;
 }
 
 /* ------------------------------------------------------------------------------------- */

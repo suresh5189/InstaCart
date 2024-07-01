@@ -728,4 +728,42 @@ export const getOrdersDetails = async (accessToken, orderId) => {
   }
 };
 
+// ---------------------------------------------------------------------------------------------
+
+// Add List
+
+export const addList = async (accessToken, listData) => {
+  try {
+    const response = await apiServices.post(
+      "/store/lists/createlist",
+      listData,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    throw new Error(error.response.data.message || "Failed To Create List");
+  }
+};
+
+// ---------------------------------------------------------------------------------------------
+
+// Get List Covers Images
+
+export const getListCoverImages = async (accessToken) => {
+  try {
+    const response = await apiServices.get('/store/lists/cover-images', {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw new Error(error.response.data.message || 'Failed to fetch list cover images');
+  }
+};
+
 export default apiServices;
