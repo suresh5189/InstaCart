@@ -9,9 +9,9 @@ import { MdDelete } from "react-icons/md";
 import { TiEdit } from "react-icons/ti";
 
 const List = () => {
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [listData, setListData] = useState(null);
-    const [isOptionsModalOpen, setIsOptionsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [listData, setListData] = useState(null);
+  const [isOptionsModalOpen, setIsOptionsModalOpen] = useState(false);
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -29,7 +29,9 @@ const List = () => {
   return (
     <>
       <div className="List">
-        {isOptionsModalOpen && <OptionsModal onClose={()=>setIsOptionsModalOpen(false)}/>}
+        {isOptionsModalOpen && (
+          <OptionsModal onClose={() => setIsOptionsModalOpen(false)} />
+        )}
         {!listData ? (
           <>
             <div className="ListHeadDiv">
@@ -70,7 +72,7 @@ const List = () => {
                   <span className="ListContainerTitle">{listData.title}</span>
                 </div>
                 <div className="ListContainerButtonDiv">
-                  <span onClick={()=>setIsOptionsModalOpen(true)}>
+                  <span onClick={() => setIsOptionsModalOpen(true)}>
                     <HiDotsHorizontal size={24} />
                   </span>
                   <span>
@@ -79,7 +81,9 @@ const List = () => {
                 </div>
               </div>
               <div className="ListContainerEditButtonDiv">
-                <button className="ListContainerEditButton" onClick={openModal}>Edit items</button>
+                <button className="ListContainerEditButton" onClick={openModal}>
+                  Edit items
+                </button>
               </div>
             </div>
             <div className="ListContainerImageDiv">
@@ -99,10 +103,16 @@ const List = () => {
   );
 };
 
-const OptionsModal = ({onClose}) => {
+const OptionsModal = ({ onClose }) => {
+  const handleOverlayClick = (e) => {
+    if (e.target.classList.contains("Overlay")) {
+      onClose();
+    }
+  };
+
   return (
     <>
-      <div className="Overlay"></div>
+      <div className="Overlay" onClick={handleOverlayClick}></div>
       <div className="Options">
         <div className="OptionsCloseDiv">
           <span className="OptionsCloseIcon" onClick={onClose}>
@@ -126,7 +136,9 @@ const OptionsModal = ({onClose}) => {
         </div>
         <div className="OptionsHorizontalLine"></div>
         <div className="OptionsCancelButtonDiv">
-          <span className="OptionsCancelButton" onClick={onClose}>Cancel</span>
+          <span className="OptionsCancelButton" onClick={onClose}>
+            Cancel
+          </span>
         </div>
       </div>
     </>
