@@ -24,6 +24,11 @@ const DetailScreenSidebar = ({
     navigate("/favorites");
   };
 
+  
+  const handleOpenList = () => {
+    navigate("/store/list");
+  };
+
   const handleOpenDetailInfoModal = () => {
     setOpenDetailInfoModal(true);
   };
@@ -89,7 +94,7 @@ const DetailScreenSidebar = ({
               <span className="SideBarStoreButtonSpan">Buy it again</span>
             </span>
           </div>
-          <div className="SideBarStoreButton">
+          <div className="SideBarStoreButton" onClick={handleOpenList}>
             <span className="SideBarStoreButtonText">
               <FaListUl size={20} />
               <span className="SideBarStoreButtonSpan">Lists</span>

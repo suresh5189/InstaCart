@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { changeEmail } from "../../apiServices";
 import { setEmail as setEmailAction } from "../../store/action/userActions";
 import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 
 function ChangeEmail({ closeEmailModal }) {
   const [emailValue, setEmailValue] = useState("");
@@ -33,6 +34,11 @@ function ChangeEmail({ closeEmailModal }) {
       );
       dispatch(setEmailAction(emailValue));
       setMessage(message || "Email SuccessFully Changed");
+      toast.success("Email Changed Successfully", {
+        position: "bottom-center",
+        autoClose: 2000,
+        hideProgressBar: true,
+      });
       closeEmailModal();
     } catch (error) {
       setMessage(

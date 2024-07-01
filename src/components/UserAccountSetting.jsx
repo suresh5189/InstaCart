@@ -7,6 +7,7 @@ import ChangeEmail from "../components/Auth/ChangeEmail";
 import ChangeName from "../components/Auth/ChangeName";
 import VerifyChangedPhoneNumber from "../components/Auth/VerifyChangedPhoneNumber";
 import { getUserDetails } from "../apiServices";
+import { ToastContainer } from "react-toastify";
 
 const User = () => {
   const navigate = useNavigate();
@@ -103,6 +104,7 @@ const User = () => {
 
   return (
     <>
+      <ToastContainer />
       <div className="User">
         <div className="UserBannerImage">
           <img src={InstacartBanner} alt="" />

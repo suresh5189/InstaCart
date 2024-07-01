@@ -27,6 +27,8 @@ import { toast } from "react-toastify";
 import Favorite from "./components/Store/Favorite";
 import AllOrders from "./components/Store/AllOrders";
 import OrderDetails from "./components/Store/OrderDetails";
+import CreateList from "./components/CreateList";
+import List from "./components/List";
 
 function App() {
   const [showLoginModal, setShowLoginModal] = useState(false);
@@ -158,7 +160,8 @@ function App() {
           />
           <Route path="/store/:id/info" element={<StoreDetailsInfoPage />} />
           <Route path="/store/checkout" element={<Checkout />} />
-          <Route path="favorites" element={<Favorite />} />
+          <Route path="/favorites" element={<Favorite />} />
+          <Route path="store/list" element={<List />} />
         </Routes>
       </Router>
     </div>

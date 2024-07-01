@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { changePassword } from "../../apiServices";
 import { useDispatch } from "react-redux";
 import { setPassword as setPasswordAction } from "../../store/action/userActions";
+import { toast } from "react-toastify";
 
 function ChangePassword({ closeModal }) {
   const [newPassword, setNewPassword] = useState("");
@@ -36,6 +37,11 @@ function ChangePassword({ closeModal }) {
       );
       setSuccessMessage(message);
       dispatch(setPasswordAction(newPassword));
+      toast.success("Password Changed Successfully", {
+        position: "bottom-center",
+        autoClose: 2000,
+        hideProgressBar: true,
+      });
       closeModal();
     } catch (error) {
       setError(error.message);

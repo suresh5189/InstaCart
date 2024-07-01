@@ -5,6 +5,7 @@ import {
   setFirstName as setFirstNameChange,
   setLastName as setLastNameChange,
 } from "../../store/action/userActions"; // Import action creators
+import { toast } from "react-toastify";
 
 function ChangeName({ closeNameModal }) {
   const [firstName, setFirstName] = useState("");
@@ -32,6 +33,11 @@ function ChangeName({ closeNameModal }) {
       dispatch(setFirstNameChange(firstName));
       dispatch(setLastNameChange(lastName));
       setMessage(message || "Name Successfully Changed");
+      toast.success("Name Changed Successfully", {
+        position: "bottom-center",
+        autoClose: 2000,
+        hideProgressBar: true,
+      });
       closeNameModal();
     } catch (error) {
       setMessage(
