@@ -117,6 +117,9 @@ input[type="search"]::placeholder {
 
 .HorizontalScrollBarWrapper {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .HorizontalScrollBarWrapper.Squares {
@@ -125,7 +128,7 @@ input[type="search"]::placeholder {
 
 .NavbarScrollBarList {
   padding: 0 10px;
-  margin: 0 10px;
+  margin: 10px 10px;
   display: flex;
   align-items: center;
   justify-self: center;
@@ -153,21 +156,28 @@ input[type="search"]::placeholder {
   margin: auto;
 }
 
+.HomePageBarDiv {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 0 0 20px;
+}
+
 .HomePageBarDiv img {
-  width: 15%;
   object-fit: cover;
 }
 
 .HomePageBarText {
   font-family: "Roboto", sans-serif;
-  position: absolute;
-  top: 23%;
-  left: 15%;
+  margin: auto;
 }
 
 .HomePageBarTextH1 {
   font-size: 45px;
   width: 508px;
+}
+
+.dropdown {
+  margin: auto;
 }
 
 .HomePageBarTextP {
@@ -181,12 +191,6 @@ input[type="search"]::placeholder {
 .ImageBannerAndDrop {
   display: flex;
   justify-content: space-between;
-}
-
-.dropdown {
-  position: relative;
-  top: 60px;
-  left: 100px;
 }
 
 .dropDownButton {
@@ -469,8 +473,10 @@ input[type="search"]::placeholder {
 }
 
 .MarketPlaceBox {
-  display: flex;
-  width: 90%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  width: 100%;
+  margin: 0 20px;
 }
 
 .MarketPlaceSubBox {
@@ -3879,7 +3885,7 @@ Input {
 
 .Orders {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   margin: 20px;
   gap: 70px;
 }
@@ -3984,7 +3990,7 @@ Input {
   box-shadow: 10px 10px 30px #bebebe, -15px -15px 30px #ffffff;
 }
 
-.OrderDetailProductImageAndName{
+.OrderDetailProductImageAndName {
   margin: 50px 0;
 }
 
@@ -3995,7 +4001,7 @@ Input {
   padding: 10px;
 }
 
-.OrderDetailProductImageAndName:hover{
+.OrderDetailProductImageAndName:hover {
   background-color: rgb(179, 179, 179);
   color: white;
   transition: 1s ease-in-out;
@@ -4013,16 +4019,17 @@ Input {
   font-family: "Playfair Display";
 }
 
-.OrderDetailAddressAndPayment{
+.OrderDetailAddressAndPayment {
   display: flex;
   justify-content: space-evenly;
 }
 
-.OrderDetailAddressDiv,.OrderDetailPaymentDiv{
+.OrderDetailAddressDiv,
+.OrderDetailPaymentDiv {
   display: flex;
   flex-direction: column;
   font-size: 22px;
-  font-family: 'Playfair Display';
+  font-family: "Playfair Display";
   margin: 30px 0;
   padding: 20px;
   box-shadow: 10px 10px 30px #bebebe, -15px -15px 30px #ffffff;
@@ -4032,8 +4039,208 @@ Input {
   color: #868686;
 }
 
-.OrderDetailAddressDiv:hover,.OrderDetailPaymentDiv:hover{
+.OrderDetailAddressDiv:hover,
+.OrderDetailPaymentDiv:hover {
   background-color: rgb(68, 68, 68);
   color: white;
   transition: 1s ease-in-out;
 }
+
+/* ------------------------------------------------------------------------------------- */
+/* ------------------------------------------------------------------------------------- */
+
+/* Responsive  */
+
+@media screen and (max-width: 768px) {
+  .HomePageBarText {
+    margin-left: 20px;
+    width: 400px;
+  }
+  .HomePageBarTextH1 {
+    font-size: 20px;
+  }
+  .ImageBanner {
+    width: 200px;
+  }
+  .HomePageBarDiv {
+    margin: 0;
+  }
+
+  .MarketPlaceBox {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .MarketPlace h1 {
+    text-align: center;
+    font-size: 28px;
+  }
+
+  .Login,
+  .SignUp,
+  .AddressDiv {
+    top: 150px;
+    left: 170px;
+  }
+
+  .Sidebar {
+    width: 45%;
+  }
+
+  .SearchBarDiv {
+    left: -200px;
+  }
+  .OrderDetailAddressDiv,
+  .OrderDetailPaymentDiv {
+    box-shadow: none;
+    background-color: rgb(245, 245, 245);
+    color: black;
+    margin-left: 20px;
+  }
+
+  .UserBannerImage img {
+    display: none;
+  }
+
+  .CategoryListImageDiv {
+    margin: 70px -110px;
+  }
+  .CategoryListImageDivText {
+    font-size: 40px;
+    margin-left: 90px;
+  }
+
+  .ProductDivMain {
+    margin-bottom: 50%;
+  }
+
+  .StoreContainerHead {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .NotFoundFavoriteAnimationDiv {
+    margin-left: 50%;
+  }
+
+  .StoreItemDetail {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .StoreItemDetailHeading {
+    width: 100%;
+  }
+
+  .StoreItemDetailButtonContainer {
+    width: 100%;
+  }
+
+  .StoreItemDetailImage {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .StoreDetailSecondContainer {
+    width: 700px;
+    left: 4%;
+  }
+  .InstaCartPlusCHead {
+    margin: 0 20px;
+  }
+  .InstacartImage {
+    width: 500px;
+  }
+
+  .InstaCartPlusButton {
+    display: flex;
+    justify-content: center;
+  }
+
+  .InstaCartPlusButtonBelowText span,
+  .InstaCartPromoCodeButton span {
+    font-size: 25px;
+  }
+
+  .InstaCartPlusHeading {
+    font-size: 18px;
+    margin-top: 30px;
+  }
+
+  .OccasionContainer {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .OccasionHeading {
+    text-align: center;
+  }
+
+  .GiftCardHeadingText {
+    font-size: 30px;
+  }
+  .GiftCardImage {
+    width: 30vh;
+  }
+
+  .GiftCardMain {
+    margin: 30px 20px;
+  }
+
+  .Purchase {
+    display: flex;
+    flex-direction: column;
+  }
+  .PurchaseContainer {
+    width: 100%;
+    margin: 20px 0;
+  }
+
+  .GiftConvenienceContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+  .GiftConvenienceImageContainer {
+    width: 100%;
+  }
+
+  .GiftConvenienceText {
+    font-size: 25px;
+  }
+
+  .GiftConvenienceSubText {
+    font-size: 21px;
+  }
+
+  .GiftConvenienceHeading {
+    text-align: center;
+  }
+
+  .PurchaseButton {
+    display: flex;
+    justify-content: center;
+  }
+
+  .Cart {
+    width: 60%;
+  }
+  .PaymentMethod {
+    top: 150px;
+    left: 120px;
+  }
+  .PhoneAndQrcodeText {
+    padding: 0 20px;
+  }
+  .DeliveryBox {
+    display: unset;
+  }
+
+  .DeliveryTextTitle {
+    font-size: 30px;
+  }
+  .DeliveryTextSubTitle {
+    font-size: 25px;
+  }
+}
+
+/* ------------------------- */

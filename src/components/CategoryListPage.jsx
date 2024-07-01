@@ -63,16 +63,18 @@ const CategoryListPage = () => {
                           {messages.map((message, index) => (
                             <span
                               key={index}
-                              className={`HomeMessage ${message.toLowerCase().includes("delivery")
+                              className={`HomeMessage ${
+                                message.toLowerCase().includes("delivery")
                                   ? "HomeMessageFirst"
                                   : ""
-                                }
-                                      ${message
-                                  .toLowerCase()
-                                  .includes("in-store")
-                                  ? "HomeMessageStore"
-                                  : ""
-                                }`}
+                              }
+                                      ${
+                                        message
+                                          .toLowerCase()
+                                          .includes("in-store")
+                                          ? "HomeMessageStore"
+                                          : ""
+                                      }`}
                             >
                               {message}
                             </span>

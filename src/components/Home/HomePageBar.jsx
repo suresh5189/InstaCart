@@ -25,7 +25,6 @@ function HomePageBar() {
               </div>
             )}
           </div>
-          <img src={Banner} alt="" className="ImageBanner" />
         </div>
         <div className="HomePageBarText">
           <h1 className="HomePageBarTextH1">
@@ -34,6 +33,9 @@ function HomePageBar() {
           <p className="HomePageBarTextP">
             Whatever you want from local stores, brought right to your door.
           </p>
+        </div>
+        <div>
+        <img src={Banner} alt="" className="ImageBanner" />
         </div>
       </div>
     </div>

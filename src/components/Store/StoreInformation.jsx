@@ -48,7 +48,7 @@ function StoreDetailsInfoPage({ isOpen, isClose, storeId }) {
       {isOpen && (
         <>
           <div className="Overlay"></div>
-          <div className="StoreDetailSecondContainer" ref={infoRef}>
+          <div className="" ref={infoRef}>
             {storeInsideDetail.map((store) => (
               <div className="StoreDetailSecondContainer" key={store.store_id}>
                 <div className="StoreDetailSecondImageContainerDiv">
