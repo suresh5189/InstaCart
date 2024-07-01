@@ -79,7 +79,7 @@ const List = () => {
                 </div>
               </div>
               <div className="ListContainerEditButtonDiv">
-                <button className="ListContainerEditButton">Edit items</button>
+                <button className="ListContainerEditButton" onClick={openModal}>Edit items</button>
               </div>
             </div>
             <div className="ListContainerImageDiv">
