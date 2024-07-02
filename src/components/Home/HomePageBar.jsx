@@ -35,7 +35,7 @@ function HomePageBar() {
           </p>
         </div>
         <div>
-        <img src={Banner} alt="" className="ImageBanner" />
+          <img src={Banner} alt="" className="ImageBanner" />
         </div>
       </div>
     </div>

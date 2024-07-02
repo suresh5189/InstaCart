@@ -78,7 +78,7 @@ function App() {
       "/store/category/populargifts",
       "/popular-gifts/category/:index",
       "/store:id/info",
-      "/favorites"
+      "/favorites",
     ];
 
     if (navbarPaths.includes(currentPath)) {
@@ -129,10 +129,7 @@ function App() {
             path="/store/userinformation/account"
             element={authGuard(<User />)}
           />
-          <Route
-            path="/store/orders"
-            element={authGuard(<AllOrders />)}
-          />
+          <Route path="/store/orders" element={authGuard(<AllOrders />)} />
           <Route
             path="/store/orders/orderDetails/:order_id"
             element={authGuard(<OrderDetails />)}
