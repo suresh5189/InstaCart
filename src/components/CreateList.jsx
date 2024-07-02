@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { addList, getListCoverImages } from "../apiServices";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function CreateList({ isOpen, onClose, onCreateList }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [selectedImage, setSelectedImage] = useState(null);
   const [coverImages, setCoverImages] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const getListImage = async () => {
@@ -13,7 +16,6 @@ function CreateList({ isOpen, onClose, onCreateList }) {
         const refreshToken = localStorage.getItem("RefreshToken");
         const response = await getListCoverImages(refreshToken);
         setCoverImages(response.data.coverImages);
-        // console.log(response.data.coverImages);
       } catch (error) {
         console.error("Error fetching list cover images:", error.message);
       }
@@ -34,6 +36,13 @@ function CreateList({ isOpen, onClose, onCreateList }) {
   };
 
   const handleCreateList = async () => {
+    if (!title || !selectedImage) {
+      toast.error("Please enter a title and select a cover photo.");
+      return;
+    }
+
+    setIsLoading(true);
+
     try {
       const listData = {
         store_id: 1,
@@ -42,16 +51,29 @@ function CreateList({ isOpen, onClose, onCreateList }) {
         cover_photo_id: selectedImage.id,
       };
       const refreshToken = localStorage.getItem("RefreshToken");
-      // const response = await addList(refreshToken, listData);
-      // console.log("List Created Successfully", response);
-      onCreateList({ ...listData, selectedImage });
+      const response = await addList(refreshToken, listData);
+      const listId = response.data.list_id;
+
+      toast.success("List Created Successfully");
+
+      onCreateList({ ...listData, selectedImage, listId });
+
+      // Clear form inputs after successful creation
+      setTitle("");
+      setDescription("");
+      setSelectedImage(null);
     } catch (error) {
       console.error("Error Creating List", error.message);
+      toast.error("Failed to create list. Please try again later.");
+    } finally {
+      setIsLoading(false);
+      onClose(); // Close modal or navigate away after creation
     }
   };
 
   return (
     <>
+      <ToastContainer />
       <div className="Overlay" onClick={handleOverlayClick}></div>
       <div className="container">
         <h1>Create Your List</h1>
@@ -72,7 +94,7 @@ function CreateList({ isOpen, onClose, onCreateList }) {
             id="description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            placeholder="Add A Description (Required)"
+            placeholder="Add A Description (Optional)"
           />
         </div>
         <div className="image-selection">
@@ -85,7 +107,7 @@ function CreateList({ isOpen, onClose, onCreateList }) {
                   alt="Images"
                   onClick={() => handleImageSelection(data)}
                   className={
-                    selectedImage && selectedImage === data.id
+                    selectedImage && selectedImage.id === data.id
                       ? "ProductImage selected"
                       : "ProductImage"
                   }
@@ -94,9 +116,13 @@ function CreateList({ isOpen, onClose, onCreateList }) {
             ))}
           </div>
         </div>
-        <div className="ListButtonDiv" onClick={handleCreateList}>
-          <button className="ListButton" disabled={!title || !selectedImage}>
-            Next
+        <div className="ListButtonDiv">
+          <button
+            className="ListButton"
+            onClick={handleCreateList}
+            disabled={isLoading}
+          >
+            {isLoading ? "Creating..." : "Next"}
           </button>
         </div>
       </div>

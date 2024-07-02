@@ -751,18 +751,54 @@ export const addList = async (accessToken, listData) => {
 
 // ---------------------------------------------------------------------------------------------
 
-// Get List Covers Images
+// Delete List
 
-export const getListCoverImages = async (accessToken) => {
+export const deleteList = async (accessToken, listId) => {
   try {
-    const response = await apiServices.get('/store/lists/cover-images', {
+    const response = await apiServices.delete(`/store/lists/${listId}/delete`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
     });
     return response.data;
   } catch (error) {
-    throw new Error(error.response.data.message || 'Failed to fetch list cover images');
+    throw new Error(error.response.data.message || "Failed To Delete List");
+  }
+};
+
+// -----------------------------------------------------------------------------------------------
+
+// Edit List
+
+export const editList = async (accessToken, listId, updatedData) => {
+  try {
+    const response = await apiServices.post(`/store/lists/${listId}/edit`,updatedData, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw new Error(error.response.data.message || "Failed to Edit List");
+  }
+};
+
+// ---------------------------------------------------------------------------------------------
+
+// Get List Covers Images
+
+export const getListCoverImages = async (accessToken) => {
+  try {
+    const response = await apiServices.get("/store/lists/cover-images", {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw new Error(
+      error.response.data.message || "Failed to fetch list cover images"
+    );
   }
 };
 

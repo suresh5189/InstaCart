@@ -62,7 +62,7 @@ function Navbar({ onLoginClick, onSignUpClick, isLoggedIn, handleLogout }) {
         const { matchingStores, matchingProducts } = suggestions.data;
         // console.log(suggestions);
         setSearchSuggestions({ matchingStores, matchingProducts });
-        console.log(suggestions.data);
+        // console.log(suggestions.data);
       } catch (error) {
         console.log("Error Fetching Search Suggestions" || error);
       }
