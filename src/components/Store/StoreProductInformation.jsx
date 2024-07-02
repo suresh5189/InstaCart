@@ -83,9 +83,9 @@ const StoreProductInformation = ({ item, handleClose, handleOpen }) => {
       // Update local state to reflect the change
       setFavoritesItems({
         ...favoriteItems,
-        [item.id]: true,// Assuming successful addition
+        [item.id]: true, // Assuming successful addition
       });
-      dispatch(addToFavorite({item,userId}));
+      dispatch(addToFavorite({ item, userId }));
       toast.success("Item Added To Favorites", {
         position: "bottom-center",
         autoClose: 2000,
@@ -110,7 +110,7 @@ const StoreProductInformation = ({ item, handleClose, handleOpen }) => {
         ...favoriteItems,
         [item.id]: false, // Assuming successful removal
       });
-      dispatch(removeFromFavorite({item,userId}));
+      dispatch(removeFromFavorite({ item, userId }));
       toast.success("Item Removed From Favorites", {
         position: "bottom-center",
         autoClose: 2000,
