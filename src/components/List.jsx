@@ -216,9 +216,7 @@ const OptionsModal = ({
           <span className="OptionsCloseText">Options</span>
         </div>
         <div className="OptionsEditAndDeleteDiv">
-          <div
-            className="OptionsEditDiv" onClick={isOpen}
-          >
+          <div className="OptionsEditDiv" onClick={isOpen}>
             <span className="OptionsEditIcon">
               <TiEdit />
             </span>

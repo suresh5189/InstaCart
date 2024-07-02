@@ -27,7 +27,6 @@ import { toast } from "react-toastify";
 import Favorite from "./components/Store/Favorite";
 import AllOrders from "./components/Store/AllOrders";
 import OrderDetails from "./components/Store/OrderDetails";
-import CreateList from "./components/CreateList";
 import List from "./components/List";
 
 function App() {
@@ -53,6 +52,8 @@ function App() {
     setIsLoggedIn(false);
     localStorage.removeItem("isLoggedIn");
     localStorage.removeItem("AccessToken");
+    localStorage.removeItem("favorites");
+    localStorage.removeItem("UserId");
     toast.success("Logout Successfully", {
       position: "bottom-center",
       autoClose: 2000,
@@ -156,9 +157,9 @@ function App() {
             element={authGuard(<PopularGiftSecondPage />)}
           />
           <Route path="/store/:id/info" element={<StoreDetailsInfoPage />} />
-          <Route path="/store/checkout" element={<Checkout />} />
-          <Route path="/favorites" element={<Favorite />} />
-          <Route path="store/list" element={<List />} />
+          <Route path="/store/checkout" element={authGuard(<Checkout />)} />
+          <Route path="/favorites" element={authGuard(<Favorite />)} />
+          <Route path="store/list" element={authGuard(<List />)} />
         </Routes>
       </Router>
     </div>

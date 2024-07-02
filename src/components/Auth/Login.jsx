@@ -83,6 +83,7 @@ const Login = ({ handleClose, handleSignUpClick, handleLoginSuccess }) => {
         handleLoginSuccess();
         dispatch(setEmail(email));
         dispatch(loginSuccess(response.userId));
+        // console.log(response.userId);
         dispatch(updateProfile(getUserData.data.data.userData));
         toast.success("Logged In Successfully", {
           position: "bottom-center",
@@ -131,181 +132,184 @@ const Login = ({ handleClose, handleSignUpClick, handleLoginSuccess }) => {
         <>
           <div className="Overlay" onClick={handleClickOutside}></div>
           <div className="LoginDiv">
-          <div className="Login">
-            <div className="LoginInside">
-              <div className="CloseIcon">
-                <IoClose onClick={handleClose} />
-              </div>
-              <h1>Log in</h1>
-              <div className="IconButton">
-                <div className="Google">
-                  <div className="GoogleIcon">
-                    <FcGoogle size={24} />
-                  </div>
-                  <span className="GoogleText">Continue With Google</span>
+            <div className="Login">
+              <div className="LoginInside">
+                <div className="CloseIcon">
+                  <IoClose onClick={handleClose} />
                 </div>
-                <div className="Facebook">
-                  <div className="FacebookIcon">
-                    <ImFacebook2 size={24} />
-                  </div>
-                  <span className="FacebookText">Continue With Facebook</span>
-                </div>
-                {!signWithPhone ? (
-                  <div className="Phone" onClick={handleLoginWithPhone}>
-                    <div className="PhoneIcon">
-                      <FaPhoneVolume size={24} />
+                <h1>Log in</h1>
+                <div className="IconButton">
+                  <div className="Google">
+                    <div className="GoogleIcon">
+                      <FcGoogle size={24} />
                     </div>
-                    <span className="PhoneText">Continue With Phone</span>
+                    <span className="GoogleText">Continue With Google</span>
                   </div>
-                ) : (
-                  <div className="Phone" onClick={handleLoginWithEmail}>
-                    <div className="PhoneIcon">
-                      <MdEmail size={24} />
+                  <div className="Facebook">
+                    <div className="FacebookIcon">
+                      <ImFacebook2 size={24} />
                     </div>
-                    <span className="PhoneText">Continue With Email</span>
+                    <span className="FacebookText">Continue With Facebook</span>
                   </div>
-                )}
-              </div>
-              <div className="Horizontal">
-                <hr className="HorizontalLine" />
-                <span>or</span>
-                <hr className="HorizontalLine" />
-              </div>
-              {signWithPhone ? (
-                <form className="Form">
-                  <div className="Input">
-                    <Select
-                      value={selectedCountry}
-                      onChange={setSelectedCountry}
-                      options={countryOptions}
-                      placeholder="Select Country Code"
-                      className="CountryCodeFieldLogin"
-                      name="selectedCountry"
-                      />
-                    <input
-                      type="tel"
-                      name="phoneNumber"
-                      id="phoneNumber"
-                      placeholder="Phone Number"
-                      value={phoneNumber}
-                      onChange={(e) => setPhoneNumber(e.target.value)}
-                      style={{ margin: "10px 0", width: "100%" }}
-                      />
-                  </div>
-                  <div className="LogButton">
-                    <button
-                      type="submit"
-                      className="LoginButton"
-                      disabled={isLoading}
-                      onClick={handleLogin}
-                      >
-                      <span>{isLoading ? "Loading..." : "Login"}</span>
-                    </button>
-                    {responseMessage && (
-                      <p style={{ color: "red", textAlign: "center" }}>
-                        {responseMessage}
-                      </p>
-                    )}
-                  </div>
-                </form>
-              ) : (
-                <Formik
-                initialValues={{ email: "", password: "" }}
-                validate={(values) => {
-                  const errors = {};
-                  if (!values.email) {
-                    errors.email = "Required Email";
-                  }
-                  if (!values.password) {
-                    errors.password = "Required Password";
-                  }
-                  return errors;
-                }}
-                  onSubmit={(values, { setSubmitting }) => {
-                    handleLogin(values);
-                    setSubmitting(false);
-                  }}
-                  >
-                  {({ isSubmitting }) => (
-                    <Form className="Form">
-                      <div className="Input">
-                        <Field
-                          type="email"
-                          name="email"
-                          id="email"
-                          placeholder="Email"
-                          style={{ marginBottom: "10px", width: "100%" }}
-                          />
-                        <ErrorMessage
-                          name="email"
-                          component="div"
-                          style={{ color: "red", marginBottom: "5px" }}
-                          />
-                        <Field
-                          type="password"
-                          name="password"
-                          id="password"
-                          placeholder="Password"
-                          style={{ marginBottom: "10px", width: "100%" }}
-                          />
-                        <ErrorMessage
-                          name="password"
-                          component="div"
-                          style={{ color: "red", marginBottom: "5px" }}
-                          />
+                  {!signWithPhone ? (
+                    <div className="Phone" onClick={handleLoginWithPhone}>
+                      <div className="PhoneIcon">
+                        <FaPhoneVolume size={24} />
                       </div>
-                      <div
-                        className="Forgot"
-                        onClick={() => setIsResetOpen(true)}
-                        >
-                        Forgot password? <span>Reset it</span>
+                      <span className="PhoneText">Continue With Phone</span>
+                    </div>
+                  ) : (
+                    <div className="Phone" onClick={handleLoginWithEmail}>
+                      <div className="PhoneIcon">
+                        <MdEmail size={24} />
                       </div>
-                      <div className="LogButton">
-                        <button
-                          className="LoginButton"
-                          disabled={isLoading || isSubmitting}
-                          type="submit"
-                          >
-                          <span>{isLoading ? "Loading..." : "Login"}</span>
-                        </button>
-                        {responseMessage && (
-                          <p style={{ color: "red", textAlign: "center" }}>
-                            {responseMessage}
-                          </p>
-                        )}
-                      </div>
-                    </Form>
+                      <span className="PhoneText">Continue With Email</span>
+                    </div>
                   )}
-                </Formik>
-              )}
-              <div
-                style={{ borderBottom: "1px solid lightGrey", margin: "10px" }}
+                </div>
+                <div className="Horizontal">
+                  <hr className="HorizontalLine" />
+                  <span>or</span>
+                  <hr className="HorizontalLine" />
+                </div>
+                {signWithPhone ? (
+                  <form className="Form">
+                    <div className="Input">
+                      <Select
+                        value={selectedCountry}
+                        onChange={setSelectedCountry}
+                        options={countryOptions}
+                        placeholder="Select Country Code"
+                        className="CountryCodeFieldLogin"
+                        name="selectedCountry"
+                      />
+                      <input
+                        type="tel"
+                        name="phoneNumber"
+                        id="phoneNumber"
+                        placeholder="Phone Number"
+                        value={phoneNumber}
+                        onChange={(e) => setPhoneNumber(e.target.value)}
+                        style={{ margin: "10px 0", width: "100%" }}
+                      />
+                    </div>
+                    <div className="LogButton">
+                      <button
+                        type="submit"
+                        className="LoginButton"
+                        disabled={isLoading}
+                        onClick={handleLogin}
+                      >
+                        <span>{isLoading ? "Loading..." : "Login"}</span>
+                      </button>
+                      {responseMessage && (
+                        <p style={{ color: "red", textAlign: "center" }}>
+                          {responseMessage}
+                        </p>
+                      )}
+                    </div>
+                  </form>
+                ) : (
+                  <Formik
+                    initialValues={{ email: "", password: "" }}
+                    validate={(values) => {
+                      const errors = {};
+                      if (!values.email) {
+                        errors.email = "Required Email";
+                      }
+                      if (!values.password) {
+                        errors.password = "Required Password";
+                      }
+                      return errors;
+                    }}
+                    onSubmit={(values, { setSubmitting }) => {
+                      handleLogin(values);
+                      setSubmitting(false);
+                    }}
+                  >
+                    {({ isSubmitting }) => (
+                      <Form className="Form">
+                        <div className="Input">
+                          <Field
+                            type="email"
+                            name="email"
+                            id="email"
+                            placeholder="Email"
+                            style={{ marginBottom: "10px", width: "100%" }}
+                          />
+                          <ErrorMessage
+                            name="email"
+                            component="div"
+                            style={{ color: "red", marginBottom: "5px" }}
+                          />
+                          <Field
+                            type="password"
+                            name="password"
+                            id="password"
+                            placeholder="Password"
+                            style={{ marginBottom: "10px", width: "100%" }}
+                          />
+                          <ErrorMessage
+                            name="password"
+                            component="div"
+                            style={{ color: "red", marginBottom: "5px" }}
+                          />
+                        </div>
+                        <div
+                          className="Forgot"
+                          onClick={() => setIsResetOpen(true)}
+                        >
+                          Forgot password? <span>Reset it</span>
+                        </div>
+                        <div className="LogButton">
+                          <button
+                            className="LoginButton"
+                            disabled={isLoading || isSubmitting}
+                            type="submit"
+                          >
+                            <span>{isLoading ? "Loading..." : "Login"}</span>
+                          </button>
+                          {responseMessage && (
+                            <p style={{ color: "red", textAlign: "center" }}>
+                              {responseMessage}
+                            </p>
+                          )}
+                        </div>
+                      </Form>
+                    )}
+                  </Formik>
+                )}
+                <div
+                  style={{
+                    borderBottom: "1px solid lightGrey",
+                    margin: "10px",
+                  }}
                 ></div>
-              <div className="Account">
-                <span>Don’t have an account?</span>
-                <span className="SignButton" onClick={handleSignUpClick}>
-                  Sign up
-                </span>
+                <div className="Account">
+                  <span>Don’t have an account?</span>
+                  <span className="SignButton" onClick={handleSignUpClick}>
+                    Sign up
+                  </span>
+                </div>
               </div>
             </div>
           </div>
-      </div>
         </>
       )}
       {showOTPModal && (
         <VerifyLoginOTP
-        phoneno={phoneNumber}
-        country_code={selectedCountry.value}
-        otpid={isOtpid}
-        handleLoginSuccess={handleLoginSuccess}
-        onVerificationSuccess={handleClose}
+          phoneno={phoneNumber}
+          country_code={selectedCountry.value}
+          otpid={isOtpid}
+          handleLoginSuccess={handleLoginSuccess}
+          onVerificationSuccess={handleClose}
         />
       )}
       {isResetOpen && (
         <ResetPassword
-        isOpenModal={isResetOpen}
-        handleCloseModal={() => setIsResetOpen(false)}
-        handleClose={handleClose}
+          isOpenModal={isResetOpen}
+          handleCloseModal={() => setIsResetOpen(false)}
+          handleClose={handleClose}
         />
       )}
     </>

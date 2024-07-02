@@ -4,7 +4,7 @@ import NoFavoriteFOundAnimation from "./NoFavoriteFoundAnimation";
 
 const Favorite = () => {
   const favoriteDetails = useSelector((state) => state.favorite.favorites);
-  console.log(favoriteDetails);
+  // console.log(favoriteDetails);
 
   return (
     <>
@@ -12,8 +12,8 @@ const Favorite = () => {
         <h1>Favorite Products : </h1>
       </div>
       <div className="Favorite">
-      {favoriteDetails && favoriteDetails.length > 0 ? (
-        favoriteDetails.map(({ id, image, title, actual_price, label }) => (
+        {favoriteDetails && favoriteDetails.length > 0 ? (
+          favoriteDetails.map(({ id, image, title, actual_price, label }) => (
             <div className="FavoriteDiv" key={id}>
               <div className="FavoriteImageDiv">
                 <img src={image} alt="" className="FavoriteImage" />
@@ -28,13 +28,13 @@ const Favorite = () => {
                 <span className="FavoriteLabel">{label}</span>
               </div>
             </div>
-        ))
-    ) : (
-        <div className="NotFoundFavoriteAnimationDiv">
-          <NoFavoriteFOundAnimation width={400} height={400} />
-        </div>
-      )}
-      </ div>
+          ))
+        ) : (
+          <div className="NotFoundFavoriteAnimationDiv">
+            <NoFavoriteFOundAnimation width={400} height={400} />
+          </div>
+        )}
+      </div>
     </>
   );
 };

@@ -72,18 +72,14 @@ export const updateCartItemQuantity = (itemId, quantity) => ({
 export const updateTotalPrice = (totalPrice) => ({
   type: UPDATE_TOTAL_PRICE,
   payload: totalPrice,
-})
+});
 
-export const addToFavorite =(item) => {
-  return {
-    type:ADD_TO_FAVORITE,
-    payload:item
-  }
-}
+export const addToFavorite = (item) => ({
+  type: ADD_TO_FAVORITE,
+  payload: item,
+});
 
-export const removeFromFavorite = (item) => {
-  return {
-    type:REMOVE_FROM_FAVORITE,
-    payload:item.id
-  }
-}
+export const removeFromFavorite = (item) => ({
+  type: REMOVE_FROM_FAVORITE,
+  payload: item.id,
+});
