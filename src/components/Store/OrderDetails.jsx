@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getOrdersDetails } from "../../apiServices";
 import { useParams } from "react-router-dom";
-import Loader from '../Loader';
+import Loader from "../Loader";
 
 const OrderDetails = () => {
   const [orderDetails, setOrderDetails] = useState(null);
@@ -20,7 +20,7 @@ const OrderDetails = () => {
       }
     };
     getProductOrderDetails();
-  }, []);
+  }, [order_id]);
 
   return (
     <div>
@@ -131,7 +131,9 @@ const OrderDetails = () => {
           </div>
         </div>
       ) : (
-        <div><Loader /></div>
+        <div>
+          <Loader />
+        </div>
       )}
     </div>
   );

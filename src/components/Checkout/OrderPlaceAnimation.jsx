@@ -16,9 +16,7 @@ const OrderPlaceAnimation = ({ width, height, isVisible }) => {
   return (
     <div style={{ width, height }} className="LottieAnimation">
       <Lottie options={defaultOptions} width={width} height={height} />
-      <h1 className="LottieAnimationText">
-        Order Placed Successfully
-      </h1>
+      <h1 className="LottieAnimationText">Order Placed Successfully</h1>
     </div>
   );
 };

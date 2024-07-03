@@ -1,6 +1,6 @@
-import React from 'react'
+import React from "react";
 import Faq from "react-faq-component";
-import data from '../../data/giftCardFaq';
+import data from "../../data/giftCardFaq";
 
 const styles = {
   bgColor: "white",
@@ -29,7 +29,7 @@ const FAQuestions = () => {
         <Faq data={data} styles={styles} config={config} />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default FAQuestions
+export default FAQuestions;

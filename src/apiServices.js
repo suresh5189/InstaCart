@@ -772,11 +772,15 @@ export const deleteList = async (accessToken, listId) => {
 
 export const editList = async (accessToken, listId, updatedData) => {
   try {
-    const response = await apiServices.post(`/store/lists/${listId}/edit`,updatedData, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    });
+    const response = await apiServices.post(
+      `/store/lists/${listId}/edit`,
+      updatedData,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
     return response.data;
   } catch (error) {
     throw new Error(error.response.data.message || "Failed to Edit List");

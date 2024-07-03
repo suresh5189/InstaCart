@@ -41,7 +41,7 @@ function StoreDetailsInfoPage({ isOpen, isClose, storeId }) {
       }
     };
     getStoreDetails();
-  }, []);
+  }, [storeId]);
 
   return (
     <>
@@ -82,15 +82,17 @@ function StoreDetailsInfoPage({ isOpen, isClose, storeId }) {
                 ></div>
                 <div className="StoreDetailSecondButton">
                   <span
-                    className={`StoreDetailSecondButtonInfo ${activeTab === "info" ? "active" : ""
-                      }`}
+                    className={`StoreDetailSecondButtonInfo ${
+                      activeTab === "info" ? "active" : ""
+                    }`}
                     onClick={() => handleTabChange("info")}
                   >
                     Info
                   </span>
                   <span
-                    className={`StoreDetailSecondButtonDelivery ${activeTab === "delivery" ? "active" : ""
-                      }`}
+                    className={`StoreDetailSecondButtonDelivery ${
+                      activeTab === "delivery" ? "active" : ""
+                    }`}
                     onClick={() => handleTabChange("delivery")}
                   >
                     Delivery times
@@ -103,8 +105,9 @@ function StoreDetailsInfoPage({ isOpen, isClose, storeId }) {
                   }}
                 ></div>
                 <div
-                  className={`StoreDetailSecondReturnAndAbout ${activeTab === "info" ? "fade-in" : ""
-                    }`}
+                  className={`StoreDetailSecondReturnAndAbout ${
+                    activeTab === "info" ? "fade-in" : ""
+                  }`}
                 >
                   <div className="StoreDetailSecondPriceInfo">
                     <div className="StoreDetailSecondPrice">Pricing</div>
@@ -206,10 +209,11 @@ function StoreDetailsInfoPage({ isOpen, isClose, storeId }) {
                     </div>
                   )}
                 </div>
-                {store.delivery_time.delivery_timings == "not available" ? (
+                {store.delivery_time.delivery_timings === "not available" ? (
                   <div
-                    className={`StoreDetailSecondDeliveryInfo ${activeTab === "delivery" ? "fade-in" : "fade-out"
-                      }`}
+                    className={`StoreDetailSecondDeliveryInfo ${
+                      activeTab === "delivery" ? "fade-in" : "fade-out"
+                    }`}
                   >
                     <span
                       style={{
@@ -224,8 +228,9 @@ function StoreDetailsInfoPage({ isOpen, isClose, storeId }) {
                   </div>
                 ) : (
                   <div
-                    className={`StoreDetailSecondDeliveryInfo ${activeTab === "delivery" ? "fade-in" : "fade-out"
-                      }`}
+                    className={`StoreDetailSecondDeliveryInfo ${
+                      activeTab === "delivery" ? "fade-in" : "fade-out"
+                    }`}
                   >
                     {store.delivery_time.delivery_timings.map(
                       (deliveryTiming, index) => (

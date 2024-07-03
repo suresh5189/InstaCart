@@ -1,7 +1,7 @@
 import React from "react";
-import Support from '../../images/GiftCard1.webp';
-import Virtual from '../../images/GiftCard2.webp';
-import Congrats from '../../images/GiftCard3.webp';
+import Support from "../../images/GiftCard1.webp";
+import Virtual from "../../images/GiftCard2.webp";
+import Congrats from "../../images/GiftCard3.webp";
 
 const Ocassion = () => {
   return (

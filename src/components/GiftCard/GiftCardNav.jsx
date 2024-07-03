@@ -1,5 +1,4 @@
 import React from "react";
-import { GiHamburgerMenu } from "react-icons/gi";
 import InstaCarLogo from "../../images/instacart.svg";
 import { IoArrowBack } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";

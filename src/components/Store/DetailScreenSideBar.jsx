@@ -24,7 +24,6 @@ const DetailScreenSidebar = ({
     navigate("/favorites");
   };
 
-  
   const handleOpenList = () => {
     navigate("/store/list");
   };
