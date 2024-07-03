@@ -39,7 +39,7 @@ const SignUp = ({
     try {
       setIsOTPSent(true);
       let response;
-      if (!signWithPhone) {
+      if (signWithPhone) {
         if (!selectedCountry) {
           throw new Error("Please select a country code.");
         }
@@ -139,7 +139,7 @@ const SignUp = ({
                 <span>or</span>
                 <hr className="HorizontalLine" />
               </div>
-              {signWithPhone ? (
+              {!signWithPhone ? (
                 <Formik
                   initialValues={{ email: "" }}
                   validate={(values) => {

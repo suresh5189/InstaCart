@@ -103,8 +103,8 @@ const StoreProducts = () => {
 
   return (
     <>
+      <ToastContainer />
       <div className="StoreDetail">
-        <ToastContainer />
         <div className="StoreDetailSideBar">
           <div className="DetailScreenSidebar">
             <DetailScreenSidebar

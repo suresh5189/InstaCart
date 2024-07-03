@@ -76,7 +76,7 @@ const User = () => {
         const getuserData = await getUserDetails(refreshToken);
         const userData = getuserData.data.data.userData;
         setUserDetails(userData);
-        console.log(userData);
+        // console.log(userData);
         // dispatch(updateProfile(userData));
       } catch (error) {
         console.error("Error fetching user details:", error.message);

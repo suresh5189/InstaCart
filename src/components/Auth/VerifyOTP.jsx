@@ -15,9 +15,11 @@ const VerifyOTP = ({
   const [isLoading, setIsLoading] = useState(false);
 
   const handleVerifyOTP = async () => {
-    if (!password || !enteredotp) {
-      setResponseMessage("Please fill all fields.");
-      return;
+    if (email) {
+      if (!password || !enteredotp) {
+        setResponseMessage("Please fill all fields.");
+        return;
+      }
     }
 
     setIsLoading(true);
@@ -25,6 +27,7 @@ const VerifyOTP = ({
       let response;
       if (isPhoneSignUp) {
         // Sign up was with phone number
+        console.log(response);
         response = await verifyOTPRegister(
           null, // No email needed for phone sign-up
           country_code,
@@ -34,8 +37,8 @@ const VerifyOTP = ({
           otpid
         );
       } else {
-        // Sign up was with email
         response = await verifyOTPRegister(
+        // Sign up was with email
           email,
           null, // No country_code or phoneno needed for email sign-up
           null,
@@ -45,7 +48,7 @@ const VerifyOTP = ({
         );
       }
 
-      if (response.status === "success") {
+      if (response && response.status === "success") {
         setResponseMessage("OTP Verified Successfully");
         onVerificationSuccess();
         alert("Sign Up Successfully. Log in Now");
@@ -53,7 +56,7 @@ const VerifyOTP = ({
         setResponseMessage("Error verifying OTP. Please try again.");
       }
     } catch (error) {
-      console.error("Error Verifying OTP", error.message);
+      console.error("Error Verifying OTP", error);
       setResponseMessage("Error verifying OTP. Please try again.");
     } finally {
       setIsLoading(false);
@@ -66,15 +69,17 @@ const VerifyOTP = ({
       <div className="VerifyOTP">
         <h1>Verify OTP</h1>
         <div className="Input">
-          <div className="InputField">
-            <label>Password:</label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Enter Password"
-            />
-          </div>
+          {email && (
+            <div className="InputField">
+              <label>Password:</label>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Enter Password"
+              />
+            </div>
+          )}
           <div className="InputField">
             <label>OTP:</label>
             <input

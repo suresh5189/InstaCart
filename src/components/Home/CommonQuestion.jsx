@@ -6,7 +6,7 @@ const styles = {
   bgColor: "white",
   titleTextColor: "black",
   rowTitleColor: "black",
-  rowTitleTextSize: "28px",
+  rowTitleTextSize: "20px",
   rowContentColor: "grey",
   rowContentTextSize: "20px",
 };

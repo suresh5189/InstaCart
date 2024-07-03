@@ -143,6 +143,7 @@ input[type="search"]::placeholder {
   border-bottom: 2px solid black;
 }
 
+
 /* -------------------------------------------------------------- */
 /* -------------------------------------------------------------- */
 
@@ -4554,6 +4555,478 @@ button[type="submit"]:hover {
   .DeliveryTextSubTitle {
     font-size: 25px;
   }
+
+  .HorizontalScrollBarWrapper{
+    flex-wrap: wrap;
+  }
 }
 
 /* ------------------------- */
+
+@media screen and (max-width: 512px) {
+  .LoginAndSignUpButtonDiv {
+    justify-content: center;
+  }
+
+  .loginButton {
+    background-color: rgb(16, 137, 16);
+    color: white;
+    padding: 10px 20px;
+  }
+
+  .HamburgerHead {
+    justify-content: space-between;
+  }
+
+  .HamburgerHeader {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: normal;
+  }
+
+  .ImageBanner {
+    display: none;
+  }
+
+  .HomePageBarTextH1,
+  .HomePageBarText {
+    width: 300px;
+    margin-top: 35px;
+    text-align: justify;
+  }
+
+  .SearchContainer {
+    width: 100%;
+  }
+
+  .StoreItemDetailHead {
+    max-height: calc(96px + 100vh);
+    min-height: 800px;
+  }
+
+  .PhoneAndQrcode {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    /* height: 100px; */
+    max-width: 1152px;
+    background-color: #b1e5d5;
+    height: 100%;
+    /* margin: auto; */
+    border-radius: 8px;
+    box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.16);
+    margin-top: 30px;
+  }
+
+  .QrcodeImage {
+    width: 150px;
+    margin-bottom: 20px;
+  }
+
+  .PhoneAndQrcodeText {
+    text-align: center;
+    margin: 10px 0;
+  }
+
+  .PhoneImage {
+    width: 350px;
+  }
+
+  .CommonQuestionHeading {
+    font-size: 30px;
+  }
+
+  .Footer {
+    display: none;
+  }
+
+  .Cart {
+    width: 80%;
+  }
+
+  .Delivery {
+    margin: 60px auto;
+  }
+
+  .DeliveryTextSubTitle {
+    text-align: justify;
+  }
+
+  .MarketPlace h1 {
+    text-align: center;
+    font-size: 22px;
+    margin: 10px 10px;
+  }
+  .FAQ {
+    margin: 0 25px;
+  }
+
+  .SearchBarDiv {
+    width: 412px;
+    left: -26px;
+  }
+
+  .Sidebar {
+    width: 80%;
+  }
+
+  .User {
+    position: relative;
+  }
+
+  .ChangeEmail,
+  .ChangePassword,
+  .ChangeName,
+  .VerifyChangedPhoneNumber {
+    left: 0;
+    top: 20%;
+  }
+
+  .Login,
+  .SignUp {
+    left: 0;
+    top: 10%;
+  }
+
+  /* ---------------------------- */
+  .Orders {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .OrderNotFound {
+    margin: 20px;
+  }
+
+  /* --------------------------- */
+  .InstacartImage,
+  .InstacartImageLogo {
+    width: 180px;
+  }
+
+  .InstaCartBanner {
+    justify-content: space-around;
+  }
+
+  .InstaCartPlusCHeadListFirstImage {
+    width: 80px;
+    height: 80px;
+  }
+
+  .InstaCartPlusCHeadListSpan span {
+    font-size: 15px;
+  }
+
+  .InstaCartPlusButtonBelowText span,
+  .InstaCartPromoCodeButton span {
+    font-size: 17px;
+  }
+
+  .InstaCardPlusHeading {
+    font-size: 18px;
+  }
+
+  /* ---------------------------------- */
+  .Promo {
+    margin: 35px 18px;
+  }
+  /* ---------------------------------- */
+
+  .GiftCardFirst {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .GiftCardSubHeading {
+    text-align: justify;
+  }
+
+  .GiftCardInside {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .GiftCardHeadingText {
+    font-size: 25px;
+  }
+
+  .GiftCardImage {
+    width: 50vh;
+    height: 40vh;
+  }
+
+  .Occasion {
+    margin: 50px auto;
+  }
+
+  .OccasionHeading {
+    font-size: 30px;
+  }
+
+  .OccasionContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+  }
+
+  .OccasionText {
+    text-align: center;
+  }
+
+  .Purchase {
+    padding: 0;
+  }
+
+  .PurchaseImageContainer img {
+    width: 360px;
+    height: 360px;
+  }
+
+  .PurchaseContainer {
+    padding: 0;
+    align-items: center;
+  }
+
+  .PurchaseContainerSubHeading {
+    text-align: justify;
+  }
+
+  .FAQuestionsHeading {
+    font-size: 25px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .FAQeuestionDiv {
+    text-align: justify;
+  }
+
+  .GiftConvenienceText,
+  .GiftConvenienceSubText {
+    font-size: 16px;
+  }
+
+  .GiftConvenience {
+    padding: 0;
+  }
+
+  .GiftConvenienceHeading {
+    font-size: 25px;
+  }
+  /* ------------------------------------- */
+
+  .StoreDetail {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .StoreDetailSideBar,
+  .ProductDivMain {
+    position: relative;
+    width: 100%;
+    height: auto;
+    margin: 0;
+    z-index: 1;
+  }
+
+  .StoreContainerHead {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .StoreImageAndDetailContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .StoreDetailSecondContainer {
+    width: 380px;
+  }
+
+  .Bookmark {
+    z-index: 1;
+  }
+
+  .StoreItemDetailImage img {
+    width: 200px;
+    margin-top: 10px;
+  }
+
+  .StoreItemDetailText1 {
+    font-size: 17px;
+    text-align: justify;
+  }
+
+  .StoreItemDetailHead {
+    top: 20px;
+  }
+
+  .StoreItemDetailButtonContainerItemCount {
+    align-items: center;
+  }
+  .StoreItemDetailIcon{
+    margin: 0;
+  }
+
+  /* ------------------------------------------ */
+  .Checkout{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .CheckoutContinueButtonOutsideDiv{
+    display: none;
+  }
+
+  .PayWithKlarnaText1{
+    font-size: 18px;
+  }
+
+  .PayWithKlarnaText2,.PayWithKlarnaText3{
+    font-size: 14px;
+  }
+
+  .PaymentMethod{
+    left: 0;
+    top: 10%;
+    width: 416px;
+  }
+
+  .CategoryListImageDiv{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .CategoryListImage{
+    width: 400px;
+    height: 370px;
+  }
+
+  .CategoryListImageDivText{
+    margin: 0;
+  }
+
+  .container{
+    width: 400px;
+    left: 5px;
+    padding: 30px 15px;
+  }
+
+  .ListContainer{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .ListContainerDiv{
+    border-radius: 20px 20px 0 0;
+  }
+
+  .ListContainerTitleAndButtonDiv{
+    margin-bottom: 20px;
+  }
+
+  .ListContainerButtonDiv{
+    display: flex;
+  }
+
+  .ListContainerButtonDiv span{
+    padding: 5px;
+  }
+
+  .ListContainerTitle{
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .ListContainerImageDiv img{
+    border-radius: 0 0 20px 20px;
+  }
+
+  .Options{
+    left: 0;
+    width: 412px;
+  }
+
+  .OptionsCloseText{
+    margin-left: 120px;
+  }
+  /* ------------------------------------------- */
+  .NotFoundFavoriteAnimationDiv{
+    margin: 0;
+  }
+
+  .FavoriteHeading{
+    font-size: 16px;
+  }
+
+  /* ------------------------------------------- */
+
+  .NavbarScrollBarWrapper {
+    position: relative;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  
+  .NavbarScrollBar {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+  }
+  
+  .HorizontalScrollBarWrapper {
+    display: flex;
+    flex-wrap: nowrap;
+  }
+  
+  .NavbarScrollBarList {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    padding: 0 8px;
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .NavbarScrollBarIcon {
+    width: 32px;
+    height: 32px;
+    margin-right: 8px;
+  }
+  
+  .NavbarScrollBarText {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .scrollButton {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+  }
+  
+  .scrollButton.left {
+    left: 0;
+  }
+  
+  .scrollButton.right {
+    right: 0;
+  }
+  
+
+
+}

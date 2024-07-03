@@ -78,6 +78,22 @@ function Navbar({ onLoginClick, onSignUpClick, isLoggedIn, handleLogout }) {
     setSearchQuery("");
   };
 
+  function scrollLeft() {
+    const scrollWrapper = document.querySelector(".NavbarScrollBarWrapper");
+    scrollWrapper.scrollBy({
+      left: -100, // Adjust scroll amount as necessary
+      behavior: "smooth", // Smooth scrolling behavior
+    });
+  }
+
+  function scrollRight() {
+    const scrollWrapper = document.querySelector(".NavbarScrollBarWrapper");
+    scrollWrapper.scrollBy({
+      left: 100, // Adjust scroll amount as necessary
+      behavior: "smooth", // Smooth scrolling behavior
+    });
+  }
+
   return (
     <div className="navbar">
       <div className="HamburgerHeader">
@@ -186,7 +202,7 @@ function Navbar({ onLoginClick, onSignUpClick, isLoggedIn, handleLogout }) {
             </>
           )}
         </div>
-        <div style={{ display: "flex" }}>
+        <div className="LoginAndSignUpButtonDiv" style={{ display: "flex" }}>
           {!isLoggedIn && (
             <>
               <button className="loginButton" onClick={onLoginClick}>
@@ -220,6 +236,7 @@ function Navbar({ onLoginClick, onSignUpClick, isLoggedIn, handleLogout }) {
       {isLoggedIn && (
         <div className="NavbarScrollBarWrapper">
           <div className="NavbarScrollBar">
+            <button className="scrollButton left" onClick={scrollLeft}></button>
             <div className="HorizontalScrollBarWrapper Squares">
               {categories.map(({ id, name, imageUrl }) => (
                 <Link
@@ -238,6 +255,10 @@ function Navbar({ onLoginClick, onSignUpClick, isLoggedIn, handleLogout }) {
                 </Link>
               ))}
             </div>
+            <button
+              className="scrollButton right"
+              onClick={scrollRight}
+            ></button>
           </div>
         </div>
       )}

@@ -104,12 +104,16 @@ export const verifyOTPRegister = async (
       throw new Error("Invalid parameters for OTP verification");
     }
 
+    console.log(requestBody);
     const response = await apiServices.post("/register/verify", requestBody);
-
     if (response.status === 201) {
-      const accessToken = response.data.data.JWTToken.accessToken;
-      localStorage.setItem("AccessToken", accessToken);
-      return { status: "success", message: "OTP verified successfully" };
+      if (response.data && response.data.data.JWTToken) {
+        const { accessToken } = response.data.data.JWTToken;
+        localStorage.setItem("AccessToken", accessToken);
+        return { status: "success", message: "OTP verified successfully" };
+      } else {
+        throw new Error("Invalid response structure from server");
+      }
     } else {
       throw new Error("Invalid OTP");
     }

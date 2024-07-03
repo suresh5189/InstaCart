@@ -5,7 +5,7 @@ import Qrcode from "../../images/qrcode.webp";
 function Payment() {
   return (
     <div className="PhoneAndQrcode">
-      <img src={Phone} alt="phone" />
+      <img src={Phone} alt="phone"  className="PhoneImage"/>
       <div className="PhoneAndQrcodeText">
         <h2 className="PhoneAndQrcodeTextTitle">
           Get the full Instacart experience
