@@ -16,7 +16,7 @@ const OrderDetails = () => {
         // console.log("Fetching Order Details", orderDetails.data.orderData);
         setOrderDetails(orderDetails.data.orderData);
       } catch (error) {
-        console.log("Error Fetching Orders Details", error.message);
+        console.error("Error Fetching Orders Details", error.message);
       }
     };
     getProductOrderDetails();

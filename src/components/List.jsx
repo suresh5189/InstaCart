@@ -50,13 +50,13 @@ const List = () => {
       const refreshToken = localStorage.getItem("RefreshToken");
       const response = await deleteList(refreshToken, listData.listId);
       // console.log("List Deleted Successfully", response);
-      setListData(null);
-      localStorage.removeItem("listData");
       toast.success("List Deleted Successfully", {
         autoClose: 2000,
         position: "bottom-center",
         hideProgressBar: true,
       });
+      localStorage.removeItem("listData");
+      setListData(null);
       setIsOptionsModalOpen(false);
     } catch (error) {
       console.error("Failed To Delete List", error.message);

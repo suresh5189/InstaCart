@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { addList, getListCoverImages } from "../apiServices";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 function CreateList({ isOpen, onClose, onCreateList }) {
   const [title, setTitle] = useState("");
@@ -37,7 +35,7 @@ function CreateList({ isOpen, onClose, onCreateList }) {
 
   const handleCreateList = async () => {
     if (!title || !selectedImage) {
-      toast.error("Please enter a title and select a cover photo.");
+      alert("Please enter a title and select a cover photo.");
       return;
     }
 
@@ -54,8 +52,6 @@ function CreateList({ isOpen, onClose, onCreateList }) {
       const response = await addList(refreshToken, listData);
       const listId = response.data.list_id;
 
-      toast.success("List Created Successfully");
-
       onCreateList({ ...listData, selectedImage, listId });
 
       // Clear form inputs after successful creation
@@ -64,7 +60,6 @@ function CreateList({ isOpen, onClose, onCreateList }) {
       setSelectedImage(null);
     } catch (error) {
       console.error("Error Creating List", error.message);
-      toast.error("Failed to create list. Please try again later.");
     } finally {
       setIsLoading(false);
       onClose(); // Close modal or navigate away after creation
@@ -73,7 +68,6 @@ function CreateList({ isOpen, onClose, onCreateList }) {
 
   return (
     <>
-      <ToastContainer />
       <div className="Overlay" onClick={handleOverlayClick}></div>
       <div className="container">
         <h1>Create Your List</h1>

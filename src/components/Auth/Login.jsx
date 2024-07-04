@@ -7,7 +7,7 @@ import { MdEmail } from "react-icons/md";
 import ResetPassword from "./ResetPassword";
 import { getUserDetails, login, refreshAccessToken } from "../../apiServices";
 import { useDispatch } from "react-redux";
-import { setEmail, updateProfile } from "../../store/action/userActions";
+import { setEmail, setPassword, updateProfile } from "../../store/action/userActions";
 import { loginSuccess } from "../../store/action/authActions";
 import { toast } from "react-toastify";
 import Select from "react-select";
@@ -82,6 +82,7 @@ const Login = ({ handleClose, handleSignUpClick, handleLoginSuccess }) => {
         setIsLoggedIn(true);
         handleLoginSuccess();
         dispatch(setEmail(email));
+        dispatch(setPassword(password));
         dispatch(loginSuccess(response.userId));
         // console.log(response.userId);
         dispatch(updateProfile(getUserData.data.data.userData));

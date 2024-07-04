@@ -17,8 +17,16 @@ import UserImage from "../images/userImage.webp";
 import { useSelector } from "react-redux";
 import { IoIosArrowForward } from "react-icons/io";
 import { FaFirstOrderAlt } from "react-icons/fa";
+import { CiLogout } from "react-icons/ci";
 
-const Sidebar = ({ closeSidebar, isOpen, isLoggedIn }) => {
+const Sidebar = ({
+  closeSidebar,
+  isOpen,
+  isLoggedIn,
+  handleLogout,
+  onLoginClick,
+  onSignUpClick,
+}) => {
   const useSidebarRef = useRef(null);
 
   const userDetails = useSelector((state) => state.user.userDetails);
@@ -57,6 +65,16 @@ const Sidebar = ({ closeSidebar, isOpen, isLoggedIn }) => {
     closeSidebar();
   };
 
+  const onLogin = () => {
+    onLoginClick();
+    closeSidebar();
+  }
+
+  const onSignUp = () => {
+    onSignUpClick();
+    closeSidebar();
+  }
+
   useEffect(() => {
     if (isOpen) {
       document.addEventListener("mousedown", handleClickOutside);
@@ -78,12 +96,16 @@ const Sidebar = ({ closeSidebar, isOpen, isLoggedIn }) => {
         <div className="SidebarHead">
           {!isLoggedIn ? (
             <div>
-              <div className="SideBarSignUpButton">
+              <div className="SideBarSignUpButton" onClick={onSignUp}>
                 <span className="SideBarSignUpButtonText">
                   <span>Sign up</span>
                 </span>
               </div>
-              <div className="SideBarLoginButton" style={{ marginTop: "20px" }}>
+              <div
+                className="SideBarLoginButton"
+                style={{ marginTop: "20px" }}
+                onClick={onLogin}
+              >
                 <span className="SideBarLoginButtonText">
                   <span>
                     <CiLogin size={22} className="SideBarLoginIcon" />
@@ -279,6 +301,15 @@ const Sidebar = ({ closeSidebar, isOpen, isLoggedIn }) => {
                     </div>
                   </div>
                 </div>
+              </div>
+              <div
+                style={{ borderBottom: "1px solid lightGrey", margin: "10px" }}
+              ></div>
+              <div className="SideBarStoreButton" onClick={handleLogout}>
+                <span className="SideBarStoreButtonText">
+                  <CiLogout size={20} />
+                  <span className="SideBarStoreButtonSpan">Logout</span>
+                </span>
               </div>
             </>
           )}

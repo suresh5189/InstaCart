@@ -33,6 +33,7 @@ form {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 20px;
 }
 
 .HamburgerHead {
@@ -64,9 +65,9 @@ input[type="search"] {
   color: inherit;
   background-color: rgb(255, 255, 255);
   border-radius: 50px;
-  width: 100%;
   height: 50px;
   border: 1px solid #dfdfdf;
+  width: 100%;
 }
 
 input[type="search"]::placeholder {
@@ -98,7 +99,7 @@ input[type="search"]::placeholder {
 
 .SearchContainer {
   position: relative;
-  width: 50%;
+  width: 100%;
 }
 
 .SearchIcon {
@@ -142,7 +143,6 @@ input[type="search"]::placeholder {
   margin-top: 10px;
   border-bottom: 2px solid black;
 }
-
 
 /* -------------------------------------------------------------- */
 /* -------------------------------------------------------------- */
@@ -3453,7 +3453,7 @@ Input {
 /* ---------------------------------------------------------- */
 
 .SearchBarDiv {
-  width: 735px;
+  width: 100%;
   border-radius: 8px;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 0px 16px;
   max-height: calc(96px - 100vh);
@@ -3465,7 +3465,7 @@ Input {
   z-index: 10;
   background-color: white;
   top: 50px;
-  left: -0.5%;
+  /* left: -0.5%; */
   overflow-y: scroll;
 }
 
@@ -4366,6 +4366,63 @@ button[type="submit"]:hover {
 /* Responsive  */
 
 @media screen and (max-width: 768px) {
+  .NavbarScrollBarWrapper {
+    position: relative;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .NavbarScrollBar {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+  }
+
+  .HorizontalScrollBarWrapper {
+    display: flex;
+    flex-wrap: nowrap;
+    width: 100%;
+  }
+
+  .NavbarScrollBarList {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    padding: 0 8px;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .NavbarScrollBarIcon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .NavbarScrollBarText {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .scrollButton {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+  }
+
+  .scrollButton.left {
+    left: 0;
+  }
+
+  .scrollButton.right {
+    right: 0;
+  }
+
+  /* ----------------------- */
+
   .HomePageBarText {
     margin-left: 20px;
     width: 400px;
@@ -4401,9 +4458,6 @@ button[type="submit"]:hover {
     width: 45%;
   }
 
-  .SearchBarDiv {
-    left: -200px;
-  }
   .OrderDetailAddressDiv,
   .OrderDetailPaymentDiv {
     box-shadow: none;
@@ -4555,10 +4609,6 @@ button[type="submit"]:hover {
   .DeliveryTextSubTitle {
     font-size: 25px;
   }
-
-  .HorizontalScrollBarWrapper{
-    flex-wrap: wrap;
-  }
 }
 
 /* ------------------------- */
@@ -4572,6 +4622,10 @@ button[type="submit"]:hover {
     background-color: rgb(16, 137, 16);
     color: white;
     padding: 10px 20px;
+  }
+
+  .HomePageButtonDiv {
+    padding: 0 20px;
   }
 
   .HamburgerHead {
@@ -4594,10 +4648,6 @@ button[type="submit"]:hover {
     width: 300px;
     margin-top: 35px;
     text-align: justify;
-  }
-
-  .SearchContainer {
-    width: 100%;
   }
 
   .StoreItemDetailHead {
@@ -4639,16 +4689,33 @@ button[type="submit"]:hover {
     font-size: 30px;
   }
 
-  .Footer {
+  /* .Footer {
     display: none;
-  }
+  } */
 
   .Cart {
     width: 80%;
+    z-index: 2;
+  }
+
+  .header {
+    font-size: 20px;
+    text-align: center;
   }
 
   .Delivery {
     margin: 60px auto;
+  }
+
+  .Delivery h1 {
+    font-size: 20px;
+  }
+
+  .DeliveryTextTitle,
+  .DeliveryTextSubTitle,
+  .MarketPlaceBoxTitle,
+  .MarketPlaceBoxSubTitle {
+    font-size: 20px;
   }
 
   .DeliveryTextSubTitle {
@@ -4662,11 +4729,6 @@ button[type="submit"]:hover {
   }
   .FAQ {
     margin: 0 25px;
-  }
-
-  .SearchBarDiv {
-    width: 412px;
-    left: -26px;
   }
 
   .Sidebar {
@@ -4686,7 +4748,8 @@ button[type="submit"]:hover {
   }
 
   .Login,
-  .SignUp {
+  .SignUp,
+  .Reset {
     left: 0;
     top: 10%;
   }
@@ -4873,100 +4936,101 @@ button[type="submit"]:hover {
   .StoreItemDetailButtonContainerItemCount {
     align-items: center;
   }
-  .StoreItemDetailIcon{
+  .StoreItemDetailIcon {
     margin: 0;
   }
 
   /* ------------------------------------------ */
-  .Checkout{
+  .Checkout {
     display: flex;
     flex-direction: column;
   }
 
-  .CheckoutContinueButtonOutsideDiv{
+  .CheckoutContinueButtonOutsideDiv {
     display: none;
   }
 
-  .PayWithKlarnaText1{
+  .PayWithKlarnaText1 {
     font-size: 18px;
   }
 
-  .PayWithKlarnaText2,.PayWithKlarnaText3{
+  .PayWithKlarnaText2,
+  .PayWithKlarnaText3 {
     font-size: 14px;
   }
 
-  .PaymentMethod{
+  .PaymentMethod {
     left: 0;
     top: 10%;
     width: 416px;
   }
 
-  .CategoryListImageDiv{
+  .CategoryListImageDiv {
     display: flex;
     flex-direction: column;
   }
 
-  .CategoryListImage{
+  .CategoryListImage {
     width: 400px;
     height: 370px;
   }
 
-  .CategoryListImageDivText{
+  .CategoryListImageDivText {
     margin: 0;
   }
 
-  .container{
+  .container {
     width: 400px;
     left: 5px;
     padding: 30px 15px;
   }
 
-  .ListContainer{
+  .ListContainer {
     display: flex;
     flex-direction: column;
   }
 
-  .ListContainerDiv{
+  .ListContainerDiv {
     border-radius: 20px 20px 0 0;
   }
 
-  .ListContainerTitleAndButtonDiv{
+  .ListContainerTitleAndButtonDiv {
     margin-bottom: 20px;
   }
 
-  .ListContainerButtonDiv{
+  .ListContainerButtonDiv {
     display: flex;
   }
 
-  .ListContainerButtonDiv span{
+  .ListContainerButtonDiv span {
     padding: 5px;
   }
 
-  .ListContainerTitle{
+  .ListContainerTitle {
     font-size: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
   }
 
-  .ListContainerImageDiv img{
+  .ListContainerImageDiv img {
     border-radius: 0 0 20px 20px;
   }
 
-  .Options{
+  .Options {
     left: 0;
     width: 412px;
   }
 
-  .OptionsCloseText{
+  .OptionsCloseText {
     margin-left: 120px;
   }
   /* ------------------------------------------- */
-  .NotFoundFavoriteAnimationDiv{
+  .NotFoundFavoriteAnimationDiv {
     margin: 0;
   }
 
-  .FavoriteHeading{
+  .FavoriteHeading {
     font-size: 16px;
   }
 
@@ -4977,18 +5041,19 @@ button[type="submit"]:hover {
     overflow-x: auto;
     white-space: nowrap;
   }
-  
+
   .NavbarScrollBar {
     display: flex;
     align-items: center;
     padding: 8px;
   }
-  
+
   .HorizontalScrollBarWrapper {
     display: flex;
     flex-wrap: nowrap;
+    width: 100%;
   }
-  
+
   .NavbarScrollBarList {
     flex: 0 0 auto;
     display: inline-flex;
@@ -4997,18 +5062,17 @@ button[type="submit"]:hover {
     text-decoration: none;
     color: inherit;
   }
-  
+
   .NavbarScrollBarIcon {
     width: 32px;
     height: 32px;
-    margin-right: 8px;
   }
-  
+
   .NavbarScrollBarText {
     overflow: hidden;
     text-overflow: ellipsis;
   }
-  
+
   .scrollButton {
     position: absolute;
     top: 50%;
@@ -5018,12 +5082,145 @@ button[type="submit"]:hover {
     font-size: 24px;
     cursor: pointer;
   }
-  
+
   .scrollButton.left {
     left: 0;
   }
-  
+
   .scrollButton.right {
     right: 0;
+  }
+
+  /* --------------------------------------- */
+
+  .OrderDetail {
+    margin: 0 10px;
+  }
+
+  .OrderDetailStoreImageAndStore {
+    gap: 30px;
+  }
+
+  .OrderDetailStoreImageAndStore,
+  .OrderDetailProductImageAndName,
+  .OrderDetailAddressAndPayment {
+    flex-direction: column;
+  }
+
+  .OrderDetailStoreName,
+  .OrderDetailOrderId,
+  .OrderDetailOrderStatus {
+    font-size: 25px;
+  }
+
+  .OrderDetailStoreNameDiv {
+    text-align: center;
+  }
+
+  .OrderDetailProductImageAndName {
+    background-color: white;
+    box-shadow: none;
+  }
+
+  .OrderDetailProductName,
+  .OrderDetailProductPrice,
+  .OrderDetailProductQuantity {
+    font-size: 20px;
+  }
+
+  .OrderDetailAddressDiv,
+  .OrderDetailPaymentDiv {
+    margin: 10px 0;
+  }
+
+  .OrderDetailProductImage {
+    margin: 0;
+  }
+
+  /* -------------------------------------------- */
+  .BookmarkHead {
+    margin: 0;
+    font-size: 14px;
+  }
+
+  .BookmarkHeading {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ------------------------------------------------------- */
+
+  .Footer {
+    margin: 0 10px;
+  }
+
+  .Store {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .StoreHead,
+  .FooterUlLI {
+    flex-direction: column;
+  }
+
+  .ToggleHead {
+    margin: 10px 5px;
+  }
+
+  .CopyRight {
+    margin: 5px 10px;
+  }
+
+  .Access {
+    margin-right: auto;
+  }
+  .FooterLi {
+    list-style-type: none;
+    padding-left: 0;
+    margin-top: 5px;
+    display: none;
+  }
+
+  .FooterLi.open {
+    display: block;
+  }
+
+  .FooterUlLI {
+    /* display: grid;
+    grid-template-columns: repeat(2,1fr); */
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    gap: 15px;
+    text-align: center;
+  }
+
+  .LegalFooter {
+    margin-bottom: 20px;
+  }
+  /* -------------------------------------------- */
+  .SearchContainer.isLogged {
+    position: relative;
+    width: 85%;
+    left: -30px;
+    margin: 10px;
+  }
+
+  .SearchContainer:not(.isLogged) {
+    width: 100%;
+    left: 0;
+  }
+
+  .CartButton {
+    position: absolute;
+    top: 80px;
+    right: 0;
+    margin-right: 10px;
+  }
+
+  .HorizontalScrollBarWrapper.Squares {
+    padding-top: 2px;
   }
 }

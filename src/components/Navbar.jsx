@@ -64,7 +64,7 @@ function Navbar({ onLoginClick, onSignUpClick, isLoggedIn, handleLogout }) {
         setSearchSuggestions({ matchingStores, matchingProducts });
         // console.log(suggestions.data);
       } catch (error) {
-        console.log("Error Fetching Search Suggestions" || error);
+        console.error("Error Fetching Search Suggestions" || error);
       }
     } else {
       setSearchSuggestions({ matchingStores: [], matchingProducts: [] });
@@ -102,11 +102,16 @@ function Navbar({ onLoginClick, onSignUpClick, isLoggedIn, handleLogout }) {
             <RxHamburgerMenu size={20} className="HamBurgerIcon" />
           </div>
           {hamburger && (
-            <Sidebar
-              closeSidebar={closeSidebar}
-              isOpen={handleHamburger}
-              isLoggedIn={isLoggedIn}
-            />
+            <div>
+              <Sidebar
+                closeSidebar={closeSidebar}
+                isOpen={handleHamburger}
+                isLoggedIn={isLoggedIn}
+                handleLogout={handleLogout}
+                onLoginClick={onLoginClick}
+                onSignUpClick={onSignUpClick}
+              />
+            </div>
           )}
           <div>
             <img
@@ -117,15 +122,21 @@ function Navbar({ onLoginClick, onSignUpClick, isLoggedIn, handleLogout }) {
             />
           </div>
         </div>
-        <div className="SearchContainer" ref={searchRef}>
-          <IoSearchOutline size={20} className="SearchIcon" />
-          <input
-            type="search"
-            className="inputSearchBox"
-            placeholder="Search products, stores and recipes"
-            value={searchQuery}
-            onChange={handleSearchInputChange}
-          />
+        <div
+          className={`SearchContainer ${isLoggedIn ? "isLogged" : ""}`}
+          ref={searchRef}
+        >
+          <div>
+            <IoSearchOutline size={20} className="SearchIcon" />
+            <input
+              type="search"
+              // className="inputSearchBox"
+              className={`inputSearchBox ${isLoggedIn ? "isLogged" : ""}`}
+              placeholder="Search products, stores and recipes"
+              value={searchQuery}
+              onChange={handleSearchInputChange}
+            />
+          </div>
           {searchQuery && (
             <>
               {/* <div className="Overlay"></div> */}
@@ -203,64 +214,62 @@ function Navbar({ onLoginClick, onSignUpClick, isLoggedIn, handleLogout }) {
           )}
         </div>
         <div className="LoginAndSignUpButtonDiv" style={{ display: "flex" }}>
-          {!isLoggedIn && (
-            <>
-              <button className="loginButton" onClick={onLoginClick}>
-                <span>Log in</span>
-              </button>
-              <button className="loginButton" onClick={onSignUpClick}>
-                <span>Sign up</span>
-              </button>
-            </>
-          )}
           {isLoggedIn && (
-            <button className="loginButton" onClick={handleLogout}>
-              <span>Logout</span>
-            </button>
-          )}
-          {isLoggedIn && (
-            <button className="CartButton">
-              <div className="CartIconButtonHead">
-                <div className="CartIconButton" onClick={handleCart}>
-                  <span>
-                    <FaShoppingCart size={22} className="CartIcon" />
-                  </span>
-                  <span className="CartIconCount">{totalItems}</span>
+            <div>
+              <button className="CartButton">
+                <div className="CartIconButtonHead">
+                  <div className="CartIconButton" onClick={handleCart}>
+                    <span>
+                      <FaShoppingCart size={22} className="CartIcon" />
+                    </span>
+                    <span className="CartIconCount">{totalItems}</span>
+                  </div>
+                  {cart && (
+                    <Cart closeCart={closeCart} isOpenCart={handleCart} />
+                  )}
                 </div>
-                {cart && <Cart closeCart={closeCart} isOpenCart={handleCart} />}
-              </div>
-            </button>
+              </button>
+            </div>
           )}
         </div>
       </div>
       {isLoggedIn && (
-        <div className="NavbarScrollBarWrapper">
-          <div className="NavbarScrollBar">
-            <button className="scrollButton left" onClick={scrollLeft}></button>
-            <div className="HorizontalScrollBarWrapper Squares">
-              {categories.map(({ id, name, imageUrl }) => (
-                <Link
-                  className="NavbarScrollBarList active"
-                  key={id}
-                  to={
-                    id !== 8
-                      ? `/store/category?main_category_id=${id}`
-                      : `/store/category/populargifts`
-                  }
-                >
-                  <div className="NavbarScrollBarIcon">
-                    <img src={imageUrl} alt={name} />
-                  </div>
-                  <div className="NavbarScrollBarText">{name}</div>
-                </Link>
-              ))}
+        <>
+          <div className="NavbarScrollBarWrapper">
+            <div className="NavbarScrollBar">
+              <div>
+                <button
+                  className="scrollButton left"
+                  onClick={scrollLeft}
+                ></button>
+              </div>
+              <div className="HorizontalScrollBarWrapper Squares">
+                {categories.map(({ id, name, imageUrl }) => (
+                  <Link
+                    className="NavbarScrollBarList active"
+                    key={id}
+                    to={
+                      id !== 8
+                        ? `/store/category?main_category_id=${id}`
+                        : `/store/category/populargifts`
+                    }
+                  >
+                    <div className="NavbarScrollBarIcon">
+                      <img src={imageUrl} alt={name} />
+                    </div>
+                    <div className="NavbarScrollBarText">{name}</div>
+                  </Link>
+                ))}
+              </div>
+              <div>
+                <button
+                  className="scrollButton right"
+                  onClick={scrollRight}
+                ></button>
+              </div>
             </div>
-            <button
-              className="scrollButton right"
-              onClick={scrollRight}
-            ></button>
           </div>
-        </div>
+        </>
       )}
     </div>
   );

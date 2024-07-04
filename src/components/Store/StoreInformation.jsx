@@ -8,7 +8,7 @@ function StoreDetailsInfoPage({ isOpen, isClose, storeId }) {
   const [activeTab, setActiveTab] = useState("info");
   const [storeInsideDetail, setStoreInsideDetail] = useState([]);
 
-  console.log(storeId);
+  // console.log(storeId);
 
   const infoRef = useRef(null);
 
@@ -35,7 +35,7 @@ function StoreDetailsInfoPage({ isOpen, isClose, storeId }) {
       try {
         const repsonse = await getStoreInsideDetails(storeId);
         setStoreInsideDetail(repsonse.data);
-        console.log(repsonse.data);
+        // console.log(repsonse.data);
       } catch (error) {
         console.error("Error Fetching Store Inside Detail Data", error);
       }

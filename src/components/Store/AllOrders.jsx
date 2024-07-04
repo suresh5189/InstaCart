@@ -18,7 +18,7 @@ const AllOrders = () => {
         // );
         setOrdersData(orders.data.current_orders.pickup_orders.orders);
       } catch (error) {
-        console.log("Error Fetching Orders", error.message);
+        console.error("Error Fetching Orders", error.message);
       }
     };
     getProductOrder();

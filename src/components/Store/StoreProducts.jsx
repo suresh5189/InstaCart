@@ -41,7 +41,7 @@ const StoreProducts = () => {
 
   const handleCategoryClick = (categoryId) => {
     const categoryElement = productRef.current[categoryId];
-    console.log(categoryElement);
+    // console.log(categoryElement);
     if (categoryElement) {
       categoryElement.scrollIntoView({ behavior: "smooth", block: "start" });
     }

@@ -18,7 +18,7 @@ const ResetPassword = ({ handleCloseModal, isOpenModal, handleClose }) => {
   const handleResetPassword = async () => {
     try {
       const message = await resetPassword(emailValue);
-      console.log(message);
+      // console.log(message);
       setMessage(message.data.data || "Linked Sent Successfully");
     } catch (error) {
       setMessage(error.message || "Error Sending Link.Try Again Later.");

@@ -75,17 +75,17 @@ const StoreProductInformation = ({ item, handleClose, handleOpen }) => {
     }
   });
 
-  const userId = localStorage.getItem("UserId");
+  // const userId = localStorage.getItem("UserId");
   const addToProduct = async () => {
     try {
-      const accessToken = localStorage.getItem("AccessToken");
-      await addToSavedProduct(item.id, accessToken);
+      const refreshToken = localStorage.getItem("RefreshToken");
+      await addToSavedProduct(item.id, refreshToken);
       // Update local state to reflect the change
       setFavoritesItems({
         ...favoriteItems,
         [item.id]: true, // Assuming successful addition
       });
-      dispatch(addToFavorite({ item, userId }));
+      dispatch(addToFavorite(item));
       toast.success("Item Added To Favorites", {
         position: "bottom-center",
         autoClose: 2000,
@@ -103,14 +103,14 @@ const StoreProductInformation = ({ item, handleClose, handleOpen }) => {
 
   const removeProduct = async () => {
     try {
-      const accessToken = localStorage.getItem("AccessToken");
-      await removeFromSavedProduct(item.id, accessToken);
+      const refreshToken = localStorage.getItem("RefreshToken");
+      await removeFromSavedProduct(item.id, refreshToken);
       // Update local state to reflect the change
       setFavoritesItems({
         ...favoriteItems,
         [item.id]: false, // Assuming successful removal
       });
-      dispatch(removeFromFavorite({ item, userId }));
+      dispatch(removeFromFavorite(item));
       toast.success("Item Removed From Favorites", {
         position: "bottom-center",
         autoClose: 2000,

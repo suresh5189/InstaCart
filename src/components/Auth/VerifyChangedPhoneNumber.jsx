@@ -51,7 +51,7 @@ const VerifyChangedPhoneNumber = ({ closePhoneModal }) => {
         accessToken
       );
       const otpid = response.data.otpid;
-      console.log(otpid);
+      // console.log(otpid);
       setOtpSent(true);
       setMessage(response.message || "OTP Sent Successfully");
       setOtpId(otpid); // Set OTP ID obtained from the API response

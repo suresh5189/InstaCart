@@ -24,7 +24,7 @@ function ChangeEmail({ closeEmailModal }) {
     try {
       const accessToken = localStorage.getItem("AccessToken");
       if (!accessToken) {
-        console.log("Acess Token Not Found!");
+        throw new Error("Access Token Not Found!");
       }
       const message = await changeEmail(
         emailValue,

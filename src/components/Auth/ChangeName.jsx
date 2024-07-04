@@ -26,7 +26,7 @@ function ChangeName({ closeNameModal }) {
     try {
       const accessToken = localStorage.getItem("AccessToken");
       if (!accessToken) {
-        console.log("Access Token Not Found!");
+        throw new Error("Access Token Not Found!");
         return;
       }
       const message = await changeName(firstName, lastName, accessToken);

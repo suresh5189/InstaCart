@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaApple } from "react-icons/fa";
 import { GrAndroid } from "react-icons/gr";
 import { IoToggle } from "react-icons/io5";
@@ -8,6 +8,24 @@ import { FaTwitter } from "react-icons/fa6";
 import { FaPinterest } from "react-icons/fa";
 
 const Footer = () => {
+  const [isOpen, setIsOpen] = useState({
+    topDepartments: false,
+    moreDepartments: false,
+    instacartPrograms: false,
+    getToKnowUs: false,
+    shopperOpportunities: false,
+    topCities: false,
+    moreCities: false,
+    shopperHelp: false,
+  });
+
+  const toggleDropdown = (dropdownName) => {
+    setIsOpen({
+      ...isOpen,
+      [dropdownName]: !isOpen[dropdownName],
+    });
+  };
+
   return (
     <div className="Footer">
       <div
@@ -26,9 +44,12 @@ const Footer = () => {
           </div>
         </div>
         <div className="FooterUlLI">
-          <div className="FooterUl">
+          <div
+            className="FooterUl"
+            onClick={() => toggleDropdown("topDepartments")}
+          >
             Top departments
-            <ul className="FooterLi">
+            <ul className={`FooterLi ${isOpen.topDepartments ? "open" : ""}`}>
               <li>Fresh Produce</li>
               <li>Dairy Products</li>
               <li>Meat</li>
@@ -44,9 +65,12 @@ const Footer = () => {
               <li>Coffee Shop Supplies</li>
             </ul>
           </div>
-          <div className="FooterUl">
+          <div
+            className="FooterUl"
+            onClick={() => toggleDropdown("moreDepartments")}
+          >
             More departments
-            <ul className="FooterLi">
+            <ul className={`FooterLi ${isOpen.moreDepartments ? "open" : ""}`}>
               <li>Alcohol</li>
               <li>Alcohol by location</li>
               <li>Frozen Food</li>
@@ -61,9 +85,14 @@ const Footer = () => {
               <li>Business Office snacks</li>
             </ul>
           </div>
-          <div className="FooterUl">
+          <div
+            className="FooterUl"
+            onClick={() => toggleDropdown("instacartPrograms")}
+          >
             Instacart programs
-            <ul className="FooterLi">
+            <ul
+              className={`FooterLi ${isOpen.instacartPrograms ? "open" : ""}`}
+            >
               <li>Instacart+</li>
               <li>Instacart Business</li>
               <li>EBT SNAP</li>
@@ -78,9 +107,12 @@ const Footer = () => {
               <li>Home Depot Delivery</li>
             </ul>
           </div>
-          <div className="FooterUl">
+          <div
+            className="FooterUl"
+            onClick={() => toggleDropdown("getToKnowUs")}
+          >
             Get to know us
-            <ul className="FooterLi">
+            <ul className={`FooterLi ${isOpen.getToKnowUs ? "open" : ""}`}>
               <li>Press</li>
               <li>Careers</li>
               <li>Blog</li>
@@ -113,18 +145,25 @@ const Footer = () => {
           </div>
         </div>
         <div className="FooterUlLI">
-          <div className="FooterUl">
+          <div
+            className="FooterUl"
+            onClick={() => toggleDropdown("shopperOpportunities")}
+          >
             Make money with us
-            <ul className="FooterLi">
+            <ul
+              className={`FooterLi ${
+                isOpen.shopperOpportunities ? "open" : ""
+              }`}
+            >
               <li>Shopper Opportunities</li>
               <li>Become a Shopper</li>
               <li>In-Store Employee For Instacart</li>
               <li>Earnings</li>
             </ul>
           </div>
-          <div className="FooterUl">
+          <div className="FooterUl" onClick={() => toggleDropdown("topCities")}>
             Top cities
-            <ul className="FooterLi">
+            <ul className={`FooterLi ${isOpen.topCities ? "open" : ""}`}>
               <li>Top cities</li>
               <li>Los Angeles</li>
               <li>New York City</li>
@@ -133,9 +172,12 @@ const Footer = () => {
               <li>San Francisco</li>
             </ul>
           </div>
-          <div className="FooterUl">
+          <div
+            className="FooterUl"
+            onClick={() => toggleDropdown("moreCities")}
+          >
             More cities
-            <ul className="FooterLi">
+            <ul className={`FooterLi ${isOpen.moreCities ? "open" : ""}`}>
               <li>Miami</li>
               <li>Las Vegas</li>
               <li>Atlanta</li>
@@ -143,9 +185,12 @@ const Footer = () => {
               <li>View all Job Locations</li>
             </ul>
           </div>
-          <div className="FooterUl">
+          <div
+            className="FooterUl"
+            onClick={() => toggleDropdown("shopperHelp")}
+          >
             Shopper help
-            <ul className="FooterLi">
+            <ul className={`FooterLi ${isOpen.shopperHelp ? "open" : ""}`}>
               <li>Help</li>
               <li>Contact</li>
               <li>Safety</li>
