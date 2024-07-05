@@ -32,7 +32,7 @@ const GiftCardHome = () => {
             </div>
           </div>
           <div className="GiftCardImageContainer">
-            <img src={GiftCardImage} alt="photo" className="GiftCardImage" />
+            <img src={GiftCardImage} alt="GiftCard" className="GiftCardImage" />
           </div>
         </div>
       </div>

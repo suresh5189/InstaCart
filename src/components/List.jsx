@@ -48,7 +48,8 @@ const List = () => {
   const deleteProductList = async () => {
     try {
       const refreshToken = localStorage.getItem("RefreshToken");
-      const response = await deleteList(refreshToken, listData.listId);
+      // const response = 
+      await deleteList(refreshToken, listData.listId);
       // console.log("List Deleted Successfully", response);
       toast.success("List Deleted Successfully", {
         autoClose: 2000,
@@ -200,10 +201,10 @@ const OptionsModal = ({
     }
   };
 
-  const handleEdit = async (newTitle, coverPhotoId) => {
-    await editListTitleAndPhoto(newTitle, coverPhotoId);
-    onClose();
-  };
+  // const handleEdit = async (newTitle, coverPhotoId) => {
+  //   await editListTitleAndPhoto(newTitle, coverPhotoId);
+  //   onClose();
+  // };
 
   return (
     <>

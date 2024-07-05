@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 import { storeData } from "../../apiServices";
 
 function HomePage({ isLoggedIn, handleLogin }) {
   const [visibleCount, setVisibleCount] = useState(9);
-
   const [store, setStore] = useState([]);
 
   const navigate = useNavigate();
@@ -31,7 +31,6 @@ function HomePage({ isLoggedIn, handleLogin }) {
     const getStores = async () => {
       try {
         const data = await storeData(1);
-        // console.log(data);
         setStore(data);
       } catch (error) {
         console.error("Error Fetching Store Data", error);
@@ -61,10 +60,13 @@ function HomePage({ isLoggedIn, handleLogin }) {
               messages,
             }) => {
               return (
-                <div
+                <motion.div
                   className="buttonHome"
                   onClick={() => handleDetail(store_id, image_url, store_name)}
                   key={store_id}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{ duration: 0.1 }}
                 >
                   <div className="buttonHomeLogo">
                     <div className="buttonHomeLogoImage">
@@ -106,7 +108,7 @@ function HomePage({ isLoggedIn, handleLogin }) {
                       </div>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               );
             }
           )}

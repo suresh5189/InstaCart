@@ -8,12 +8,14 @@ import VerifyOTP from "./VerifyOTP";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import Select from "react-select";
 import { MdEmail } from "react-icons/md";
+import { motion } from "framer-motion";
 
 const SignUp = ({
   handleCloseSignUpModal,
   handleOpen,
   handleLoginClick,
   isLoggedIn,
+  showSignUpModal,
 }) => {
   const refSignup = useRef(null);
 
@@ -97,7 +99,16 @@ const SignUp = ({
   return (
     <>
       <div className="Overlay"></div>
-      <div className="SignUp" ref={refSignup}>
+      <motion.div
+        className="SignUp"
+        initial={{ opacity: 0, scale: 0.1 }}
+        animate={{
+          opacity: showSignUpModal ? 1 : 0,
+          scale: showSignUpModal ? 1 : 0.1,
+        }}
+        transition={{ duration: 0.5 }}
+        ref={refSignup}
+      >
         <div className="SignUpInside">
           <div className="CloseIcon" onClick={handleCloseSignUpModal}>
             <IoClose />
@@ -265,7 +276,7 @@ const SignUp = ({
             />
           )}
         </div>
-      </div>
+      </motion.div>
     </>
   );
 };

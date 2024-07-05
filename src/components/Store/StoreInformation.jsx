@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { AiOutlineDollar } from "react-icons/ai";
 import { HiArrowUturnRight } from "react-icons/hi2";
 import { BsExclamationCircle } from "react-icons/bs";
@@ -7,9 +8,6 @@ import { getStoreInsideDetails } from "../../apiServices";
 function StoreDetailsInfoPage({ isOpen, isClose, storeId }) {
   const [activeTab, setActiveTab] = useState("info");
   const [storeInsideDetail, setStoreInsideDetail] = useState([]);
-
-  // console.log(storeId);
-
   const infoRef = useRef(null);
 
   const handleTabChange = (tab) => {
@@ -33,9 +31,8 @@ function StoreDetailsInfoPage({ isOpen, isClose, storeId }) {
   useEffect(() => {
     const getStoreDetails = async () => {
       try {
-        const repsonse = await getStoreInsideDetails(storeId);
-        setStoreInsideDetail(repsonse.data);
-        // console.log(repsonse.data);
+        const response = await getStoreInsideDetails(storeId);
+        setStoreInsideDetail(response.data);
       } catch (error) {
         console.error("Error Fetching Store Inside Detail Data", error);
       }
@@ -44,13 +41,24 @@ function StoreDetailsInfoPage({ isOpen, isClose, storeId }) {
   }, [storeId]);
 
   return (
-    <>
+    <AnimatePresence>
       {isOpen && (
-        <>
-          <div className="Overlay"></div>
-          <div className="" ref={infoRef}>
+        <motion.div
+          className="Overlay"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+        >
+          <motion.div
+            className="StoreDetailSecondContainer"
+            ref={infoRef}
+            initial={{ opacity: 0, y: -50 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -50 }}
+            transition={{ type: "spring", stiffness: 100, duration: 0.5 }}
+          >
             {storeInsideDetail.map((store) => (
-              <div className="StoreDetailSecondContainer" key={store.store_id}>
+              <div key={store.store_id}>
                 <div className="StoreDetailSecondImageContainerDiv">
                   <div className="StoreDetailSecondImageContainer">
                     <img
@@ -81,22 +89,26 @@ function StoreDetailsInfoPage({ isOpen, isClose, storeId }) {
                   }}
                 ></div>
                 <div className="StoreDetailSecondButton">
-                  <span
+                  <motion.span
                     className={`StoreDetailSecondButtonInfo ${
                       activeTab === "info" ? "active" : ""
                     }`}
                     onClick={() => handleTabChange("info")}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                   >
                     Info
-                  </span>
-                  <span
+                  </motion.span>
+                  <motion.span
                     className={`StoreDetailSecondButtonDelivery ${
                       activeTab === "delivery" ? "active" : ""
                     }`}
                     onClick={() => handleTabChange("delivery")}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                   >
                     Delivery times
-                  </span>
+                  </motion.span>
                 </div>
                 <div
                   style={{
@@ -104,10 +116,13 @@ function StoreDetailsInfoPage({ isOpen, isClose, storeId }) {
                     margin: "10px",
                   }}
                 ></div>
-                <div
+                <motion.div
                   className={`StoreDetailSecondReturnAndAbout ${
                     activeTab === "info" ? "fade-in" : ""
                   }`}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.5 }}
                 >
                   <div className="StoreDetailSecondPriceInfo">
                     <div className="StoreDetailSecondPrice">Pricing</div>
@@ -208,12 +223,15 @@ function StoreDetailsInfoPage({ isOpen, isClose, storeId }) {
                       )}
                     </div>
                   )}
-                </div>
+                </motion.div>
                 {store.delivery_time.delivery_timings === "not available" ? (
-                  <div
+                  <motion.div
                     className={`StoreDetailSecondDeliveryInfo ${
                       activeTab === "delivery" ? "fade-in" : "fade-out"
                     }`}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.5 }}
                   >
                     <span
                       style={{
@@ -225,12 +243,15 @@ function StoreDetailsInfoPage({ isOpen, isClose, storeId }) {
                     >
                       No Delivery Time Found
                     </span>
-                  </div>
+                  </motion.div>
                 ) : (
-                  <div
+                  <motion.div
                     className={`StoreDetailSecondDeliveryInfo ${
                       activeTab === "delivery" ? "fade-in" : "fade-out"
                     }`}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.5 }}
                   >
                     {store.delivery_time.delivery_timings.map(
                       (deliveryTiming, index) => (
@@ -260,14 +281,14 @@ function StoreDetailsInfoPage({ isOpen, isClose, storeId }) {
                         </div>
                       )
                     )}
-                  </div>
+                  </motion.div>
                 )}
               </div>
             ))}
-          </div>
-        </>
+          </motion.div>
+        </motion.div>
       )}
-    </>
+    </AnimatePresence>
   );
 }
 

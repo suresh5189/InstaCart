@@ -106,6 +106,7 @@ function App() {
             handleOpen={handleLoginClick}
             handleSignUpClick={handleSignUpClick}
             handleLoginSuccess={handleLoginSuccess}
+            showLoginModal={showLoginModal}
           />
         )}
         {showSignUpModal && (
@@ -113,6 +114,7 @@ function App() {
             handleCloseSignUpModal={handleSignUpCloseModal}
             handleOpen={handleSignUpClick}
             handleLoginClick={handleLoginClick}
+            showSignUpModal={showSignUpModal}
           />
         )}
         <Routes>

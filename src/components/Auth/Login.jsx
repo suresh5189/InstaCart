@@ -17,8 +17,14 @@ import { toast } from "react-toastify";
 import Select from "react-select";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import VerifyLoginOTP from "../Auth/VerifyLoginOTP";
+import { motion } from "framer-motion";
 
-const Login = ({ handleClose, handleSignUpClick, handleLoginSuccess }) => {
+const Login = ({
+  handleClose,
+  handleSignUpClick,
+  handleLoginSuccess,
+  showLoginModal,
+}) => {
   const dispatch = useDispatch();
 
   const [isResetOpen, setIsResetOpen] = useState(false);
@@ -137,7 +143,15 @@ const Login = ({ handleClose, handleSignUpClick, handleLoginSuccess }) => {
         <>
           <div className="Overlay" onClick={handleClickOutside}></div>
           <div className="LoginDiv">
-            <div className="Login">
+            <motion.div
+              className="Login"
+              initial={{ opacity: 0, scale: 0.1 }}
+              animate={{
+                opacity: showLoginModal ? 1 : 0,
+                scale: showLoginModal ? 1 : 0.1,
+              }}
+              transition={{ duration: 0.5 }}
+            >
               <div className="LoginInside">
                 <div className="CloseIcon">
                   <IoClose onClick={handleClose} />
@@ -297,7 +311,7 @@ const Login = ({ handleClose, handleSignUpClick, handleLoginSuccess }) => {
                   </span>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
         </>
       )}

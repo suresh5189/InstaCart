@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+import { motion } from "framer-motion";
 import { IoClose } from "react-icons/io5";
 import InstaCartLogo from "../images/instacart.svg";
 import { CiLogin } from "react-icons/ci";
@@ -30,7 +31,6 @@ const Sidebar = ({
   const useSidebarRef = useRef(null);
 
   const userDetails = useSelector((state) => state.user.userDetails);
-  // console.log(userDetails);
 
   const handleClickOutside = (event) => {
     if (
@@ -47,6 +47,7 @@ const Sidebar = ({
     navigate("/store/userinformation/account");
     closeSidebar();
   };
+
   const handleOpenOrder = () => {
     navigate("/store/orders");
     closeSidebar();
@@ -68,12 +69,12 @@ const Sidebar = ({
   const onLogin = () => {
     onLoginClick();
     closeSidebar();
-  }
+  };
 
   const onSignUp = () => {
     onSignUpClick();
     closeSidebar();
-  }
+  };
 
   useEffect(() => {
     if (isOpen) {
@@ -86,25 +87,47 @@ const Sidebar = ({
   return (
     <>
       <div className="Overlay"></div>
-      <div className="Sidebar" ref={useSidebarRef}>
+      <motion.div
+        className="Sidebar"
+        ref={useSidebarRef}
+        initial={{ x: "-100%" }}
+        animate={{ x: isOpen ? "0%" : "-100%" }}
+        transition={{ type: "spring", stiffness: 100, duration: 0.3 }}
+      >
         <div className="LogoAndImage">
-          <div className="CloseIconSidebar" onClick={closeSidebar}>
+          <motion.div
+            className="CloseIconSidebar"
+            onClick={closeSidebar}
+            whileHover={{ scale: 1.2 }}
+            whileTap={{ scale: 0.9 }}
+          >
             <IoClose size={24} className="CloseIconSide" />
-          </div>
+          </motion.div>
           <img src={InstaCartLogo} alt="instacartLogo" className="logo" />
         </div>
         <div className="SidebarHead">
           {!isLoggedIn ? (
             <div>
-              <div className="SideBarSignUpButton" onClick={onSignUp}>
+              <motion.div
+                className="SideBarSignUpButton"
+                onClick={onSignUp}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1, transition: { delay: 0.1 } }}
+              >
                 <span className="SideBarSignUpButtonText">
                   <span>Sign up</span>
                 </span>
-              </div>
-              <div
+              </motion.div>
+              <motion.div
                 className="SideBarLoginButton"
                 style={{ marginTop: "20px" }}
                 onClick={onLogin}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1, transition: { delay: 0.2 } }}
               >
                 <span className="SideBarLoginButtonText">
                   <span>
@@ -112,55 +135,92 @@ const Sidebar = ({
                   </span>
                   <span>Log in</span>
                 </span>
-              </div>
+              </motion.div>
               <div
                 style={{
                   borderBottom: "1px solid lightGrey",
                   margin: "30px 10px",
                 }}
               ></div>
-              <div className="SideBarNew">
-                <div className="SideBarNewSpan">
+              <motion.div
+                className="SideBarNew"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1, transition: { delay: 0.3 } }}
+              >
+                <motion.div
+                  className="SideBarNewSpan"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  initial={{ x: -50, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1, transition: { delay: 0.4 } }}
+                >
                   <span className="SideBarNewSpanText">Departments</span>
-                  <span className="SideBarNewSpanIcon">
-                    <IoIosArrowForward size={12} />
-                  </span>
-                </div>
-                <div className="SideBarNewSpan">
+                  <IoIosArrowForward size={12} className="SideBarNewSpanIcon" />
+                </motion.div>
+                <motion.div
+                  className="SideBarNewSpan"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  initial={{ x: -50, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1, transition: { delay: 0.5 } }}
+                >
                   <span className="SideBarNewSpanText">More ways to shop</span>
-                  <span className="SideBarNewSpanIcon">
-                    <IoIosArrowForward size={12} />
-                  </span>
-                </div>
-                <div className="SideBarNewSpan">
+                  <IoIosArrowForward size={12} className="SideBarNewSpanIcon" />
+                </motion.div>
+                <motion.div
+                  className="SideBarNewSpan"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  initial={{ x: -50, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1, transition: { delay: 0.6 } }}
+                >
                   <span className="SideBarNewSpanText">Help</span>
-                  <span className="SideBarNewSpanIcon">
-                    <IoIosArrowForward size={12} />
-                  </span>
-                </div>
-              </div>
+                  <IoIosArrowForward size={12} className="SideBarNewSpanIcon" />
+                </motion.div>
+              </motion.div>
             </div>
           ) : (
             <>
-              <div className="SideBarUserAndName">
+              <motion.div
+                className="SideBarUserAndName"
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2, duration: 0.4 }}
+              >
                 <div className="SideBarUserName">
                   {userDetails.firstName} {userDetails.lastName}
                 </div>
                 <div className="SideBarUserImage">
                   <img src={UserImage} alt="" />
                 </div>
-              </div>
+              </motion.div>
               <div
                 style={{ borderBottom: "1px solid lightGrey", margin: "10px" }}
               ></div>
-              <div className="SideBarStore">
-                <div className="SideBarStoreButton">
+              <motion.div
+                className="SideBarStore"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1, transition: { delay: 0.3 } }}
+              >
+                <motion.div
+                  className="SideBarStoreButton"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  initial={{ x: -50, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1, transition: { delay: 0.4 } }}
+                >
                   <span className="SideBarStoreButtonText active">
                     <GoHomeFill size={24} />
                     <span className="SideBarStoreButtonSpan">Stores</span>
                   </span>
-                </div>
-                <div className="SideBarStoreButton">
+                </motion.div>
+                <motion.div
+                  className="SideBarStoreButton"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  initial={{ x: -50, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1, transition: { delay: 0.5 } }}
+                >
                   <span className="SideBarStoreButtonText">
                     <FaFirstOrderAlt size={20} />
                     <span
@@ -170,8 +230,14 @@ const Sidebar = ({
                       Your Orders
                     </span>
                   </span>
-                </div>
-                <div className="SideBarStoreButton">
+                </motion.div>
+                <motion.div
+                  className="SideBarStoreButton"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  initial={{ x: -50, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1, transition: { delay: 0.6 } }}
+                >
                   <span className="SideBarStoreButtonText">
                     <MdOutlineSettings size={20} />
                     <span
@@ -181,9 +247,13 @@ const Sidebar = ({
                       Your account settings
                     </span>
                   </span>
-                </div>
-                <div
+                </motion.div>
+                <motion.div
                   className="SideBarStoreButton"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  initial={{ x: -50, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1, transition: { delay: 0.7 } }}
                   onClick={handleInstaCartPlus}
                 >
                   <span className="SideBarStoreButtonText">
@@ -192,18 +262,34 @@ const Sidebar = ({
                       Try Instcart+
                     </span>
                   </span>
-                </div>
-              </div>
+                </motion.div>
+              </motion.div>
               <div
                 style={{ borderBottom: "1px solid lightGrey", margin: "10px" }}
               ></div>
-              <div className="SideBarStore">
-                <div className="SideBarStoreButton">
+              <motion.div
+                className="SideBarStore"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1, transition: { delay: 0.4 } }}
+              >
+                <motion.div
+                  className="SideBarStoreButton"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  initial={{ x: -50, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1, transition: { delay: 0.5 } }}
+                >
                   <span className="SideBarStoreButtonSpan">
                     Credit and promos
                   </span>
-                </div>
-                <div className="SideBarStoreButton">
+                </motion.div>
+                <motion.div
+                  className="SideBarStoreButton"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  initial={{ x: -50, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1, transition: { delay: 0.6 } }}
+                >
                   <span className="SideBarStoreButtonText">
                     <FaGift size={20} />
                     <span
@@ -213,108 +299,161 @@ const Sidebar = ({
                       Buy gifts cards
                     </span>
                   </span>
-                </div>
-                <div className="SideBarStoreButton" onClick={handlePromo}>
+                </motion.div>
+                <motion.div
+                  className="SideBarStoreButton"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  initial={{ x: -50, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1, transition: { delay: 0.7 } }}
+                  onClick={handlePromo}
+                >
                   <span className="SideBarStoreButtonText">
                     <IoPricetag size={20} />
                     <span className="SideBarStoreButtonSpan">
                       Credits, promos, and gift cards
                     </span>
                   </span>
-                </div>
-              </div>
+                </motion.div>
+              </motion.div>
               <div
                 style={{ borderBottom: "1px solid lightGrey", margin: "10px" }}
               ></div>
-              <div className="SideBarStore">
-                <div className="SideBarStoreButton">
+              <motion.div
+                className="SideBarStore"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1, transition: { delay: 0.5 } }}
+              >
+                <motion.div
+                  className="SideBarStoreButton"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  initial={{ x: -50, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1, transition: { delay: 0.6 } }}
+                >
                   <span className="SideBarStoreButtonSpan">Support</span>
-                </div>
-                <div className="SideBarStoreButton">
+                </motion.div>
+                <motion.div
+                  className="SideBarStoreButton"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  initial={{ x: -50, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1, transition: { delay: 0.7 } }}
+                >
                   <span className="SideBarStoreButtonText">
                     <MdHelpCenter size={20} />
                     <span className="SideBarStoreButtonSpan">Help Center</span>
                   </span>
-                </div>
-                <div className="SideBarStoreButton">
+                </motion.div>
+                <motion.div
+                  className="SideBarStoreButton"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  initial={{ x: -50, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1, transition: { delay: 0.8 } }}
+                >
                   <span className="SideBarStoreButtonText">
                     <LuLightbulb size={20} />
                     <span className="SideBarStoreButtonSpan">
                       How Instacart works
                     </span>
                   </span>
-                </div>
-              </div>
+                </motion.div>
+              </motion.div>
               <div
                 style={{ borderBottom: "1px solid lightGrey", margin: "10px" }}
               ></div>
-              <div className="SideBarStore">
-                <div className="SideBarStoreButton">
+              <motion.div
+                className="SideBarStore"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1, transition: { delay: 0.6 } }}
+              >
+                <motion.div
+                  className="SideBarStoreButton"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  initial={{ x: -50, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1, transition: { delay: 0.7 } }}
+                >
                   <span className="SideBarStoreButtonSpan">Our Apps</span>
-                </div>
-                <div className="SideBarStoreButton">
+                </motion.div>
+                <motion.div
+                  className="SideBarStoreButton"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  initial={{ x: -50, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1, transition: { delay: 0.8 } }}
+                >
                   <span className="SideBarStoreButtonText">
                     <FaApple size={20} />
                     <span className="SideBarStoreButtonSpan">App Store</span>
                   </span>
-                </div>
-                <div className="SideBarStoreButton">
+                </motion.div>
+                <motion.div
+                  className="SideBarStoreButton"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  initial={{ x: -50, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1, transition: { delay: 0.9 } }}
+                >
                   <span className="SideBarStoreButtonText">
                     <FaGooglePlay size={20} />
                     <span className="SideBarStoreButtonSpan">Google Play</span>
                   </span>
-                </div>
-              </div>
+                </motion.div>
+              </motion.div>
               <div
                 style={{ borderBottom: "1px solid lightGrey", margin: "10px" }}
               ></div>
-              <div className="SideBarStore">
-                <div className="SideBarStoreButton">
+              <motion.div
+                className="SideBarStore"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1, transition: { delay: 0.7 } }}
+              >
+                <motion.div
+                  className="SideBarStoreButton"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  initial={{ x: -50, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1, transition: { delay: 0.8 } }}
+                >
                   <span className="SideBarStoreButtonSpan">Accessibility</span>
-                </div>
-                <div className="SideBarStoreButton">
+                </motion.div>
+                <motion.div
+                  className="SideBarStoreButton"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  initial={{ x: -50, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1, transition: { delay: 0.9 } }}
+                >
                   <span className="SideBarStoreButtonText">
                     <span className="SideBarStoreButtonSpan">
                       Enable high contrast colors
                     </span>
                     <IoToggle size={24} />
                   </span>
-                </div>
-              </div>
+                </motion.div>
+              </motion.div>
               <div
                 style={{ borderBottom: "1px solid lightGrey", margin: "10px" }}
               ></div>
-              <div className="SideBarStore">
-                <div className="SideBarStoreButton">
-                  <div className="SideBarButtonAllList">
-                    <div className="SideBarButtonList">
-                      <li className="SideBarButtonLi">Press</li>
-                    </div>
-                    <div className="SideBarButtonList">
-                      <li className="SideBarButtonLi">Jobs</li>
-                    </div>
-                    <div className="SideBarButtonList">
-                      <li className="SideBarButtonLi">Terms</li>
-                    </div>
-                    <div className="SideBarButtonList">
-                      <li className="SideBarButtonLi">Privacy</li>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div
-                style={{ borderBottom: "1px solid lightGrey", margin: "10px" }}
-              ></div>
-              <div className="SideBarStoreButton" onClick={handleLogout}>
+              <motion.div
+                className="SideBarStoreButton"
+                onClick={handleLogout}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1, transition: { delay: 1.0 } }}
+              >
                 <span className="SideBarStoreButtonText">
                   <CiLogout size={20} />
                   <span className="SideBarStoreButtonSpan">Logout</span>
                 </span>
-              </div>
+              </motion.div>
             </>
           )}
         </div>
-      </div>
+      </motion.div>
     </>
   );
 };

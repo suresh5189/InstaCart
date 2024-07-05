@@ -11,6 +11,7 @@ import {
 } from "../../store/action/userActions";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { motion } from "framer-motion";
 
 const Cart = ({ closeCart, isOpenCart }) => {
   const useCartRef = useRef(null);
@@ -76,7 +77,14 @@ const Cart = ({ closeCart, isOpenCart }) => {
   return (
     <>
       <div className="Overlay"></div>
-      <div className="Cart" ref={useCartRef}>
+      <motion.div
+        className="Cart"
+        ref={useCartRef}
+        initial={{ x: "100%" }}
+        animate={{ x: isOpenCart ? "0%" : "100%" }}
+        exit={{ x: "100%" }}
+        transition={{ type: "tween", duration: 0.3 }}
+      >
         <div className="CartHeader">
           <div className="CartClose">
             <MdOutlineClose
@@ -163,7 +171,7 @@ const Cart = ({ closeCart, isOpenCart }) => {
             ${totalPrice <= 0 ? "0.00" : totalPrice.toFixed(2)}
           </span>
         </div>
-      </div>
+      </motion.div>
     </>
   );
 };

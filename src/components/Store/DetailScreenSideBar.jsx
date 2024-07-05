@@ -8,6 +8,7 @@ import { MdKeyboardArrowRight } from "react-icons/md";
 import StoreDetailsInfoPage from "./StoreInformation";
 import { getStoreFrontDetails } from "../../apiServices";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const DetailScreenSidebar = ({
   storeId,
@@ -17,6 +18,7 @@ const DetailScreenSidebar = ({
 }) => {
   const [openDetailInfoModal, setOpenDetailInfoModal] = useState(false);
   const [storeFrontItems, setStoreFrontItems] = useState([]);
+  const [isMobileView, setIsMobileView] = useState(false);
 
   const navigate = useNavigate();
 
@@ -54,9 +56,31 @@ const DetailScreenSidebar = ({
 
   // console.log(storeFrontItems)
 
+  useEffect(() => {
+    // Check if viewport width is less than or equal to 768px (example for mobile view)
+    const handleResize = () => {
+      setIsMobileView(window.innerWidth <= 768);
+    };
+
+    // Initial check on component mount
+    handleResize();
+
+    // Add event listener for resize events
+    window.addEventListener("resize", handleResize);
+
+    // Clean up event listener on component unmount
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <>
-      <div className="SidebarHead">
+      <motion.div
+        className="SidebarHead"
+        initial={{ x: "-100%", opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        exit={{ x: "-100%", opacity: 0 }}
+        transition={{ type: "spring", stiffness: 150, duration: 0.7 }}
+      >
         <div className="SideBarDetailButton">
           <span className="DetailSideBarLogo">
             <span className="DetailSideBarImage">
@@ -109,26 +133,54 @@ const DetailScreenSidebar = ({
         <div
           style={{ borderBottom: "1px solid lightGrey", margin: "10px" }}
         ></div>
-        <div className="SideBarStore">
-          <div className="SideBarDetailButton">
-            {storeFrontItems.length === 0 ? (
-              <div className="NoCategoriesMessage">No categories available</div>
-            ) : (
-              storeFrontItems.map((category) => (
-                <div
-                  className="SideBarDetailButtonSpanHead"
-                  key={category.category_id}
-                  onClick={() => handleCategoryClick(category.category_name)}
-                >
-                  <span className="SideBarDetailButtonSpan">
-                    {category.category_name}
-                  </span>
+        {!isMobileView ? (
+          <div className="SideBarStore">
+            <div className="SideBarDetailButton">
+              {storeFrontItems.length === 0 ? (
+                <div className="NoCategoriesMessage">
+                  No categories available
                 </div>
-              ))
-            )}
+              ) : (
+                storeFrontItems.map((category) => (
+                  <div
+                    className="SideBarDetailButtonSpanHead"
+                    key={category.category_id}
+                    onClick={() => handleCategoryClick(category.category_name)}
+                  >
+                    <span className="SideBarDetailButtonSpan">
+                      {category.category_name}
+                    </span>
+                  </div>
+                ))
+              )}
+            </div>
           </div>
-        </div>
-      </div>
+        ) : (
+          <div className="SideBarStore">
+            <select
+              className="SideBarDropdown"
+              onChange={(e) => {
+                const selectedCategoryName = e.target.value;
+                handleCategoryClick(selectedCategoryName);
+              }}
+            >
+              <option value="">Select Category</option>
+              {storeFrontItems.length === 0 ? (
+                <option disabled>No categories available</option>
+              ) : (
+                storeFrontItems.map((category) => (
+                  <option
+                    key={category.category_id}
+                    value={category.category_name}
+                  >
+                    {category.category_name}
+                  </option>
+                ))
+              )}
+            </select>
+          </div>
+        )}
+      </motion.div>
       {openDetailInfoModal && (
         <StoreDetailsInfoPage
           isOpen={handleOpenDetailInfoModal}

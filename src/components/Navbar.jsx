@@ -8,6 +8,7 @@ import { FaShoppingCart } from "react-icons/fa";
 import Cart from "../components/Store/CartScreen";
 import { fetchCategoryList, searchStore } from "../apiServices";
 import { useSelector } from "react-redux";
+import { motion } from "framer-motion";
 
 function Navbar({ onLoginClick, onSignUpClick, isLoggedIn, handleLogout }) {
   const [hamburger, setHamburger] = useState(false);
@@ -72,10 +73,14 @@ function Navbar({ onLoginClick, onSignUpClick, isLoggedIn, handleLogout }) {
   };
 
   const handleDetail = (store_id, image, title) => {
-    navigate(`/store/${store_id}/storefront`, {
-      state: { store_id, image, title },
-    });
-    setSearchQuery("");
+    if (!isLoggedIn) {
+      setSearchQuery("");
+      return onLoginClick(true);
+    } else {
+      navigate(`/store/${store_id}/storefront`, {
+        state: { store_id, image, title },
+      });
+    }
   };
 
   function scrollLeft() {
@@ -140,7 +145,15 @@ function Navbar({ onLoginClick, onSignUpClick, isLoggedIn, handleLogout }) {
           {searchQuery && (
             <>
               {/* <div className="Overlay"></div> */}
-              <div className="SearchBarDiv">
+              <motion.div
+                className="SearchBarDiv"
+                initial={{ opacity: 0, scale: 0.1 }}
+                animate={{
+                  opacity: searchQuery ? 1 : 0,
+                  scale: searchQuery ? 1 : 0.1,
+                }}
+                transition={{ duration: 0.5 }}
+              >
                 {searchSuggestions.matchingStores &&
                   searchSuggestions.matchingStores.length > 0 && (
                     <>
@@ -209,7 +222,7 @@ function Navbar({ onLoginClick, onSignUpClick, isLoggedIn, handleLogout }) {
                       </div>
                     </>
                   )}
-              </div>
+              </motion.div>
             </>
           )}
         </div>
