@@ -7,7 +7,11 @@ import { MdEmail } from "react-icons/md";
 import ResetPassword from "./ResetPassword";
 import { getUserDetails, login, refreshAccessToken } from "../../apiServices";
 import { useDispatch } from "react-redux";
-import { setEmail, setPassword, updateProfile } from "../../store/action/userActions";
+import {
+  setEmail,
+  setPassword,
+  updateProfile,
+} from "../../store/action/userActions";
 import { loginSuccess } from "../../store/action/authActions";
 import { toast } from "react-toastify";
 import Select from "react-select";
