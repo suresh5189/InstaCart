@@ -4639,17 +4639,17 @@ button[type="submit"]:hover {
     align-items: normal;
   }
 
-  .Hamburger{
+  .Hamburger {
     display: flex;
     justify-content: flex-start !important;
   }
 
-  .logo{
+  .logo {
     margin-left: 70px;
     flex: 1;
   }
 
-  .SideBarDropdown{
+  .SideBarDropdown {
     border: none;
     width: 100%;
     font-size: 17px;
@@ -4920,7 +4920,7 @@ button[type="submit"]:hover {
     z-index: 1;
   }
 
-  .StoreContainer{
+  .StoreContainer {
     margin: 0;
   }
 
@@ -4928,7 +4928,7 @@ button[type="submit"]:hover {
     /* display: flex;
     flex-direction: column; */
     display: grid;
-    grid-template-columns: repeat(2,1fr);
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .StoreImageAndDetailContainer {
