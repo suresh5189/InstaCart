@@ -5184,7 +5184,8 @@ button[type="submit"]:hover {
   .Store {
     display: flex;
     align-items: center;
-    justify-content: center;
+    /* justify-content: center; */
+    flex-direction: column;
   }
 
   .StoreHead,
@@ -5219,7 +5220,6 @@ button[type="submit"]:hover {
     grid-template-columns: repeat(2,1fr); */
     display: flex;
     flex-direction: column;
-    margin: auto;
     gap: 15px;
     text-align: center;
   }
@@ -5227,6 +5227,32 @@ button[type="submit"]:hover {
   .LegalFooter {
     margin-bottom: 20px;
   }
+
+  .FooterTitleAndArrow{
+    display: flex;
+    justify-content: space-between;
+    margin: 0 20px;
+  }
+
+  .AppleIcon{
+    margin-right: 5px;
+  }
+
+  .LegalFooter{
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .LegalIcon{
+    font-size: 22px;
+  }
+
+  .StoreIcon{
+    font-size: 17px;
+    gap: 20px;
+  }
+
   /* -------------------------------------------- */
   .SearchContainer.isLogged {
     position: relative;

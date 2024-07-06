@@ -6,6 +6,7 @@ import { FaInstagram } from "react-icons/fa6";
 import { FaFacebookSquare } from "react-icons/fa";
 import { FaTwitter } from "react-icons/fa6";
 import { FaPinterest } from "react-icons/fa";
+import { IoIosArrowDown } from "react-icons/io";
 
 const Footer = () => {
   const [isOpen, setIsOpen] = useState({
@@ -36,10 +37,10 @@ const Footer = () => {
           <div>Get deliveries with Instacart</div>
           <div className="StoreIcon">
             <div className="AppleIcon">
-              <FaApple /> iOS
+              <FaApple style={{ color: "#555555" }} /> iOS
             </div>
             <div className="AndroidIcon">
-              <GrAndroid /> Android
+              <GrAndroid style={{ color: "#78C257" }} /> Android
             </div>
           </div>
         </div>
@@ -48,7 +49,13 @@ const Footer = () => {
             className="FooterUl"
             onClick={() => toggleDropdown("topDepartments")}
           >
-            Top departments
+            <div className="FooterTitleAndArrow">
+              <span className="FooterTitle"> Top departments</span>
+              <span className="FooterArrowIcon">
+                {" "}
+                <IoIosArrowDown />
+              </span>
+            </div>
             <ul className={`FooterLi ${isOpen.topDepartments ? "open" : ""}`}>
               <li>Fresh Produce</li>
               <li>Dairy Products</li>
@@ -69,7 +76,13 @@ const Footer = () => {
             className="FooterUl"
             onClick={() => toggleDropdown("moreDepartments")}
           >
-            More departments
+            <div className="FooterTitleAndArrow">
+              <span className="FooterTitle">More departments</span>
+              <span className="FooterArrowIcon">
+                {" "}
+                <IoIosArrowDown />
+              </span>
+            </div>
             <ul className={`FooterLi ${isOpen.moreDepartments ? "open" : ""}`}>
               <li>Alcohol</li>
               <li>Alcohol by location</li>
@@ -89,7 +102,13 @@ const Footer = () => {
             className="FooterUl"
             onClick={() => toggleDropdown("instacartPrograms")}
           >
-            Instacart programs
+            <div className="FooterTitleAndArrow">
+              <span className="FooterTitle">INstacart programs</span>
+              <span className="FooterArrowIcon">
+                {" "}
+                <IoIosArrowDown />
+              </span>
+            </div>
             <ul
               className={`FooterLi ${isOpen.instacartPrograms ? "open" : ""}`}
             >
@@ -111,7 +130,13 @@ const Footer = () => {
             className="FooterUl"
             onClick={() => toggleDropdown("getToKnowUs")}
           >
-            Get to know us
+            <div className="FooterTitleAndArrow">
+              <span className="FooterTitle">Get to know us</span>
+              <span className="FooterArrowIcon">
+                {" "}
+                <IoIosArrowDown />
+              </span>
+            </div>
             <ul className={`FooterLi ${isOpen.getToKnowUs ? "open" : ""}`}>
               <li>Press</li>
               <li>Careers</li>
@@ -137,10 +162,10 @@ const Footer = () => {
           <div>Become a Shopper</div>
           <div className="StoreIcon">
             <div className="AppleIcon">
-              <FaApple /> iOS
+              <FaApple style={{ color: "#555555" }} /> iOS
             </div>
             <div className="AndroidIcon">
-              <GrAndroid /> Android
+              <GrAndroid style={{ color: "#78C257" }} /> Android
             </div>
           </div>
         </div>
@@ -149,7 +174,13 @@ const Footer = () => {
             className="FooterUl"
             onClick={() => toggleDropdown("shopperOpportunities")}
           >
-            Make money with us
+            <div className="FooterTitleAndArrow">
+              <span className="FooterTitle">Make money with us</span>
+              <span className="FooterArrowIcon">
+                {" "}
+                <IoIosArrowDown />
+              </span>
+            </div>
             <ul
               className={`FooterLi ${
                 isOpen.shopperOpportunities ? "open" : ""
@@ -162,7 +193,13 @@ const Footer = () => {
             </ul>
           </div>
           <div className="FooterUl" onClick={() => toggleDropdown("topCities")}>
-            Top cities
+            <div className="FooterTitleAndArrow">
+              <span className="FooterTitle">Top cities</span>
+              <span className="FooterArrowIcon">
+                {" "}
+                <IoIosArrowDown />
+              </span>
+            </div>
             <ul className={`FooterLi ${isOpen.topCities ? "open" : ""}`}>
               <li>Top cities</li>
               <li>Los Angeles</li>
@@ -176,7 +213,13 @@ const Footer = () => {
             className="FooterUl"
             onClick={() => toggleDropdown("moreCities")}
           >
-            More cities
+            <div className="FooterTitleAndArrow">
+              <span className="FooterTitle">More cities</span>
+              <span className="FooterArrowIcon">
+                {" "}
+                <IoIosArrowDown />
+              </span>
+            </div>
             <ul className={`FooterLi ${isOpen.moreCities ? "open" : ""}`}>
               <li>Miami</li>
               <li>Las Vegas</li>
@@ -189,7 +232,13 @@ const Footer = () => {
             className="FooterUl"
             onClick={() => toggleDropdown("shopperHelp")}
           >
-            Shopper help
+            <div className="FooterTitleAndArrow">
+              <span className="FooterTitle">Shopping help</span>
+              <span className="FooterArrowIcon">
+                {" "}
+                <IoIosArrowDown />
+              </span>
+            </div>
             <ul className={`FooterLi ${isOpen.shopperHelp ? "open" : ""}`}>
               <li>Help</li>
               <li>Contact</li>
@@ -216,16 +265,16 @@ const Footer = () => {
         <div>Privacy Policy</div>
         <div className="LegalIcon">
           <span>
-            <FaFacebookSquare />
+            <FaFacebookSquare style={{ color: "#4267B2" }} />
           </span>
           <span>
-            <FaTwitter />
+            <FaTwitter style={{ color: "#1DA1F2" }} />
           </span>
           <span>
-            <FaInstagram />
+            <FaInstagram style={{ color: "#E1306C" }} />
           </span>
           <span>
-            <FaPinterest />
+            <FaPinterest style={{ color: "#E60023" }} />
           </span>
         </div>
       </div>
