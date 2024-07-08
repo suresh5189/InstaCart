@@ -12,9 +12,7 @@ import { ToastContainer } from "react-toastify";
 const User = () => {
   const navigate = useNavigate();
 
-  const handleBackToHome = () => {
-    navigate("/");
-  };
+  const handleBackToHome = () => navigate("/");
 
   const [showPasswordModal, setShowPasswordModal] = useState(false);
   const [showEmailModal, setShowEmailModal] = useState(false);
@@ -23,36 +21,14 @@ const User = () => {
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
 
-  const handleChangePassword = () => {
-    setShowPasswordModal(true);
-  };
-
-  const handleChangeEmail = () => {
-    setShowEmailModal(true);
-  };
-
-  const handleCloseModal = () => {
-    setShowPasswordModal(false);
-  };
-
-  const handleCloseEmailModal = () => {
-    setShowEmailModal(false);
-  };
-
-  const handleChangeNameModal = () => {
-    setShowNameModal(true);
-  };
-
-  const handleCloseNameModal = () => {
-    setShowNameModal(false);
-  };
-  const handleChangePhoneModal = () => {
-    setShowPhoneModal(true);
-  };
-
-  const handleClosePhoneModal = () => {
-    setShowPhoneModal(false);
-  };
+  const handleChangePassword = () => setShowPasswordModal(true);
+  const handleChangeEmail = () => setShowEmailModal(true);
+  const handleCloseModal = () => setShowPasswordModal(false);
+  const handleCloseEmailModal = () => setShowEmailModal(false);
+  const handleChangeNameModal = () => setShowNameModal(true);
+  const handleCloseNameModal = () => setShowNameModal(false);
+  const handleChangePhoneModal = () => setShowPhoneModal(true);
+  const handleClosePhoneModal = () => setShowPhoneModal(false);
 
   let Password = useSelector((state) => state.user.password);
   const formatPassword = (Password) => {
@@ -98,9 +74,7 @@ const User = () => {
     );
   }
 
-  if (!userDetails) {
-    return <p>No user details available.</p>;
-  }
+  if (!userDetails) return <p>No user details available.</p>;
 
   return (
     <>

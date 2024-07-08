@@ -21,22 +21,10 @@ const DetailScreenSidebar = ({
   const [isMobileView, setIsMobileView] = useState(false);
 
   const navigate = useNavigate();
-
-  const handleNavigatefavorite = () => {
-    navigate("/favorites");
-  };
-
-  const handleOpenList = () => {
-    navigate("/store/list");
-  };
-
-  const handleOpenDetailInfoModal = () => {
-    setOpenDetailInfoModal(true);
-  };
-
-  const handleCloseDetailInfoModal = () => {
-    setOpenDetailInfoModal(false);
-  };
+  const handleNavigatefavorite = () => navigate("/favorites");
+  const handleOpenList = () => navigate("/store/list");
+  const handleOpenDetailInfoModal = () => setOpenDetailInfoModal(true);
+  const handleCloseDetailInfoModal = () => setOpenDetailInfoModal(false);
 
   useEffect(() => {
     const fetchStoreFrontDetails = async () => {

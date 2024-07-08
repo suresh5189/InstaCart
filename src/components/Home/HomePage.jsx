@@ -9,13 +9,8 @@ function HomePage({ isLoggedIn, handleLogin }) {
 
   const navigate = useNavigate();
 
-  const showMore = () => {
-    setVisibleCount(visibleCount + 6);
-  };
-
-  const showLess = () => {
-    setVisibleCount(9);
-  };
+  const showMore = () => setVisibleCount(visibleCount + 6);
+  const showLess = () => setVisibleCount(9);
 
   const handleDetail = (store_id, image, title) => {
     if (!isLoggedIn) {

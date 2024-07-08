@@ -32,13 +32,8 @@ const List = () => {
     }
   }, [listData]);
 
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
 
   const handleCreateList = (data) => {
     setListData(data);
@@ -48,7 +43,7 @@ const List = () => {
   const deleteProductList = async () => {
     try {
       const refreshToken = localStorage.getItem("RefreshToken");
-      // const response = 
+      // const response =
       await deleteList(refreshToken, listData.listId);
       // console.log("List Deleted Successfully", response);
       toast.success("List Deleted Successfully", {

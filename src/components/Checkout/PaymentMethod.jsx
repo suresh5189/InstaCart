@@ -12,9 +12,7 @@ const PaymentMethod = ({ onClose, onSelectedPaymentMethod }) => {
     }
   };
 
-  const handlePaymentMethodClick = (index) => {
-    setSelectedMethod(index);
-  };
+  const handlePaymentMethodClick = (index) => setSelectedMethod(index);
 
   const handleConfirmPaymentMethod = () => {
     if (selectedMethod !== null) {

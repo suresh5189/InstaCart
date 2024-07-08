@@ -47,9 +47,7 @@ const StoreProducts = () => {
     }
   };
 
-  const handleCloseBookmarkModal = () => {
-    setBookmarkModalOpen(false);
-  };
+  const handleCloseBookmarkModal = () => setBookmarkModalOpen(false);
 
   const handleOpenDetailModal = (item) => {
     setSelectedItem(item);

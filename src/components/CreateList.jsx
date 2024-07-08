@@ -23,9 +23,7 @@ function CreateList({ isOpen, onClose, onCreateList }) {
 
   if (!isOpen) return null;
 
-  const handleImageSelection = (image) => {
-    setSelectedImage(image);
-  };
+  const handleImageSelection = (image) => setSelectedImage(image);
 
   const handleOverlayClick = (e) => {
     if (e.target.classList.contains("Overlay")) {

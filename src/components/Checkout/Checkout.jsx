@@ -102,9 +102,8 @@ const Checkout = () => {
   const totalPrice = price + deliveryFee + serviceFee + estimateTaxes;
   // console.log(totalPrice.toFixed(2));
 
-  const handleDeliveryInstructionsClick = () => {
+  const handleDeliveryInstructionsClick = () =>
     setShowDeliveryInstructions(true);
-  };
 
   const countryOptions = [
     { value: "+91", label: "+91 - India" },
@@ -231,9 +230,7 @@ const Checkout = () => {
     }
   };
 
-  const handleMakeAGiftImageClick = (index) => {
-    setSelectedImageId(index);
-  };
+  const handleMakeAGiftImageClick = (index) => setSelectedImageId(index);
 
   const handleAddOrder = async () => {
     try {

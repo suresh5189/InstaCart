@@ -10,9 +10,7 @@ function StoreDetailsInfoPage({ isOpen, isClose, storeId }) {
   const [storeInsideDetail, setStoreInsideDetail] = useState([]);
   const infoRef = useRef(null);
 
-  const handleTabChange = (tab) => {
-    setActiveTab(tab);
-  };
+  const handleTabChange = (tab) => setActiveTab(tab);
 
   const handleClickOutside = (event) => {
     if (infoRef.current && !infoRef.current.contains(event.target)) {

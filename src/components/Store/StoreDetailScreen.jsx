@@ -31,9 +31,7 @@ const StoreDetailScreen = () => {
   const location = useLocation();
   const { store_id, image, title } = location.state;
 
-  const handleCloseBookmarkModal = () => {
-    setBookmarkModalOpen(false);
-  };
+  const handleCloseBookmarkModal = () => setBookmarkModalOpen(false);
 
   const handleOpenDetailModal = (item) => {
     setSelectedItem(item);
