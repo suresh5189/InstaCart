@@ -92,19 +92,21 @@ export const verifyOTPRegister = async (
   enteredotp,
   otpid
 ) => {
+  console.log(country_code, phoneno);
   try {
     let requestBody = {};
     if (email) {
       // Sign up with email
       requestBody = { email, password, enteredotp, otpid };
+      // console.log(requestBody);
     } else if (country_code && phoneno) {
       // Sign up with phone number
-      requestBody = { country_code, phoneno, enteredotp, otpid };
+      requestBody = { country_code, enteredotp, otpid, password, phoneno };
+      // console.log(requestBody);
     } else {
       throw new Error("Invalid parameters for OTP verification");
     }
 
-    console.log(requestBody);
     const response = await apiServices.post("/register/verify", requestBody);
     if (response.status === 201) {
       if (response.data && response.data.data.JWTToken) {

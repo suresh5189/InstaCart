@@ -72,17 +72,14 @@ function App() {
 
     // List of paths where Navbar should be displayed
     const navbarPaths = [
-      "/",
-      "/store/:storeId/storefront",
-      "/store/userinformation/account",
-      "/store/category",
-      "/store/category/populargifts",
-      "/popular-gifts/category/:index",
-      "/store:id/info",
-      "/favorites",
+      "/store/account/manage_promos",
+      "/store/account/instacart-plus",
+      "/store/checkout",
+      "/p/gift-cards",
+      "/store/account/manage_promos",
     ];
 
-    if (navbarPaths.includes(currentPath)) {
+    if (!navbarPaths.includes(currentPath)) {
       return (
         <Navbar
           onLoginClick={handleLoginClick}

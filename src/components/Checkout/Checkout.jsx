@@ -13,7 +13,7 @@ import PaymentMethod from "./PaymentMethod";
 import DebitCard from "../../images/Payment/DebitCard.webp";
 import Select from "react-select";
 import GiftCardImage from "../../data/giftCardImage";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   addAddress,
   addOrder,
@@ -24,6 +24,7 @@ import {
 import { ToastContainer, toast } from "react-toastify";
 import OrderPlaceAnimation from "./OrderPlaceAnimation";
 import Klarna from "../../images/Klarna.webp";
+import { clearCart } from "../../store/action/userActions";
 
 const Checkout = () => {
   const [isAddressModalOpen, setIsAddressModalOpen] = useState(false);
@@ -47,6 +48,8 @@ const Checkout = () => {
   const [makeAGiftVisible, setMakeAGiftVisible] = useState(false);
   const [onSelectedPaymentMethod, setOnSelectedPaymentMethod] = useState(null);
   const [showAnimation, setShowAnimation] = useState(false);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     // Fetch initial address from local storage or API if needed
@@ -77,6 +80,7 @@ const Checkout = () => {
     setTimeout(() => {
       window.location.href = "/";
     }, 2000);
+    dispatch(clearCart());
   };
 
   const handleSelectedPaymentMethod = (method) => {

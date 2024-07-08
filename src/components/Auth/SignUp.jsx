@@ -273,6 +273,7 @@ const SignUp = ({
               country_code={selectedCountry?.value}
               otpid={otpid}
               onVerificationSuccess={handleCloseSignUpModal}
+              isPhoneSignUp={signWithPhone}
             />
           )}
         </div>

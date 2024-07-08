@@ -5,8 +5,8 @@ const VerifyOTP = ({
   email,
   phoneno,
   country_code,
-  onVerificationSuccess,
   otpid,
+  onVerificationSuccess,
   isPhoneSignUp, // New prop to determine if sign-up was with phone
 }) => {
   const [password, setPassword] = useState("");
@@ -21,26 +21,25 @@ const VerifyOTP = ({
         return;
       }
     }
-
     setIsLoading(true);
     try {
       let response;
       if (isPhoneSignUp) {
         // Sign up was with phone number
-        console.log(response);
         response = await verifyOTPRegister(
-          null, // No email needed for phone sign-up
+          null,
           country_code,
           phoneno,
-          null,
+          password,
           enteredotp,
           otpid
         );
+        // console.log(response);
       } else {
         response = await verifyOTPRegister(
-        // Sign up was with email
+          // Sign up was with email
           email,
-          null, // No country_code or phoneno needed for email sign-up
+          null,
           null,
           password,
           enteredotp,
@@ -69,17 +68,15 @@ const VerifyOTP = ({
       <div className="VerifyOTP">
         <h1>Verify OTP</h1>
         <div className="Input">
-          {email && (
-            <div className="InputField">
-              <label>Password:</label>
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Enter Password"
-              />
-            </div>
-          )}
+          <div className="InputField">
+            <label>Password:</label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Enter Password"
+            />
+          </div>
           <div className="InputField">
             <label>OTP:</label>
             <input

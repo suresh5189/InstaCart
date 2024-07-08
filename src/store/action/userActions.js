@@ -12,6 +12,7 @@ import {
   UPDATE_TOTAL_PRICE,
   ADD_TO_FAVORITE,
   REMOVE_FROM_FAVORITE,
+  CLEAR_CART,
 } from "../ActionTypes";
 
 export const updateProfile = (userData) => ({
@@ -62,6 +63,10 @@ export const addToCart = (item) => ({
 export const removeFromCart = (itemId) => ({
   type: REMOVE_FROM_CART,
   payload: itemId,
+});
+
+export const clearCart = () => ({
+  type: CLEAR_CART,
 });
 
 export const updateCartItemQuantity = (itemId, quantity) => ({

@@ -155,7 +155,7 @@ input[type="search"]::placeholder {
   background-color: #deedd6;
   position: relative;
   margin: auto;
-  z-index: -1;
+  /* z-index: -1; */
 }
 
 .HomePageBarDiv {
@@ -213,13 +213,14 @@ input[type="search"]::placeholder {
 }
 
 .dropDownButtonList span {
-  border: 1px solid black;
+  /* border: 1px solid black; */
   cursor: pointer;
   padding: 5px;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 10px 10px 0 0;
+  text-transform: uppercase;
 }
 
 .dropDownButtonList span:hover {
@@ -4445,6 +4446,11 @@ button[type="submit"]:hover {
     left: 170px;
   }
 
+  .VerifyOTP {
+    top: 120px;
+    left: 0;
+  }
+
   .Sidebar {
     width: 45%;
   }
@@ -4601,12 +4607,90 @@ button[type="submit"]:hover {
     font-size: 25px;
   }
 
+  .PopularGiftImageHeading {
+    text-align: center;
+  }
+
+  .PopularGiftImageHeadingText {
+    font-size: 20px;
+  }
+
+  /* --------------------- */
+
   .Footer {
     margin: 0 50px;
   }
 
+  .Store {
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+    flex-direction: column;
+  }
+
+  .StoreHead,
+  .FooterUlLI {
+    flex-direction: column;
+  }
+
+  .ToggleHead {
+    margin: 10px 5px;
+  }
+
   .CopyRight {
-    margin: 20px 10px;
+    margin: 5px 10px;
+  }
+
+  .Access {
+    margin-right: auto;
+  }
+  .FooterLi {
+    list-style-type: none;
+    padding-left: 0;
+    margin-top: 5px;
+    display: none;
+  }
+
+  .FooterLi.open {
+    display: block;
+  }
+
+  .FooterUlLI {
+    /* display: grid;
+    grid-template-columns: repeat(2,1fr); */
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+
+  .LegalFooter {
+    margin-bottom: 20px;
+  }
+
+  .FooterTitleAndArrow {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 20px;
+  }
+
+  .AppleIcon {
+    margin-right: 5px;
+  }
+
+  .LegalFooter {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .LegalIcon {
+    font-size: 22px;
+  }
+
+  .StoreIcon {
+    font-size: 17px;
+    gap: 20px;
   }
 }
 
@@ -4663,12 +4747,19 @@ button[type="submit"]:hover {
 
   .HomePageBar {
     display: flex;
+    width: 100%;
+    justify-content: center;
   }
 
   .HomePageBarTextH1,
   .HomePageBarText {
     width: 300px;
     text-align: justify;
+    margin-left: 0;
+  }
+
+  .ImageBannerAndDrop {
+    width: 100px;
   }
 
   .StoreItemDetailHead {
@@ -4838,11 +4929,6 @@ button[type="submit"]:hover {
 
   .GiftCardHeadingText {
     font-size: 25px;
-  }
-
-  .GiftCardImage {
-    width: 50vh;
-    height: 40vh;
   }
 
   .Occasion {
@@ -5228,27 +5314,27 @@ button[type="submit"]:hover {
     margin-bottom: 20px;
   }
 
-  .FooterTitleAndArrow{
+  .FooterTitleAndArrow {
     display: flex;
     justify-content: space-between;
     margin: 0 20px;
   }
 
-  .AppleIcon{
+  .AppleIcon {
     margin-right: 5px;
   }
 
-  .LegalFooter{
+  .LegalFooter {
     flex-direction: column;
     align-items: center;
     gap: 10px;
   }
 
-  .LegalIcon{
+  .LegalIcon {
     font-size: 22px;
   }
 
-  .StoreIcon{
+  .StoreIcon {
     font-size: 17px;
     gap: 20px;
   }
@@ -5275,5 +5361,41 @@ button[type="submit"]:hover {
 
   .HorizontalScrollBarWrapper.Squares {
     padding-top: 2px;
+  }
+
+  /* -------------------------------------- */
+  .PopularGiftSecondImageDiv {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .PopularGiftSecondContainerHead {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* .PopularGiftSecondImage{
+    display: none;
+  } */
+
+  .PopularGiftSecondListItem {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .PopularGiftSecondImageDiv img {
+    display: none;
+  }
+
+  .PopularGiftSecondImageText {
+    top: 35%;
+    left: 25%;
+    font-size: 35px;
+  }
+
+  .HomePageBarDiv {
+    flex-direction: column;
+    margin: 20px 0;
+    justify-content: center;
+    align-items: center;
   }
 }

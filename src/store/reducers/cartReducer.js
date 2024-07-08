@@ -2,6 +2,7 @@
 
 import {
   ADD_TO_CART,
+  CLEAR_CART,
   REMOVE_FROM_CART,
   UPDATE_CART_ITEM_QUANTITY,
   UPDATE_TOTAL_PRICE,
@@ -68,6 +69,13 @@ const cartReducer = (state = initialState, action) => {
       return {
         ...state,
         totalPrice: action.payload,
+      };
+    case CLEAR_CART:
+      return {
+        ...state,
+        items: [],
+        totalItems:0,
+        totalPrice:0,
       };
     default:
       return state;
