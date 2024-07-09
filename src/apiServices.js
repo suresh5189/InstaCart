@@ -59,31 +59,6 @@ export const sendOTPRegister = async ({ email, country_code, phoneNumber }) => {
 
 // Verifying the Register
 
-// export const verifyOTPRegister = async (email,country_code,phoneno, password, enteredotp, otpid) => {
-//   try {
-//     const response = await apiServices.post("/register/verify", {
-//       email,
-//       country_code,
-//       phoneno,
-//       password,
-//       enteredotp,
-//       otpid,
-//     });
-
-//     if (response.status === 201) {
-//       const accessToken = response.data.data.JWTToken.accessToken;
-//       localStorage.setItem("AccessToken", accessToken);
-//       return { status: "success", message: "OTP verified successfully" };
-//     } else {
-//       throw new Error("Invalid OTP");
-//     }
-//   } catch (error) {
-//     throw new Error(
-//       error.response.data.msg || "Error verifying OTP. Please try again."
-//     );
-//   }
-// };
-
 export const verifyOTPRegister = async (
   email,
   country_code,
