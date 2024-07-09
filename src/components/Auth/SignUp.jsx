@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import '../../components/css/SignupPage.css'
 import { FcGoogle } from "react-icons/fc";
 import { ImFacebook2 } from "react-icons/im";
 import { FaPhoneVolume } from "react-icons/fa";

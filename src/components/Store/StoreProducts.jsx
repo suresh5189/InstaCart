@@ -1,7 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import '../css/StoreItemDetail.css'
-import '../css/StoreDetailPage.css'
-import '../css/StoreDetailScreen.css'
 import { getStoreIemDetails } from "../../apiServices";
 import { FaPlus } from "react-icons/fa6";
 import { useDispatch, useSelector } from "react-redux";

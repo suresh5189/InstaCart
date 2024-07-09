@@ -1,5 +1,4 @@
 import React from "react";
-import '../../components/css/Payment.css'
 import Phone from "../../images/phone.webp";
 import Qrcode from "../../images/qrcode.webp";
 

@@ -1,7 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import '../css/StoreItemDetail.css'
-import '../css/StoreDetailPage.css'
-import '../css/StoreDetailScreen.css'
 import { motion, AnimatePresence } from "framer-motion";
 import { AiOutlineDollar } from "react-icons/ai";
 import { HiArrowUturnRight } from "react-icons/hi2";

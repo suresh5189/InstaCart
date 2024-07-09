@@ -1,5 +1,4 @@
 import React from "react";
-import '../../components/css/CommonQuestions.css'
 import Faq from "react-faq-component";
 import data from "../../data/faqData";
 

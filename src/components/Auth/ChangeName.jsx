@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import '../../components/css/ChangeNamePage.css'
 import { changeName } from "../../apiServices";
 import { useDispatch } from "react-redux";
 import {

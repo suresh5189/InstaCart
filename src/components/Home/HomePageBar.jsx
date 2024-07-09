@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import '../../components/css/HomePageBar.css'
 import Banner from "../../images/banner.webp";
 import { GiIndianPalace } from "react-icons/gi";
 import { MdKeyboardArrowDown } from "react-icons/md";

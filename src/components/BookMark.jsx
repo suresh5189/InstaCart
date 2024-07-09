@@ -1,5 +1,4 @@
 import React from "react";
-import '../components/css/Bookmark.css';
 import { IoClose } from "react-icons/io5";
 
 const BookMark = ({ handleClose }) => {

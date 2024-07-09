@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from "react";
-import '../components/css/Sidebar.css';
 import { motion } from "framer-motion";
 import { IoClose } from "react-icons/io5";
 import InstaCartLogo from "../images/instacart.svg";

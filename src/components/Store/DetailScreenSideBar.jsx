@@ -1,8 +1,4 @@
 import React, { useEffect, useState } from "react";
-import '../css/Sidebar.css'
-import '../css/StoreItemDetail.css'
-import '../css/StoreDetailPage.css'
-import '../css/StoreDetailScreen.css'
 import { FaShop } from "react-icons/fa6";
 import { TbReload } from "react-icons/tb";
 import { FaListUl } from "react-icons/fa";

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import '../components/css/User.css';
 import InstacartBanner from "../images/instacartBanner.webp";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";

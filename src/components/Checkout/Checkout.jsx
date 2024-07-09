@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import '../../components/css/CheckoutPage.css'
 import { FaLocationDot } from "react-icons/fa6";
 import { FiSearch } from "react-icons/fi";
 import { FaCar } from "react-icons/fa6";

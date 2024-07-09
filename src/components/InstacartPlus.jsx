@@ -1,5 +1,4 @@
 import React from "react";
-import '../components/css/InstacartPlusPage.css';
 import InstacartPlusImage from "../images/InstacartPlus.webp";
 import InstacartPlusLogo from "../images/InstacartPlusLogo.webp";
 import Truck from "../images/Truck.webp";

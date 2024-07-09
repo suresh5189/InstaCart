@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import '../components/css/CategoryListPage.css';
 import { storeData } from "../apiServices";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import Store from "../images/Store.png";
