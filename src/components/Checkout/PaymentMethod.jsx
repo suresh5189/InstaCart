@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import '../../components/css/PaymentMethod.css'
 import { IoMdClose } from "react-icons/io";
 import GooglePay from "../../images/Payment/GooglePay.webp";
 import PaymentMethodData from "../../data/paymentMethod";

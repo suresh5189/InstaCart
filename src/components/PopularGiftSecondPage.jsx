@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import '../components/css/PopularGiftSecondPage.css';
 import PopularGiftImage from "../images/PopularGift.png";
 import { useParams } from "react-router-dom";
 import { storeDetailData } from "../apiServices";

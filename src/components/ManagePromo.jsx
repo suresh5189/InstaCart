@@ -1,4 +1,5 @@
 import React from "react";
+import '../components/css/ManagePromoPage.css';
 import { BsExclamationCircleFill } from "react-icons/bs";
 
 const ManagePromo = () => {

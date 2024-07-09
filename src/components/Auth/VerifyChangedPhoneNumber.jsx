@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import '../../components/css/VerifyAndChangePhoneNumber.css'
 import Select from "react-select";
 import { useDispatch } from "react-redux";
 import { changePhoneNumber, verifyChangedPhoneNumber } from "../../apiServices";

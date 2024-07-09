@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import '../components/css/ListPage.css';
 import ListImage from "../images/List.webp";
 import CreateList from "./CreateList";
 import { MdOutlineFileUpload } from "react-icons/md";

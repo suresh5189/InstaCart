@@ -1,4 +1,5 @@
 import React from "react";
+import '../../components/css/FavoritePage.css';
 import { useSelector } from "react-redux";
 import NoFavoriteFOundAnimation from "./NoFavoriteFoundAnimation";
 

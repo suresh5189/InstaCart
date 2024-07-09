@@ -3,6 +3,7 @@ import { changeEmail } from "../../apiServices";
 import { setEmail as setEmailAction } from "../../store/action/userActions";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
+import '../../components/css/ChangeEmailPage.css'
 
 function ChangeEmail({ closeEmailModal }) {
   const [emailValue, setEmailValue] = useState("");

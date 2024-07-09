@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import '../../components/css/VerifyLoginPage.css'
 import { getUserDetails, resendOTP, verifyOTPLogin } from "../../apiServices";
 import { updateProfile } from "../../store/action/userActions";
 import { useDispatch } from "react-redux";

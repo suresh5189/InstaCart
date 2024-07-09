@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import '../../components/css/AddressModal.css'
 import { IoMdClose } from "react-icons/io";
 import map from "../../images/InstacartPlus.webp";
 import { addAddress } from "../../apiServices";

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import '../../components/css/Footer.css'
 import { FaApple } from "react-icons/fa";
 import { GrAndroid } from "react-icons/gr";
 import { IoToggle } from "react-icons/io5";

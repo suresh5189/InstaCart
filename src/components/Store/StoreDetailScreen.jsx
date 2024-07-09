@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from "react";
+import '../css/StoreItemDetail.css'
+import '../css/StoreDetailPage.css'
+import '../css/StoreDetailScreen.css'
 import { FaPlus } from "react-icons/fa6";
 import DetailScreenSidebar from "./DetailScreenSideBar";
 import BookMark from "../BookMark";

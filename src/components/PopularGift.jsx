@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import '../components/css/PopularGiftPage.css';
 import { storeData } from "../apiServices";
 import { Link, useNavigate } from "react-router-dom";
 

@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import '../../components/css/ChangePasswordPage.css'
 import { changePassword } from "../../apiServices";
 import { useDispatch } from "react-redux";
 import { setPassword as setPasswordAction } from "../../store/action/userActions";

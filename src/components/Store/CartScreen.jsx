@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import '../../components/css/Cart.css';
 import { MdOutlineClose } from "react-icons/md";
 import { CiSquarePlus } from "react-icons/ci";
 import { CiSquareMinus } from "react-icons/ci";

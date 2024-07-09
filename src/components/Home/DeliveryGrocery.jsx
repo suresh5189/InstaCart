@@ -1,4 +1,5 @@
 import React from "react";
+import '../../components/css/DeliveryGrocery.css'
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import DeliveryData from "../../data/deliveryGrocery";

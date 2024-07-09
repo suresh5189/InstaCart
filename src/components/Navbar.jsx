@@ -1,3 +1,4 @@
+import '../components/css/Navbar.css'
 import React, { useEffect, useRef, useState } from "react";
 import Sidebar from "./Sidebar";
 import InstaCartLogo from "../images/instacart.svg";

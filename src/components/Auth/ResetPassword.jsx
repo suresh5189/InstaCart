@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import '../../components/css/ResetPassword.css'
 import { IoIosArrowRoundBack } from "react-icons/io";
 import { resetPassword } from "../../apiServices";
 
