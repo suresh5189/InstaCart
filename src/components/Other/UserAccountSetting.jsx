@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import InstacartBanner from "../images/instacartBanner.webp";
+import InstacartBanner from "../../images/instacartBanner.webp";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import ChangePassword from "../components/Auth/ChangePassword";
-import ChangeEmail from "../components/Auth/ChangeEmail";
-import ChangeName from "../components/Auth/ChangeName";
-import VerifyChangedPhoneNumber from "../components/Auth/VerifyChangedPhoneNumber";
-import { getUserDetails } from "../apiServices";
+import ChangePassword from "../Auth/ChangePassword";
+import ChangeEmail from "../Auth/ChangeEmail";
+import ChangeName from "../Auth/ChangeName";
+import VerifyChangedPhoneNumber from "../Auth/VerifyChangedPhoneNumber";
+import { getUserDetails } from "../../apiServices";
 import { ToastContainer } from "react-toastify";
 
 const User = () => {

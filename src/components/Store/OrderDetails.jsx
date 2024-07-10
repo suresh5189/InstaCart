@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getOrdersDetails } from "../../apiServices";
 import { useParams } from "react-router-dom";
-import Loader from "../Loader";
+import Loader from "../Other/Loader";
 
 const OrderDetails = () => {
   const [orderDetails, setOrderDetails] = useState(null);

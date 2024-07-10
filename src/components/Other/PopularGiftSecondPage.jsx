@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import PopularGiftImage from "../images/PopularGift.png";
+import PopularGiftImage from "../../images/PopularGift.png";
 import { useParams } from "react-router-dom";
-import { storeDetailData } from "../apiServices";
+import { storeDetailData } from "../../apiServices";
 import { FaPlus } from "react-icons/fa6";
 import { useDispatch } from "react-redux";
-import { addToCart } from "../store/action/userActions";
+import { addToCart } from "../../store/action/userActions";
 import { ToastContainer, toast } from "react-toastify";
 
 const PopularGiftSecondPage = () => {

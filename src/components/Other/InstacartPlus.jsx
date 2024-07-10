@@ -1,16 +1,16 @@
 import React from "react";
-import InstacartPlusImage from "../images/InstacartPlus.webp";
-import InstacartPlusLogo from "../images/InstacartPlusLogo.webp";
-import Truck from "../images/Truck.webp";
-import Percentage from "../images/Percentage.webp";
-import DownArrow from "../images/DownArrow.webp";
-import Peacock from "../images/Peacock.webp";
-import EmiCard from "../images/EmiCard.webp";
-import CostoCard from "../images/costcoCard.webp";
-import Paypal from "../images/Paypal.webp";
-import MasterCard from "../images/MasterCard.webp";
-import PeacockCard from "../images/PeacockCard.webp";
-import Chase from "../images/Chase.webp";
+import InstacartPlusImage from "../../images/InstacartPlus.webp";
+import InstacartPlusLogo from "../../images/InstacartPlusLogo.webp";
+import Truck from "../../images/Truck.webp";
+import Percentage from "../../images/Percentage.webp";
+import DownArrow from "../../images/DownArrow.webp";
+import Peacock from "../../images/Peacock.webp";
+import EmiCard from "../../images/EmiCard.webp";
+import CostoCard from "../../images/costcoCard.webp";
+import Paypal from "../../images/Paypal.webp";
+import MasterCard from "../../images/MasterCard.webp";
+import PeacockCard from "../../images/PeacockCard.webp";
+import Chase from "../../images/Chase.webp";
 
 const InstacartPlus = () => {
   return (

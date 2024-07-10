@@ -1,12 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import Sidebar from "./Sidebar";
-import InstaCartLogo from "../images/instacart.svg";
+import InstaCartLogo from "../../images/instacart.svg";
 import { Link, useNavigate } from "react-router-dom";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { IoSearchOutline } from "react-icons/io5";
 import { FaShoppingCart } from "react-icons/fa";
-import Cart from "../components/Store/CartScreen";
-import { fetchCategoryList, searchStore } from "../apiServices";
+import Cart from "../Store/CartScreen";
+import { fetchCategoryList, searchStore } from "../../apiServices";
 import { useSelector } from "react-redux";
 import { motion } from "framer-motion";
 

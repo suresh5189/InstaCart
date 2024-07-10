@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { storeData } from "../apiServices";
+import { storeData } from "../../apiServices";
 import { Link, useNavigate } from "react-router-dom";
 
 const PopularGift = () => {

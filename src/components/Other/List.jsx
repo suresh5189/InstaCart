@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import ListImage from "../images/List.webp";
+import ListImage from "../../images/List.webp";
 import CreateList from "./CreateList";
 import { MdOutlineFileUpload } from "react-icons/md";
 import { HiDotsHorizontal } from "react-icons/hi";
@@ -7,7 +7,7 @@ import { IoMdLock } from "react-icons/io";
 import { IoMdClose } from "react-icons/io";
 import { MdDelete } from "react-icons/md";
 import { TiEdit } from "react-icons/ti";
-import { deleteList, editList } from "../apiServices";
+import { deleteList, editList } from "../../apiServices";
 import { ToastContainer, toast } from "react-toastify";
 
 const List = () => {

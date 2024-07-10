@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { IoClose } from "react-icons/io5";
-import InstaCartLogo from "../images/instacart.svg";
+import InstaCartLogo from "../../images/instacart.svg";
 import { CiLogin } from "react-icons/ci";
 import { GoHomeFill } from "react-icons/go";
 import { MdOutlineSettings } from "react-icons/md";
@@ -14,7 +14,7 @@ import { FaApple } from "react-icons/fa";
 import { FaGooglePlay } from "react-icons/fa";
 import { IoToggle } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
-import UserImage from "../images/userImage.webp";
+import UserImage from "../../images/userImage.webp";
 import { useSelector } from "react-redux";
 import { IoIosArrowForward } from "react-icons/io";
 import { FaFirstOrderAlt } from "react-icons/fa";

@@ -9,14 +9,14 @@ import {
   Navigate,
 } from "react-router-dom";
 import Home from "./components/Home/Home";
-import Navbar from "./components/Navbar";
-import User from "./components/UserAccountSetting";
+import Navbar from "./components/Other/Navbar";
+import User from "./components/Other/UserAccountSetting";
 import GiftCard from "./components/GiftCard/GiftCard";
-import InstacartPlus from "./components/InstacartPlus";
-import ManagePromo from "./components/ManagePromo";
-import CategoryListPage from "./components/CategoryListPage";
-import PopularGift from "./components/PopularGift";
-import PopularGiftSecondPage from "./components/PopularGiftSecondPage";
+import InstacartPlus from "./components/Other/InstacartPlus";
+import ManagePromo from "./components/Other/ManagePromo";
+import CategoryListPage from "./components/Other/CategoryListPage";
+import PopularGift from "./components/Other/PopularGift";
+import PopularGiftSecondPage from "./components/Other/PopularGiftSecondPage";
 import StoreDetailsInfoPage from "./components/Store/StoreInformation";
 import Checkout from "./components/Checkout/Checkout";
 import StoreItemInfo from "./components/Store/StoreProducts";
@@ -27,7 +27,7 @@ import { toast } from "react-toastify";
 import Favorite from "./components/Store/Favorite";
 import AllOrders from "./components/Store/AllOrders";
 import OrderDetails from "./components/Store/OrderDetails";
-import List from "./components/List";
+import List from "./components/Other/List";
 
 function App() {
   const [showLoginModal, setShowLoginModal] = useState(false);

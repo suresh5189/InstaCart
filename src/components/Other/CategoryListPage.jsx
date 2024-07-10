@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { storeData } from "../apiServices";
+import { storeData } from "../../apiServices";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import Store from "../images/Store.png";
+import Store from "../../images/Store.png";
 
 const CategoryListPage = () => {
   const [storeCategory, setStoreCategory] = useState([]);

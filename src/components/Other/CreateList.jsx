@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { addList, getListCoverImages } from "../apiServices";
+import { addList, getListCoverImages } from "../../apiServices";
 
 function CreateList({ isOpen, onClose, onCreateList }) {
   const [title, setTitle] = useState("");
